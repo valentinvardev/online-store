@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Tipografías ── */
+  --font-display: var(--font-tropi), serif;
+  --font-serif:   var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Paleta La Reina de Bastos ── */
+
+  /* Morado mágico — color primario */
+  --color-morado:       #6d28d9;
+  --color-morado-light: #8b5cf6;
+  --color-morado-pale:  #ede9fe;
+  --color-morado-mid:   #4c1d95;
+  --color-morado-dark:  #1e0a3c;
+
+  /* Dorado — acento cálido */
+  --color-dorado:       #f5c842;
+  --color-dorado-light: #ffe066;
+  --color-dorado-pale:  #fdf3c5;
+
+  /* Secundarios */
+  --color-rosa:         #f72585;
+  --color-rosa-light:   #ff4ecd;
+  --color-rosa-pale:    #fde8f5;
+  --color-celeste:      #7ec8e3;
+  --color-celeste-pale: #e0f4fc;
+  --color-verde:        #3d7a47;
+  --color-verde-light:  #6bae75;
+  --color-verde-pale:   #d4ead8;
+
+  /* Neutros cálidos */
+  --color-crema:        #fbf5e6;
+  --color-crema-dark:   #f0e8d0;
+  --color-tierra:       #6b4226;
+  --color-tierra-dark:  #3c1f0d;
+  --color-tierra-light: #c49a6c;
+
+  /* ── Animaciones ── */
+  --animate-blob:      blob 12s ease-in-out infinite;
+  --animate-float:     float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 35s linear infinite;
+  --animate-swing:     swing 4s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%       { transform: translate(40px, -60px) scale(1.08); }
+  50%       { transform: translate(-30px, 30px) scale(0.95); }
+  75%       { transform: translate(20px, 50px) scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-9deg); }
+  50%       { transform: rotate(9deg); }
+}
+
+/* Péndulo — pivota desde el top center del elemento */
+.pendulum-wrap {
+  transform-origin: top center;
+  animation: swing 4s ease-in-out infinite;
+}
+
+/* Mazo de tarot — flotación continua del conjunto */
+@keyframes deckFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-10px) rotate(0.8deg); }
+  66%       { transform: translateY(-5px) rotate(-0.5deg); }
+}
+
+.tarot-deck {
+  animation: deckFloat 6s ease-in-out infinite;
+}
+
+/* ── Utilidades de tipografía decorativa ── */
+
+/* Título con trazo visible y relleno transparente */
+.text-outline-crema {
+  -webkit-text-stroke: 2px #fbf5e6;
+  color: transparent;
+}
+.text-outline-dorado {
+  -webkit-text-stroke: 2px #f5c842;
+  color: transparent;
+}
+.text-outline-morado {
+  -webkit-text-stroke: 2px #6d28d9;
+  color: transparent;
+}
+
+/* Badge de sección (eyebrow) con borde */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid;
+  border-radius: 9999px;
+  padding: 0.3rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+/* ── Animaciones de reveal por scroll ── */
+.reveal-hidden {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+/* ── Estrellas de fondo ── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(1.4); }
+}
+@keyframes twinkle-slow {
+  0%, 100% { opacity: 0.05; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(1.2); }
+}
+
+/* ── Neo-brutalismo: sombra sólida tipo bloque ── */
+.block-shadow {
+  box-shadow: 4px 4px 0px #1e0a3c;
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+.block-shadow:hover {
+  box-shadow: 2px 2px 0px #1e0a3c;
+  transform: translate(2px, 2px);
+}
+.block-shadow-sm {
+  box-shadow: 3px 3px 0px #1e0a3c;
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+.block-shadow-sm:hover {
+  box-shadow: 1px 1px 0px #1e0a3c;
+  transform: translate(2px, 2px);
+}
+.block-shadow-light {
+  box-shadow: 4px 4px 0px rgba(251,245,230,0.5);
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+.block-shadow-light:hover {
+  box-shadow: 2px 2px 0px rgba(251,245,230,0.5);
+  transform: translate(2px, 2px);
+}
+.block-shadow-dorado {
+  box-shadow: 3px 3px 0px #f5c842;
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+.block-shadow-dorado:hover {
+  box-shadow: 1px 1px 0px #f5c842;
+  transform: translate(2px, 2px);
+}
+
+/* Separador ornamental de sección */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.25;
+}
