@@ -137,7 +137,12 @@ const cursos: Curso[] = [
   },
 ];
 
-const levels: Level[] = ["Todos", "Principiante", "Intermedio", "Todos los niveles"];
+const levels: { value: Level; label: string; icon: string; color: string; activeColor: string }[] = [
+  { value: "Todos",           label: "Todos",           icon: "✦", color: "text-morado/50 border-morado/15 hover:border-morado/40 hover:text-morado",         activeColor: "bg-morado-dark text-crema border-morado-dark shadow-lg" },
+  { value: "Principiante",   label: "Principiante",   icon: "◎", color: "text-verde/60 border-verde/20 hover:border-verde/50 hover:text-verde",              activeColor: "bg-verde text-crema border-verde shadow-lg" },
+  { value: "Intermedio",     label: "Intermedio",     icon: "◈", color: "text-celeste/60 border-celeste/20 hover:border-celeste/50 hover:text-celeste",      activeColor: "bg-celeste text-tierra-dark border-celeste shadow-lg" },
+  { value: "Todos los niveles", label: "Todos los niveles", icon: "◉", color: "text-dorado/70 border-dorado/20 hover:border-dorado/50 hover:text-dorado-dark", activeColor: "bg-dorado text-tierra-dark border-dorado shadow-lg" },
+];
 
 const levelColors: Record<string, string> = {
   "Principiante":     "text-verde bg-verde/10 border-verde/25",
@@ -158,28 +163,43 @@ export default function CursosCatalog() {
     ? cursos
     : cursos.filter((c) => c.level === active);
 
+  const countFor = (lvl: Level) =>
+    lvl === "Todos" ? cursos.length : cursos.filter((c) => c.level === lvl).length;
+
   return (
     <div>
       {/* Filtros sticky */}
-      <div className="border-b-2 border-morado/10 bg-crema sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="font-sans text-xs text-tierra/40 tracking-widest uppercase">
-            {filtered.length} curso{filtered.length !== 1 ? "s" : ""}
+      <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-4">
+            Filtrar por nivel
           </p>
-          <div className="flex items-center gap-2 flex-wrap">
-            {levels.map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => setActive(lvl)}
-                className={`font-sans text-[0.65rem] px-4 py-2 border-2 tracking-widest uppercase transition-colors ${
-                  active === lvl
-                    ? "bg-morado-dark text-crema border-morado-dark"
-                    : "border-morado/20 text-morado/60 hover:border-morado hover:text-morado"
-                }`}
-              >
-                {lvl}
-              </button>
-            ))}
+          <div className="flex items-center gap-5 flex-wrap">
+            {levels.map(({ value, label, icon, color, activeColor }) => {
+              const isActive = active === value;
+              const count = countFor(value);
+              return (
+                <button
+                  key={value}
+                  onClick={() => setActive(value)}
+                  className={`group flex items-center gap-2.5 px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
+                    isActive ? activeColor : `bg-transparent ${color}`
+                  }`}
+                >
+                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
+                    {icon}
+                  </span>
+                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold">
+                    {label}
+                  </span>
+                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
