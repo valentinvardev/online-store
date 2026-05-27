@@ -83,7 +83,7 @@ export default function TiendaSection() {
                     {product.desc}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-2xl text-morado tracking-wide">{product.price}</span>
+                    <span className="font-sans font-bold text-2xl text-morado">{product.price}</span>
                     <button
                       onClick={() => addItem({
                         id: product.id,

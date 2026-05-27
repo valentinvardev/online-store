@@ -91,7 +91,7 @@ export default function CartDrawer() {
                           <Plus size={11} strokeWidth={2} />
                         </button>
                       </div>
-                      <span className="font-display text-xl text-morado tracking-wide">
+                      <span className="font-sans font-bold text-xl text-morado">
                         ${(item.price * item.quantity).toFixed(0)}
                       </span>
                     </div>
@@ -116,7 +116,7 @@ export default function CartDrawer() {
           <div className="border-t-2 border-morado/10 px-6 py-6 space-y-4 shrink-0">
             <div className="flex items-center justify-between">
               <span className="font-sans text-sm text-tierra/55 tracking-wide">Subtotal</span>
-              <span className="font-display text-2xl text-tierra-dark tracking-wide">
+              <span className="font-sans font-bold text-2xl text-tierra-dark">
                 ${total.toFixed(0)}
               </span>
             </div>

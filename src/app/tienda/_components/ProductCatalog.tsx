@@ -198,7 +198,7 @@ export default function ProductCatalog() {
                 </p>
                 <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-baseline gap-2">
-                    <span className="font-display text-2xl text-morado tracking-wide">{product.price}</span>
+                    <span className="font-sans font-bold text-2xl text-morado">{product.price}</span>
                     {product.priceOld && (
                       <span className="font-sans text-xs text-tierra/35 line-through">{product.priceOld}</span>
                     )}

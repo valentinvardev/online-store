@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "../cart/CartContext";
 
@@ -17,21 +18,19 @@ export default function Navbar() {
   const { count, openCart } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 bg-white backdrop-blur-sm border-b border-morado/10 shadow-sm shadow-morado/5">
+    <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-morado/10 shadow-sm shadow-morado/5">
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="text-rosa text-lg transition-transform duration-300 group-hover:rotate-12">✦</span>
-          <div className="leading-none">
-            <span className="font-display font-black text-base text-morado-dark uppercase tracking-widest block">
-              La Reina
-            </span>
-            <span className="font-display text-[0.6rem] text-morado/50 uppercase tracking-[0.35em] block">
-              de Bastos
-            </span>
-          </div>
-          <span className="text-rosa text-lg transition-transform duration-300 group-hover:-rotate-12">✦</span>
+        <Link href="/" className="group">
+          <Image
+            src="/logo-rdb.png"
+            alt="La Reina de Bastos"
+            width={160}
+            height={160}
+            className="h-16 w-auto transition-opacity duration-300 group-hover:opacity-75"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -84,7 +83,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-72" : "max-h-0"}`}>
-        <div className="bg-white border-t border-morado/10 px-6 py-6 space-y-4">
+        <div className="bg-crema border-t border-morado/10 px-6 py-6 space-y-4">
           {links.map((link) => (
             <Link
               key={link.href}

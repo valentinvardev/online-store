@@ -262,7 +262,7 @@ export default function CursosCatalog() {
                 {/* Precio + CTA */}
                 <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-baseline gap-2">
-                    <span className="font-display text-3xl text-morado tracking-wide">{curso.price}</span>
+                    <span className="font-sans font-bold text-3xl text-morado">{curso.price}</span>
                     {curso.priceOld && (
                       <span className="font-sans text-xs text-tierra/35 line-through">{curso.priceOld}</span>
                     )}

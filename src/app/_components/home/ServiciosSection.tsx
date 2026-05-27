@@ -80,7 +80,7 @@ export default function ServiciosSection() {
                   ))}
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-3xl text-tierra-dark tracking-wide">{s.precio}</span>
+                  <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
                   <a href="/servicios" className="bg-morado text-crema font-sans text-xs px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm">
                     Reservar
                   </a>
