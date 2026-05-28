@@ -36,6 +36,8 @@ const cursoInput = z.object({
   durationWeeks: z.number().int().positive().optional(),
   lessonsCount: z.number().int().positive().optional(),
   imageUrl: z.string().optional(),
+  images: z.array(z.string()).optional(),
+  videoUrl: z.string().optional(),
   active: z.boolean().default(true),
 });
 
@@ -60,6 +62,8 @@ const servicioInput = z.object({
   price: z.number().positive(),
   duration: z.number().int().positive(),
   format: z.string().default("Zoom"),
+  imageUrl: z.string().optional(),
+  images: z.array(z.string()).optional(),
   active: z.boolean().default(true),
 });
 

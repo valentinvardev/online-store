@@ -46,6 +46,54 @@ Paper texture, watercolor feel. Warm, saturated, festive, earthy. NOT minimalist
 
 ---
 
+## Cómo pedir un elemento decorativo aislado (para recortar el fondo)
+
+> Este es el formato exacto para generar una pieza suelta — luna, flor, cristal, lo que sea.
+> El objetivo: fondo sólido de un solo color, elemento centrado, listo para hacer remove background.
+
+### Estructura del prompt completo
+
+```
+[PEGAR PROMPT BASE ARRIBA]
+
+Now generate a single decorative element: [DESCRIBIR EL ELEMENTO].
+The element must be centered in a square 1:1 composition.
+Solid flat background — use cream #FBF5E6 (no gradients, no patterns, no texture on the background).
+Nothing else in the image. No text, no border, no frame, no shadows that extend to the edges.
+The element should be bold, detailed, and fill roughly 70–80% of the frame.
+```
+
+### Ejemplos listos para copiar
+
+**Luna creciente:**
+```
+Single decorative element: a crescent moon with a face, surrounded by small stars and swirling lines.
+Centered, 1:1 square format. Solid background color #FBF5E6. Nothing else in the image.
+Element fills 70% of the frame. Bold outlines, rich colors from the palette.
+```
+
+**Flor psicodélica:**
+```
+Single decorative element: a large psychedelic flower with concentric petals in alternating colors.
+Centered, 1:1 square format. Solid background color #FBF5E6. Nothing else in the image.
+Element fills 75% of the frame. Bold flat outlines, groovy 70s style.
+```
+
+**Cristal / gema:**
+```
+Single decorative element: a faceted crystal gem with geometric shine lines radiating outward.
+Centered, 1:1 square format. Solid background color #FBF5E6. Nothing else in the image.
+Element fills 65% of the frame. Bold outlines, mystical feel.
+```
+
+### Negative prompt (si el generador lo permite)
+
+```
+background pattern, texture behind element, gradient background, border, frame, shadow, text, watermark, multiple elements, busy composition, white background, minimalist
+```
+
+---
+
 ## Notas de uso
 
 - **Pegá el prompt base primero**, luego en el mismo campo (o en el siguiente) describí la ilustración específica.

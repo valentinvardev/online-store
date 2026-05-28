@@ -113,6 +113,8 @@ model Course {
     durationWeeks Int?
     lessonsCount  Int?
     imageUrl      String?
+    images        String[]
+    videoUrl      String?
     active        Boolean        @default(true)
     createdAt     DateTime       @default(now())
     updatedAt     DateTime       @updatedAt
@@ -150,6 +152,8 @@ model Service {
     price       Float
     duration    Int
     format      String      @default("Zoom")
+    imageUrl    String?
+    images      String[]
     active      Boolean     @default(true)
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
