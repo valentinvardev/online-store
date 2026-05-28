@@ -1,9 +1,6 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
-
-import { db } from "~/server/db";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -13,27 +10,35 @@ declare module "next-auth" {
   }
 }
 
+const providers: NextAuthConfig["providers"] = [];
+
+if (process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) {
+  providers.push(Google({
+    clientId: process.env.AUTH_GOOGLE_ID,
+    clientSecret: process.env.AUTH_GOOGLE_SECRET,
+  }));
+}
+
+if (process.env.AUTH_RESEND_KEY) {
+  providers.push(Resend({
+    apiKey: process.env.AUTH_RESEND_KEY,
+    from: "La Reina de Bastos <no-reply@lareinadebastos.com>",
+  }));
+}
+
 export const authConfig = {
-  providers: [
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
-    }),
-    Resend({
-      apiKey: process.env.AUTH_RESEND_KEY,
-      from: "La Reina de Bastos <no-reply@lareinadebastos.com>",
-    }),
-  ],
-  adapter: PrismaAdapter(db),
+  providers,
+  // PrismaAdapter desactivado hasta conectar Supabase
+  session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
   },
   callbacks: {
-    session: ({ session, user }) => ({
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
+        id: token.sub ?? "",
       },
     }),
   },

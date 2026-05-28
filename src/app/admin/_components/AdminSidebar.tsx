@@ -4,16 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
-  Users, Mail, Wrench, LogOut, ExternalLink,
+  Users, Mail, Wrench, LogOut, ExternalLink, Settings,
 } from "lucide-react";
 
 const nav = [
-  { label: "Dashboard",  href: "/admin",           icon: LayoutDashboard },
-  { label: "Cursos",     href: "/admin/cursos",     icon: BookOpen },
-  { label: "Productos",  href: "/admin/productos",  icon: ShoppingBag },
-  { label: "Servicios",  href: "/admin/servicios",  icon: Wrench },
-  { label: "Usuarios",   href: "/admin/usuarios",   icon: Users },
-  { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
+  { label: "Dashboard",      href: "/admin",                icon: LayoutDashboard },
+  { label: "Cursos",         href: "/admin/cursos",         icon: BookOpen },
+  { label: "Productos",      href: "/admin/productos",      icon: ShoppingBag },
+  { label: "Servicios",      href: "/admin/servicios",      icon: Wrench },
+  { label: "Usuarios",       href: "/admin/usuarios",       icon: Users },
+  { label: "Newsletter",     href: "/admin/newsletter",     icon: Mail },
+  { label: "Configuración",  href: "/admin/configuracion",  icon: Settings },
 ];
 
 export default function AdminSidebar() {
