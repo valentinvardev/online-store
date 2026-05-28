@@ -122,14 +122,19 @@ const products: Product[] = [
   },
 ];
 
-const categories: Category[] = ["Todos", "Físico", "Digital", "Personalizado"];
-
 const badgeStyles: Record<string, string> = {
   "Nuevo":       "bg-celeste/20 text-celeste border-celeste/30",
   "Oferta":      "bg-rosa/15 text-rosa border-rosa/30",
   "Más vendido": "bg-dorado/20 text-tierra-dark border-dorado/40",
   "Agotado":     "bg-tierra/10 text-tierra/60 border-tierra/20",
 };
+
+const categories: { value: Category; label: string; icon: string; color: string; activeColor: string }[] = [
+  { value: "Todos",         label: "Todos",         icon: "✦", color: "text-morado/50 border-morado/15 hover:border-morado/40 hover:text-morado",       activeColor: "bg-morado-dark text-crema border-morado-dark shadow-lg" },
+  { value: "Físico",        label: "Físico",         icon: "◎", color: "text-verde/60 border-verde/20 hover:border-verde/50 hover:text-verde",            activeColor: "bg-verde text-crema border-verde shadow-lg" },
+  { value: "Digital",       label: "Digital",        icon: "◈", color: "text-celeste/60 border-celeste/20 hover:border-celeste/50 hover:text-celeste",    activeColor: "bg-celeste text-tierra-dark border-celeste shadow-lg" },
+  { value: "Personalizado", label: "Personalizado",  icon: "◉", color: "text-rosa/70 border-rosa/20 hover:border-rosa/50 hover:text-rosa",               activeColor: "bg-rosa text-crema border-rosa shadow-lg" },
+];
 
 export default function ProductCatalog() {
   const [active, setActive] = useState<Category>("Todos");
@@ -139,28 +144,43 @@ export default function ProductCatalog() {
     ? products
     : products.filter((p) => p.category === active);
 
+  const countFor = (cat: Category) =>
+    cat === "Todos" ? products.length : products.filter((p) => p.category === cat).length;
+
   return (
     <div>
-      {/* Header + filtros */}
-      <div className="border-b-2 border-morado/10 bg-white sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="font-sans text-xs text-tierra/40 tracking-widest uppercase">
-            {filtered.length} producto{filtered.length !== 1 ? "s" : ""}
+      {/* Filtros sticky */}
+      <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-4">
+            Filtrar por categoría
           </p>
-          <div className="flex items-center gap-2 flex-wrap">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`font-sans text-[0.65rem] px-4 py-2 border-2 tracking-widest uppercase transition-colors ${
-                  active === cat
-                    ? "bg-morado-dark text-crema border-morado-dark"
-                    : "border-morado/20 text-morado/60 hover:border-morado hover:text-morado"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex items-center gap-5 flex-wrap">
+            {categories.map(({ value, label, icon, color, activeColor }) => {
+              const isActive = active === value;
+              const count = countFor(value);
+              return (
+                <button
+                  key={value}
+                  onClick={() => setActive(value)}
+                  className={`group flex items-center gap-2.5 px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
+                    isActive ? activeColor : `bg-transparent ${color}`
+                  }`}
+                >
+                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
+                    {icon}
+                  </span>
+                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold">
+                    {label}
+                  </span>
+                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
