@@ -74,33 +74,6 @@ export default function Footer() {
         <div className="flex-1 h-px bg-crema/5" />
       </div>
 
-      {/* Newsletter */}
-      <div className="border-y border-dorado/10 py-10 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="font-display text-crema text-2xl tracking-wide uppercase leading-none mb-1">
-              Ritual semanal en tu correo
-            </p>
-            <p className="font-sans text-crema/35 text-xs tracking-wide">
-              Reflexiones, lunas, ofertas y magia — sin spam, sin ruido.
-            </p>
-          </div>
-          <form className="flex gap-0 w-full max-w-sm shrink-0" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="tu@email.com"
-              className="flex-1 bg-white/8 border-2 border-dorado/30 border-r-0 px-4 py-3 font-sans text-sm text-crema placeholder:text-crema/25 focus:outline-none focus:border-dorado/60 transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.65rem] px-5 py-3 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors whitespace-nowrap shrink-0"
-            >
-              ✦ Unirme
-            </button>
-          </form>
-        </div>
-      </div>
-
       {/* Grid principal */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
