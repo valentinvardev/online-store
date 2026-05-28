@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ShoppingBag, Loader2, Plus, X, ImageIcon } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Loader2, X, ChevronLeft, ChevronRight, ImageIcon, Star, Upload } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import { api } from "~/trpc/react";
@@ -17,65 +17,191 @@ const typeInfo: Record<string, string> = {
   PERSONALIZADO: "Hecho a medida, requiere consulta previa",
 };
 
-function ImagePreview({ url, onRemove, label }: { url: string; onRemove?: () => void; label?: string }) {
-  const [error, setError] = useState(false);
-
-  if (!url) return null;
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+function Lightbox({ images, index, onClose, onNav }: {
+  images: string[];
+  index: number;
+  onClose: () => void;
+  onNav: (i: number) => void;
+}) {
+  useEffect(() => {
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft" && index > 0) onNav(index - 1);
+      if (e.key === "ArrowRight" && index < images.length - 1) onNav(index + 1);
+    };
+    window.addEventListener("keydown", handle);
+    return () => window.removeEventListener("keydown", handle);
+  }, [images.length, index, onClose, onNav]);
 
   return (
-    <div className="relative group">
-      {error ? (
-        <div className="w-full aspect-square bg-morado/5 border-2 border-dashed border-morado/20 flex flex-col items-center justify-center gap-2">
-          <ImageIcon size={20} className="text-tierra/20" />
-          <p className="font-sans text-[0.58rem] text-tierra/30 tracking-wide text-center px-2">URL inválida</p>
-        </div>
-      ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={url}
-          alt={label ?? "Preview"}
-          onError={() => setError(true)}
-          className="w-full aspect-square object-cover border-2 border-morado/15"
-        />
-      )}
-      {onRemove && (
+    <div
+      className="fixed inset-0 z-50 bg-morado-dark/95 flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Cerrar */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 text-crema/50 hover:text-crema transition-colors"
+      >
+        <X size={22} />
+      </button>
+
+      {/* Contador */}
+      <p className="absolute top-5 left-1/2 -translate-x-1/2 font-sans text-[0.65rem] text-crema/40 tracking-widest uppercase">
+        {index + 1} / {images.length}
+      </p>
+
+      {/* Prev */}
+      {index > 0 && (
         <button
-          type="button"
-          onClick={onRemove}
-          className="absolute top-1.5 right-1.5 bg-tierra-dark/70 text-white p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rosa"
+          onClick={(e) => { e.stopPropagation(); onNav(index - 1); }}
+          className="absolute left-5 text-crema/40 hover:text-crema transition-colors p-2"
         >
-          <X size={11} />
+          <ChevronLeft size={32} />
         </button>
       )}
-      {label && (
-        <p className="font-sans text-[0.55rem] text-tierra/35 tracking-widest uppercase mt-1 text-center">{label}</p>
+
+      {/* Imagen */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={images[index]}
+        alt={`Foto ${index + 1}`}
+        className="max-h-[85vh] max-w-[85vw] object-contain shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+
+      {/* Next */}
+      {index < images.length - 1 && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNav(index + 1); }}
+          className="absolute right-5 text-crema/40 hover:text-crema transition-colors p-2"
+        >
+          <ChevronRight size={32} />
+        </button>
+      )}
+
+      {/* Tiras abajo */}
+      {images.length > 1 && (
+        <div className="absolute bottom-5 flex gap-2">
+          {images.map((url, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); onNav(i); }}
+              className={`w-12 h-12 border-2 transition-all overflow-hidden ${i === index ? "border-dorado" : "border-white/10 opacity-50 hover:opacity-75"}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={url} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
 }
 
+// ── Drop Zone ─────────────────────────────────────────────────────────────────
+function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
+  const [dragging, setDragging] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handle = (files: FileList | null) => {
+    if (!files) return;
+    onFiles(Array.from(files).filter((f) => f.type.startsWith("image/")));
+  };
+
+  return (
+    <div
+      onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={(e) => { e.preventDefault(); setDragging(false); handle(e.dataTransfer.files); }}
+      onClick={() => inputRef.current?.click()}
+      className={`border-2 border-dashed cursor-pointer transition-all py-10 flex flex-col items-center gap-3 ${
+        dragging ? "border-morado bg-morado/5" : "border-morado/25 hover:border-morado/50 hover:bg-morado/3"
+      }`}
+    >
+      <Upload size={22} className={dragging ? "text-morado" : "text-tierra/25"} strokeWidth={1.5} />
+      <div className="text-center">
+        <p className="font-sans text-sm text-tierra/50 tracking-wide">
+          {dragging ? "Soltá para subir" : "Arrastrá fotos o hacé click"}
+        </p>
+        <p className="font-sans text-xs text-tierra/30 tracking-wide mt-0.5">JPG, PNG, WEBP — sin límite de cantidad</p>
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={(e) => handle(e.target.files)}
+      />
+    </div>
+  );
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
 const empty = {
   name: "", description: "", type: "FISICO" as "FISICO" | "DIGITAL" | "PERSONALIZADO",
-  price: "", priceOld: "", badge: "", imageUrl: "", fileUrl: "", stock: "",
+  price: "", priceOld: "", badge: "", fileUrl: "", stock: "",
 };
+
+type UploadEntry = { url: string; uploading?: boolean };
 
 export default function NuevoProductoPage() {
   const router = useRouter();
   const { toast } = useToast();
   const [form, setForm] = useState(empty);
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [photoInput, setPhotoInput] = useState("");
+  const [images, setImages] = useState<UploadEntry[]>([]);
+  const [lightbox, setLightbox] = useState<number | null>(null);
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
-  const addPhoto = () => {
-    const url = photoInput.trim();
-    if (url && !photos.includes(url)) {
-      setPhotos((p) => [...p, url]);
+  const uploadFiles = useCallback(async (files: File[]) => {
+    // Agrega placeholders de carga
+    const placeholders: UploadEntry[] = files.map(() => ({ url: "", uploading: true }));
+    setImages((prev) => [...prev, ...placeholders]);
+    const startIdx = images.length;
+
+    await Promise.all(files.map(async (file, i) => {
+      const fd = new FormData();
+      fd.append("file", file);
+      try {
+        const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+        const data = await res.json() as { url?: string; error?: string };
+        if (data.url) {
+          setImages((prev) => {
+            const next = [...prev];
+            next[startIdx + i] = { url: data.url! };
+            return next;
+          });
+        } else {
+          setImages((prev) => prev.filter((_, idx) => idx !== startIdx + i));
+          toast(data.error ?? "Error al subir imagen", "error");
+        }
+      } catch {
+        setImages((prev) => prev.filter((_, idx) => idx !== startIdx + i));
+        toast("Error de red al subir imagen", "error");
+      }
+    }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images.length]);
+
+  const removeImage = (idx: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== idx));
+    if (lightbox !== null) {
+      if (idx === lightbox) setLightbox(null);
+      else if (idx < lightbox) setLightbox(lightbox - 1);
     }
-    setPhotoInput("");
   };
 
-  const removePhoto = (idx: number) => setPhotos((p) => p.filter((_, i) => i !== idx));
+  const setCover = (idx: number) => {
+    setImages((prev) => {
+      const next = [...prev];
+      const [item] = next.splice(idx, 1);
+      return [item!, ...next];
+    });
+  };
+
+  const readyImages = images.filter((img) => !img.uploading && img.url);
 
   const create = api.admin.productos.create.useMutation({
     onSuccess: (p) => {
@@ -87,6 +213,10 @@ export default function NuevoProductoPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (images.some((img) => img.uploading)) {
+      toast("Esperá a que terminen de subir todas las fotos", "error");
+      return;
+    }
     create.mutate({
       name: form.name,
       description: form.description,
@@ -94,8 +224,8 @@ export default function NuevoProductoPage() {
       price: parseFloat(form.price),
       priceOld: form.priceOld ? parseFloat(form.priceOld) : undefined,
       badge: form.badge || undefined,
-      imageUrl: form.imageUrl || undefined,
-      images: photos.length > 0 ? photos : undefined,
+      imageUrl: readyImages[0]?.url,
+      images: readyImages.map((img) => img.url),
       fileUrl: form.fileUrl || undefined,
       stock: form.stock ? parseInt(form.stock) : undefined,
       active: true,
@@ -181,82 +311,86 @@ export default function NuevoProductoPage() {
               </div>
             </div>
 
-            {/* Imágenes */}
+            {/* Galería */}
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
               <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
                 <ImageIcon size={15} className="text-morado" strokeWidth={1.8} />
-                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Imágenes del producto</h2>
-              </div>
-
-              {/* Imagen principal */}
-              <div className="space-y-3 mb-6">
-                <label className={labelClass}>Imagen principal</label>
-                <div className="flex gap-3 items-start">
-                  <div className="flex-1">
-                    <input
-                      className={inputClass}
-                      placeholder="https://..."
-                      value={form.imageUrl}
-                      onChange={(e) => set("imageUrl", e.target.value)}
-                    />
-                    <p className={hintClass + " mt-1.5"}>Es la foto que aparece en la tienda y en la card del producto</p>
-                  </div>
-                  {form.imageUrl && (
-                    <div className="w-20 shrink-0">
-                      <ImagePreview url={form.imageUrl} label="Principal" />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Fotos adicionales */}
-              <div className="space-y-3 pt-5 border-t border-morado/10">
-                <label className={labelClass}>Fotos del producto</label>
-                <p className={hintClass}>Imágenes adicionales que el comprador puede ver en el detalle del producto</p>
-
-                {/* Input para agregar */}
-                <div className="flex gap-2">
-                  <input
-                    className={inputClass}
-                    placeholder="Pegá la URL de una foto y presioná +"
-                    value={photoInput}
-                    onChange={(e) => setPhotoInput(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addPhoto(); } }}
-                  />
-                  <button
-                    type="button"
-                    onClick={addPhoto}
-                    disabled={!photoInput.trim()}
-                    className="shrink-0 w-12 bg-morado-dark text-crema border-2 border-morado-dark hover:bg-morado transition-colors disabled:opacity-30 flex items-center justify-center"
-                  >
-                    <Plus size={15} />
-                  </button>
-                </div>
-
-                {/* Grid de fotos */}
-                {photos.length > 0 ? (
-                  <div className="grid grid-cols-4 gap-3 mt-3">
-                    {photos.map((url, i) => (
-                      <ImagePreview
-                        key={i}
-                        url={url}
-                        label={`Foto ${i + 1}`}
-                        onRemove={() => removePhoto(i)}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="border-2 border-dashed border-morado/15 py-8 flex flex-col items-center gap-2 mt-2">
-                    <ImageIcon size={22} className="text-tierra/15" />
-                    <p className="font-sans text-xs text-tierra/25 tracking-wide">Todavía no hay fotos adicionales</p>
-                  </div>
+                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">
+                  Fotos del producto
+                </h2>
+                {images.length > 0 && (
+                  <span className="ml-auto font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">
+                    {readyImages.length} foto{readyImages.length !== 1 ? "s" : ""}
+                  </span>
                 )}
               </div>
+
+              <DropZone onFiles={uploadFiles} />
+
+              {images.length > 0 && (
+                <div className="mt-5 space-y-3">
+                  <p className={hintClass}>
+                    La primera foto es la portada. Hacé click en <Star size={11} className="inline" /> para cambiarla.
+                  </p>
+                  <div className="grid grid-cols-4 gap-3">
+                    {images.map((img, i) => (
+                      <div key={i} className="relative group aspect-square">
+                        {img.uploading ? (
+                          <div className="w-full h-full bg-morado/5 border-2 border-morado/10 flex items-center justify-center">
+                            <Loader2 size={18} className="animate-spin text-morado/30" />
+                          </div>
+                        ) : (
+                          <>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={img.url}
+                              alt={`Foto ${i + 1}`}
+                              className="w-full h-full object-cover border-2 border-morado/10 cursor-zoom-in"
+                              onClick={() => setLightbox(i)}
+                            />
+
+                            {/* Badge portada */}
+                            {i === 0 && (
+                              <span className="absolute bottom-0 left-0 right-0 bg-dorado/90 text-tierra-dark font-sans text-[0.5rem] tracking-widest uppercase text-center py-0.5">
+                                Portada
+                              </span>
+                            )}
+
+                            {/* Controles hover */}
+                            <div className="absolute inset-0 bg-morado-dark/0 group-hover:bg-morado-dark/40 transition-all flex items-start justify-end gap-1 p-1.5 opacity-0 group-hover:opacity-100">
+                              {i !== 0 && (
+                                <button
+                                  type="button"
+                                  title="Usar como portada"
+                                  onClick={() => setCover(i)}
+                                  className="bg-dorado text-tierra-dark p-1 hover:bg-dorado/80 transition-colors"
+                                >
+                                  <Star size={11} />
+                                </button>
+                              )}
+                              <button
+                                type="button"
+                                title="Eliminar"
+                                onClick={() => removeImage(i)}
+                                className="bg-tierra-dark/80 text-white p-1 hover:bg-rosa transition-colors"
+                              >
+                                <X size={11} />
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Columna lateral */}
           <div className="space-y-5">
+
+            {/* Precio */}
             <div className="bg-crema border-2 border-morado-dark block-shadow p-6">
               <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase mb-5 pb-4 border-b border-morado/10">
                 Precio y estado
@@ -292,24 +426,26 @@ export default function NuevoProductoPage() {
             </div>
 
             {/* Preview portada */}
-            {form.imageUrl && (
-              <div className="bg-crema border-2 border-morado-dark block-shadow p-4">
-                <p className={labelClass + " mb-3"}>Preview portada</p>
-                <ImagePreview url={form.imageUrl} />
-                {form.name && (
-                  <p className="font-sans font-semibold text-xs text-tierra-dark mt-2 tracking-wide truncate">{form.name}</p>
-                )}
+            {readyImages[0] && (
+              <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={readyImages[0].url} alt="Portada" className="w-full aspect-square object-cover" />
+                <div className="px-4 py-3">
+                  <p className="font-sans text-[0.55rem] text-tierra/35 tracking-widest uppercase mb-0.5">Así se ve en la tienda</p>
+                  {form.name && <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide truncate">{form.name}</p>}
+                  {form.price && <p className="font-sans text-morado font-bold mt-0.5">${form.price}</p>}
+                </div>
               </div>
             )}
 
             <div className="space-y-3">
               <button
                 type="submit"
-                disabled={saving}
+                disabled={saving || images.some((img) => img.uploading)}
                 className="flex items-center justify-center gap-2 w-full bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-60"
               >
                 {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
-                {saving ? "Publicando..." : "Publicar producto"}
+                {saving ? "Publicando..." : images.some((img) => img.uploading) ? "Subiendo fotos..." : "Publicar producto"}
               </button>
               <Link
                 href="/admin/productos"
@@ -321,6 +457,16 @@ export default function NuevoProductoPage() {
           </div>
         </div>
       </form>
+
+      {/* Lightbox */}
+      {lightbox !== null && readyImages.length > 0 && (
+        <Lightbox
+          images={readyImages.map((img) => img.url)}
+          index={Math.min(lightbox, readyImages.length - 1)}
+          onClose={() => setLightbox(null)}
+          onNav={setLightbox}
+        />
+      )}
     </div>
   );
 }
