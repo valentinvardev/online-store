@@ -44,6 +44,22 @@
   --animate-swing:     swing 4s ease-in-out infinite;
 }
 
+/* ── Transición de página ── */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ── Keyframes ── */
 @keyframes blob {
   0%, 100% { transform: translate(0, 0) scale(1); }

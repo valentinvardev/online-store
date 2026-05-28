@@ -30,18 +30,46 @@ export default function AdminLogin() {
 
       <div className="w-full max-w-sm relative z-10">
         {/* Logo */}
-        <div className="text-center mb-10">
-          <p className="font-display text-dorado text-3xl tracking-widest uppercase leading-none">
-            La Reina
-          </p>
-          <p className="font-display text-crema/30 text-3xl tracking-widest uppercase leading-none">
-            de Bastos
-          </p>
-          <div className="ornament text-dorado/20 mt-4">
-            <span className="font-sans text-[0.55rem] text-crema/25 tracking-[0.35em] uppercase px-3">
-              Administración
-            </span>
+        <div className="text-center mb-10 space-y-5">
+          {/* Carta de tarot */}
+          <div className="flex justify-center">
+            <svg width="70" height="105" viewBox="0 0 70 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Carta de atrás (offset) */}
+              <rect x="7" y="7" width="58" height="92" rx="5" fill="#F5C842" fillOpacity="0.25" stroke="#F5C842" strokeWidth="1" strokeOpacity="0.4" />
+              {/* Carta principal — fondo crema */}
+              <rect x="2" y="2" width="58" height="92" rx="5" fill="#FBF5E6" stroke="#F5C842" strokeWidth="2" />
+              {/* Marco interior dorado */}
+              <rect x="7" y="7" width="48" height="82" rx="3" stroke="#F5C842" strokeWidth="1" strokeOpacity="0.6" />
+              {/* Q esquina superior izquierda */}
+              <text x="13" y="21" fill="#7B5EA7" fontSize="12" fontWeight="bold" fontFamily="Georgia, serif">Q</text>
+              {/* Palo — bastón (♣) esquina sup */}
+              <text x="13" y="32" fill="#7B5EA7" fontSize="10" fontFamily="Georgia, serif">♣</text>
+              {/* Estrella central grande */}
+              <text x="31" y="58" textAnchor="middle" fill="#F5C842" fontSize="30" fontFamily="Georgia, serif">✦</text>
+              {/* Q esquina inferior derecha (invertida) */}
+              <g transform="rotate(180 46 80)">
+                <text x="40" y="77" fill="#7B5EA7" fontSize="12" fontWeight="bold" fontFamily="Georgia, serif">Q</text>
+                <text x="40" y="88" fill="#7B5EA7" fontSize="10" fontFamily="Georgia, serif">♣</text>
+              </g>
+              {/* Líneas decorativas */}
+              <line x1="14" y1="40" x2="48" y2="40" stroke="#F5C842" strokeWidth="0.8" strokeOpacity="0.5" />
+              <line x1="14" y1="70" x2="48" y2="70" stroke="#F5C842" strokeWidth="0.8" strokeOpacity="0.5" />
+            </svg>
           </div>
+
+          {/* Título */}
+          <div>
+            <p className="font-display text-dorado text-4xl tracking-widest uppercase leading-none">
+              La Reina
+            </p>
+            <p className="font-display text-crema/40 text-4xl tracking-widest uppercase leading-none mt-1">
+              de Bastos
+            </p>
+          </div>
+
+          <span className="font-sans text-[0.55rem] text-crema/25 tracking-[0.35em] uppercase">
+            Administración
+          </span>
         </div>
 
         {/* Card */}
