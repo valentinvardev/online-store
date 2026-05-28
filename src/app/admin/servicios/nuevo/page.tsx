@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Wrench, Loader2, ImageIcon, Video, AlertCircle } from "lucide-react";
+import { ArrowLeft, Wrench, Loader2, ImageIcon, Video, AlertCircle, FileText } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
+import { PdfGallery, usePdfGallery } from "../../_components/PdfGallery";
 import { api } from "~/trpc/react";
 
 function parseVimeo(input: string): string | null {
@@ -38,6 +39,7 @@ export default function NuevoServicioPage() {
   const { toast } = useToast();
   const [form, setForm] = useState(empty);
   const gallery = useImageGallery();
+  const pdfs = usePdfGallery();
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
   const vimeoEmbed = parseVimeo(form.videoUrl);
@@ -50,6 +52,7 @@ export default function NuevoServicioPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (gallery.isUploading) { toast("Esperá a que terminen de subir todas las fotos", "error"); return; }
+    if (pdfs.isUploading) { toast("Esperá a que terminen de subir todos los PDFs", "error"); return; }
     if (form.videoUrl && !vimeoEmbed) { toast("El link de Vimeo no es válido", "error"); return; }
     create.mutate({
       name: form.name,
@@ -61,6 +64,7 @@ export default function NuevoServicioPage() {
       imageUrl: gallery.readyImages[0]?.url,
       images: gallery.readyImages.map((img) => img.url),
       videoUrl: vimeoEmbed ?? undefined,
+      attachments: pdfs.readyPdfs.map((p) => p.url),
       active: true,
     });
   };
@@ -119,6 +123,27 @@ export default function NuevoServicioPage() {
                 ))}
               </div>
             </div>
+
+            {/* PDFs de guía — solo cuando el formato lo requiere */}
+            {form.format === "Zoom + guía" && (
+              <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
+                <div className="flex items-center justify-between mb-6 pb-5 border-b border-morado/10">
+                  <div className="flex items-center gap-3">
+                    <FileText size={15} className="text-morado" strokeWidth={1.8} />
+                    <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Material de la sesión</h2>
+                  </div>
+                  {pdfs.readyPdfs.length > 0 && (
+                    <span className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">
+                      {pdfs.readyPdfs.length} PDF{pdfs.readyPdfs.length !== 1 ? "s" : ""}
+                    </span>
+                  )}
+                </div>
+                <p className="font-sans text-xs text-tierra/40 tracking-wide mb-4">
+                  Estos PDFs se entregan a la clienta al completar el pago. Podés subir guías, resúmenes, ejercicios o cualquier material complementario.
+                </p>
+                <PdfGallery pdfs={pdfs.pdfs} uploadFiles={pdfs.uploadFiles} removePdf={pdfs.removePdf} />
+              </div>
+            )}
 
             {/* Video Vimeo */}
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
@@ -206,10 +231,10 @@ export default function NuevoServicioPage() {
             )}
 
             <div className="space-y-3">
-              <button type="submit" disabled={saving || gallery.isUploading}
+              <button type="submit" disabled={saving || gallery.isUploading || pdfs.isUploading}
                 className="flex items-center justify-center gap-2 w-full bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-60">
                 {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
-                {saving ? "Publicando..." : gallery.isUploading ? "Subiendo fotos..." : "Publicar servicio"}
+                {saving ? "Publicando..." : gallery.isUploading ? "Subiendo fotos..." : pdfs.isUploading ? "Subiendo PDFs..." : "Publicar servicio"}
               </button>
               <Link href="/admin/servicios" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors">
                 Cancelar

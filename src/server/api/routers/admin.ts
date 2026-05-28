@@ -66,6 +66,7 @@ const servicioInput = z.object({
   imageUrl: z.string().optional(),
   images: z.array(z.string()).optional(),
   videoUrl: z.string().optional(),
+  attachments: z.array(z.string()).optional(),
   active: z.boolean().default(true),
 });
 
