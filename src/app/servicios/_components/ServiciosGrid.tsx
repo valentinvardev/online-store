@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 type Servicio = {
   id: number;
+  slug: string;
   numero: string;
   title: string;
   subtitle: string;
@@ -18,6 +21,7 @@ type Servicio = {
 const servicios: Servicio[] = [
   {
     id: 1,
+    slug: "tarot",
     numero: "01",
     title: "Lectura de Tarot",
     subtitle: "Para lo que estás viviendo ahora",
@@ -38,6 +42,7 @@ const servicios: Servicio[] = [
   },
   {
     id: 2,
+    slug: "lectura-extendida",
     numero: "02",
     title: "Lectura Extendida",
     subtitle: "Con más profundidad y tiempo",
@@ -57,6 +62,7 @@ const servicios: Servicio[] = [
   },
   {
     id: 3,
+    slug: "ritual",
     numero: "03",
     title: "Ritual Personalizado",
     subtitle: "Diseñado solo para vos",
@@ -76,6 +82,7 @@ const servicios: Servicio[] = [
   },
   {
     id: 4,
+    slug: "astrologia",
     numero: "04",
     title: "Consulta Astrológica",
     subtitle: "Tu carta natal como mapa de vida",
@@ -95,6 +102,7 @@ const servicios: Servicio[] = [
   },
   {
     id: 5,
+    slug: "bundle",
     numero: "05",
     title: "Bundle: Tarot + Ritual",
     subtitle: "La combinación más completa",
@@ -115,6 +123,7 @@ const servicios: Servicio[] = [
   },
   {
     id: 6,
+    slug: "cierre",
     numero: "06",
     title: "Sesión de Cierre",
     subtitle: "Para terminar un ciclo con conciencia",
@@ -446,12 +455,12 @@ export default function ServiciosGrid() {
                       </span>
                     )}
                   </div>
-                  <a
-                    href="#reservar"
+                  <Link
+                    href={`/reservas?servicio=${s.slug}`}
                     className="bg-morado text-crema font-sans font-semibold text-[0.65rem] px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
                   >
                     Reservar
-                  </a>
+                  </Link>
                 </div>
               </div>
             </article>
