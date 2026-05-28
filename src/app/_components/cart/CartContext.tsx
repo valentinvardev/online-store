@@ -2,21 +2,37 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+export type ItemType = "product" | "course" | "service";
+
 export type CartItem = {
-  id: number;
+  id: number | string;
   name: string;
   category: string;
+  itemType: ItemType;
   price: number;
   priceLabel: string;
   gradient: string;
   quantity: number;
 };
 
+export type BuyerInfo = {
+  name: string;
+  apellido: string;
+  email: string;
+  phone: string;
+};
+
+export type LastOrder = {
+  buyer: BuyerInfo;
+  items: CartItem[];
+  total: number;
+};
+
 type CartContextType = {
   items: CartItem[];
   addItem: (item: Omit<CartItem, "quantity">) => void;
-  removeItem: (id: number) => void;
-  updateQty: (id: number, qty: number) => void;
+  removeItem: (id: number | string) => void;
+  updateQty: (id: number | string, qty: number) => void;
   clearCart: () => void;
   total: number;
   count: number;
@@ -55,10 +71,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(true);
   };
 
-  const removeItem = (id: number) =>
+  const removeItem = (id: number | string) =>
     setItems((prev) => prev.filter((i) => i.id !== id));
 
-  const updateQty = (id: number, qty: number) => {
+  const updateQty = (id: number | string, qty: number) => {
     if (qty < 1) { removeItem(id); return; }
     setItems((prev) =>
       prev.map((i) => (i.id === id ? { ...i, quantity: qty } : i))

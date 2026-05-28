@@ -229,6 +229,7 @@ export default function ProductCatalog() {
                       id: product.id,
                       name: product.name,
                       category: product.category,
+                      itemType: "product",
                       price: Number(product.price.replace(/[^0-9.]/g, "")),
                       priceLabel: product.price,
                       gradient: product.gradient,
