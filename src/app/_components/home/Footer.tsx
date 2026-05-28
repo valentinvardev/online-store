@@ -87,10 +87,9 @@ export default function Footer() {
                 alt="La Reina de Bastos"
                 width={160}
                 height={80}
-                className="w-auto h-16 object-contain"
+                className="w-auto h-24 object-contain"
                 style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(87%) sepia(45%) saturate(700%) hue-rotate(5deg) brightness(105%)",
+                  filter: "brightness(0) invert(1) sepia(0.15) brightness(0.95)",
                 }}
               />
             </div>
