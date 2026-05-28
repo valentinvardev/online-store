@@ -149,7 +149,8 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image'
+  image: 'image',
+  isAdmin: 'isAdmin'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -163,7 +164,9 @@ exports.Prisma.ProductScalarFieldEnum = {
   name: 'name',
   description: 'description',
   price: 'price',
+  priceOld: 'priceOld',
   type: 'type',
+  badge: 'badge',
   imageUrl: 'imageUrl',
   fileUrl: 'fileUrl',
   stock: 'stock',
@@ -176,8 +179,13 @@ exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
   name: 'name',
+  subtitle: 'subtitle',
   description: 'description',
   price: 'price',
+  badge: 'badge',
+  level: 'level',
+  durationWeeks: 'durationWeeks',
+  lessonsCount: 'lessonsCount',
   imageUrl: 'imageUrl',
   active: 'active',
   createdAt: 'createdAt',
@@ -197,15 +205,19 @@ exports.Prisma.CourseLessonScalarFieldEnum = {
   title: 'title',
   content: 'content',
   videoUrl: 'videoUrl',
-  order: 'order'
+  attachments: 'attachments',
+  order: 'order',
+  freePreview: 'freePreview'
 };
 
 exports.Prisma.ServiceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  subtitle: 'subtitle',
   description: 'description',
   price: 'price',
   duration: 'duration',
+  format: 'format',
   active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

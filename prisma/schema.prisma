@@ -44,6 +44,7 @@ model User {
     email         String?      @unique
     emailVerified DateTime?
     image         String?
+    isAdmin       Boolean      @default(false)
     accounts      Account[]
     sessions      Session[]
     orders        Order[]
@@ -87,7 +88,9 @@ model Product {
     name        String
     description String
     price       Float
+    priceOld    Float?
     type        ProductType
+    badge       String?
     imageUrl    String?
     fileUrl     String?
     stock       Int?
@@ -98,18 +101,23 @@ model Product {
 }
 
 model Course {
-    id          String         @id @default(cuid())
-    slug        String         @unique
-    name        String
-    description String
-    price       Float
-    imageUrl    String?
-    active      Boolean        @default(true)
-    createdAt   DateTime       @default(now())
-    updatedAt   DateTime       @updatedAt
-    modules     CourseModule[]
-    enrollments Enrollment[]
-    orderItems  OrderItem[]
+    id            String         @id @default(cuid())
+    slug          String         @unique
+    name          String
+    subtitle      String?
+    description   String
+    price         Float
+    badge         String?
+    level         String         @default("Todos los niveles")
+    durationWeeks Int?
+    lessonsCount  Int?
+    imageUrl      String?
+    active        Boolean        @default(true)
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    modules       CourseModule[]
+    enrollments   Enrollment[]
+    orderItems    OrderItem[]
 }
 
 model CourseModule {
@@ -122,21 +130,25 @@ model CourseModule {
 }
 
 model CourseLesson {
-    id       String       @id @default(cuid())
-    moduleId String
-    module   CourseModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
-    title    String
-    content  String?      @db.Text
-    videoUrl String?
-    order    Int
+    id          String       @id @default(cuid())
+    moduleId    String
+    module      CourseModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+    title       String
+    content     String?      @db.Text
+    videoUrl    String?
+    attachments String[]
+    order       Int
+    freePreview Boolean      @default(false)
 }
 
 model Service {
     id          String      @id @default(cuid())
     name        String
+    subtitle    String?
     description String
     price       Float
     duration    Int
+    format      String      @default("Zoom")
     active      Boolean     @default(true)
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
