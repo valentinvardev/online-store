@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ShoppingBag, Loader2 } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Loader2, Plus, X, ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import { api } from "~/trpc/react";
@@ -17,6 +17,43 @@ const typeInfo: Record<string, string> = {
   PERSONALIZADO: "Hecho a medida, requiere consulta previa",
 };
 
+function ImagePreview({ url, onRemove, label }: { url: string; onRemove?: () => void; label?: string }) {
+  const [error, setError] = useState(false);
+
+  if (!url) return null;
+
+  return (
+    <div className="relative group">
+      {error ? (
+        <div className="w-full aspect-square bg-morado/5 border-2 border-dashed border-morado/20 flex flex-col items-center justify-center gap-2">
+          <ImageIcon size={20} className="text-tierra/20" />
+          <p className="font-sans text-[0.58rem] text-tierra/30 tracking-wide text-center px-2">URL inválida</p>
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={url}
+          alt={label ?? "Preview"}
+          onError={() => setError(true)}
+          className="w-full aspect-square object-cover border-2 border-morado/15"
+        />
+      )}
+      {onRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="absolute top-1.5 right-1.5 bg-tierra-dark/70 text-white p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rosa"
+        >
+          <X size={11} />
+        </button>
+      )}
+      {label && (
+        <p className="font-sans text-[0.55rem] text-tierra/35 tracking-widest uppercase mt-1 text-center">{label}</p>
+      )}
+    </div>
+  );
+}
+
 const empty = {
   name: "", description: "", type: "FISICO" as "FISICO" | "DIGITAL" | "PERSONALIZADO",
   price: "", priceOld: "", badge: "", imageUrl: "", fileUrl: "", stock: "",
@@ -26,7 +63,19 @@ export default function NuevoProductoPage() {
   const router = useRouter();
   const { toast } = useToast();
   const [form, setForm] = useState(empty);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [photoInput, setPhotoInput] = useState("");
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const addPhoto = () => {
+    const url = photoInput.trim();
+    if (url && !photos.includes(url)) {
+      setPhotos((p) => [...p, url]);
+    }
+    setPhotoInput("");
+  };
+
+  const removePhoto = (idx: number) => setPhotos((p) => p.filter((_, i) => i !== idx));
 
   const create = api.admin.productos.create.useMutation({
     onSuccess: (p) => {
@@ -46,6 +95,7 @@ export default function NuevoProductoPage() {
       priceOld: form.priceOld ? parseFloat(form.priceOld) : undefined,
       badge: form.badge || undefined,
       imageUrl: form.imageUrl || undefined,
+      images: photos.length > 0 ? photos : undefined,
       fileUrl: form.fileUrl || undefined,
       stock: form.stock ? parseInt(form.stock) : undefined,
       active: true,
@@ -78,6 +128,7 @@ export default function NuevoProductoPage() {
           {/* Columna principal */}
           <div className="lg:col-span-2 space-y-5">
 
+            {/* Info básica */}
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
               <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
                 <ShoppingBag size={15} className="text-morado" strokeWidth={1.8} />
@@ -120,15 +171,84 @@ export default function NuevoProductoPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className={labelClass}>URL de imagen</label>
-                  <input className={inputClass} placeholder="https://..." value={form.imageUrl} onChange={(e) => set("imageUrl", e.target.value)} />
-                </div>
                 {form.type === "DIGITAL" && (
                   <div>
                     <label className={labelClass}>URL del archivo digital</label>
                     <p className={hintClass}>Link al PDF, ZIP o recurso que se entrega al comprar</p>
                     <input className={inputClass} placeholder="https://..." value={form.fileUrl} onChange={(e) => set("fileUrl", e.target.value)} />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Imágenes */}
+            <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
+              <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
+                <ImageIcon size={15} className="text-morado" strokeWidth={1.8} />
+                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Imágenes del producto</h2>
+              </div>
+
+              {/* Imagen principal */}
+              <div className="space-y-3 mb-6">
+                <label className={labelClass}>Imagen principal</label>
+                <div className="flex gap-3 items-start">
+                  <div className="flex-1">
+                    <input
+                      className={inputClass}
+                      placeholder="https://..."
+                      value={form.imageUrl}
+                      onChange={(e) => set("imageUrl", e.target.value)}
+                    />
+                    <p className={hintClass + " mt-1.5"}>Es la foto que aparece en la tienda y en la card del producto</p>
+                  </div>
+                  {form.imageUrl && (
+                    <div className="w-20 shrink-0">
+                      <ImagePreview url={form.imageUrl} label="Principal" />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Fotos adicionales */}
+              <div className="space-y-3 pt-5 border-t border-morado/10">
+                <label className={labelClass}>Fotos del producto</label>
+                <p className={hintClass}>Imágenes adicionales que el comprador puede ver en el detalle del producto</p>
+
+                {/* Input para agregar */}
+                <div className="flex gap-2">
+                  <input
+                    className={inputClass}
+                    placeholder="Pegá la URL de una foto y presioná +"
+                    value={photoInput}
+                    onChange={(e) => setPhotoInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addPhoto(); } }}
+                  />
+                  <button
+                    type="button"
+                    onClick={addPhoto}
+                    disabled={!photoInput.trim()}
+                    className="shrink-0 w-12 bg-morado-dark text-crema border-2 border-morado-dark hover:bg-morado transition-colors disabled:opacity-30 flex items-center justify-center"
+                  >
+                    <Plus size={15} />
+                  </button>
+                </div>
+
+                {/* Grid de fotos */}
+                {photos.length > 0 ? (
+                  <div className="grid grid-cols-4 gap-3 mt-3">
+                    {photos.map((url, i) => (
+                      <ImagePreview
+                        key={i}
+                        url={url}
+                        label={`Foto ${i + 1}`}
+                        onRemove={() => removePhoto(i)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="border-2 border-dashed border-morado/15 py-8 flex flex-col items-center gap-2 mt-2">
+                    <ImageIcon size={22} className="text-tierra/15" />
+                    <p className="font-sans text-xs text-tierra/25 tracking-wide">Todavía no hay fotos adicionales</p>
                   </div>
                 )}
               </div>
@@ -170,6 +290,17 @@ export default function NuevoProductoPage() {
                 </div>
               </div>
             </div>
+
+            {/* Preview portada */}
+            {form.imageUrl && (
+              <div className="bg-crema border-2 border-morado-dark block-shadow p-4">
+                <p className={labelClass + " mb-3"}>Preview portada</p>
+                <ImagePreview url={form.imageUrl} />
+                {form.name && (
+                  <p className="font-sans font-semibold text-xs text-tierra-dark mt-2 tracking-wide truncate">{form.name}</p>
+                )}
+              </div>
+            )}
 
             <div className="space-y-3">
               <button

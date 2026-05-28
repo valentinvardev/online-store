@@ -47,6 +47,7 @@ const productoInput = z.object({
   type: z.enum(["FISICO", "DIGITAL", "PERSONALIZADO"]),
   badge: z.string().optional(),
   imageUrl: z.string().optional(),
+  images: z.array(z.string()).optional(),
   fileUrl: z.string().optional(),
   stock: z.number().int().optional(),
   active: z.boolean().default(true),
