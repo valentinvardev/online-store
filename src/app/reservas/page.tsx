@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Clock, Video, FileText, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Clock, Video, Bell, BellOff } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
+import CalendarioReserva from "./_components/CalendarioReserva";
 
 /* ── Datos de servicios ── */
 const servicios = [
@@ -83,8 +84,6 @@ const servicios = [
   },
 ];
 
-const horarios = ["Mañana (9 a 13h)", "Mediodía (13 a 16h)", "Tarde (16 a 20h)", "Noche (20 a 22h)"];
-const dias = ["Lunes a viernes", "Sábados", "Domingos", "Sin preferencia"];
 
 const inputClass =
   "w-full bg-white border-2 border-morado/15 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
@@ -99,8 +98,9 @@ export default function ReservasPage() {
   const [servicioId, setServicioId] = useState<string>("");
   const [form, setForm] = useState({
     nombre: "", email: "", whatsapp: "", pais: "",
-    horario: "", dia: "", mensaje: "",
+    fecha: "", hora: "", mensaje: "",
   });
+  const [recordatorio, setRecordatorio] = useState(true);
 
   useEffect(() => {
     const s = searchParams.get("servicio");
@@ -114,7 +114,7 @@ export default function ReservasPage() {
     ? !!servicioId
     : step === 1
     ? !!form.nombre && !!form.email
-    : true;
+    : !!form.fecha && !!form.hora;
 
   const handleSubmit = () => setDone(true);
 
@@ -196,7 +196,13 @@ export default function ReservasPage() {
                 ¡Reserva recibida!
               </h2>
               <p className="font-sans text-tierra/55 text-sm tracking-wide max-w-sm mx-auto leading-relaxed">
-                Recibí tu solicitud para <strong className="text-tierra-dark">{servicio?.nombre}</strong>. Te escribo a <strong className="text-tierra-dark">{form.email}</strong> dentro de las 24hs para confirmar fecha y hora.
+                Recibí tu solicitud para <strong className="text-tierra-dark">{servicio?.nombre}</strong> el{" "}
+              <strong className="text-tierra-dark">
+                {form.fecha ? new Date(form.fecha + "T12:00:00").toLocaleDateString("es-AR", { weekday:"long", day:"numeric", month:"long" }) : ""}
+              </strong>{" "}a las <strong className="text-tierra-dark">{form.hora}hs</strong>.
+              {recordatorio && (
+                <span> Te enviamos un recordatorio a <strong className="text-tierra-dark">{form.email}</strong> el día anterior.</span>
+              )}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                 <Link href="/servicios" className="bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] px-8 py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
@@ -329,83 +335,104 @@ export default function ReservasPage() {
 
           /* ── PASO 3: COORDINEMOS ── */
           ) : (
-            <div>
-              <h2 className="font-display uppercase text-3xl text-tierra-dark tracking-wide mb-2">
-                Coordinemos
-              </h2>
-              <p className="font-sans text-tierra/40 text-sm tracking-wide mb-8">
-                Ayudame a encontrar el mejor momento para vos.
-              </p>
-
-              {/* Preferencia de día */}
-              <div className="mb-6">
-                <label className={labelClass}>¿Qué días te quedan mejor?</label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {dias.map((d) => (
-                    <button
-                      key={d} type="button"
-                      onClick={() => set("dia", d)}
-                      className={`py-2.5 font-sans text-[0.62rem] border-2 tracking-widest uppercase transition-all ${
-                        form.dia === d
-                          ? "bg-morado-dark text-crema border-morado-dark"
-                          : "border-morado/15 text-tierra/50 hover:border-morado/40 hover:text-tierra-dark"
-                      }`}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
+            <div className="space-y-8">
+              <div>
+                <h2 className="font-display uppercase text-3xl text-tierra-dark tracking-wide mb-1">
+                  Coordinemos
+                </h2>
+                <p className="font-sans text-tierra/40 text-sm tracking-wide">
+                  Elegí la fecha y hora que mejor te quede.
+                </p>
               </div>
 
-              {/* Preferencia de horario */}
-              <div className="mb-6">
-                <label className={labelClass}>¿En qué horario?</label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {horarios.map((h) => (
-                    <button
-                      key={h} type="button"
-                      onClick={() => set("horario", h)}
-                      className={`py-2.5 font-sans text-[0.62rem] border-2 tracking-widest uppercase transition-all ${
-                        form.horario === h
-                          ? "bg-dorado text-tierra-dark border-dorado"
-                          : "border-morado/15 text-tierra/50 hover:border-morado/40 hover:text-tierra-dark"
-                      }`}
-                    >
-                      {h}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {/* Calendario + horario */}
+              <CalendarioReserva
+                fecha={form.fecha}
+                hora={form.hora}
+                onFecha={(d) => { set("fecha", d); set("hora", ""); }}
+                onHora={(h) => set("hora", h)}
+              />
 
               {/* Mensaje */}
-              <div className="mb-6">
+              <div>
                 <label className={labelClass}>¿Qué te trae? ¿Desde dónde llegás?</label>
-                <p className="font-sans text-[0.65rem] text-tierra/30 tracking-wide mb-2">
-                  Opcional — pero cuanto más sepas contarme, mejor puedo prepararme para tu sesión.
+                <p className="font-sans text-[0.62rem] text-tierra/30 tracking-wide mb-2">
+                  Opcional — cuanto más me contés, mejor puedo prepararme para tu sesión.
                 </p>
                 <textarea
-                  rows={4} placeholder="Contame un poco dónde estás en tu vida ahora mismo..."
-                  className={`${inputClass} resize-none`} value={form.mensaje}
+                  rows={3}
+                  placeholder="Contame un poco dónde estás en tu vida ahora mismo..."
+                  className={`${inputClass} resize-none`}
+                  value={form.mensaje}
                   onChange={(e) => set("mensaje", e.target.value)}
                 />
               </div>
 
-              {/* Resumen final */}
-              <div className="bg-crema-dark border-2 border-morado/10 p-6 space-y-3">
-                <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.3em] uppercase mb-4">Resumen de tu reserva</p>
-                {[
-                  { label: "Sesión",   val: servicio?.nombre ?? "—" },
-                  { label: "Precio",   val: servicio?.precio ?? "—" },
-                  { label: "Formato",  val: servicio?.formato ?? "—" },
-                  { label: "Duración", val: servicio?.duracion ?? "—" },
-                  { label: "Nombre",   val: form.nombre || "—" },
-                  { label: "Email",    val: form.email || "—" },
-                ].map(({ label, val }) => (
-                  <div key={label} className="flex items-center justify-between border-b border-morado/6 pb-2 last:border-0 last:pb-0">
-                    <span className="font-sans text-[0.62rem] text-tierra/35 tracking-widest uppercase">{label}</span>
-                    <span className="font-sans text-sm text-tierra-dark font-medium truncate max-w-[60%] text-right">{val}</span>
+              {/* Recordatorio */}
+              <div className={`border-2 p-5 transition-all ${recordatorio ? "border-dorado/50 bg-dorado/5" : "border-morado/15 bg-crema"}`}>
+                <button
+                  type="button"
+                  onClick={() => setRecordatorio((r) => !r)}
+                  className="w-full flex items-start gap-4 text-left"
+                >
+                  <div className={`w-10 h-10 border-2 shrink-0 flex items-center justify-center transition-all mt-0.5 ${
+                    recordatorio ? "bg-dorado border-dorado" : "border-morado/20 bg-crema"
+                  }`}>
+                    {recordatorio
+                      ? <Bell size={16} className="text-tierra-dark" strokeWidth={2} />
+                      : <BellOff size={16} className="text-tierra/25" strokeWidth={1.5} />
+                    }
                   </div>
-                ))}
+                  <div className="flex-1">
+                    <p className={`font-sans font-semibold text-sm tracking-wide transition-colors ${recordatorio ? "text-tierra-dark" : "text-tierra/40"}`}>
+                      Recordatorio 24 horas antes
+                    </p>
+                    <p className="font-sans text-[0.65rem] text-tierra/40 tracking-wide mt-0.5">
+                      {recordatorio
+                        ? `Te avisamos a ${form.email || "tu email"} el día anterior para que no se te pase.`
+                        : "Activá el recordatorio para recibir un aviso por email antes de tu sesión."
+                      }
+                    </p>
+                  </div>
+                </button>
+
+                {recordatorio && form.fecha && form.hora && (
+                  <div className="reminder-in mt-4 ml-14 border-t border-dorado/20 pt-4">
+                    <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-2">Tu recordatorio llegará</p>
+                    <div className="flex items-center gap-2">
+                      <Bell size={12} className="text-dorado shrink-0" />
+                      <p className="font-sans text-sm text-tierra-dark font-medium">
+                        {(() => {
+                          const d = new Date(form.fecha + "T12:00:00");
+                          d.setDate(d.getDate() - 1);
+                          return d.toLocaleDateString("es-AR", { weekday:"long", day:"numeric", month:"long" });
+                        })()}
+                        {" "}· a las 9:00 AM
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Resumen */}
+              <div className="bg-crema-dark border-2 border-morado/10 p-6">
+                <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.3em] uppercase mb-4">Resumen de tu reserva</p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: "Sesión",   val: servicio?.nombre ?? "—" },
+                    { label: "Precio",   val: servicio?.precio ?? "—" },
+                    { label: "Formato",  val: servicio?.formato ?? "—" },
+                    { label: "Fecha",    val: form.fecha ? new Date(form.fecha + "T12:00:00").toLocaleDateString("es-AR", { weekday:"long", day:"numeric", month:"long" }) : "—" },
+                    { label: "Hora",     val: form.hora ? `${form.hora}hs` : "—" },
+                    { label: "Nombre",   val: form.nombre || "—" },
+                    { label: "Email",    val: form.email || "—" },
+                  ].map(({ label, val }) => (
+                    <div key={label} className="flex items-center justify-between border-b border-morado/6 pb-2 last:border-0 last:pb-0">
+                      <span className="font-sans text-[0.62rem] text-tierra/35 tracking-widest uppercase">{label}</span>
+                      <span className="font-sans text-sm text-tierra-dark font-medium truncate max-w-[60%] text-right">{val}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
