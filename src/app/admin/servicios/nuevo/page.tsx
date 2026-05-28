@@ -2,11 +2,23 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Wrench, Loader2, ImageIcon } from "lucide-react";
+import { ArrowLeft, Wrench, Loader2, ImageIcon, Video, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
 import { api } from "~/trpc/react";
+
+function parseVimeo(input: string): string | null {
+  const s = input.trim();
+  const player = s.match(/player\.vimeo\.com\/video\/(\d+)(?:\?h=([a-f0-9]+))?/);
+  if (player) return s;
+  const withHash = s.match(/vimeo\.com\/(\d+)\/([a-f0-9]+)/);
+  if (withHash) return `https://player.vimeo.com/video/${withHash[1]}?h=${withHash[2]}`;
+  const simple = s.match(/vimeo\.com\/(\d+)/);
+  if (simple) return `https://player.vimeo.com/video/${simple[1]}`;
+  if (/^\d+$/.test(s)) return `https://player.vimeo.com/video/${s}`;
+  return null;
+}
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
 const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5";
@@ -19,7 +31,7 @@ const formatos = [
   { value: "Presencial",  label: "Presencial",       desc: "Encuentro en persona" },
 ];
 
-const empty = { name: "", subtitle: "", description: "", price: "", duration: "", format: "Zoom" };
+const empty = { name: "", subtitle: "", description: "", price: "", duration: "", format: "Zoom", videoUrl: "" };
 
 export default function NuevoServicioPage() {
   const router = useRouter();
@@ -27,6 +39,8 @@ export default function NuevoServicioPage() {
   const [form, setForm] = useState(empty);
   const gallery = useImageGallery();
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const vimeoEmbed = parseVimeo(form.videoUrl);
 
   const create = api.admin.servicios.create.useMutation({
     onSuccess: (s) => { toast(`"${s.name}" publicado`); router.push("/admin/servicios"); },
@@ -36,6 +50,7 @@ export default function NuevoServicioPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (gallery.isUploading) { toast("Esperá a que terminen de subir todas las fotos", "error"); return; }
+    if (form.videoUrl && !vimeoEmbed) { toast("El link de Vimeo no es válido", "error"); return; }
     create.mutate({
       name: form.name,
       subtitle: form.subtitle || undefined,
@@ -45,6 +60,7 @@ export default function NuevoServicioPage() {
       format: form.format,
       imageUrl: gallery.readyImages[0]?.url,
       images: gallery.readyImages.map((img) => img.url),
+      videoUrl: vimeoEmbed ?? undefined,
       active: true,
     });
   };
@@ -101,6 +117,41 @@ export default function NuevoServicioPage() {
                     <p className={`font-sans text-[0.58rem] mt-1 ${form.format === value ? "text-white/60" : "text-tierra/30"}`}>{desc}</p>
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Video Vimeo */}
+            <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
+              <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
+                <Video size={15} className="text-morado" strokeWidth={1.8} />
+                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Video de presentación</h2>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>Link de Vimeo</label>
+                  <p className={hintClass}>Video de bienvenida, descripción o muestra del servicio</p>
+                  <input
+                    className={`${inputClass} ${form.videoUrl && !vimeoEmbed ? "border-rosa" : ""}`}
+                    placeholder="https://vimeo.com/123456789 o https://vimeo.com/123456789/hashprivado"
+                    value={form.videoUrl}
+                    onChange={(e) => set("videoUrl", e.target.value)}
+                  />
+                  {form.videoUrl && !vimeoEmbed && (
+                    <p className="flex items-center gap-1.5 font-sans text-xs text-rosa mt-1.5">
+                      <AlertCircle size={12} /> Link inválido — debe ser una URL de Vimeo
+                    </p>
+                  )}
+                </div>
+                {vimeoEmbed && (
+                  <div className="aspect-video w-full overflow-hidden border-2 border-morado/15">
+                    <iframe
+                      src={`${vimeoEmbed}&color=7B5EA7&title=0&byline=0&portrait=0`}
+                      className="w-full h-full"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

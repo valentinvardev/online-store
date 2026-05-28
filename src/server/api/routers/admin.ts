@@ -50,6 +50,7 @@ const productoInput = z.object({
   badge: z.string().optional(),
   imageUrl: z.string().optional(),
   images: z.array(z.string()).optional(),
+  videoUrl: z.string().optional(),
   fileUrl: z.string().optional(),
   stock: z.number().int().optional(),
   active: z.boolean().default(true),
@@ -64,6 +65,7 @@ const servicioInput = z.object({
   format: z.string().default("Zoom"),
   imageUrl: z.string().optional(),
   images: z.array(z.string()).optional(),
+  videoUrl: z.string().optional(),
   active: z.boolean().default(true),
 });
 
@@ -135,14 +137,17 @@ export const adminRouter = createTRPCRouter({
 
     create: publicProcedure.input(productoInput).mutation(async ({ ctx, input }) => {
       requireAdmin(ctx.session?.user?.email);
-      return ctx.db.product.create({ data: input });
+      const slug = slugify(input.name);
+      return ctx.db.product.create({ data: { ...input, slug } });
     }),
 
     update: publicProcedure
       .input(z.object({ id: z.string(), data: productoInput.partial() }))
       .mutation(async ({ ctx, input }) => {
         requireAdmin(ctx.session?.user?.email);
-        return ctx.db.product.update({ where: { id: input.id }, data: input.data });
+        const data: Record<string, unknown> = { ...input.data };
+        if (input.data.name) data.slug = slugify(input.data.name);
+        return ctx.db.product.update({ where: { id: input.id }, data });
       }),
 
     delete: publicProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
@@ -168,14 +173,17 @@ export const adminRouter = createTRPCRouter({
 
     create: publicProcedure.input(servicioInput).mutation(async ({ ctx, input }) => {
       requireAdmin(ctx.session?.user?.email);
-      return ctx.db.service.create({ data: input });
+      const slug = slugify(input.name);
+      return ctx.db.service.create({ data: { ...input, slug } });
     }),
 
     update: publicProcedure
       .input(z.object({ id: z.string(), data: servicioInput.partial() }))
       .mutation(async ({ ctx, input }) => {
         requireAdmin(ctx.session?.user?.email);
-        return ctx.db.service.update({ where: { id: input.id }, data: input.data });
+        const data: Record<string, unknown> = { ...input.data };
+        if (input.data.name) data.slug = slugify(input.data.name);
+        return ctx.db.service.update({ where: { id: input.id }, data });
       }),
 
     delete: publicProcedure.input(z.string()).mutation(async ({ ctx, input }) => {

@@ -35,40 +35,109 @@ export default async function CourseViewerPage({ params }: Props) {
     return (
       <>
         <Navbar />
-        <main className="min-h-[70vh] bg-crema flex items-center justify-center px-6 py-20">
-          <div className="max-w-md w-full text-center">
-            <span className="font-display text-6xl text-morado/15 block mb-8">✦</span>
-            <h1 className="font-display uppercase text-[clamp(1.8rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-4">
-              {course.name}
-            </h1>
-            <p className="font-sans text-tierra/50 text-sm leading-relaxed mb-8">
-              {course.description}
-            </p>
-            {session ? (
-              <div className="space-y-3">
-                <p className="font-sans text-tierra/40 text-xs tracking-wide">
-                  No tenés acceso a este curso todavía.
-                </p>
-                <Link
-                  href="/cursos"
-                  className="inline-block font-sans font-semibold text-xs px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
-                >
-                  Inscribirme — ${course.price}
-                </Link>
+        <main className="bg-crema min-h-screen">
+
+          {/* Header */}
+          <div className="bg-morado-dark py-14 px-6">
+            <div className="max-w-4xl mx-auto">
+              <Link href="/cursos" className="font-sans text-xs text-crema/40 hover:text-crema transition-colors tracking-widest uppercase mb-6 inline-block">
+                ← Volver a cursos
+              </Link>
+              <div className="flex flex-wrap items-start gap-3 mb-4">
+                {course.level && (
+                  <span className="font-sans text-[0.58rem] px-3 py-1.5 border border-dorado/40 text-dorado tracking-widest uppercase">
+                    {course.level}
+                  </span>
+                )}
+                {course.badge && (
+                  <span className="font-sans text-[0.58rem] px-3 py-1.5 border border-crema/20 text-crema/60 tracking-widest uppercase">
+                    {course.badge}
+                  </span>
+                )}
               </div>
-            ) : (
-              <div className="space-y-3">
-                <p className="font-sans text-tierra/40 text-xs tracking-wide">
-                  Iniciá sesión para ver si tenés acceso.
-                </p>
-                <Link
-                  href="/login"
-                  className="inline-block font-sans font-semibold text-xs px-8 py-4 bg-morado text-crema border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
-                >
-                  Iniciar sesión
-                </Link>
+              <h1 className="font-display uppercase text-[clamp(2rem,6vw,4rem)] text-crema leading-none tracking-wide mb-3">
+                {course.name}
+              </h1>
+              {course.subtitle && (
+                <p className="font-sans italic text-crema/50 text-base">{course.subtitle}</p>
+              )}
+              <div className="flex flex-wrap gap-5 mt-6 font-sans text-xs text-crema/35 tracking-wide">
+                {course.durationWeeks && <span>{course.durationWeeks} semanas</span>}
+                {course.lessonsCount && <span>{course.lessonsCount} clases</span>}
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
+
+            {/* Video de presentación */}
+            {course.videoUrl && (
+              <div>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="h-px flex-1 bg-morado/10" />
+                  <span className="font-sans text-[0.6rem] text-morado tracking-[0.35em] uppercase">Video de presentación</span>
+                  <div className="h-px flex-1 bg-morado/10" />
+                </div>
+                <div className="aspect-video w-full border-2 border-morado-dark overflow-hidden">
+                  <iframe
+                    src={`${course.videoUrl}&color=7B5EA7&title=0&byline=0&portrait=0`}
+                    className="w-full h-full"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             )}
+
+            {/* Descripción */}
+            <div className="grid md:grid-cols-2 gap-10 items-start">
+              <div>
+                <p className="font-sans text-tierra/65 leading-relaxed tracking-wide whitespace-pre-line">
+                  {course.description}
+                </p>
+              </div>
+
+              {/* CTA card */}
+              <div className="bg-white border-2 border-morado-dark p-8 space-y-6">
+                <div>
+                  <p className="font-sans text-[0.6rem] text-tierra/35 tracking-widest uppercase mb-1">Precio del curso</p>
+                  <span className="font-sans font-bold text-4xl text-morado">${course.price.toLocaleString("es-AR")}</span>
+                </div>
+
+                {session ? (
+                  <div className="space-y-3">
+                    <p className="font-sans text-tierra/40 text-xs tracking-wide leading-relaxed">
+                      Todavía no tenés acceso a este curso. Inscribite para ver todo el contenido.
+                    </p>
+                    <Link
+                      href="/cursos"
+                      className="flex items-center justify-center gap-2 w-full font-sans font-semibold text-xs py-4 px-6 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+                    >
+                      ✦ Inscribirme al curso
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <p className="font-sans text-tierra/40 text-xs tracking-wide leading-relaxed">
+                      Iniciá sesión o creá tu cuenta para inscribirte.
+                    </p>
+                    <Link
+                      href="/login"
+                      className="flex items-center justify-center gap-2 w-full font-sans font-semibold text-xs py-4 px-6 bg-morado text-crema border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
+                    >
+                      Iniciar sesión
+                    </Link>
+                    <Link
+                      href="/cursos"
+                      className="block w-full text-center font-sans text-[0.62rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/40 hover:border-morado/50 hover:text-tierra transition-colors"
+                    >
+                      Ver todos los cursos
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         </main>
         <Footer />

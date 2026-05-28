@@ -85,6 +85,7 @@ enum ItemType {
 
 model Product {
     id          String      @id @default(cuid())
+    slug        String      @unique
     name        String
     description String
     price       Float
@@ -93,6 +94,7 @@ model Product {
     badge       String?
     imageUrl    String?
     images      String[]
+    videoUrl    String?
     fileUrl     String?
     stock       Int?
     active      Boolean     @default(true)
@@ -146,6 +148,7 @@ model CourseLesson {
 
 model Service {
     id          String      @id @default(cuid())
+    slug        String      @unique
     name        String
     subtitle    String?
     description String
@@ -154,6 +157,7 @@ model Service {
     format      String      @default("Zoom")
     imageUrl    String?
     images      String[]
+    videoUrl    String?
     active      Boolean     @default(true)
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
