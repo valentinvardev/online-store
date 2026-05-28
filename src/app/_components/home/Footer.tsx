@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 /* ── SVG logos de redes sociales ── */
 const IconInstagram = () => (
@@ -81,8 +82,17 @@ export default function Footer() {
           {/* Marca */}
           <div className="space-y-6">
             <div>
-              <p className="font-display text-dorado text-3xl tracking-widest uppercase leading-none">La Reina</p>
-              <p className="font-display text-crema/25 text-3xl tracking-widest uppercase leading-none">de Bastos</p>
+              <Image
+                src="/logo-rdb.png"
+                alt="La Reina de Bastos"
+                width={160}
+                height={80}
+                className="w-auto h-16 object-contain"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(87%) sepia(45%) saturate(700%) hue-rotate(5deg) brightness(105%)",
+                }}
+              />
             </div>
             <p className="font-sans italic text-crema/35 text-sm leading-relaxed max-w-xs">
               Espiritualidad que sabe a tierra. Para las que quieren ser sagradas y humanas al mismo tiempo.
