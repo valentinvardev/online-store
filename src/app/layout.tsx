@@ -7,6 +7,7 @@ import { Jost } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import CartProviders from "./_components/cart/CartProviders";
 import PageTransition from "./_components/PageTransition";
+import MagicCursor from "./_components/MagicCursor";
 
 const lostar = localFont({
   src: "../fonts/lostar.ttf",
@@ -43,6 +44,7 @@ export default function RootLayout({
     >
       <body className="bg-crema font-sans text-tierra antialiased">
         <TRPCReactProvider>
+          <MagicCursor />
           <CartProviders>
             <PageTransition>{children}</PageTransition>
           </CartProviders>
