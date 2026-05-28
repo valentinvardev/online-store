@@ -5,24 +5,24 @@ interface Props {
   value: string;
   sub?: string;
   icon: LucideIcon;
-  color: string;
+  accent: string;
 }
 
-export default function StatCard({ label, value, sub, icon: Icon, color }: Props) {
+export default function StatCard({ label, value, sub, icon: Icon, accent }: Props) {
   return (
-    <div className="bg-white border-2 border-morado/10 rounded-2xl p-6 flex items-start justify-between">
-      <div>
-        <p className="font-sans text-[0.65rem] text-tierra/40 tracking-widest uppercase mb-2">
+    <div className={`bg-crema border-2 border-morado-dark block-shadow p-6 w-full`}>
+      <div className="flex items-start justify-between mb-4">
+        <p className="font-sans text-[0.6rem] text-tierra/40 tracking-[0.25em] uppercase">
           {label}
         </p>
-        <p className="font-display text-4xl text-tierra-dark tracking-wide">{value}</p>
-        {sub && (
-          <p className="font-sans text-xs text-tierra/40 mt-1 tracking-wide">{sub}</p>
-        )}
+        <Icon size={16} strokeWidth={1.8} className={accent} />
       </div>
-      <div className={`p-3 rounded-xl ${color}`}>
-        <Icon size={20} strokeWidth={1.8} />
-      </div>
+      <p className={`font-display text-5xl tracking-wide leading-none mb-1 ${accent}`}>
+        {value}
+      </p>
+      {sub && (
+        <p className="font-sans text-xs text-tierra/35 mt-2 tracking-wide">{sub}</p>
+      )}
     </div>
   );
 }

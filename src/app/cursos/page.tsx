@@ -2,6 +2,7 @@ import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import CursosBanner from "./_components/CursosBanner";
 import CursosCatalog from "./_components/CursosCatalog";
+import ReseñasScroll from "./_components/ReseñasScroll";
 
 export const metadata = {
   title: "Cursos — La Reina de Bastos",
@@ -15,10 +16,9 @@ export default function CursosPage() {
       <CursosBanner />
 
       {/* Encabezado */}
-      <div className="bg-morado-dark py-14 px-6 border-b-2 border-dorado/20">
+      <div className="bg-morado-dark py-14 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="h-px w-8 bg-dorado" />
+          <div className="mb-5">
             <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase">
               Aprendé a tu ritmo
             </span>
@@ -31,6 +31,8 @@ export default function CursosPage() {
           </p>
         </div>
       </div>
+
+      <ReseñasScroll />
 
       <div className="bg-crema min-h-screen">
         <CursosCatalog />

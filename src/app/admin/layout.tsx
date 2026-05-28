@@ -1,21 +1,17 @@
-import { redirect } from "next/navigation";
-import { auth } from "~/server/auth";
 import AdminSidebar from "./_components/AdminSidebar";
+import { ToastProvider } from "./_components/AdminToast";
 
-const ADMIN_EMAIL = "valentinvarela0508@gmail.com";
-
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
-
-  if (!session?.user) redirect("/api/auth/signin");
-  if (session.user.email !== ADMIN_EMAIL) redirect("/");
-
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-crema/60">
-      <AdminSidebar />
-      <main className="flex-1 px-10 py-10 overflow-y-auto">
-        {children}
-      </main>
-    </div>
+    <ToastProvider>
+      <div className="flex min-h-screen bg-crema-dark">
+        <AdminSidebar />
+        <main className="flex-1 overflow-y-auto">
+          <div className="max-w-5xl mx-auto px-12 pt-12 pb-16 pr-16">
+            {children}
+          </div>
+        </main>
+      </div>
+    </ToastProvider>
   );
 }
