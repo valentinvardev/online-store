@@ -1,10 +1,43 @@
 "use client";
 
-import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { X, Plus, Minus, ShoppingBag, Trash2, Loader2 } from "lucide-react";
 import { useCart } from "./CartContext";
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQty, total, count } = useCart();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/mp/create-preference", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            id: i.id,
+            name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+          })),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Error al iniciar pago");
+
+      const data = (await res.json()) as { sandbox_init_point?: string; init_point?: string };
+      const url = data.sandbox_init_point ?? data.init_point;
+      if (!url) throw new Error("No se recibió URL de pago");
+
+      window.location.href = url;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Error inesperado");
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -91,7 +124,7 @@ export default function CartDrawer() {
                           <Plus size={11} strokeWidth={2} />
                         </button>
                       </div>
-                      <span className="font-display text-xl text-morado tracking-wide">
+                      <span className="font-sans font-bold text-xl text-morado">
                         ${(item.price * item.quantity).toFixed(0)}
                       </span>
                     </div>
@@ -116,12 +149,26 @@ export default function CartDrawer() {
           <div className="border-t-2 border-morado/10 px-6 py-6 space-y-4 shrink-0">
             <div className="flex items-center justify-between">
               <span className="font-sans text-sm text-tierra/55 tracking-wide">Subtotal</span>
-              <span className="font-display text-2xl text-tierra-dark tracking-wide">
+              <span className="font-sans font-bold text-2xl text-tierra-dark">
                 ${total.toFixed(0)}
               </span>
             </div>
-            <button className="w-full bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow">
-              Finalizar compra
+            {error && (
+              <p className="font-sans text-xs text-rosa text-center">{error}</p>
+            )}
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className="w-full bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <Loader2 size={14} className="animate-spin" />
+                  Redirigiendo...
+                </>
+              ) : (
+                "Finalizar compra"
+              )}
             </button>
             <button
               onClick={closeCart}

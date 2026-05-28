@@ -439,7 +439,7 @@ export default function ServiciosGrid() {
                 {/* Precio + CTA */}
                 <div className="flex items-center justify-between mt-auto">
                   <div>
-                    <span className="font-display text-3xl text-tierra-dark tracking-wide">{s.precio}</span>
+                    <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
                     {s.badge && (
                       <span className="block font-sans text-[0.58rem] text-dorado tracking-widest uppercase mt-0.5">
                         {s.badge}

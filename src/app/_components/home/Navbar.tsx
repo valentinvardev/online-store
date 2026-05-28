@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { ShoppingBag, LogIn, LogOut, User } from "lucide-react";
 import { useCart } from "../cart/CartContext";
+import { useSession, signOut } from "next-auth/react";
 
 const links = [
   { label: "Tienda", href: "/tienda" },
@@ -15,23 +17,22 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { count, openCart } = useCart();
+  const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 bg-white backdrop-blur-sm border-b border-morado/10 shadow-sm shadow-morado/5">
+    <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-morado/10 shadow-sm shadow-morado/5">
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="text-rosa text-lg transition-transform duration-300 group-hover:rotate-12">✦</span>
-          <div className="leading-none">
-            <span className="font-display font-black text-base text-morado-dark uppercase tracking-widest block">
-              La Reina
-            </span>
-            <span className="font-display text-[0.6rem] text-morado/50 uppercase tracking-[0.35em] block">
-              de Bastos
-            </span>
-          </div>
-          <span className="text-rosa text-lg transition-transform duration-300 group-hover:-rotate-12">✦</span>
+        <Link href="/" className="group">
+          <Image
+            src="/logo-rdb.png"
+            alt="La Reina de Bastos"
+            width={160}
+            height={160}
+            className="h-16 w-auto transition-opacity duration-300 group-hover:opacity-75"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -50,6 +51,7 @@ export default function Navbar() {
 
         {/* CTA Desktop */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Cart */}
           <button
             onClick={openCart}
             className="relative p-2 text-morado/60 hover:text-morado transition-colors"
@@ -62,6 +64,41 @@ export default function Navbar() {
               </span>
             )}
           </button>
+
+          {/* Auth */}
+          {session ? (
+            <div className="flex items-center gap-2">
+              {session.user?.image ? (
+                <Image
+                  src={session.user.image}
+                  alt={session.user.name ?? ""}
+                  width={28}
+                  height={28}
+                  className="rounded-full border border-morado/20"
+                />
+              ) : (
+                <div className="w-7 h-7 bg-morado/10 border border-morado/20 flex items-center justify-center">
+                  <User size={14} className="text-morado/50" />
+                </div>
+              )}
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="text-morado/40 hover:text-morado transition-colors p-1"
+                aria-label="Cerrar sesión"
+              >
+                <LogOut size={16} strokeWidth={1.5} />
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 font-sans text-xs text-morado/60 hover:text-morado transition-colors tracking-widest uppercase"
+            >
+              <LogIn size={15} strokeWidth={1.5} />
+              Entrar
+            </Link>
+          )}
+
           <Link
             href="/servicios"
             className="border-2 border-morado text-morado font-sans text-xs px-5 py-2.5 hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
@@ -83,8 +120,8 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-72" : "max-h-0"}`}>
-        <div className="bg-white border-t border-morado/10 px-6 py-6 space-y-4">
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
+        <div className="bg-crema border-t border-morado/10 px-6 py-6 space-y-4">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -95,6 +132,22 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          {session ? (
+            <button
+              onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
+              className="block font-sans text-xs text-tierra/50 hover:text-morado transition-colors tracking-widest uppercase py-1"
+            >
+              Cerrar sesión
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="block font-sans text-xs text-morado/50 hover:text-morado transition-colors tracking-widest uppercase py-1"
+              onClick={() => setOpen(false)}
+            >
+              Iniciar sesión
+            </Link>
+          )}
           <Link
             href="/servicios"
             className="block text-center border-2 border-morado text-morado font-sans text-xs px-5 py-2.5 hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase"

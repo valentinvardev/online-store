@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
     output   = "../generated/prisma"
@@ -8,26 +5,12 @@ generator client {
 
 datasource db {
     provider  = "postgresql"
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url       = env("DATABASE_URL")
     directUrl = env("DIRECT_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// ─── NextAuth ────────────────────────────────────────────────────────────────
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
-}
-
-// Necessary for Next auth
 model Account {
     id                       String  @id @default(cuid())
     userId                   String
@@ -41,8 +24,8 @@ model Account {
     scope                    String?
     id_token                 String? @db.Text
     session_state            String?
-    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     refresh_token_expires_in Int?
+    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
 }
@@ -56,14 +39,16 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String       @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?      @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
+    orders        Order[]
+    enrollments   Enrollment[]
+    bookings      Booking[]
 }
 
 model VerificationToken {
@@ -72,4 +57,146 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum ProductType {
+    FISICO
+    DIGITAL
+    PERSONALIZADO
+}
+
+enum OrderStatus {
+    PENDING
+    PAID
+    FAILED
+    CANCELLED
+}
+
+enum ItemType {
+    PRODUCT
+    COURSE
+    SERVICE
+}
+
+// ─── Catálogo ────────────────────────────────────────────────────────────────
+
+model Product {
+    id          String      @id @default(cuid())
+    name        String
+    description String
+    price       Float
+    type        ProductType
+    imageUrl    String?
+    fileUrl     String?
+    stock       Int?
+    active      Boolean     @default(true)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    orderItems  OrderItem[]
+}
+
+model Course {
+    id          String         @id @default(cuid())
+    slug        String         @unique
+    name        String
+    description String
+    price       Float
+    imageUrl    String?
+    active      Boolean        @default(true)
+    createdAt   DateTime       @default(now())
+    updatedAt   DateTime       @updatedAt
+    modules     CourseModule[]
+    enrollments Enrollment[]
+    orderItems  OrderItem[]
+}
+
+model CourseModule {
+    id       String         @id @default(cuid())
+    courseId String
+    course   Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    title    String
+    order    Int
+    lessons  CourseLesson[]
+}
+
+model CourseLesson {
+    id       String       @id @default(cuid())
+    moduleId String
+    module   CourseModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+    title    String
+    content  String?      @db.Text
+    videoUrl String?
+    order    Int
+}
+
+model Service {
+    id          String      @id @default(cuid())
+    name        String
+    description String
+    price       Float
+    duration    Int
+    active      Boolean     @default(true)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    bookings    Booking[]
+    orderItems  OrderItem[]
+}
+
+// ─── Órdenes ─────────────────────────────────────────────────────────────────
+
+model Order {
+    id          String      @id @default(cuid())
+    userId      String?
+    user        User?       @relation(fields: [userId], references: [id])
+    email       String
+    status      OrderStatus @default(PENDING)
+    total       Float
+    mpPaymentId String?
+    mpPrefId    String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    items       OrderItem[]
+}
+
+model OrderItem {
+    id        String   @id @default(cuid())
+    orderId   String
+    order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    itemType  ItemType
+    productId String?
+    product   Product? @relation(fields: [productId], references: [id])
+    courseId  String?
+    course    Course?  @relation(fields: [courseId], references: [id])
+    serviceId String?
+    service   Service? @relation(fields: [serviceId], references: [id])
+    quantity  Int      @default(1)
+    price     Float
+    name      String
+}
+
+// ─── Acceso ───────────────────────────────────────────────────────────────────
+
+model Enrollment {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    courseId  String
+    course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+
+    @@unique([userId, courseId])
+}
+
+model Booking {
+    id        String   @id @default(cuid())
+    userId    String?
+    user      User?    @relation(fields: [userId], references: [id])
+    serviceId String
+    service   Service  @relation(fields: [serviceId], references: [id])
+    email     String
+    date      DateTime
+    notes     String?
+    createdAt DateTime @default(now())
 }

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const navLinks = [
   { label: "Tienda", href: "/tienda" },
   { label: "Cursos", href: "/cursos" },
@@ -21,15 +23,17 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-14">
           {/* Marca */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-5">
-              <span className="text-dorado text-lg">✦</span>
-              <div className="leading-none">
-                <span className="font-display font-black text-base text-crema uppercase tracking-widest block">La Reina</span>
-                <span className="font-display text-[0.6rem] text-dorado/70 uppercase tracking-[0.35em] block">de Bastos</span>
-              </div>
-              <span className="text-dorado text-lg">✦</span>
+            <div className="mb-5">
+              <Image
+                src="/logo-rdb.png"
+                alt="La Reina de Bastos"
+                width={120}
+                height={120}
+                className="h-16 w-auto"
+                style={{ filter: "invert(1) brightness(10) sepia(1) saturate(0.3) hue-rotate(10deg)" }}
+              />
             </div>
-            <p className="font-serif italic text-crema/40 text-base leading-relaxed max-w-xs">
+            <p className="font-sans italic text-crema/40 text-base leading-relaxed max-w-xs">
               Espiritualidad que sabe a tierra. Para las que quieren ser sagradas y humanas al mismo tiempo.
             </p>
           </div>
