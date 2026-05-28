@@ -17,6 +17,73 @@ const typeInfo: Record<string, string> = {
   PERSONALIZADO: "Hecho a medida, requiere consulta previa",
 };
 
+const typeLabel: Record<string, string> = {
+  FISICO: "Físico", DIGITAL: "Digital", PERSONALIZADO: "Personalizado",
+};
+
+const badgeStyles: Record<string, string> = {
+  "Nuevo":       "bg-celeste/20 text-celeste border-celeste/30",
+  "Oferta":      "bg-rosa/15 text-rosa border-rosa/30",
+  "Más vendido": "bg-dorado/20 text-tierra-dark border-dorado/40",
+  "Agotado":     "bg-tierra/10 text-tierra/60 border-tierra/20",
+};
+
+function ProductCardPreview({ name, description, price, priceOld, badge, type, imageUrl }: {
+  name: string; description: string; price: string; priceOld: string;
+  badge: string; type: string; imageUrl?: string;
+}) {
+  return (
+    <article className="bg-white border-2 border-morado-dark overflow-hidden block-shadow flex flex-col">
+      {/* Imagen */}
+      <div className="h-52 bg-gradient-to-br from-morado-dark via-celeste to-morado relative flex items-center justify-center shrink-0 overflow-hidden">
+        {imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-14 h-14 bg-white/20 border-2 border-white/50 flex items-center justify-center">
+            <span className="text-white text-xl">✦</span>
+          </div>
+        )}
+        {badge && (
+          <span className={`absolute top-3 left-3 font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[badge] ?? ""}`}>
+            {badge}
+          </span>
+        )}
+        <span className="absolute top-3 right-3 font-sans text-[0.55rem] text-white/50 tracking-[0.3em] uppercase bg-black/20 px-2 py-1">
+          {typeLabel[type] ?? type}
+        </span>
+      </div>
+
+      {/* Info */}
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="font-sans font-semibold text-base text-tierra-dark mb-2 leading-snug">
+          {name || <span className="text-tierra/25">Nombre del producto</span>}
+        </h3>
+        <p className="font-sans text-[0.72rem] text-tierra/50 mb-5 leading-relaxed tracking-wide flex-1 line-clamp-3">
+          {description || <span className="text-tierra/20">Descripción del producto...</span>}
+        </p>
+        <div className="flex items-center justify-between mt-auto">
+          <div className="flex items-baseline gap-2">
+            <span className="font-sans font-bold text-2xl text-morado">
+              {price ? `$${price}` : <span className="text-tierra/20 text-base">$0</span>}
+            </span>
+            {priceOld && (
+              <span className="font-sans text-xs text-tierra/35 line-through">${priceOld}</span>
+            )}
+          </div>
+          <button
+            type="button"
+            disabled={badge === "Agotado"}
+            className="font-sans text-[0.65rem] px-4 py-2.5 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {badge === "Agotado" ? "Agotado" : "Agregar"}
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 // ── Lightbox ──────────────────────────────────────────────────────────────────
 function Lightbox({ images, index, onClose, onNav }: {
   images: string[];
@@ -425,18 +492,19 @@ export default function NuevoProductoPage() {
               </div>
             </div>
 
-            {/* Preview portada */}
-            {readyImages[0] && (
-              <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={readyImages[0].url} alt="Portada" className="w-full aspect-square object-cover" />
-                <div className="px-4 py-3">
-                  <p className="font-sans text-[0.55rem] text-tierra/35 tracking-widest uppercase mb-0.5">Así se ve en la tienda</p>
-                  {form.name && <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide truncate">{form.name}</p>}
-                  {form.price && <p className="font-sans text-morado font-bold mt-0.5">${form.price}</p>}
-                </div>
-              </div>
-            )}
+            {/* Preview */}
+            <div className="space-y-2">
+              <p className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">Así se ve en la tienda</p>
+              <ProductCardPreview
+                name={form.name}
+                description={form.description}
+                price={form.price}
+                priceOld={form.priceOld}
+                badge={form.badge}
+                type={form.type}
+                imageUrl={readyImages[0]?.url}
+              />
+            </div>
 
             <div className="space-y-3">
               <button
