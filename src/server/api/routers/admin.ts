@@ -22,8 +22,13 @@ function requireAdmin(email: string | null | undefined) {
 
 const cursoInput = z.object({
   name: z.string().min(1),
+  subtitle: z.string().optional(),
   description: z.string().min(1),
   price: z.number().positive(),
+  badge: z.string().optional(),
+  level: z.string().default("Todos los niveles"),
+  durationWeeks: z.number().int().positive().optional(),
+  lessonsCount: z.number().int().positive().optional(),
   imageUrl: z.string().optional(),
   active: z.boolean().default(true),
 });
@@ -32,7 +37,9 @@ const productoInput = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
   price: z.number().positive(),
+  priceOld: z.number().positive().optional(),
   type: z.enum(["FISICO", "DIGITAL", "PERSONALIZADO"]),
+  badge: z.string().optional(),
   imageUrl: z.string().optional(),
   fileUrl: z.string().optional(),
   stock: z.number().int().optional(),
@@ -41,9 +48,11 @@ const productoInput = z.object({
 
 const servicioInput = z.object({
   name: z.string().min(1),
+  subtitle: z.string().optional(),
   description: z.string().min(1),
   price: z.number().positive(),
   duration: z.number().int().positive(),
+  format: z.string().default("Zoom"),
   active: z.boolean().default(true),
 });
 

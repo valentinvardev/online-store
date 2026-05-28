@@ -6669,11 +6669,13 @@ export namespace Prisma {
 
   export type ProductAvgAggregateOutputType = {
     price: number | null
+    priceOld: number | null
     stock: number | null
   }
 
   export type ProductSumAggregateOutputType = {
     price: number | null
+    priceOld: number | null
     stock: number | null
   }
 
@@ -6682,7 +6684,9 @@ export namespace Prisma {
     name: string | null
     description: string | null
     price: number | null
+    priceOld: number | null
     type: $Enums.ProductType | null
+    badge: string | null
     imageUrl: string | null
     fileUrl: string | null
     stock: number | null
@@ -6696,7 +6700,9 @@ export namespace Prisma {
     name: string | null
     description: string | null
     price: number | null
+    priceOld: number | null
     type: $Enums.ProductType | null
+    badge: string | null
     imageUrl: string | null
     fileUrl: string | null
     stock: number | null
@@ -6710,7 +6716,9 @@ export namespace Prisma {
     name: number
     description: number
     price: number
+    priceOld: number
     type: number
+    badge: number
     imageUrl: number
     fileUrl: number
     stock: number
@@ -6723,11 +6731,13 @@ export namespace Prisma {
 
   export type ProductAvgAggregateInputType = {
     price?: true
+    priceOld?: true
     stock?: true
   }
 
   export type ProductSumAggregateInputType = {
     price?: true
+    priceOld?: true
     stock?: true
   }
 
@@ -6736,7 +6746,9 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    priceOld?: true
     type?: true
+    badge?: true
     imageUrl?: true
     fileUrl?: true
     stock?: true
@@ -6750,7 +6762,9 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    priceOld?: true
     type?: true
+    badge?: true
     imageUrl?: true
     fileUrl?: true
     stock?: true
@@ -6764,7 +6778,9 @@ export namespace Prisma {
     name?: true
     description?: true
     price?: true
+    priceOld?: true
     type?: true
+    badge?: true
     imageUrl?: true
     fileUrl?: true
     stock?: true
@@ -6865,7 +6881,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld: number | null
     type: $Enums.ProductType
+    badge: string | null
     imageUrl: string | null
     fileUrl: string | null
     stock: number | null
@@ -6898,7 +6916,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    priceOld?: boolean
     type?: boolean
+    badge?: boolean
     imageUrl?: boolean
     fileUrl?: boolean
     stock?: boolean
@@ -6914,7 +6934,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    priceOld?: boolean
     type?: boolean
+    badge?: boolean
     imageUrl?: boolean
     fileUrl?: boolean
     stock?: boolean
@@ -6928,7 +6950,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    priceOld?: boolean
     type?: boolean
+    badge?: boolean
     imageUrl?: boolean
     fileUrl?: boolean
     stock?: boolean
@@ -6942,7 +6966,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     price?: boolean
+    priceOld?: boolean
     type?: boolean
+    badge?: boolean
     imageUrl?: boolean
     fileUrl?: boolean
     stock?: boolean
@@ -6951,7 +6977,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "type" | "imageUrl" | "fileUrl" | "stock" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "priceOld" | "type" | "badge" | "imageUrl" | "fileUrl" | "stock" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | Product$orderItemsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
@@ -6969,7 +6995,9 @@ export namespace Prisma {
       name: string
       description: string
       price: number
+      priceOld: number | null
       type: $Enums.ProductType
+      badge: string | null
       imageUrl: string | null
       fileUrl: string | null
       stock: number | null
@@ -7404,7 +7432,9 @@ export namespace Prisma {
     readonly name: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
     readonly price: FieldRef<"Product", 'Float'>
+    readonly priceOld: FieldRef<"Product", 'Float'>
     readonly type: FieldRef<"Product", 'ProductType'>
+    readonly badge: FieldRef<"Product", 'String'>
     readonly imageUrl: FieldRef<"Product", 'String'>
     readonly fileUrl: FieldRef<"Product", 'String'>
     readonly stock: FieldRef<"Product", 'Int'>
@@ -7855,18 +7885,27 @@ export namespace Prisma {
 
   export type CourseAvgAggregateOutputType = {
     price: number | null
+    durationWeeks: number | null
+    lessonsCount: number | null
   }
 
   export type CourseSumAggregateOutputType = {
     price: number | null
+    durationWeeks: number | null
+    lessonsCount: number | null
   }
 
   export type CourseMinAggregateOutputType = {
     id: string | null
     slug: string | null
     name: string | null
+    subtitle: string | null
     description: string | null
     price: number | null
+    badge: string | null
+    level: string | null
+    durationWeeks: number | null
+    lessonsCount: number | null
     imageUrl: string | null
     active: boolean | null
     createdAt: Date | null
@@ -7877,8 +7916,13 @@ export namespace Prisma {
     id: string | null
     slug: string | null
     name: string | null
+    subtitle: string | null
     description: string | null
     price: number | null
+    badge: string | null
+    level: string | null
+    durationWeeks: number | null
+    lessonsCount: number | null
     imageUrl: string | null
     active: boolean | null
     createdAt: Date | null
@@ -7889,8 +7933,13 @@ export namespace Prisma {
     id: number
     slug: number
     name: number
+    subtitle: number
     description: number
     price: number
+    badge: number
+    level: number
+    durationWeeks: number
+    lessonsCount: number
     imageUrl: number
     active: number
     createdAt: number
@@ -7901,18 +7950,27 @@ export namespace Prisma {
 
   export type CourseAvgAggregateInputType = {
     price?: true
+    durationWeeks?: true
+    lessonsCount?: true
   }
 
   export type CourseSumAggregateInputType = {
     price?: true
+    durationWeeks?: true
+    lessonsCount?: true
   }
 
   export type CourseMinAggregateInputType = {
     id?: true
     slug?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
+    badge?: true
+    level?: true
+    durationWeeks?: true
+    lessonsCount?: true
     imageUrl?: true
     active?: true
     createdAt?: true
@@ -7923,8 +7981,13 @@ export namespace Prisma {
     id?: true
     slug?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
+    badge?: true
+    level?: true
+    durationWeeks?: true
+    lessonsCount?: true
     imageUrl?: true
     active?: true
     createdAt?: true
@@ -7935,8 +7998,13 @@ export namespace Prisma {
     id?: true
     slug?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
+    badge?: true
+    level?: true
+    durationWeeks?: true
+    lessonsCount?: true
     imageUrl?: true
     active?: true
     createdAt?: true
@@ -8034,8 +8102,13 @@ export namespace Prisma {
     id: string
     slug: string
     name: string
+    subtitle: string | null
     description: string
     price: number
+    badge: string | null
+    level: string
+    durationWeeks: number | null
+    lessonsCount: number | null
     imageUrl: string | null
     active: boolean
     createdAt: Date
@@ -8065,8 +8138,13 @@ export namespace Prisma {
     id?: boolean
     slug?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
+    badge?: boolean
+    level?: boolean
+    durationWeeks?: boolean
+    lessonsCount?: boolean
     imageUrl?: boolean
     active?: boolean
     createdAt?: boolean
@@ -8081,8 +8159,13 @@ export namespace Prisma {
     id?: boolean
     slug?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
+    badge?: boolean
+    level?: boolean
+    durationWeeks?: boolean
+    lessonsCount?: boolean
     imageUrl?: boolean
     active?: boolean
     createdAt?: boolean
@@ -8093,8 +8176,13 @@ export namespace Prisma {
     id?: boolean
     slug?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
+    badge?: boolean
+    level?: boolean
+    durationWeeks?: boolean
+    lessonsCount?: boolean
     imageUrl?: boolean
     active?: boolean
     createdAt?: boolean
@@ -8105,15 +8193,20 @@ export namespace Prisma {
     id?: boolean
     slug?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
+    badge?: boolean
+    level?: boolean
+    durationWeeks?: boolean
+    lessonsCount?: boolean
     imageUrl?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "price" | "imageUrl" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "subtitle" | "description" | "price" | "badge" | "level" | "durationWeeks" | "lessonsCount" | "imageUrl" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     modules?: boolean | Course$modulesArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
@@ -8134,8 +8227,13 @@ export namespace Prisma {
       id: string
       slug: string
       name: string
+      subtitle: string | null
       description: string
       price: number
+      badge: string | null
+      level: string
+      durationWeeks: number | null
+      lessonsCount: number | null
       imageUrl: string | null
       active: boolean
       createdAt: Date
@@ -8569,8 +8667,13 @@ export namespace Prisma {
     readonly id: FieldRef<"Course", 'String'>
     readonly slug: FieldRef<"Course", 'String'>
     readonly name: FieldRef<"Course", 'String'>
+    readonly subtitle: FieldRef<"Course", 'String'>
     readonly description: FieldRef<"Course", 'String'>
     readonly price: FieldRef<"Course", 'Float'>
+    readonly badge: FieldRef<"Course", 'String'>
+    readonly level: FieldRef<"Course", 'String'>
+    readonly durationWeeks: FieldRef<"Course", 'Int'>
+    readonly lessonsCount: FieldRef<"Course", 'Int'>
     readonly imageUrl: FieldRef<"Course", 'String'>
     readonly active: FieldRef<"Course", 'Boolean'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
@@ -10189,6 +10292,7 @@ export namespace Prisma {
     content: string | null
     videoUrl: string | null
     order: number | null
+    freePreview: boolean | null
   }
 
   export type CourseLessonMaxAggregateOutputType = {
@@ -10198,6 +10302,7 @@ export namespace Prisma {
     content: string | null
     videoUrl: string | null
     order: number | null
+    freePreview: boolean | null
   }
 
   export type CourseLessonCountAggregateOutputType = {
@@ -10206,7 +10311,9 @@ export namespace Prisma {
     title: number
     content: number
     videoUrl: number
+    attachments: number
     order: number
+    freePreview: number
     _all: number
   }
 
@@ -10226,6 +10333,7 @@ export namespace Prisma {
     content?: true
     videoUrl?: true
     order?: true
+    freePreview?: true
   }
 
   export type CourseLessonMaxAggregateInputType = {
@@ -10235,6 +10343,7 @@ export namespace Prisma {
     content?: true
     videoUrl?: true
     order?: true
+    freePreview?: true
   }
 
   export type CourseLessonCountAggregateInputType = {
@@ -10243,7 +10352,9 @@ export namespace Prisma {
     title?: true
     content?: true
     videoUrl?: true
+    attachments?: true
     order?: true
+    freePreview?: true
     _all?: true
   }
 
@@ -10339,7 +10450,9 @@ export namespace Prisma {
     title: string
     content: string | null
     videoUrl: string | null
+    attachments: string[]
     order: number
+    freePreview: boolean
     _count: CourseLessonCountAggregateOutputType | null
     _avg: CourseLessonAvgAggregateOutputType | null
     _sum: CourseLessonSumAggregateOutputType | null
@@ -10367,7 +10480,9 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     videoUrl?: boolean
+    attachments?: boolean
     order?: boolean
+    freePreview?: boolean
     module?: boolean | CourseModuleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["courseLesson"]>
 
@@ -10377,7 +10492,9 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     videoUrl?: boolean
+    attachments?: boolean
     order?: boolean
+    freePreview?: boolean
     module?: boolean | CourseModuleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["courseLesson"]>
 
@@ -10387,7 +10504,9 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     videoUrl?: boolean
+    attachments?: boolean
     order?: boolean
+    freePreview?: boolean
     module?: boolean | CourseModuleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["courseLesson"]>
 
@@ -10397,10 +10516,12 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     videoUrl?: boolean
+    attachments?: boolean
     order?: boolean
+    freePreview?: boolean
   }
 
-  export type CourseLessonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "moduleId" | "title" | "content" | "videoUrl" | "order", ExtArgs["result"]["courseLesson"]>
+  export type CourseLessonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "moduleId" | "title" | "content" | "videoUrl" | "attachments" | "order" | "freePreview", ExtArgs["result"]["courseLesson"]>
   export type CourseLessonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     module?: boolean | CourseModuleDefaultArgs<ExtArgs>
   }
@@ -10422,7 +10543,9 @@ export namespace Prisma {
       title: string
       content: string | null
       videoUrl: string | null
+      attachments: string[]
       order: number
+      freePreview: boolean
     }, ExtArgs["result"]["courseLesson"]>
     composites: {}
   }
@@ -10852,7 +10975,9 @@ export namespace Prisma {
     readonly title: FieldRef<"CourseLesson", 'String'>
     readonly content: FieldRef<"CourseLesson", 'String'>
     readonly videoUrl: FieldRef<"CourseLesson", 'String'>
+    readonly attachments: FieldRef<"CourseLesson", 'String[]'>
     readonly order: FieldRef<"CourseLesson", 'Int'>
+    readonly freePreview: FieldRef<"CourseLesson", 'Boolean'>
   }
     
 
@@ -11292,9 +11417,11 @@ export namespace Prisma {
   export type ServiceMinAggregateOutputType = {
     id: string | null
     name: string | null
+    subtitle: string | null
     description: string | null
     price: number | null
     duration: number | null
+    format: string | null
     active: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -11303,9 +11430,11 @@ export namespace Prisma {
   export type ServiceMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    subtitle: string | null
     description: string | null
     price: number | null
     duration: number | null
+    format: string | null
     active: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -11314,9 +11443,11 @@ export namespace Prisma {
   export type ServiceCountAggregateOutputType = {
     id: number
     name: number
+    subtitle: number
     description: number
     price: number
     duration: number
+    format: number
     active: number
     createdAt: number
     updatedAt: number
@@ -11337,9 +11468,11 @@ export namespace Prisma {
   export type ServiceMinAggregateInputType = {
     id?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
     duration?: true
+    format?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -11348,9 +11481,11 @@ export namespace Prisma {
   export type ServiceMaxAggregateInputType = {
     id?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
     duration?: true
+    format?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -11359,9 +11494,11 @@ export namespace Prisma {
   export type ServiceCountAggregateInputType = {
     id?: true
     name?: true
+    subtitle?: true
     description?: true
     price?: true
     duration?: true
+    format?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -11457,9 +11594,11 @@ export namespace Prisma {
   export type ServiceGroupByOutputType = {
     id: string
     name: string
+    subtitle: string | null
     description: string
     price: number
     duration: number
+    format: string
     active: boolean
     createdAt: Date
     updatedAt: Date
@@ -11487,9 +11626,11 @@ export namespace Prisma {
   export type ServiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
     duration?: boolean
+    format?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -11501,9 +11642,11 @@ export namespace Prisma {
   export type ServiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
     duration?: boolean
+    format?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -11512,9 +11655,11 @@ export namespace Prisma {
   export type ServiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
     duration?: boolean
+    format?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -11523,15 +11668,17 @@ export namespace Prisma {
   export type ServiceSelectScalar = {
     id?: boolean
     name?: boolean
+    subtitle?: boolean
     description?: boolean
     price?: boolean
     duration?: boolean
+    format?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "duration" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["service"]>
+  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "subtitle" | "description" | "price" | "duration" | "format" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["service"]>
   export type ServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | Service$bookingsArgs<ExtArgs>
     orderItems?: boolean | Service$orderItemsArgs<ExtArgs>
@@ -11549,9 +11696,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      subtitle: string | null
       description: string
       price: number
       duration: number
+      format: string
       active: boolean
       createdAt: Date
       updatedAt: Date
@@ -11982,9 +12131,11 @@ export namespace Prisma {
   interface ServiceFieldRefs {
     readonly id: FieldRef<"Service", 'String'>
     readonly name: FieldRef<"Service", 'String'>
+    readonly subtitle: FieldRef<"Service", 'String'>
     readonly description: FieldRef<"Service", 'String'>
     readonly price: FieldRef<"Service", 'Float'>
     readonly duration: FieldRef<"Service", 'Int'>
+    readonly format: FieldRef<"Service", 'String'>
     readonly active: FieldRef<"Service", 'Boolean'>
     readonly createdAt: FieldRef<"Service", 'DateTime'>
     readonly updatedAt: FieldRef<"Service", 'DateTime'>
@@ -17097,7 +17248,9 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     price: 'price',
+    priceOld: 'priceOld',
     type: 'type',
+    badge: 'badge',
     imageUrl: 'imageUrl',
     fileUrl: 'fileUrl',
     stock: 'stock',
@@ -17113,8 +17266,13 @@ export namespace Prisma {
     id: 'id',
     slug: 'slug',
     name: 'name',
+    subtitle: 'subtitle',
     description: 'description',
     price: 'price',
+    badge: 'badge',
+    level: 'level',
+    durationWeeks: 'durationWeeks',
+    lessonsCount: 'lessonsCount',
     imageUrl: 'imageUrl',
     active: 'active',
     createdAt: 'createdAt',
@@ -17140,7 +17298,9 @@ export namespace Prisma {
     title: 'title',
     content: 'content',
     videoUrl: 'videoUrl',
-    order: 'order'
+    attachments: 'attachments',
+    order: 'order',
+    freePreview: 'freePreview'
   };
 
   export type CourseLessonScalarFieldEnum = (typeof CourseLessonScalarFieldEnum)[keyof typeof CourseLessonScalarFieldEnum]
@@ -17149,9 +17309,11 @@ export namespace Prisma {
   export const ServiceScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    subtitle: 'subtitle',
     description: 'description',
     price: 'price',
     duration: 'duration',
+    format: 'format',
     active: 'active',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -17621,7 +17783,9 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     price?: FloatFilter<"Product"> | number
+    priceOld?: FloatNullableFilter<"Product"> | number | null
     type?: EnumProductTypeFilter<"Product"> | $Enums.ProductType
+    badge?: StringNullableFilter<"Product"> | string | null
     imageUrl?: StringNullableFilter<"Product"> | string | null
     fileUrl?: StringNullableFilter<"Product"> | string | null
     stock?: IntNullableFilter<"Product"> | number | null
@@ -17636,7 +17800,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    priceOld?: SortOrderInput | SortOrder
     type?: SortOrder
+    badge?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     stock?: SortOrderInput | SortOrder
@@ -17654,7 +17820,9 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     price?: FloatFilter<"Product"> | number
+    priceOld?: FloatNullableFilter<"Product"> | number | null
     type?: EnumProductTypeFilter<"Product"> | $Enums.ProductType
+    badge?: StringNullableFilter<"Product"> | string | null
     imageUrl?: StringNullableFilter<"Product"> | string | null
     fileUrl?: StringNullableFilter<"Product"> | string | null
     stock?: IntNullableFilter<"Product"> | number | null
@@ -17669,7 +17837,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    priceOld?: SortOrderInput | SortOrder
     type?: SortOrder
+    badge?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     stock?: SortOrderInput | SortOrder
@@ -17691,7 +17861,9 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
     price?: FloatWithAggregatesFilter<"Product"> | number
+    priceOld?: FloatNullableWithAggregatesFilter<"Product"> | number | null
     type?: EnumProductTypeWithAggregatesFilter<"Product"> | $Enums.ProductType
+    badge?: StringNullableWithAggregatesFilter<"Product"> | string | null
     imageUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     fileUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     stock?: IntNullableWithAggregatesFilter<"Product"> | number | null
@@ -17707,8 +17879,13 @@ export namespace Prisma {
     id?: StringFilter<"Course"> | string
     slug?: StringFilter<"Course"> | string
     name?: StringFilter<"Course"> | string
+    subtitle?: StringNullableFilter<"Course"> | string | null
     description?: StringFilter<"Course"> | string
     price?: FloatFilter<"Course"> | number
+    badge?: StringNullableFilter<"Course"> | string | null
+    level?: StringFilter<"Course"> | string
+    durationWeeks?: IntNullableFilter<"Course"> | number | null
+    lessonsCount?: IntNullableFilter<"Course"> | number | null
     imageUrl?: StringNullableFilter<"Course"> | string | null
     active?: BoolFilter<"Course"> | boolean
     createdAt?: DateTimeFilter<"Course"> | Date | string
@@ -17722,8 +17899,13 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
     description?: SortOrder
     price?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    level?: SortOrder
+    durationWeeks?: SortOrderInput | SortOrder
+    lessonsCount?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -17740,8 +17922,13 @@ export namespace Prisma {
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
     name?: StringFilter<"Course"> | string
+    subtitle?: StringNullableFilter<"Course"> | string | null
     description?: StringFilter<"Course"> | string
     price?: FloatFilter<"Course"> | number
+    badge?: StringNullableFilter<"Course"> | string | null
+    level?: StringFilter<"Course"> | string
+    durationWeeks?: IntNullableFilter<"Course"> | number | null
+    lessonsCount?: IntNullableFilter<"Course"> | number | null
     imageUrl?: StringNullableFilter<"Course"> | string | null
     active?: BoolFilter<"Course"> | boolean
     createdAt?: DateTimeFilter<"Course"> | Date | string
@@ -17755,8 +17942,13 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
     description?: SortOrder
     price?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    level?: SortOrder
+    durationWeeks?: SortOrderInput | SortOrder
+    lessonsCount?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -17775,8 +17967,13 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Course"> | string
     slug?: StringWithAggregatesFilter<"Course"> | string
     name?: StringWithAggregatesFilter<"Course"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"Course"> | string | null
     description?: StringWithAggregatesFilter<"Course"> | string
     price?: FloatWithAggregatesFilter<"Course"> | number
+    badge?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    level?: StringWithAggregatesFilter<"Course"> | string
+    durationWeeks?: IntNullableWithAggregatesFilter<"Course"> | number | null
+    lessonsCount?: IntNullableWithAggregatesFilter<"Course"> | number | null
     imageUrl?: StringNullableWithAggregatesFilter<"Course"> | string | null
     active?: BoolWithAggregatesFilter<"Course"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
@@ -17847,7 +18044,9 @@ export namespace Prisma {
     title?: StringFilter<"CourseLesson"> | string
     content?: StringNullableFilter<"CourseLesson"> | string | null
     videoUrl?: StringNullableFilter<"CourseLesson"> | string | null
+    attachments?: StringNullableListFilter<"CourseLesson">
     order?: IntFilter<"CourseLesson"> | number
+    freePreview?: BoolFilter<"CourseLesson"> | boolean
     module?: XOR<CourseModuleScalarRelationFilter, CourseModuleWhereInput>
   }
 
@@ -17857,7 +18056,9 @@ export namespace Prisma {
     title?: SortOrder
     content?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    attachments?: SortOrder
     order?: SortOrder
+    freePreview?: SortOrder
     module?: CourseModuleOrderByWithRelationInput
   }
 
@@ -17870,7 +18071,9 @@ export namespace Prisma {
     title?: StringFilter<"CourseLesson"> | string
     content?: StringNullableFilter<"CourseLesson"> | string | null
     videoUrl?: StringNullableFilter<"CourseLesson"> | string | null
+    attachments?: StringNullableListFilter<"CourseLesson">
     order?: IntFilter<"CourseLesson"> | number
+    freePreview?: BoolFilter<"CourseLesson"> | boolean
     module?: XOR<CourseModuleScalarRelationFilter, CourseModuleWhereInput>
   }, "id">
 
@@ -17880,7 +18083,9 @@ export namespace Prisma {
     title?: SortOrder
     content?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    attachments?: SortOrder
     order?: SortOrder
+    freePreview?: SortOrder
     _count?: CourseLessonCountOrderByAggregateInput
     _avg?: CourseLessonAvgOrderByAggregateInput
     _max?: CourseLessonMaxOrderByAggregateInput
@@ -17897,7 +18102,9 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"CourseLesson"> | string
     content?: StringNullableWithAggregatesFilter<"CourseLesson"> | string | null
     videoUrl?: StringNullableWithAggregatesFilter<"CourseLesson"> | string | null
+    attachments?: StringNullableListFilter<"CourseLesson">
     order?: IntWithAggregatesFilter<"CourseLesson"> | number
+    freePreview?: BoolWithAggregatesFilter<"CourseLesson"> | boolean
   }
 
   export type ServiceWhereInput = {
@@ -17906,9 +18113,11 @@ export namespace Prisma {
     NOT?: ServiceWhereInput | ServiceWhereInput[]
     id?: StringFilter<"Service"> | string
     name?: StringFilter<"Service"> | string
+    subtitle?: StringNullableFilter<"Service"> | string | null
     description?: StringFilter<"Service"> | string
     price?: FloatFilter<"Service"> | number
     duration?: IntFilter<"Service"> | number
+    format?: StringFilter<"Service"> | string
     active?: BoolFilter<"Service"> | boolean
     createdAt?: DateTimeFilter<"Service"> | Date | string
     updatedAt?: DateTimeFilter<"Service"> | Date | string
@@ -17919,9 +18128,11 @@ export namespace Prisma {
   export type ServiceOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
     description?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    format?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -17935,9 +18146,11 @@ export namespace Prisma {
     OR?: ServiceWhereInput[]
     NOT?: ServiceWhereInput | ServiceWhereInput[]
     name?: StringFilter<"Service"> | string
+    subtitle?: StringNullableFilter<"Service"> | string | null
     description?: StringFilter<"Service"> | string
     price?: FloatFilter<"Service"> | number
     duration?: IntFilter<"Service"> | number
+    format?: StringFilter<"Service"> | string
     active?: BoolFilter<"Service"> | boolean
     createdAt?: DateTimeFilter<"Service"> | Date | string
     updatedAt?: DateTimeFilter<"Service"> | Date | string
@@ -17948,9 +18161,11 @@ export namespace Prisma {
   export type ServiceOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
     description?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    format?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -17967,9 +18182,11 @@ export namespace Prisma {
     NOT?: ServiceScalarWhereWithAggregatesInput | ServiceScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Service"> | string
     name?: StringWithAggregatesFilter<"Service"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"Service"> | string | null
     description?: StringWithAggregatesFilter<"Service"> | string
     price?: FloatWithAggregatesFilter<"Service"> | number
     duration?: IntWithAggregatesFilter<"Service"> | number
+    format?: StringWithAggregatesFilter<"Service"> | string
     active?: BoolWithAggregatesFilter<"Service"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Service"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Service"> | Date | string
@@ -18552,7 +18769,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld?: number | null
     type: $Enums.ProductType
+    badge?: string | null
     imageUrl?: string | null
     fileUrl?: string | null
     stock?: number | null
@@ -18567,7 +18786,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld?: number | null
     type: $Enums.ProductType
+    badge?: string | null
     imageUrl?: string | null
     fileUrl?: string | null
     stock?: number | null
@@ -18582,7 +18803,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -18597,7 +18820,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -18612,7 +18837,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld?: number | null
     type: $Enums.ProductType
+    badge?: string | null
     imageUrl?: string | null
     fileUrl?: string | null
     stock?: number | null
@@ -18626,7 +18853,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -18640,7 +18869,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -18653,8 +18884,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -18668,8 +18904,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -18683,8 +18924,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18698,8 +18944,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18713,8 +18964,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -18725,8 +18981,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18737,8 +18998,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18802,7 +19068,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
     module: CourseModuleCreateNestedOneWithoutLessonsInput
   }
 
@@ -18812,7 +19080,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
   }
 
   export type CourseLessonUpdateInput = {
@@ -18820,7 +19090,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
     module?: CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
   }
 
@@ -18830,7 +19102,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseLessonCreateManyInput = {
@@ -18839,7 +19113,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
   }
 
   export type CourseLessonUpdateManyMutationInput = {
@@ -18847,7 +19123,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseLessonUncheckedUpdateManyInput = {
@@ -18856,15 +19134,19 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ServiceCreateInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18875,9 +19157,11 @@ export namespace Prisma {
   export type ServiceUncheckedCreateInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18888,9 +19172,11 @@ export namespace Prisma {
   export type ServiceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18901,9 +19187,11 @@ export namespace Prisma {
   export type ServiceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18914,9 +19202,11 @@ export namespace Prisma {
   export type ServiceCreateManyInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18925,9 +19215,11 @@ export namespace Prisma {
   export type ServiceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18936,9 +19228,11 @@ export namespace Prisma {
   export type ServiceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19587,6 +19881,17 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type EnumProductTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ProductType | EnumProductTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
@@ -19609,7 +19914,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    priceOld?: SortOrder
     type?: SortOrder
+    badge?: SortOrder
     imageUrl?: SortOrder
     fileUrl?: SortOrder
     stock?: SortOrder
@@ -19620,6 +19927,7 @@ export namespace Prisma {
 
   export type ProductAvgOrderByAggregateInput = {
     price?: SortOrder
+    priceOld?: SortOrder
     stock?: SortOrder
   }
 
@@ -19628,7 +19936,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    priceOld?: SortOrder
     type?: SortOrder
+    badge?: SortOrder
     imageUrl?: SortOrder
     fileUrl?: SortOrder
     stock?: SortOrder
@@ -19642,7 +19952,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    priceOld?: SortOrder
     type?: SortOrder
+    badge?: SortOrder
     imageUrl?: SortOrder
     fileUrl?: SortOrder
     stock?: SortOrder
@@ -19653,6 +19965,7 @@ export namespace Prisma {
 
   export type ProductSumOrderByAggregateInput = {
     price?: SortOrder
+    priceOld?: SortOrder
     stock?: SortOrder
   }
 
@@ -19670,6 +19983,22 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type EnumProductTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -19696,8 +20025,13 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    badge?: SortOrder
+    level?: SortOrder
+    durationWeeks?: SortOrder
+    lessonsCount?: SortOrder
     imageUrl?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -19706,14 +20040,21 @@ export namespace Prisma {
 
   export type CourseAvgOrderByAggregateInput = {
     price?: SortOrder
+    durationWeeks?: SortOrder
+    lessonsCount?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    badge?: SortOrder
+    level?: SortOrder
+    durationWeeks?: SortOrder
+    lessonsCount?: SortOrder
     imageUrl?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -19724,8 +20065,13 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    badge?: SortOrder
+    level?: SortOrder
+    durationWeeks?: SortOrder
+    lessonsCount?: SortOrder
     imageUrl?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -19734,6 +20080,8 @@ export namespace Prisma {
 
   export type CourseSumOrderByAggregateInput = {
     price?: SortOrder
+    durationWeeks?: SortOrder
+    lessonsCount?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -19807,6 +20155,14 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type CourseModuleScalarRelationFilter = {
     is?: CourseModuleWhereInput
     isNot?: CourseModuleWhereInput
@@ -19818,7 +20174,9 @@ export namespace Prisma {
     title?: SortOrder
     content?: SortOrder
     videoUrl?: SortOrder
+    attachments?: SortOrder
     order?: SortOrder
+    freePreview?: SortOrder
   }
 
   export type CourseLessonAvgOrderByAggregateInput = {
@@ -19832,6 +20190,7 @@ export namespace Prisma {
     content?: SortOrder
     videoUrl?: SortOrder
     order?: SortOrder
+    freePreview?: SortOrder
   }
 
   export type CourseLessonMinOrderByAggregateInput = {
@@ -19841,6 +20200,7 @@ export namespace Prisma {
     content?: SortOrder
     videoUrl?: SortOrder
     order?: SortOrder
+    freePreview?: SortOrder
   }
 
   export type CourseLessonSumOrderByAggregateInput = {
@@ -19850,9 +20210,11 @@ export namespace Prisma {
   export type ServiceCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    format?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19866,9 +20228,11 @@ export namespace Prisma {
   export type ServiceMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    format?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19877,9 +20241,11 @@ export namespace Prisma {
   export type ServiceMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
     price?: SortOrder
     duration?: SortOrder
+    format?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -20388,6 +20754,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type EnumProductTypeFieldUpdateOperationsInput = {
     set?: $Enums.ProductType
   }
@@ -20610,10 +20984,19 @@ export namespace Prisma {
     deleteMany?: CourseLessonScalarWhereInput | CourseLessonScalarWhereInput[]
   }
 
+  export type CourseLessonCreateattachmentsInput = {
+    set: string[]
+  }
+
   export type CourseModuleCreateNestedOneWithoutLessonsInput = {
     create?: XOR<CourseModuleCreateWithoutLessonsInput, CourseModuleUncheckedCreateWithoutLessonsInput>
     connectOrCreate?: CourseModuleCreateOrConnectWithoutLessonsInput
     connect?: CourseModuleWhereUniqueInput
+  }
+
+  export type CourseLessonUpdateattachmentsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type CourseModuleUpdateOneRequiredWithoutLessonsNestedInput = {
@@ -21100,6 +21483,22 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumProductTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -21794,8 +22193,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21808,8 +22212,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21828,7 +22237,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
   }
 
   export type CourseLessonUncheckedCreateWithoutModuleInput = {
@@ -21836,7 +22247,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
   }
 
   export type CourseLessonCreateOrConnectWithoutModuleInput = {
@@ -21864,8 +22277,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21878,8 +22296,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21913,7 +22336,9 @@ export namespace Prisma {
     title?: StringFilter<"CourseLesson"> | string
     content?: StringNullableFilter<"CourseLesson"> | string | null
     videoUrl?: StringNullableFilter<"CourseLesson"> | string | null
+    attachments?: StringNullableListFilter<"CourseLesson">
     order?: IntFilter<"CourseLesson"> | number
+    freePreview?: BoolFilter<"CourseLesson"> | boolean
   }
 
   export type CourseModuleCreateWithoutLessonsInput = {
@@ -22202,7 +22627,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld?: number | null
     type: $Enums.ProductType
+    badge?: string | null
     imageUrl?: string | null
     fileUrl?: string | null
     stock?: number | null
@@ -22216,7 +22643,9 @@ export namespace Prisma {
     name: string
     description: string
     price: number
+    priceOld?: number | null
     type: $Enums.ProductType
+    badge?: string | null
     imageUrl?: string | null
     fileUrl?: string | null
     stock?: number | null
@@ -22234,8 +22663,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -22248,8 +22682,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -22266,9 +22705,11 @@ export namespace Prisma {
   export type ServiceCreateWithoutOrderItemsInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22278,9 +22719,11 @@ export namespace Prisma {
   export type ServiceUncheckedCreateWithoutOrderItemsInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22343,7 +22786,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -22357,7 +22802,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    priceOld?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     stock?: NullableIntFieldUpdateOperationsInput | number | null
@@ -22381,8 +22828,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22395,8 +22847,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22419,9 +22876,11 @@ export namespace Prisma {
   export type ServiceUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22431,9 +22890,11 @@ export namespace Prisma {
   export type ServiceUncheckedUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22475,8 +22936,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -22489,8 +22955,13 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
+    badge?: string | null
+    level?: string
+    durationWeeks?: number | null
+    lessonsCount?: number | null
     imageUrl?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -22556,8 +23027,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22570,8 +23046,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: StringFieldUpdateOperationsInput | string
+    durationWeeks?: NullableIntFieldUpdateOperationsInput | number | null
+    lessonsCount?: NullableIntFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22614,9 +23095,11 @@ export namespace Prisma {
   export type ServiceCreateWithoutBookingsInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22626,9 +23109,11 @@ export namespace Prisma {
   export type ServiceUncheckedCreateWithoutBookingsInput = {
     id?: string
     name: string
+    subtitle?: string | null
     description: string
     price: number
     duration: number
+    format?: string
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22691,9 +23176,11 @@ export namespace Prisma {
   export type ServiceUpdateWithoutBookingsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22703,9 +23190,11 @@ export namespace Prisma {
   export type ServiceUncheckedUpdateWithoutBookingsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
+    format?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23045,7 +23534,9 @@ export namespace Prisma {
     title: string
     content?: string | null
     videoUrl?: string | null
+    attachments?: CourseLessonCreateattachmentsInput | string[]
     order: number
+    freePreview?: boolean
   }
 
   export type CourseLessonUpdateWithoutModuleInput = {
@@ -23053,7 +23544,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseLessonUncheckedUpdateWithoutModuleInput = {
@@ -23061,7 +23554,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseLessonUncheckedUpdateManyWithoutModuleInput = {
@@ -23069,7 +23564,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     content?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: CourseLessonUpdateattachmentsInput | string[]
     order?: IntFieldUpdateOperationsInput | number
+    freePreview?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BookingCreateManyServiceInput = {
