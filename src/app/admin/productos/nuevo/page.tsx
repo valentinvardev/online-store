@@ -2,50 +2,85 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Loader2 } from "lucide-react";
 import Link from "next/link";
-import AdminHeader from "../../_components/AdminHeader";
 import { useToast } from "../../_components/AdminToast";
+import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
 const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5";
 const hintClass = "font-sans text-xs text-tierra/35 tracking-wide mb-2";
 
+const typeInfo: Record<string, string> = {
+  FISICO: "Objeto enviado por correo o en persona",
+  DIGITAL: "Archivo descargable o acceso online",
+  PERSONALIZADO: "Hecho a medida, requiere consulta previa",
+};
+
+const empty = {
+  name: "", description: "", type: "FISICO" as "FISICO" | "DIGITAL" | "PERSONALIZADO",
+  price: "", priceOld: "", badge: "", imageUrl: "", fileUrl: "", stock: "",
+};
+
 export default function NuevoProductoPage() {
   const router = useRouter();
   const { toast } = useToast();
-
-  const [form, setForm] = useState({
-    name: "", category: "Físico", price: "", priceOld: "", badge: "", desc: "",
-  });
-
+  const [form, setForm] = useState(empty);
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const create = api.admin.productos.create.useMutation({
+    onSuccess: (p) => {
+      toast(`"${p.name}" publicado`);
+      router.push("/admin/productos");
+    },
+    onError: (err) => toast(err.message, "error"),
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast(`"${form.name}" creado exitosamente`);
-    router.push("/admin/productos");
+    create.mutate({
+      name: form.name,
+      description: form.description,
+      type: form.type,
+      price: parseFloat(form.price),
+      priceOld: form.priceOld ? parseFloat(form.priceOld) : undefined,
+      badge: form.badge || undefined,
+      imageUrl: form.imageUrl || undefined,
+      fileUrl: form.fileUrl || undefined,
+      stock: form.stock ? parseInt(form.stock) : undefined,
+      active: true,
+    });
   };
 
+  const saving = create.isPending;
+
   return (
-    <div className="space-y-8">
-      <Link href="/admin/productos" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/40 hover:text-tierra tracking-widest uppercase transition-colors">
+    <div className="max-w-5xl mx-auto px-8 py-10 space-y-8">
+
+      <Link
+        href="/admin/productos"
+        className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/40 hover:text-tierra tracking-widest uppercase transition-colors"
+      >
         <ArrowLeft size={13} /> Volver a productos
       </Link>
 
-      <AdminHeader
-        title="Nuevo producto"
-        subtitle="Completá los datos para agregar un producto a la tienda"
-      />
+      <div>
+        <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.35em] uppercase mb-1">Nuevo contenido</p>
+        <h1 className="font-display text-5xl text-morado-dark tracking-wide uppercase leading-none">Nuevo Producto</h1>
+        <p className="font-sans text-tierra/45 mt-2 tracking-wide text-sm">
+          Completá los datos para agregar un producto a la tienda
+        </p>
+      </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
           {/* Columna principal */}
           <div className="lg:col-span-2 space-y-5">
+
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
               <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
-                <ShoppingBag size={16} className="text-morado" strokeWidth={1.8} />
+                <ShoppingBag size={15} className="text-morado" strokeWidth={1.8} />
                 <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Información del producto</h2>
               </div>
               <div className="space-y-5">
@@ -56,16 +91,46 @@ export default function NuevoProductoPage() {
                 <div>
                   <label className={labelClass}>Descripción <span className="text-rosa">*</span></label>
                   <p className={hintClass}>Qué incluye, para qué sirve y por qué lo va a querer</p>
-                  <textarea rows={5} className={`${inputClass} resize-none`} placeholder="Describí el producto con detalle..." value={form.desc} onChange={(e) => set("desc", e.target.value)} required />
+                  <textarea rows={6} className={`${inputClass} resize-none`} placeholder="Describí el producto con detalle..." value={form.description} onChange={(e) => set("description", e.target.value)} required />
                 </div>
+
+                {/* Tipo */}
                 <div>
-                  <label className={labelClass}>Categoría <span className="text-rosa">*</span></label>
-                  <select className={inputClass} value={form.category} onChange={(e) => set("category", e.target.value)} required>
-                    <option value="Físico">Físico — objeto enviado por correo</option>
-                    <option value="Digital">Digital — descarga o acceso online</option>
-                    <option value="Personalizado">Personalizado — hecho a medida</option>
-                  </select>
+                  <label className={labelClass}>Tipo de producto <span className="text-rosa">*</span></label>
+                  <div className="grid grid-cols-3 gap-3 mt-1">
+                    {(["FISICO", "DIGITAL", "PERSONALIZADO"] as const).map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => set("type", t)}
+                        className={`py-3 px-3 border-2 text-left transition-colors ${
+                          form.type === t
+                            ? "bg-morado-dark text-crema border-morado-dark"
+                            : "bg-white text-tierra/50 border-morado/15 hover:border-morado/40"
+                        }`}
+                      >
+                        <p className="font-sans text-[0.6rem] tracking-widest uppercase font-semibold">
+                          {t === "FISICO" ? "Físico" : t === "DIGITAL" ? "Digital" : "Personalizado"}
+                        </p>
+                        <p className={`font-sans text-[0.58rem] mt-1 leading-snug ${form.type === t ? "text-crema/50" : "text-tierra/30"}`}>
+                          {typeInfo[t]}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
+
+                <div>
+                  <label className={labelClass}>URL de imagen</label>
+                  <input className={inputClass} placeholder="https://..." value={form.imageUrl} onChange={(e) => set("imageUrl", e.target.value)} />
+                </div>
+                {form.type === "DIGITAL" && (
+                  <div>
+                    <label className={labelClass}>URL del archivo digital</label>
+                    <p className={hintClass}>Link al PDF, ZIP o recurso que se entrega al comprar</p>
+                    <input className={inputClass} placeholder="https://..." value={form.fileUrl} onChange={(e) => set("fileUrl", e.target.value)} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -73,21 +138,29 @@ export default function NuevoProductoPage() {
           {/* Columna lateral */}
           <div className="space-y-5">
             <div className="bg-crema border-2 border-morado-dark block-shadow p-6">
-              <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase mb-5 pb-4 border-b border-morado/10">Precio y estado</h2>
+              <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase mb-5 pb-4 border-b border-morado/10">
+                Precio y estado
+              </h2>
               <div className="space-y-4">
                 <div>
-                  <label className={labelClass}>Precio <span className="text-rosa">*</span></label>
-                  <input className={inputClass} placeholder="$45" value={form.price} onChange={(e) => set("price", e.target.value)} required />
+                  <label className={labelClass}>Precio (ARS) <span className="text-rosa">*</span></label>
+                  <input type="number" step="0.01" min="0" className={inputClass} placeholder="Ej: 8500" value={form.price} onChange={(e) => set("price", e.target.value)} required />
                 </div>
                 <div>
                   <label className={labelClass}>Precio anterior</label>
                   <p className={hintClass}>Solo si está en oferta</p>
-                  <input className={inputClass} placeholder="$60" value={form.priceOld} onChange={(e) => set("priceOld", e.target.value)} />
+                  <input type="number" step="0.01" min="0" className={inputClass} placeholder="Ej: 12000" value={form.priceOld} onChange={(e) => set("priceOld", e.target.value)} />
                 </div>
+                {form.type === "FISICO" && (
+                  <div>
+                    <label className={labelClass}>Stock</label>
+                    <input type="number" min="0" className={inputClass} placeholder="Ej: 50" value={form.stock} onChange={(e) => set("stock", e.target.value)} />
+                  </div>
+                )}
                 <div>
                   <label className={labelClass}>Badge</label>
                   <p className={hintClass}>Etiqueta visible en la tienda</p>
-                  <select className={inputClass} value={form.badge} onChange={(e) => set("badge", e.target.value)}>
+                  <select className={`${inputClass} cursor-pointer`} value={form.badge} onChange={(e) => set("badge", e.target.value)}>
                     <option value="">Sin badge</option>
                     <option value="Nuevo">Nuevo</option>
                     <option value="Oferta">Oferta</option>
@@ -99,10 +172,18 @@ export default function NuevoProductoPage() {
             </div>
 
             <div className="space-y-3">
-              <button type="submit" className="w-full bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
-                ✦ Publicar producto
+              <button
+                type="submit"
+                disabled={saving}
+                className="flex items-center justify-center gap-2 w-full bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-60"
+              >
+                {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
+                {saving ? "Publicando..." : "Publicar producto"}
               </button>
-              <Link href="/admin/productos" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors">
+              <Link
+                href="/admin/productos"
+                className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors"
+              >
                 Cancelar
               </Link>
             </div>

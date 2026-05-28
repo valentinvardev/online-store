@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { Plus, Pencil, Trash2, Search, Loader2 } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
@@ -102,15 +103,15 @@ export default function AdminCursos() {
   const deleteTarget = cursos.find((c) => c.id === deleteId);
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-5xl mx-auto px-8 py-10 space-y-6">
       <AdminHeader
         title="Cursos"
         subtitle={`${cursos.length} cursos en total`}
         action={
-          <button onClick={openCreate}
+          <Link href="/admin/cursos/nuevo"
             className="flex items-center gap-2 bg-morado-dark text-crema font-sans text-[0.65rem] px-5 py-3 tracking-widest uppercase font-semibold border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
             <Plus size={13} /> Nuevo curso
-          </button>
+          </Link>
         }
       />
 
