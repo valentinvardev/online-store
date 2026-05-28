@@ -55,7 +55,7 @@ export default function NuevoProductoPage() {
   const saving = create.isPending;
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-10 space-y-8">
+    <div className="space-y-8">
 
       <Link
         href="/admin/productos"

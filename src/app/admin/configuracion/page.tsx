@@ -88,7 +88,7 @@ export default function AdminConfiguracion() {
   const isConnected = data?.mp_connected ?? false;
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-10"><div className="space-y-8 max-w-xl">
+    <div className="space-y-8 max-w-xl">
       <AdminHeader
         title="Configuración"
         subtitle="Conectá tus herramientas de pago"
@@ -202,6 +202,6 @@ export default function AdminConfiguracion() {
           )}
         </div>
       </div>
-    </div></div>
+    </div>
   );
 }

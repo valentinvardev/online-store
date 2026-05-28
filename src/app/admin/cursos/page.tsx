@@ -103,7 +103,7 @@ export default function AdminCursos() {
   const deleteTarget = cursos.find((c) => c.id === deleteId);
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-10 space-y-6">
+    <div className="space-y-6">
       <AdminHeader
         title="Cursos"
         subtitle={`${cursos.length} cursos en total`}

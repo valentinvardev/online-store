@@ -111,7 +111,7 @@ export default function AdminProductos() {
   const cats: CatFilter[] = ["Todos", "FISICO", "DIGITAL", "PERSONALIZADO"];
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-10 space-y-6">
+    <div className="space-y-6">
       <AdminHeader
         title="Productos"
         subtitle={`${productos.length} productos en total`}
