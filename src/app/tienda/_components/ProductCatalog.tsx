@@ -117,6 +117,7 @@ export default function ProductCatalog() {
                         id: product.id,
                         name: product.name,
                         category: product.category,
+                        itemType: "product",
                         price: product.priceNum,
                         priceLabel: product.price,
                         gradient: product.gradient,
