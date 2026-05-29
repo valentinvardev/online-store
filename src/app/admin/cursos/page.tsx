@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Plus, Pencil, Trash2, Search, Loader2 } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
-import AdminFormModal, { Field, Input, Textarea, Select } from "../_components/AdminFormModal";
 import { useToast } from "../_components/AdminToast";
 import { api } from "~/trpc/react";
 
@@ -13,11 +12,7 @@ const levelColors: Record<string, string> = {
   "Principiante":      "bg-verde/15 text-verde border-verde/30",
   "Intermedio":        "bg-celeste/15 text-celeste border-celeste/30",
   "Todos los niveles": "bg-dorado/15 text-dorado-dark border-dorado/30",
-};
-
-const emptyForm = {
-  name: "", subtitle: "", level: "Principiante",
-  price: "", durationWeeks: "", lessonsCount: "", description: "", badge: "",
+  "Avanzado":          "bg-morado/15 text-morado border-morado/30",
 };
 
 export default function AdminCursos() {
@@ -26,20 +21,6 @@ export default function AdminCursos() {
 
   const { data: cursos = [], isLoading } = api.admin.cursos.list.useQuery();
 
-  const createMutation = api.admin.cursos.create.useMutation({
-    onSuccess: (_, vars) => {
-      void utils.admin.cursos.list.invalidate();
-      toast(`"${vars.name}" creado`);
-      setFormOpen(false);
-    },
-  });
-  const updateMutation = api.admin.cursos.update.useMutation({
-    onSuccess: () => {
-      void utils.admin.cursos.list.invalidate();
-      toast("Curso actualizado");
-      setFormOpen(false);
-    },
-  });
   const deleteMutation = api.admin.cursos.delete.useMutation({
     onSuccess: () => {
       void utils.admin.cursos.list.invalidate();
@@ -53,52 +34,11 @@ export default function AdminCursos() {
 
   const [search, setSearch] = useState("");
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [formOpen, setFormOpen] = useState(false);
-  const [editId, setEditId] = useState<string | null>(null);
-  const [form, setForm] = useState(emptyForm);
 
   const filtered = useMemo(
     () => cursos.filter((c) => c.name.toLowerCase().includes(search.toLowerCase())),
     [cursos, search]
   );
-
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
-
-  const openCreate = () => { setForm(emptyForm); setEditId(null); setFormOpen(true); };
-  const openEdit = (c: typeof cursos[0]) => {
-    setForm({
-      name: c.name,
-      subtitle: c.subtitle ?? "",
-      level: c.level,
-      price: String(c.price),
-      durationWeeks: c.durationWeeks ? String(c.durationWeeks) : "",
-      lessonsCount: c.lessonsCount ? String(c.lessonsCount) : "",
-      description: c.description,
-      badge: c.badge ?? "",
-    });
-    setEditId(c.id);
-    setFormOpen(true);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const payload = {
-      name: form.name,
-      subtitle: form.subtitle || undefined,
-      description: form.description,
-      price: parseFloat(form.price),
-      badge: form.badge || undefined,
-      level: form.level,
-      durationWeeks: form.durationWeeks ? parseInt(form.durationWeeks) : undefined,
-      lessonsCount: form.lessonsCount ? parseInt(form.lessonsCount) : undefined,
-      active: true,
-    };
-    if (editId) {
-      updateMutation.mutate({ id: editId, data: payload });
-    } else {
-      createMutation.mutate(payload);
-    }
-  };
 
   const deleteTarget = cursos.find((c) => c.id === deleteId);
 
@@ -152,9 +92,17 @@ export default function AdminCursos() {
               ) : filtered.map((c) => (
                 <tr key={c.id} className="hover:bg-dorado/5 transition-colors group">
                   <td className="px-6 py-4">
-                    <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{c.name}</p>
-                    {c.subtitle && <p className="font-sans text-xs text-tierra/40 tracking-wide">{c.subtitle}</p>}
-                    {c.badge && <span className="font-sans text-[0.55rem] text-dorado-dark tracking-widest uppercase">✦ {c.badge}</span>}
+                    <div className="flex items-center gap-3">
+                      {c.imageUrl && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={c.imageUrl} alt={c.name} className="w-10 h-10 object-cover border border-morado/15 shrink-0" />
+                      )}
+                      <div>
+                        <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{c.name}</p>
+                        {c.subtitle && <p className="font-sans text-xs text-tierra/40 tracking-wide">{c.subtitle}</p>}
+                        {c.badge && <span className="font-sans text-[0.55rem] text-dorado-dark tracking-widest uppercase">✦ {c.badge}</span>}
+                      </div>
+                    </div>
                   </td>
                   <td className="px-4 py-4">
                     <span className={`font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[c.level] ?? "bg-tierra/10 text-tierra/50 border-tierra/20"}`}>
@@ -172,12 +120,12 @@ export default function AdminCursos() {
                       onClick={() => toggleMutation.mutate({ id: c.id, active: !c.active })}
                       className={`relative w-10 h-5 border-2 border-morado-dark transition-colors ${c.active ? "bg-dorado" : "bg-tierra/10"}`}
                     >
-                      <span className={`absolute top-0.5 w-3.5 h-3.5 bg-morado-dark transition-all ${c.active ? "left-4" : "left-0.5"}`} />
+                      <span className={`absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-morado-dark transition-all ${c.active ? "left-5" : "left-0.5"}`} />
                     </button>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => openEdit(c)} title="Editar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></button>
+                      <Link href={`/admin/cursos/${c.id}`} title="Gestionar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></Link>
                       <button onClick={() => setDeleteId(c.id)} title="Eliminar" className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
@@ -193,64 +141,10 @@ export default function AdminCursos() {
         )}
       </div>
 
-      <AdminFormModal
-        open={formOpen}
-        title={editId ? "Editar curso" : "Nuevo curso"}
-        subtitle={editId ? "Modificá los datos del curso" : "Completá los datos para agregar un curso nuevo"}
-        onClose={() => setFormOpen(false)}
-        onSubmit={handleSubmit}
-        submitLabel={editId ? "Guardar cambios" : "Crear curso"}
-      >
-        <form id="admin-form" onSubmit={handleSubmit} className="space-y-5">
-          <Field label="Título del curso" required>
-            <Input placeholder="Ej: Tarot desde Cero" value={form.name} onChange={(e) => set("name", e.target.value)} required />
-          </Field>
-
-          <Field label="Subtítulo" hint="Frase corta que complementa el título">
-            <Input placeholder="Ej: Leé tu propio código sagrado" value={form.subtitle} onChange={(e) => set("subtitle", e.target.value)} />
-          </Field>
-
-          <Field label="Descripción" hint="Qué aprende la alumna en este curso" required>
-            <Textarea placeholder="Describí el contenido y la propuesta del curso..." value={form.description} onChange={(e) => set("description", e.target.value)} required />
-          </Field>
-
-          <div className="grid grid-cols-2 gap-4">
-            <Field label="Precio (ARS)" required>
-              <Input type="number" step="0.01" min="0" placeholder="89" value={form.price} onChange={(e) => set("price", e.target.value)} required />
-            </Field>
-            <Field label="Duración (semanas)">
-              <Input type="number" min="1" placeholder="8" value={form.durationWeeks} onChange={(e) => set("durationWeeks", e.target.value)} />
-            </Field>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <Field label="Cantidad de clases">
-              <Input type="number" min="1" placeholder="24" value={form.lessonsCount} onChange={(e) => set("lessonsCount", e.target.value)} />
-            </Field>
-            <Field label="Nivel">
-              <Select value={form.level} onChange={(e) => set("level", e.target.value)}>
-                <option value="Principiante">Principiante</option>
-                <option value="Intermedio">Intermedio</option>
-                <option value="Todos los niveles">Todos los niveles</option>
-              </Select>
-            </Field>
-          </div>
-
-          <Field label="Badge" hint="Etiqueta destacada (opcional)">
-            <Select value={form.badge} onChange={(e) => set("badge", e.target.value)}>
-              <option value="">Sin badge</option>
-              <option value="Más vendido">Más vendido</option>
-              <option value="Nuevo">Nuevo</option>
-              <option value="Últimos lugares">Últimos lugares</option>
-            </Select>
-          </Field>
-        </form>
-      </AdminFormModal>
-
       <ConfirmModal
         open={deleteId !== null}
         title="Eliminar curso"
-        message={`¿Segura que querés eliminar "${deleteTarget?.name}"? Esta acción no se puede deshacer.`}
+        message={`¿Segura que querés eliminar "${deleteTarget?.name}"? Se eliminarán todos sus módulos y clases.`}
         confirmLabel="Sí, eliminar"
         onConfirm={() => { if (deleteId) deleteMutation.mutate(deleteId); }}
         onCancel={() => setDeleteId(null)}

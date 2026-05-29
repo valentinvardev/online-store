@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
-  Users, Mail, Wrench, LogOut, ExternalLink, Settings,
+  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock,
 } from "lucide-react";
 
 const nav = [
@@ -12,6 +13,7 @@ const nav = [
   { label: "Cursos",         href: "/admin/cursos",         icon: BookOpen },
   { label: "Productos",      href: "/admin/productos",      icon: ShoppingBag },
   { label: "Servicios",      href: "/admin/servicios",      icon: Wrench },
+  { label: "Disponibilidad", href: "/admin/disponibilidad", icon: CalendarClock },
   { label: "Usuarios",       href: "/admin/usuarios",       icon: Users },
   { label: "Newsletter",     href: "/admin/newsletter",     icon: Mail },
   { label: "Configuración",  href: "/admin/configuracion",  icon: Settings },
@@ -23,16 +25,17 @@ export default function AdminSidebar() {
   return (
     <aside className="w-60 min-h-screen bg-morado-dark flex flex-col shrink-0 border-r-4 border-dorado">
       {/* Logo */}
-      <div className="px-6 pt-8 pb-6 border-b-2 border-white/10">
-        <p className="font-display text-white text-xl tracking-widest uppercase leading-none">
-          La Reina
-        </p>
-        <p className="font-display text-white/40 text-xl tracking-widest uppercase leading-none">
-          de Bastos
-        </p>
-        <div className="ornament text-dorado/30 mt-3 text-[0.55rem] tracking-[0.3em] uppercase text-crema/25 font-sans">
-          Admin
-        </div>
+      <div className="flex justify-center px-6 pt-8 pb-6 border-b-2 border-white/10">
+        <Link href="/admin">
+          <Image
+            src="/logo-rdb.png"
+            alt="La Reina de Bastos"
+            width={120}
+            height={120}
+            className="w-28 h-auto"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
+        </Link>
       </div>
 
       {/* Nav */}

@@ -126,12 +126,13 @@ model Course {
 }
 
 model CourseModule {
-    id       String         @id @default(cuid())
-    courseId String
-    course   Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
-    title    String
-    order    Int
-    lessons  CourseLesson[]
+    id          String         @id @default(cuid())
+    courseId    String
+    course      Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    title       String
+    order       Int
+    attachments String[]
+    lessons     CourseLesson[]
 }
 
 model CourseLesson {

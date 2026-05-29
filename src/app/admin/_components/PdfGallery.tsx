@@ -50,7 +50,11 @@ export function usePdfGallery() {
   const readyPdfs = pdfs.filter((p) => !p.uploading && p.url);
   const isUploading = pdfs.some((p) => p.uploading);
 
-  return { pdfs, readyPdfs, uploadFiles, removePdf, isUploading };
+  const setInitialPdfs = useCallback((initial: PdfEntry[]) => {
+    setPdfs(initial);
+  }, []);
+
+  return { pdfs, readyPdfs, uploadFiles, removePdf, isUploading, setInitialPdfs };
 }
 
 // ── DropZone PDF ──────────────────────────────────────────────────────────────

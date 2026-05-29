@@ -45,7 +45,6 @@ export default function AdminConfiguracion() {
       .then((r) => r.json() as Promise<SettingsData>)
       .then((d) => {
         setData(d);
-        setMode(d.mp_mode);
       });
   }, []);
 

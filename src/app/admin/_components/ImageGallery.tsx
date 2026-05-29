@@ -132,7 +132,11 @@ export function useImageGallery(uploadPath = "/api/admin/upload") {
   const readyImages = images.filter((img) => !img.uploading && img.url);
   const isUploading = images.some((img) => img.uploading);
 
-  return { images, readyImages, lightbox, setLightbox, uploadFiles, removeImage, setCover, isUploading };
+  const setInitialImages = useCallback((initial: UploadEntry[]) => {
+    setImages(initial);
+  }, []);
+
+  return { images, readyImages, lightbox, setLightbox, uploadFiles, removeImage, setCover, isUploading, setInitialImages };
 }
 
 // ── ImageGallery component ────────────────────────────────────────────────────

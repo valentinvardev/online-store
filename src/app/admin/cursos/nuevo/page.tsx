@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, BookOpen, Loader2, ImageIcon, Video, AlertCircle } from "lucide-react";
+import { ArrowLeft, BookOpen, Loader2, ImageIcon, Video, AlertCircle, Upload, X, Star } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
@@ -12,21 +12,121 @@ const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-san
 const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5";
 const hintClass = "font-sans text-xs text-tierra/35 tracking-wide mb-2";
 
-// Parsea cualquier formato de URL de Vimeo y devuelve la URL del player
 function parseVimeo(input: string): string | null {
   const s = input.trim();
-  // ya es player URL
   const player = s.match(/player\.vimeo\.com\/video\/(\d+)(?:\?h=([a-f0-9]+))?/);
   if (player) return s;
-  // URL de Vimeo con hash privado: vimeo.com/123456/abc123
   const withHash = s.match(/vimeo\.com\/(\d+)\/([a-f0-9]+)/);
   if (withHash) return `https://player.vimeo.com/video/${withHash[1]}?h=${withHash[2]}`;
-  // URL simple: vimeo.com/123456
   const simple = s.match(/vimeo\.com\/(\d+)/);
   if (simple) return `https://player.vimeo.com/video/${simple[1]}`;
-  // Solo el ID numérico
   if (/^\d+$/.test(s)) return `https://player.vimeo.com/video/${s}`;
   return null;
+}
+
+const levelColors: Record<string, string> = {
+  "Principiante":      "bg-verde text-white",
+  "Intermedio":        "bg-celeste text-tierra-dark",
+  "Avanzado":          "bg-morado text-white",
+  "Todos los niveles": "bg-dorado text-tierra-dark",
+};
+const badgeStyles: Record<string, string> = {
+  "Nuevo":            "bg-celeste/20 text-celeste border-celeste/30",
+  "Más vendido":      "bg-dorado/20 text-tierra-dark border-dorado/40",
+  "Últimos lugares":  "bg-rosa/15 text-rosa border-rosa/30",
+  "Próximamente":     "bg-morado/15 text-morado border-morado/30",
+};
+
+// ── Portada single-image uploader ─────────────────────────────────────────────
+function CoverUpload({ url, uploading, onFile, onRemove }: {
+  url: string | null; uploading: boolean;
+  onFile: (f: File) => void; onRemove: () => void;
+}) {
+  const [drag, setDrag] = useState(false);
+  const ref = useRef<HTMLInputElement>(null);
+  const handle = (files: FileList | null) => {
+    const f = Array.from(files ?? []).find((f) => f.type.startsWith("image/"));
+    if (f) onFile(f);
+  };
+  if (url) return (
+    <div className="relative">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={url} alt="Portada" className="w-full aspect-video object-cover border-2 border-morado/15" />
+      <button type="button" onClick={onRemove}
+        className="absolute top-2 right-2 bg-tierra-dark/80 text-white p-1.5 hover:bg-rosa transition-colors">
+        <X size={13} />
+      </button>
+      <span className="absolute bottom-0 left-0 right-0 bg-dorado/90 text-tierra-dark font-sans text-[0.5rem] tracking-widest uppercase text-center py-1">
+        Portada del curso
+      </span>
+    </div>
+  );
+  return (
+    <div
+      onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+      onDragLeave={() => setDrag(false)}
+      onDrop={(e) => { e.preventDefault(); setDrag(false); handle(e.dataTransfer.files); }}
+      onClick={() => ref.current?.click()}
+      className={`border-2 border-dashed cursor-pointer transition-all py-10 flex flex-col items-center gap-3 ${drag ? "border-morado bg-morado/5" : "border-morado/25 hover:border-morado/50"}`}
+    >
+      {uploading
+        ? <Loader2 size={22} className="animate-spin text-morado/40" />
+        : <Upload size={22} className={drag ? "text-morado" : "text-tierra/25"} strokeWidth={1.5} />
+      }
+      <div className="text-center">
+        <p className="font-sans text-sm text-tierra/50 tracking-wide">{drag ? "Soltá para subir" : "Arrastrá o hacé click"}</p>
+        <p className="font-sans text-xs text-tierra/30 tracking-wide mt-0.5">JPG, PNG, WEBP — imagen principal del curso</p>
+      </div>
+      <input ref={ref} type="file" accept="image/*" className="hidden" onChange={(e) => handle(e.target.files)} />
+    </div>
+  );
+}
+
+// ── Card preview pública ──────────────────────────────────────────────────────
+function CourseCardPreview({ name, subtitle, price, level, badge, coverUrl, durationWeeks, lessonsCount }: {
+  name: string; subtitle: string; price: string; level: string; badge: string;
+  coverUrl: string | null; durationWeeks: string; lessonsCount: string;
+}) {
+  return (
+    <article className="bg-white border-2 border-morado-dark block-shadow overflow-hidden flex flex-col">
+      <div className="relative aspect-video bg-gradient-to-br from-morado-dark via-morado to-celeste overflow-hidden shrink-0">
+        {coverUrl
+          // eslint-disable-next-line @next/next/no-img-element
+          ? <img src={coverUrl} alt={name} className="w-full h-full object-cover" />
+          : <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-white/20 text-6xl">✦</span>
+            </div>
+        }
+        {badge && (
+          <span className={`absolute top-3 left-3 font-sans text-[0.55rem] px-2 py-1 border tracking-widest uppercase ${badgeStyles[badge] ?? ""}`}>
+            {badge}
+          </span>
+        )}
+        <span className={`absolute top-3 right-3 font-sans text-[0.55rem] px-2 py-1 tracking-widest uppercase font-semibold ${levelColors[level] ?? "bg-dorado text-tierra-dark"}`}>
+          {level || "Nivel"}
+        </span>
+      </div>
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="font-sans font-bold text-sm text-tierra-dark leading-snug mb-1">
+          {name || <span className="text-tierra/25">Título del curso</span>}
+        </h3>
+        {subtitle && (
+          <p className="font-sans text-xs text-tierra/50 italic mb-3 leading-snug">{subtitle}</p>
+        )}
+        <div className="flex items-center gap-3 mt-auto pt-3 border-t border-morado/8">
+          {durationWeeks && (
+            <span className="font-sans text-[0.6rem] text-tierra/40 tracking-wide">{durationWeeks} sem.</span>
+          )}
+          {lessonsCount && (
+            <span className="font-sans text-[0.6rem] text-tierra/40 tracking-wide">{lessonsCount} clases</span>
+          )}
+          <span className="font-sans font-bold text-lg text-morado ml-auto">
+            {price ? `$${price}` : <span className="text-tierra/20 text-sm">$—</span>}
+          </span>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 const empty = {
@@ -39,18 +139,31 @@ export default function NuevoCursoPage() {
   const { toast } = useToast();
   const [form, setForm] = useState(empty);
   const gallery = useImageGallery();
+  const [cover, setCover] = useState<{ url: string; uploading: boolean } | null>(null);
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
   const vimeoEmbed = parseVimeo(form.videoUrl);
 
   const create = api.admin.cursos.create.useMutation({
-    onSuccess: (c) => { toast(`"${c.name}" publicado`); router.push("/admin/cursos"); },
+    onSuccess: (c) => { toast(`"${c.name}" publicado`); router.push(`/admin/cursos/${c.id}`); },
     onError: (err) => toast(err.message, "error"),
   });
 
+  async function uploadCover(file: File) {
+    setCover({ url: "", uploading: true });
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+      const data = await res.json() as { url?: string };
+      if (data.url) setCover({ url: data.url, uploading: false });
+      else setCover(null);
+    } catch { setCover(null); }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (gallery.isUploading) { toast("Esperá a que terminen de subir todas las fotos", "error"); return; }
+    if (cover?.uploading || gallery.isUploading) { toast("Esperá a que terminen de subir las imágenes", "error"); return; }
     if (form.videoUrl && !vimeoEmbed) { toast("El link de Vimeo no es válido", "error"); return; }
     create.mutate({
       name: form.name,
@@ -61,7 +174,7 @@ export default function NuevoCursoPage() {
       lessonsCount: form.lessonsCount ? parseInt(form.lessonsCount) : undefined,
       level: form.level,
       badge: form.badge || undefined,
-      imageUrl: gallery.readyImages[0]?.url,
+      imageUrl: cover?.url ?? gallery.readyImages[0]?.url,
       images: gallery.readyImages.map((img) => img.url),
       videoUrl: vimeoEmbed ?? undefined,
       active: true,
@@ -129,15 +242,12 @@ export default function NuevoCursoPage() {
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
               <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
                 <Video size={15} className="text-morado" strokeWidth={1.8} />
-                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Video de presentación</h2>
+                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widets uppercase">Video de presentación</h2>
               </div>
               <div className="space-y-4">
                 <div>
                   <label className={labelClass}>Link de Vimeo</label>
-                  <p className={hintClass}>
-                    Pegá el link del video. Puede ser privado o no listado —
-                    solo quienes tengan el link van a poder verlo.
-                  </p>
+                  <p className={hintClass}>Video de presentación visible para todas (inscriptas y no inscriptas)</p>
                   <input
                     className={`${inputClass} ${form.videoUrl && !vimeoEmbed ? "border-rosa" : ""}`}
                     placeholder="https://vimeo.com/123456789 o https://vimeo.com/123456789/hashprivado"
@@ -150,43 +260,41 @@ export default function NuevoCursoPage() {
                     </p>
                   )}
                 </div>
-
-                {/* Instrucciones para video privado */}
-                <div className="bg-morado/5 border border-morado/15 px-4 py-3 space-y-1.5">
-                  <p className="font-sans text-[0.62rem] text-morado font-semibold tracking-widest uppercase">¿Cómo hacer el video privado en Vimeo?</p>
-                  <ol className="font-sans text-xs text-tierra/50 space-y-1 leading-relaxed list-decimal list-inside">
-                    <li>Subí el video a tu cuenta de Vimeo</li>
-                    <li>En ajustes del video → Privacidad → elegí <strong className="text-tierra/70">"Solo con link privado"</strong></li>
-                    <li>Copiá el link que te da Vimeo (tiene la forma vimeo.com/123.../abc...)</li>
-                    <li>Pegalo acá arriba</li>
-                  </ol>
-                </div>
-
-                {/* Preview del video */}
                 {vimeoEmbed && (
                   <div className="aspect-video w-full overflow-hidden border-2 border-morado/15">
-                    <iframe
-                      src={`${vimeoEmbed}&color=7B5EA7&title=0&byline=0&portrait=0`}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                    />
+                    <iframe src={`${vimeoEmbed}&color=7B5EA7&title=0&byline=0&portrait=0`} className="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen />
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Galería */}
+            {/* Portada */}
+            <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
+              <div className="flex items-center gap-3 mb-6 pb-5 border-b border-morado/10">
+                <Star size={15} className="text-morado" strokeWidth={1.8} />
+                <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Portada del curso</h2>
+              </div>
+              <p className={hintClass}>Imagen principal — aparece en la card de la tienda y en el encabezado de la página del curso</p>
+              <CoverUpload
+                url={cover?.url ?? null}
+                uploading={cover?.uploading ?? false}
+                onFile={uploadCover}
+                onRemove={() => setCover(null)}
+              />
+            </div>
+
+            {/* Galería adicional */}
             <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
               <div className="flex items-center justify-between mb-6 pb-5 border-b border-morado/10">
                 <div className="flex items-center gap-3">
                   <ImageIcon size={15} className="text-morado" strokeWidth={1.8} />
-                  <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Fotos del curso</h2>
+                  <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Galería de fotos</h2>
                 </div>
                 {gallery.readyImages.length > 0 && (
                   <span className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">{gallery.readyImages.length} foto{gallery.readyImages.length !== 1 ? "s" : ""}</span>
                 )}
               </div>
+              <p className={hintClass}>Fotos adicionales que aparecen en la página del curso — ambiente, materiales, capturas</p>
               <ImageGallery {...gallery} />
             </div>
           </div>
@@ -223,23 +331,22 @@ export default function NuevoCursoPage() {
               </div>
             </div>
 
-            {gallery.readyImages[0] && (
-              <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={gallery.readyImages[0].url} alt="Portada" className="w-full aspect-video object-cover" />
-                <div className="px-4 py-3">
-                  {form.name && <p className="font-sans font-semibold text-sm text-tierra-dark">{form.name}</p>}
-                  {form.subtitle && <p className="font-sans text-xs text-tierra/45 mt-0.5 italic">{form.subtitle}</p>}
-                  {form.price && <p className="font-sans text-morado font-bold mt-1">${form.price}</p>}
-                </div>
-              </div>
-            )}
+            {/* Card preview */}
+            <div className="space-y-2">
+              <p className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">Así se ve en el catálogo</p>
+              <CourseCardPreview
+                name={form.name} subtitle={form.subtitle} price={form.price}
+                level={form.level} badge={form.badge}
+                coverUrl={cover?.url ?? null}
+                durationWeeks={form.durationWeeks} lessonsCount={form.lessonsCount}
+              />
+            </div>
 
             <div className="space-y-3">
-              <button type="submit" disabled={saving || gallery.isUploading}
+              <button type="submit" disabled={saving || cover?.uploading || gallery.isUploading}
                 className="flex items-center justify-center gap-2 w-full bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-60">
                 {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
-                {saving ? "Publicando..." : gallery.isUploading ? "Subiendo fotos..." : "Publicar curso"}
+                {saving ? "Publicando..." : cover?.uploading || gallery.isUploading ? "Subiendo imágenes..." : "Publicar curso"}
               </button>
               <Link href="/admin/cursos" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors">
                 Cancelar

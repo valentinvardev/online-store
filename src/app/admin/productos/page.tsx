@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Plus, Pencil, Trash2, Search, Loader2 } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
-import AdminFormModal, { Field, Input, Textarea, Select } from "../_components/AdminFormModal";
 import { useToast } from "../_components/AdminToast";
 import { api } from "~/trpc/react";
 
@@ -22,31 +21,12 @@ const badgeColors: Record<string, string> = {
   "Más vendido": "text-dorado-dark", "Agotado": "text-tierra/35",
 };
 
-const emptyForm = {
-  name: "", type: "FISICO" as "FISICO" | "DIGITAL" | "PERSONALIZADO",
-  price: "", priceOld: "", badge: "", description: "",
-};
-
 export default function AdminProductos() {
   const { toast } = useToast();
   const utils = api.useUtils();
 
   const { data: productos = [], isLoading } = api.admin.productos.list.useQuery();
 
-  const createMutation = api.admin.productos.create.useMutation({
-    onSuccess: (_, vars) => {
-      void utils.admin.productos.list.invalidate();
-      toast(`"${vars.name}" creado`);
-      setFormOpen(false);
-    },
-  });
-  const updateMutation = api.admin.productos.update.useMutation({
-    onSuccess: () => {
-      void utils.admin.productos.list.invalidate();
-      toast("Producto actualizado");
-      setFormOpen(false);
-    },
-  });
   const deleteMutation = api.admin.productos.delete.useMutation({
     onSuccess: () => {
       void utils.admin.productos.list.invalidate();
@@ -61,9 +41,6 @@ export default function AdminProductos() {
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState<CatFilter>("Todos");
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [formOpen, setFormOpen] = useState(false);
-  const [editId, setEditId] = useState<string | null>(null);
-  const [form, setForm] = useState(emptyForm);
 
   const filtered = useMemo(
     () =>
@@ -72,40 +49,6 @@ export default function AdminProductos() {
         .filter((p) => p.name.toLowerCase().includes(search.toLowerCase())),
     [productos, search, catFilter]
   );
-
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
-
-  const openCreate = () => { setForm(emptyForm); setEditId(null); setFormOpen(true); };
-  const openEdit = (p: typeof productos[0]) => {
-    setForm({
-      name: p.name,
-      type: p.type,
-      price: String(p.price),
-      priceOld: p.priceOld ? String(p.priceOld) : "",
-      badge: p.badge ?? "",
-      description: p.description,
-    });
-    setEditId(p.id);
-    setFormOpen(true);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const payload = {
-      name: form.name,
-      description: form.description,
-      price: parseFloat(form.price),
-      priceOld: form.priceOld ? parseFloat(form.priceOld) : undefined,
-      type: form.type,
-      badge: form.badge || undefined,
-      active: true,
-    };
-    if (editId) {
-      updateMutation.mutate({ id: editId, data: payload });
-    } else {
-      createMutation.mutate(payload);
-    }
-  };
 
   const deleteTarget = productos.find((p) => p.id === deleteId);
   const cats: CatFilter[] = ["Todos", "FISICO", "DIGITAL", "PERSONALIZADO"];
@@ -187,12 +130,12 @@ export default function AdminProductos() {
                       onClick={() => toggleMutation.mutate({ id: p.id, active: !p.active })}
                       className={`relative w-10 h-5 border-2 border-morado-dark transition-colors ${p.active ? "bg-dorado" : "bg-tierra/10"}`}
                     >
-                      <span className={`absolute top-0.5 w-3.5 h-3.5 bg-morado-dark transition-all ${p.active ? "left-4" : "left-0.5"}`} />
+                      <span className={`absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-morado-dark transition-all ${p.active ? "left-5" : "left-0.5"}`} />
                     </button>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => openEdit(p)} title="Editar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></button>
+                      <Link href={`/admin/productos/${p.id}`} title="Editar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></Link>
                       <button onClick={() => setDeleteId(p.id)} title="Eliminar" className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
@@ -207,52 +150,6 @@ export default function AdminProductos() {
           </div>
         )}
       </div>
-
-      <AdminFormModal
-        open={formOpen}
-        title={editId ? "Editar producto" : "Nuevo producto"}
-        subtitle={editId ? "Modificá los datos del producto" : "Completá los datos para agregar un producto nuevo"}
-        onClose={() => setFormOpen(false)}
-        onSubmit={handleSubmit}
-        submitLabel={editId ? "Guardar cambios" : "Crear producto"}
-      >
-        <form id="admin-form" onSubmit={handleSubmit} className="space-y-5">
-          <Field label="Nombre del producto" required>
-            <Input placeholder="Ej: Kit de Inicio Ritual" value={form.name} onChange={(e) => set("name", e.target.value)} required />
-          </Field>
-
-          <Field label="Descripción" hint="Qué incluye y para qué sirve el producto" required>
-            <Textarea placeholder="Describí el producto con detalle..." value={form.description} onChange={(e) => set("description", e.target.value)} required />
-          </Field>
-
-          <Field label="Categoría" required>
-            <Select value={form.type} onChange={(e) => set("type", e.target.value)} required>
-              <option value="FISICO">Físico</option>
-              <option value="DIGITAL">Digital</option>
-              <option value="PERSONALIZADO">Personalizado</option>
-            </Select>
-          </Field>
-
-          <div className="grid grid-cols-2 gap-4">
-            <Field label="Precio (ARS)" required>
-              <Input type="number" step="0.01" min="0" placeholder="45" value={form.price} onChange={(e) => set("price", e.target.value)} required />
-            </Field>
-            <Field label="Precio anterior" hint="Solo si está en oferta">
-              <Input type="number" step="0.01" min="0" placeholder="60" value={form.priceOld} onChange={(e) => set("priceOld", e.target.value)} />
-            </Field>
-          </div>
-
-          <Field label="Badge" hint="Etiqueta destacada (opcional)">
-            <Select value={form.badge} onChange={(e) => set("badge", e.target.value)}>
-              <option value="">Sin badge</option>
-              <option value="Nuevo">Nuevo</option>
-              <option value="Oferta">Oferta</option>
-              <option value="Más vendido">Más vendido</option>
-              <option value="Agotado">Agotado</option>
-            </Select>
-          </Field>
-        </form>
-      </AdminFormModal>
 
       <ConfirmModal
         open={deleteId !== null}
