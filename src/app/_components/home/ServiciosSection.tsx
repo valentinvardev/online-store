@@ -53,9 +53,6 @@ export default function ServiciosSection() {
             <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-tierra-dark leading-none tracking-wide mb-4">
               Solo para vos
             </h2>
-            <p className="font-sans italic text-tierra/60 text-xl max-w-lg leading-snug">
-              La espiritualidad más poderosa es la que te encuentra donde estás.
-            </p>
           </div>
         </RevealOnScroll>
 

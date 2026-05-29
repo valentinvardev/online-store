@@ -31,10 +31,6 @@ export default function ServiciosPage() {
               Sesiones<br />personales
             </h1>
           </div>
-          <p className="font-sans italic text-tierra/55 text-base max-w-sm leading-relaxed md:text-right">
-            La espiritualidad más poderosa es la que te encuentra donde estás.
-            Trabajo personalizado, sin fórmulas.
-          </p>
         </div>
       </div>
 

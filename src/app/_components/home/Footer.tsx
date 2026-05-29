@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
 
 /* ── SVG logos de redes sociales ── */
 const IconInstagram = () => (
@@ -47,26 +47,6 @@ const socials = [
   { label: "Email",     Icon: IconMail,      href: "mailto:hola@lareinadebastos.com", color: "hover:text-dorado hover:border-dorado/40" },
 ];
 
-const cursosList = [
-  "Tarot desde Cero",
-  "Rituales Lunares",
-  "Astrología Práctica",
-  "Meditación y Presencia",
-  "Tarot Avanzado",
-  "Chakras: Mapa Interior",
-  "Sueños y Simbolismo",
-  "Herbología y Rituales",
-  "Numerología Esencial",
-];
-
-const consultasList = [
-  "Lectura de Tarot",
-  "Lectura Extendida",
-  "Ritual Personalizado",
-  "Consulta Astrológica",
-  "Bundle Tarot + Ritual",
-];
-
 const navLinks = [
   { label: "Tienda",    href: "/tienda" },
   { label: "Cursos",    href: "/cursos" },
@@ -81,18 +61,7 @@ const servicios = [
   "Sesiones grupales",
 ];
 
-const inputClass = "w-full bg-white/6 border border-crema/15 px-4 py-3 font-sans text-sm text-crema placeholder:text-crema/25 focus:outline-none focus:border-dorado/50 transition-colors";
-const labelClass = "block font-sans text-[0.58rem] text-crema/35 tracking-widest uppercase mb-1.5";
-
 export default function Footer() {
-  const [sent, setSent] = useState(false);
-  const [tipo, setTipo] = useState<"" | "curso" | "consulta">("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
-
   return (
     <footer className="bg-morado-dark relative overflow-hidden">
 
@@ -106,131 +75,28 @@ export default function Footer() {
         <div className="flex-1 h-px bg-crema/5" />
       </div>
 
-      {/* Formulario de aplicación + Newsletter */}
-      <div className="border-y border-dorado/10 py-14 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-14">
+      {/* Grid principal */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
 
-          {/* Formulario de aplicación */}
-          <div>
-            <p className="font-sans text-[0.58rem] text-dorado tracking-[0.35em] uppercase mb-3">Trabajemos juntas</p>
-            <h3 className="font-display text-crema text-3xl uppercase tracking-wide leading-none mb-7">
-              Formulario de<br />aplicación
-            </h3>
-
-            {sent ? (
-              <div className="border border-dorado/30 bg-dorado/5 px-6 py-10 text-center space-y-3">
-                <span className="font-display text-dorado text-4xl block">✦</span>
-                <p className="font-sans text-crema text-sm tracking-wide font-semibold">¡Aplicación recibida!</p>
-                <p className="font-sans text-crema/45 text-xs tracking-wide">Me pondré en contacto con vos pronto.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Nombre + Email */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className={labelClass}>Nombre <span className="text-rosa">*</span></label>
-                    <input type="text" required placeholder="Tu nombre" className={inputClass} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Email <span className="text-rosa">*</span></label>
-                    <input type="email" required placeholder="tu@email.com" className={inputClass} />
-                  </div>
-                </div>
-
-                {/* WhatsApp + País */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className={labelClass}>WhatsApp</label>
-                    <input type="tel" placeholder="+54 11 1234-5678" className={inputClass} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>País</label>
-                    <input type="text" placeholder="Argentina" className={inputClass} />
-                  </div>
-                </div>
-
-                {/* Tipo de interés */}
-                <div>
-                  <label className={labelClass}>¿Qué estás buscando? <span className="text-rosa">*</span></label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { val: "consulta", label: "◎ Una consulta" },
-                      { val: "curso",    label: "◈ Un curso" },
-                    ].map(({ val, label }) => (
-                      <button
-                        key={val}
-                        type="button"
-                        onClick={() => setTipo(val as "consulta" | "curso")}
-                        className={`font-sans text-[0.62rem] py-2.5 border tracking-widest uppercase transition-colors ${
-                          tipo === val
-                            ? "bg-dorado text-tierra-dark border-dorado"
-                            : "border-crema/15 text-crema/40 hover:border-dorado/40 hover:text-crema/70"
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Selector específico (condicional) */}
-                {tipo !== "" && (
-                  <div>
-                    <label className={labelClass}>
-                      {tipo === "curso" ? "¿Qué curso?" : "¿Qué tipo de sesión?"} <span className="text-rosa">*</span>
-                    </label>
-                    <select required className={`${inputClass} appearance-none`} defaultValue="">
-                      <option value="" disabled>Elegí una opción</option>
-                      {(tipo === "curso" ? cursosList : consultasList).map((s) => (
-                        <option key={s} value={s} className="text-tierra-dark bg-white">{s}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Sobre la usuaria */}
-                <div>
-                  <label className={labelClass}>¿Desde dónde llegás?</label>
-                  <textarea
-                    rows={3}
-                    placeholder="Contame un poco dónde estás en tu camino y qué estás buscando en este momento..."
-                    className={`${inputClass} resize-none`}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-dorado text-tierra-dark font-sans font-semibold text-[0.65rem] py-3.5 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors"
-                >
-                  ✦ Enviar aplicación
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Newsletter */}
-          <div className="flex flex-col justify-between gap-10">
+          {/* Marca */}
+          <div className="space-y-6">
             <div>
-              <p className="font-sans text-[0.58rem] text-dorado tracking-[0.35em] uppercase mb-3">Magia directo a tu correo</p>
-              <h3 className="font-display text-crema text-3xl uppercase tracking-wide leading-none mb-4">
-                Ritual semanal<br />en tu bandeja
-              </h3>
-              <p className="font-sans text-crema/35 text-sm tracking-wide leading-relaxed max-w-sm">
-                Reflexiones de luna, rituales de temporada, ofertas exclusivas y mucho más — sin spam ni ruido innecesario.
-              </p>
-            </div>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-              <input
-                type="email"
-                placeholder="tu@email.com"
-                className={inputClass}
+              <Image
+                src="/logo-rdb.png"
+                alt="La Reina de Bastos"
+                width={160}
+                height={80}
+                className="w-auto h-24 object-contain"
+                style={{
+                  filter: "brightness(0) invert(1) sepia(0.15) brightness(0.95)",
+                }}
               />
-              <button type="submit" className="w-full border border-dorado/40 text-dorado font-sans font-semibold text-[0.65rem] py-3 tracking-widest uppercase hover:bg-dorado hover:text-tierra-dark transition-colors">
-                ✦ Suscribirme
-              </button>
-            </form>
-
-            {/* Redes sociales */}
+            </div>
+            <p className="font-sans italic text-crema/35 text-sm leading-relaxed max-w-xs">
+              Espiritualidad que sabe a tierra. Para las que quieren ser sagradas y humanas al mismo tiempo.
+            </p>
+            {/* Redes */}
             <div>
               <p className="font-sans text-[0.58rem] text-crema/20 tracking-[0.3em] uppercase mb-3">Seguime</p>
               <div className="flex flex-wrap gap-2">
@@ -248,33 +114,16 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Grid de navegación */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr] gap-10">
-
-          {/* Marca */}
-          <div className="space-y-4">
-            <div>
-              <p className="font-display text-dorado text-3xl tracking-widest uppercase leading-none">La Reina</p>
-              <p className="font-display text-crema/20 text-3xl tracking-widest uppercase leading-none">de Bastos</p>
-            </div>
-            <p className="font-sans italic text-crema/30 text-sm leading-relaxed max-w-xs">
-              Espiritualidad que sabe a tierra. Para las que quieren ser sagradas y humanas al mismo tiempo.
-            </p>
-          </div>
 
           {/* Navegar */}
           <div>
-            <h4 className="font-sans font-semibold uppercase text-crema/40 text-[0.58rem] tracking-[0.35em] mb-5 pb-3 border-b border-crema/8">
+            <h4 className="font-sans font-semibold uppercase text-crema/40 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/8">
               Navegar
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="group flex items-center gap-2 font-sans text-xs text-crema/30 hover:text-dorado transition-colors tracking-wide">
+                  <Link href={link.href} className="group flex items-center gap-2 font-sans text-xs text-crema/35 hover:text-dorado transition-colors tracking-wide">
                     <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.5rem] transition-colors">✦</span>
                     {link.label}
                   </Link>
@@ -285,19 +134,40 @@ export default function Footer() {
 
           {/* Servicios */}
           <div>
-            <h4 className="font-sans font-semibold uppercase text-crema/40 text-[0.58rem] tracking-[0.35em] mb-5 pb-3 border-b border-crema/8">
+            <h4 className="font-sans font-semibold uppercase text-crema/40 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/8">
               Servicios
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {servicios.map((s) => (
                 <li key={s}>
-                  <Link href="/servicios" className="group flex items-center gap-2 font-sans text-xs text-crema/30 hover:text-dorado transition-colors tracking-wide">
+                  <Link href="/servicios" className="group flex items-center gap-2 font-sans text-xs text-crema/35 hover:text-dorado transition-colors tracking-wide">
                     <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.5rem] transition-colors">✦</span>
                     {s}
                   </Link>
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Contacto */}
+          <div>
+            <h4 className="font-sans font-semibold uppercase text-crema/40 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/8">
+              Contacto
+            </h4>
+            <div className="space-y-4">
+              <a
+                href="mailto:hola@lareinadebastos.com"
+                className="block font-sans text-xs text-crema/35 hover:text-dorado transition-colors tracking-wide"
+              >
+                hola@lareinadebastos.com
+              </a>
+              <Link
+                href="/sobre-mi"
+                className="inline-flex items-center gap-2 font-sans text-[0.62rem] text-crema/35 hover:text-dorado border border-crema/10 hover:border-dorado/40 px-4 py-2.5 tracking-widest uppercase transition-colors"
+              >
+                ✦ Mi historia
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -51,6 +51,31 @@
   100% { opacity: 0;   transform: translate(-50%, -120%) scale(0.4); }
 }
 
+/* ── Calendario — transición de mes ── */
+@keyframes cal-slide-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes cal-slide-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.cal-enter-right { animation: cal-slide-right 0.28s cubic-bezier(0.22,1,0.36,1) both; }
+.cal-enter-left  { animation: cal-slide-left  0.28s cubic-bezier(0.22,1,0.36,1) both; }
+
+@keyframes date-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+.date-pop { animation: date-pop 0.22s ease-out; }
+
+@keyframes reminder-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reminder-in { animation: reminder-in 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+
 /* ── Transición de página ── */
 @keyframes page-in {
   from {
