@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Clock, BookOpen, Users } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Clock, BookOpen, Users, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { cursos } from "../_data/cursos";
 import type { Nivel } from "../_data/cursos";
@@ -29,6 +29,8 @@ const badgeColors: Record<string, string> = {
 
 export default function CursosCatalog() {
   const [active, setActive] = useState<Level>("Todos");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const filtered = active === "Todos"
     ? cursos
@@ -37,40 +39,89 @@ export default function CursosCatalog() {
   const countFor = (lvl: Level) =>
     lvl === "Todos" ? cursos.length : cursos.filter((c) => c.level === lvl).length;
 
+  // Cerrar dropdown al click afuera
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [dropdownOpen]);
+
+  // Pill reutilizable — mismo estilo en trigger y opciones
+  const renderPill = (
+    { value, label, icon, color, activeColor }: typeof levels[number],
+    opts?: { onClick?: () => void; withChevron?: boolean; isOpen?: boolean }
+  ) => {
+    const isActive = active === value;
+    const count = countFor(value);
+    return (
+      <button
+        key={value}
+        onClick={opts?.onClick ?? (() => setActive(value))}
+        className={`group flex items-center gap-2.5 px-4 sm:px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
+          isActive ? activeColor : `bg-transparent ${color}`
+        } ${opts?.withChevron ? "w-full justify-between" : ""}`}
+      >
+        <span className="flex items-center gap-2.5 min-w-0">
+          <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
+            {icon}
+          </span>
+          <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
+            {label}
+          </span>
+          <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+            isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+          }`}>
+            {count}
+          </span>
+        </span>
+        {opts?.withChevron && (
+          <ChevronDown size={14} className={`shrink-0 transition-transform ${opts.isOpen ? "rotate-180" : ""}`} />
+        )}
+      </button>
+    );
+  };
+
+  const activeLevel = levels.find((l) => l.value === active)!;
+
   return (
     <div>
       {/* Filtros sticky */}
       <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
+          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por nivel
           </p>
-          <div className="flex items-center gap-5 flex-wrap">
-            {levels.map(({ value, label, icon, color, activeColor }) => {
-              const isActive = active === value;
-              const count = countFor(value);
-              return (
-                <button
-                  key={value}
-                  onClick={() => setActive(value)}
-                  className={`group flex items-center gap-2.5 px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
-                    isActive ? activeColor : `bg-transparent ${color}`
-                  }`}
-                >
-                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
-                    {icon}
-                  </span>
-                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold">
-                    {label}
-                  </span>
-                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
-                  }`}>
-                    {count}
-                  </span>
-                </button>
-              );
+
+          {/* Mobile: dropdown */}
+          <div ref={dropdownRef} className="sm:hidden relative">
+            {renderPill(activeLevel, {
+              onClick: () => setDropdownOpen(!dropdownOpen),
+              withChevron: true,
+              isOpen: dropdownOpen,
             })}
+            {dropdownOpen && (
+              <div className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 p-3 space-y-2">
+                {levels.map((level) =>
+                  renderPill(level, {
+                    onClick: () => { setActive(level.value); setDropdownOpen(false); },
+                  })
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: pills horizontales sin wrap */}
+          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1">
+            {levels.map((level) => (
+              <div key={level.value} className="shrink-0">
+                {renderPill(level)}
+              </div>
+            ))}
           </div>
         </div>
       </div>

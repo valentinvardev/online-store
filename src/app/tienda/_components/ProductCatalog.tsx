@@ -50,6 +50,42 @@ export default function ProductCatalog() {
 
   const activeCategory = categories.find((c) => c.value === active)!;
 
+  // Pill reutilizable — mismo estilo en trigger y opciones
+  const renderPill = (
+    { value, label, icon, color, activeColor }: typeof categories[number],
+    opts?: { onClick?: () => void; withChevron?: boolean; isOpen?: boolean }
+  ) => {
+    const isActive = active === value;
+    const count = countFor(value);
+    return (
+      <button
+        key={value}
+        type="button"
+        onClick={opts?.onClick ?? (() => setActive(value))}
+        className={`group flex items-center gap-2.5 px-4 sm:px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
+          isActive ? activeColor : `bg-transparent ${color}`
+        } ${opts?.withChevron ? "w-full justify-between" : ""}`}
+      >
+        <span className="flex items-center gap-2.5 min-w-0">
+          <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
+            {icon}
+          </span>
+          <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
+            {label}
+          </span>
+          <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+            isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+          }`}>
+            {count}
+          </span>
+        </span>
+        {opts?.withChevron && (
+          <ChevronDown size={14} className={`shrink-0 transition-transform ${opts.isOpen ? "rotate-180" : ""}`} />
+        )}
+      </button>
+    );
+  };
+
   return (
     <div>
       {/* Filtros sticky */}
@@ -61,77 +97,29 @@ export default function ProductCatalog() {
 
           {/* Mobile: dropdown */}
           <div ref={dropdownRef} className="sm:hidden relative">
-            <button
-              type="button"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className={`w-full flex items-center justify-between gap-3 px-4 py-3 border-2 rounded-full transition-colors ${activeCategory.activeColor}`}
-            >
-              <span className="flex items-center gap-2.5">
-                <span className="text-[0.75rem]">{activeCategory.icon}</span>
-                <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold">
-                  {activeCategory.label}
-                </span>
-                <span className="font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full bg-white/20">
-                  {countFor(active)}
-                </span>
-              </span>
-              <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
-            </button>
-
+            {renderPill(activeCategory, {
+              onClick: () => setDropdownOpen(!dropdownOpen),
+              withChevron: true,
+              isOpen: dropdownOpen,
+            })}
             {dropdownOpen && (
-              <ul className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 overflow-hidden">
-                {categories.map(({ value, label, icon }) => {
-                  const isActive = active === value;
-                  return (
-                    <li key={value}>
-                      <button
-                        type="button"
-                        onClick={() => { setActive(value); setDropdownOpen(false); }}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors border-b border-morado/8 last:border-0 ${
-                          isActive ? "bg-morado/8 text-morado" : "text-tierra-dark hover:bg-morado/5"
-                        }`}
-                      >
-                        <span className="text-[0.75rem]">{icon}</span>
-                        <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold flex-1">
-                          {label}
-                        </span>
-                        <span className="font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full bg-morado/10 text-tierra/60">
-                          {countFor(value)}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 p-3 space-y-2">
+                {categories.map((cat) =>
+                  renderPill(cat, {
+                    onClick: () => { setActive(cat.value); setDropdownOpen(false); },
+                  })
+                )}
+              </div>
             )}
           </div>
 
           {/* Desktop: pills horizontales sin wrap */}
-          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1 scrollbar-hidden">
-            {categories.map(({ value, label, icon, color, activeColor }) => {
-              const isActive = active === value;
-              return (
-                <button
-                  key={value}
-                  onClick={() => setActive(value)}
-                  className={`group shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 border-2 rounded-full transition-all duration-200 ${
-                    isActive ? activeColor : `bg-transparent ${color}`
-                  }`}
-                >
-                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
-                    {icon}
-                  </span>
-                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
-                    {label}
-                  </span>
-                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
-                  }`}>
-                    {countFor(value)}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1">
+            {categories.map((cat) => (
+              <div key={cat.value} className="shrink-0">
+                {renderPill(cat)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
