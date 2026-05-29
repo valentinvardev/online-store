@@ -92,6 +92,7 @@ model Product {
     type        ProductType
     badge       String?
     imageUrl    String?
+    images      String[]
     fileUrl     String?
     stock       Int?
     active      Boolean     @default(true)

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { Plus, Pencil, Trash2, Search, Loader2 } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
@@ -115,10 +116,10 @@ export default function AdminProductos() {
         title="Productos"
         subtitle={`${productos.length} productos en total`}
         action={
-          <button onClick={openCreate}
+          <Link href="/admin/productos/nuevo"
             className="flex items-center gap-2 bg-morado-dark text-crema font-sans text-[0.65rem] px-5 py-3 tracking-widest uppercase font-semibold border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
             <Plus size={13} /> Nuevo producto
-          </button>
+          </Link>
         }
       />
 

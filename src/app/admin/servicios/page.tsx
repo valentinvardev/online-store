@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
@@ -88,10 +89,10 @@ export default function AdminServicios() {
         title="Servicios"
         subtitle={`${servicios.length} servicios configurados`}
         action={
-          <button onClick={openCreate}
+          <Link href="/admin/servicios/nuevo"
             className="flex items-center gap-2 bg-morado-dark text-crema font-sans text-[0.65rem] px-5 py-3 tracking-widest uppercase font-semibold border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
             <Plus size={13} /> Nuevo servicio
-          </button>
+          </Link>
         }
       />
 

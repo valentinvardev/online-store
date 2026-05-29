@@ -7,7 +7,7 @@ interface Props {
   title: string;
   subtitle?: string;
   onClose: () => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit?: (e: React.FormEvent) => void;
   children: React.ReactNode;
   submitLabel?: string;
 }
@@ -50,10 +50,10 @@ export default function AdminFormModal({ open, title, subtitle, onClose, onSubmi
           </div>
         </div>
 
-        {/* Form */}
-        <form onSubmit={onSubmit} className="flex-1 overflow-y-auto px-8 py-7 space-y-5">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-8 py-7 space-y-5">
           {children}
-        </form>
+        </div>
 
         {/* Footer */}
         <div className="px-8 py-5 border-t-2 border-morado/15 bg-crema shrink-0 flex gap-3">
