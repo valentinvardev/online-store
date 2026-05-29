@@ -281,9 +281,9 @@ export default async function CursoInfoPage({ params }: Props) {
       </div>
 
       {/* ── CTA FINAL ── */}
-      <section className="bg-morado-dark border-t-4 border-dorado/20">
+      <section className="bg-rosa border-t-4 border-dorado/40">
         <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-6">
-          <span className="font-display text-dorado/20 text-6xl block">✦</span>
+          <span className="font-display text-dorado text-6xl block">✦</span>
           <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
             ¿Lista para empezar?
           </h2>

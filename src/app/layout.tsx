@@ -42,7 +42,7 @@ export default function RootLayout({
       lang="es"
       className={`${lostar.variable} ${chevrola.variable} ${jost.variable}`}
     >
-      <body className="bg-crema font-sans text-tierra antialiased">
+      <body className="bg-crema font-sans text-tierra antialiased overflow-x-hidden">
         <TRPCReactProvider>
           <MagicCursor />
           <CartProviders>

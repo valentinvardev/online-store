@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 const COLORS = ["#f5c842", "#f72585", "#a882d8", "#7ec8e3", "#f5c842", "#f5c842"];
 const CHARS  = ["✦", "✧", "⋆", "✦", "·", "✦"];
@@ -10,6 +10,16 @@ let uid = 0;
 export default function MagicCursor() {
   const wandRef  = useRef<HTMLDivElement>(null);
   const lastTime = useRef(0);
+  const [enabled, setEnabled] = useState(false);
+
+  // Solo renderizar en dispositivos con hover (desktop). Esquiva touch/teléfonos.
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setEnabled(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   const addSparkle = useCallback((x: number, y: number) => {
     const now = Date.now();
@@ -39,6 +49,7 @@ export default function MagicCursor() {
   }, []);
 
   useEffect(() => {
+    if (!enabled) return;
     const onMove = (e: MouseEvent) => {
       if (wandRef.current) {
         wandRef.current.style.left = `${e.clientX}px`;
@@ -49,7 +60,9 @@ export default function MagicCursor() {
 
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, [addSparkle]);
+  }, [addSparkle, enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

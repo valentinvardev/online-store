@@ -57,7 +57,7 @@ export default function CursosSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <RevealOnScroll direction="up" delay={0}>
           <div className="text-center mb-16">
-            <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4.5rem)] text-crema leading-none tracking-wide">
+            <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4.5rem)] text-crema leading-none tracking-wide">
               Aprendé tu propio<br />lenguaje sagrado
             </h2>
           </div>

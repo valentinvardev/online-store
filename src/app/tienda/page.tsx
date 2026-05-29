@@ -15,18 +15,12 @@ export default function TiendaPage() {
       <PromoBanner />
 
       {/* Encabezado de sección */}
-      <div className="bg-crema border-b-2 border-morado/10 py-14 px-6">
+      <div className="bg-crema border-b-2 border-morado/10 py-10 sm:py-12 lg:py-14 px-5 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="h-px w-8 bg-dorado" />
-            <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase">
-              Objetos con intención
-            </span>
-          </div>
-          <h1 className="font-display uppercase text-[clamp(2.5rem,7vw,5rem)] text-tierra-dark leading-none tracking-wide">
+          <h1 className="font-display uppercase text-[clamp(3rem,12vw,7.5rem)] text-tierra-dark leading-[0.88] tracking-tight">
             Del altar<br />a tu vida
           </h1>
-          <p className="font-sans italic text-tierra/55 text-base mt-4 max-w-md leading-relaxed">
+          <p className="font-sans italic text-tierra/55 text-sm sm:text-base mt-3 sm:mt-4 max-w-md leading-relaxed">
             Cada pieza lleva el cuidado de una práctica real. No es decoración — es herramienta.
           </p>
         </div>

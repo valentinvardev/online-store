@@ -19,8 +19,8 @@ const servicios: Servicio[] = [
     desc: "Una hora de lectura personalizada donde las cartas hablan directo a lo que estás viviendo ahora. En vivo por videollamada, con grabación incluida.",
     precio: "desde $45",
     tags: ["1h vía Zoom", "Grabación incluida", "Recomendaciones escritas"],
-    cardClass: "bg-morado-pale",
-    numClass: "text-morado",
+    cardClass: "bg-dorado",
+    numClass: "text-tierra-dark",
   },
   {
     id: 2,
@@ -29,8 +29,8 @@ const servicios: Servicio[] = [
     desc: "Diseño un ritual específico para lo que estás atravesando: para soltar, para atraer, para sanar. Guía escrita detallada y acompañamiento durante 7 días.",
     precio: "desde $65",
     tags: ["Guía escrita", "Seguimiento 7 días", "Lista de elementos"],
-    cardClass: "bg-rosa-pale",
-    numClass: "text-rosa",
+    cardClass: "bg-dorado",
+    numClass: "text-tierra-dark",
   },
   {
     id: 3,
@@ -39,24 +39,24 @@ const servicios: Servicio[] = [
     desc: "Analizamos tu carta natal completa: motivaciones profundas, dones, desafíos y tránsitos actuales. Para tomar decisiones con más claridad.",
     precio: "desde $80",
     tags: ["Carta natal completa", "1h + informe PDF", "Tránsitos actuales"],
-    cardClass: "bg-dorado-pale",
-    numClass: "text-tierra",
+    cardClass: "bg-dorado",
+    numClass: "text-tierra-dark",
   },
 ];
 
 export default function ServiciosSection() {
   return (
-    <section className="bg-crema py-24 px-6">
+    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <RevealOnScroll direction="right" delay={0}>
-          <div className="mb-16">
-            <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-tierra-dark leading-none tracking-wide mb-4">
+        <RevealOnScroll direction="up" delay={0}>
+          <div className="mb-10 sm:mb-12 lg:mb-16 text-center lg:text-left">
+            <h2 className="font-display uppercase text-[clamp(2rem,8vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
               Solo para vos
             </h2>
           </div>
         </RevealOnScroll>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {servicios.map((s, i) => (
             <RevealOnScroll key={s.id} direction="up" delay={150 * i}>
               <article className={`border-2 border-morado-dark p-8 ${s.cardClass} block-shadow flex flex-col h-full`}>

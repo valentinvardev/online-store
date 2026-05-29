@@ -67,13 +67,6 @@ export default function Footer() {
 
       {/* Borde superior ornamental */}
       <div className="h-px bg-gradient-to-r from-transparent via-dorado/50 to-transparent" />
-      <div className="flex items-center justify-center py-5 gap-4 px-6">
-        <div className="flex-1 h-px bg-crema/5" />
-        <span className="font-display text-dorado/40 text-sm shrink-0">✦</span>
-        <span className="font-sans text-[0.52rem] text-crema/20 tracking-[0.4em] uppercase shrink-0">La Reina de Bastos</span>
-        <span className="font-display text-dorado/40 text-sm shrink-0">✦</span>
-        <div className="flex-1 h-px bg-crema/5" />
-      </div>
 
       {/* Grid principal */}
       <div className="max-w-7xl mx-auto px-6 py-16">

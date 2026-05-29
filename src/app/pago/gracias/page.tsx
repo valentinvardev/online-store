@@ -263,7 +263,7 @@ export default function GraciasPage() {
         <div className="bg-morado-dark py-16 px-6">
           <div className="max-w-2xl mx-auto text-center">
             <span className="font-display text-5xl text-dorado/30 block mb-6">✦</span>
-            <h1 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
+            <h1 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-crema leading-none tracking-wide mb-4">
               ¡Gracias{order?.buyer.name ? `, ${order.buyer.name}` : ""}!
             </h1>
             <p className="font-sans text-crema/55 text-base tracking-wide leading-relaxed">

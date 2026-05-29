@@ -10,7 +10,7 @@ export default async function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo text */}
         <div className="text-center mb-12">
-          <p className="font-sans text-[0.6rem] text-dorado tracking-[0.45em] uppercase mb-4">
+          <p className="font-sans text-[0.6rem] text-morado/65 tracking-[0.45em] uppercase mb-4">
             La Reina de Bastos
           </p>
           <h1 className="font-display uppercase text-[clamp(2rem,8vw,3rem)] text-tierra-dark leading-none tracking-wide">

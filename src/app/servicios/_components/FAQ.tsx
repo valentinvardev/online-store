@@ -37,8 +37,8 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-5">
-            <div className="h-px w-8 bg-dorado" />
-            <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase">
+            <div className="h-px w-8 bg-morado/40" />
+            <span className="font-sans text-[0.6rem] text-morado/65 tracking-[0.4em] uppercase">
               Preguntas frecuentes
             </span>
           </div>

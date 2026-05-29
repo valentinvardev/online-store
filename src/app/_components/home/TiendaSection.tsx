@@ -55,7 +55,7 @@ export default function TiendaSection() {
         <RevealOnScroll direction="left" delay={0}>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
             <div>
-              <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-tierra-dark leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-tierra-dark leading-none tracking-wide">
                 Del altar<br />a tu vida
               </h2>
             </div>

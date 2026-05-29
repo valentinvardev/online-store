@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { useCart } from "../../_components/cart/CartContext";
 import { productos } from "../_data/productos";
 import type { Category } from "../_data/productos";
@@ -24,6 +25,8 @@ const categories: { value: Filter; label: string; icon: string; color: string; a
 
 export default function ProductCatalog() {
   const [active, setActive] = useState<Filter>("Todos");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { addItem } = useCart();
 
   const filtered = active === "Todos"
@@ -33,29 +36,92 @@ export default function ProductCatalog() {
   const countFor = (cat: Filter) =>
     cat === "Todos" ? productos.length : productos.filter((p) => p.category === cat).length;
 
+  // Cerrar dropdown al click afuera
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [dropdownOpen]);
+
+  const activeCategory = categories.find((c) => c.value === active)!;
+
   return (
     <div>
       {/* Filtros sticky */}
       <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
+          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por categoría
           </p>
-          <div className="flex items-center gap-5 flex-wrap">
+
+          {/* Mobile: dropdown */}
+          <div ref={dropdownRef} className="sm:hidden relative">
+            <button
+              type="button"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className={`w-full flex items-center justify-between gap-3 px-4 py-3 border-2 rounded-full transition-colors ${activeCategory.activeColor}`}
+            >
+              <span className="flex items-center gap-2.5">
+                <span className="text-[0.75rem]">{activeCategory.icon}</span>
+                <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold">
+                  {activeCategory.label}
+                </span>
+                <span className="font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full bg-white/20">
+                  {countFor(active)}
+                </span>
+              </span>
+              <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {dropdownOpen && (
+              <ul className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 overflow-hidden">
+                {categories.map(({ value, label, icon }) => {
+                  const isActive = active === value;
+                  return (
+                    <li key={value}>
+                      <button
+                        type="button"
+                        onClick={() => { setActive(value); setDropdownOpen(false); }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors border-b border-morado/8 last:border-0 ${
+                          isActive ? "bg-morado/8 text-morado" : "text-tierra-dark hover:bg-morado/5"
+                        }`}
+                      >
+                        <span className="text-[0.75rem]">{icon}</span>
+                        <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold flex-1">
+                          {label}
+                        </span>
+                        <span className="font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full bg-morado/10 text-tierra/60">
+                          {countFor(value)}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+
+          {/* Desktop: pills horizontales sin wrap */}
+          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1 scrollbar-hidden">
             {categories.map(({ value, label, icon, color, activeColor }) => {
               const isActive = active === value;
               return (
                 <button
                   key={value}
                   onClick={() => setActive(value)}
-                  className={`group flex items-center gap-2.5 px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
+                  className={`group shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 border-2 rounded-full transition-all duration-200 ${
                     isActive ? activeColor : `bg-transparent ${color}`
                   }`}
                 >
                   <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
                     {icon}
                   </span>
-                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold">
+                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
                     {label}
                   </span>
                   <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${

@@ -20,7 +20,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-morado/10 shadow-sm shadow-morado/5">
+    <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-rosa/10 shadow-sm shadow-rosa/5">
       <nav className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-8">
 
         {/* Logo */}
@@ -55,12 +55,12 @@ export default function Navbar() {
           {/* Carrito */}
           <button
             onClick={openCart}
-            className="relative flex items-center justify-center w-9 h-9 border border-morado/20 text-morado/55 hover:text-morado hover:border-morado/50 hover:bg-morado/5 transition-all"
+            className="relative flex items-center justify-center w-9 h-9 hover:bg-morado/5 transition-all"
             aria-label="Abrir carrito"
           >
-            <ShoppingBag size={17} strokeWidth={1.5} />
+            <ShoppingBag size={18} strokeWidth={1.5} className="text-verde-light" />
             {count > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center border border-morado/20">
+              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center">
                 {count}
               </span>
             )}
@@ -79,7 +79,7 @@ export default function Navbar() {
                 />
               ) : (
                 <div className="w-8 h-8 bg-morado/8 border border-morado/20 flex items-center justify-center">
-                  <User size={14} className="text-morado/50" />
+                  <User size={14} className="text-verde-light" />
                 </div>
               )}
               <button
@@ -87,7 +87,7 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase"
                 aria-label="Cerrar sesión"
               >
-                <LogOut size={13} strokeWidth={1.5} />
+                <LogOut size={13} strokeWidth={1.5} className="text-verde-light" />
                 Salir
               </button>
             </div>
@@ -96,38 +96,55 @@ export default function Navbar() {
               href="/login"
               className="flex items-center gap-2 font-sans text-[0.65rem] text-morado/55 hover:text-morado transition-colors tracking-widest uppercase"
             >
-              <LogIn size={14} strokeWidth={1.5} />
+              <LogIn size={14} strokeWidth={1.5} className="text-verde-light" />
               Entrar
             </Link>
           )}
 
           {/* Separador */}
-          <span className="h-6 w-px bg-morado/15" />
+          <span className="h-6 w-px bg-rosa/15" />
 
           {/* CTA Reservar */}
           <Link
             href="/reservas"
-            className="bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] px-6 py-2.5 border-2 border-morado-dark hover:bg-morado transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
+            className="bg-morado text-crema font-sans font-semibold text-[0.65rem] px-6 py-2.5 border-2 border-morado hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
           >
             ✦ Reservar
           </Link>
         </div>
 
-        {/* Hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Abrir menú"
-        >
-          <span className={`block h-0.5 w-6 bg-morado/60 transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-morado/60 transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-morado/60 transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
+        {/* Acciones Mobile (siempre visibles) */}
+        <div className="md:hidden flex items-center gap-3">
+          {/* Carrito */}
+          <button
+            onClick={openCart}
+            className="relative flex items-center justify-center w-9 h-9 hover:bg-morado/5 transition-all"
+            aria-label="Abrir carrito"
+          >
+            <ShoppingBag size={18} strokeWidth={1.5} className="text-verde-light" />
+            {count > 0 && (
+              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center">
+                {count}
+              </span>
+            )}
+          </button>
+
+          {/* Hamburger */}
+          <button
+            className="flex flex-col gap-1.5 p-2"
+            onClick={() => setOpen(!open)}
+            aria-label="Abrir menú"
+          >
+            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
-        <div className="bg-crema border-t border-morado/10 px-8 py-6">
+        <div className="bg-crema border-t border-rosa/10 px-8 py-6">
           <ul className="space-y-1 mb-6">
             {links.map((link) => (
               <li key={link.href}>
@@ -143,23 +160,12 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="flex items-center gap-3 pt-2">
-            <button
-              onClick={openCart}
-              className="relative flex items-center justify-center w-10 h-10 border border-morado/20 text-morado/50 hover:text-morado hover:border-morado/40 transition-all"
-            >
-              <ShoppingBag size={16} strokeWidth={1.5} />
-              {count > 0 && (
-                <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center">
-                  {count}
-                </span>
-              )}
-            </button>
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
                 className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
               >
-                <LogOut size={13} strokeWidth={1.5} /> Salir
+                <LogOut size={13} strokeWidth={1.5} className="text-verde-light" /> Salir
               </button>
             ) : (
               <Link
@@ -167,12 +173,12 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 font-sans text-[0.65rem] text-morado/55 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
                 onClick={() => setOpen(false)}
               >
-                <LogIn size={13} strokeWidth={1.5} /> Entrar
+                <LogIn size={13} strokeWidth={1.5} className="text-verde-light" /> Entrar
               </Link>
             )}
             <Link
               href="/reservas"
-              className="flex-1 text-center bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] py-2.5 tracking-widest uppercase border-2 border-morado-dark hover:bg-morado transition-colors"
+              className="flex-1 text-center bg-morado text-crema font-sans font-semibold text-[0.65rem] py-2.5 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors"
               onClick={() => setOpen(false)}
             >
               ✦ Reservar

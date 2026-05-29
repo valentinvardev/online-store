@@ -12,14 +12,14 @@ export default function HeroSection() {
       <span className="absolute bottom-8 right-8 font-display text-dorado/40 text-lg z-10 select-none">✦</span>
 
       {/* Contenido */}
-      <div className="flex-1 flex flex-col items-center justify-center px-8 py-16 text-center relative z-20">
+      <div className="flex-1 flex flex-col items-center justify-center px-5 sm:px-6 lg:px-8 py-12 sm:py-16 text-center relative z-20">
 
         {/* Título */}
-        <h1 className="font-display leading-[0.85] mb-10 select-none">
-          <span className="block text-[clamp(3.5rem,11vw,9rem)] text-morado tracking-wide">
+        <h1 className="font-display leading-[0.85] mb-8 sm:mb-10 select-none">
+          <span className="block text-[clamp(2.25rem,14vw,9rem)] text-morado tracking-wide">
             La Reina
           </span>
-          <span className="block text-[clamp(3.5rem,11vw,9rem)] text-morado-dark tracking-wide">
+          <span className="block text-[clamp(2.25rem,14vw,9rem)] text-morado-dark tracking-wide">
             de Bastos
           </span>
         </h1>

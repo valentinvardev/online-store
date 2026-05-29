@@ -77,7 +77,7 @@ export default function SobreMiPage() {
         <span className="absolute bottom-8 right-8 font-display text-dorado/10 text-lg select-none">◉</span>
 
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase block mb-5">
+          <span className="font-sans text-[0.6rem] text-morado/65 tracking-[0.4em] uppercase block mb-5">
             La historia detrás
           </span>
           <h1 className="font-display uppercase text-[clamp(3rem,9vw,7rem)] text-crema leading-none tracking-wide mb-6">
@@ -179,7 +179,7 @@ export default function SobreMiPage() {
         <div className="max-w-4xl mx-auto">
           <RevealOnScroll>
             <div className="mb-14 text-center">
-              <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase block mb-4">El camino</span>
+              <span className="font-sans text-[0.6rem] text-morado/65 tracking-[0.4em] uppercase block mb-4">El camino</span>
               <h2 className="font-display uppercase text-[clamp(2rem,6vw,4rem)] text-crema leading-none tracking-wide">
                 Mi historia
               </h2>

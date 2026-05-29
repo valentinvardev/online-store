@@ -26,7 +26,7 @@ export default function NewsletterSection() {
 
       <div className="relative z-10 max-w-xl mx-auto text-center">
         <RevealOnScroll direction="up" delay={0}>
-          <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
+          <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-crema leading-none tracking-wide mb-4">
             Un ritual<br />en tu correo
           </h2>
           <p className="font-sans italic text-crema/60 text-xl mb-10 leading-snug">
