@@ -9,7 +9,7 @@ const stats = [
   { label: "Servicios",       value: "6",  sub: "5 lugares disponibles",  icon: Wrench,      accent: "text-verde",       href: "/admin/servicios" },
   { label: "Usuarios",        value: "—",  sub: "Conectar Supabase",      icon: Users,       accent: "text-celeste",     href: "/admin/usuarios" },
   { label: "Suscriptoras",    value: "—",  sub: "Conectar Supabase",      icon: Mail,        accent: "text-rosa",        href: "/admin/newsletter" },
-  { label: "Ingresos",        value: "—",  sub: "Requiere e-commerce",    icon: TrendingUp,  accent: "text-tierra/40",   href: "/admin" },
+  { label: "Ingresos",        value: "—",  sub: "Requiere e-commerce",    icon: TrendingUp,  accent: "text-tierra/60",   href: "/admin" },
 ];
 
 const actividad = [
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
 
       {/* Quick actions */}
       <div>
-        <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-3">Acciones rápidas</p>
+        <p className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.3em] uppercase mb-3">Acciones rápidas</p>
         <div className="flex flex-wrap gap-3">
           {quickLinks.map(({ label, href, color }) => (
             <Link
@@ -50,7 +50,7 @@ export default function AdminDashboard() {
 
       {/* Stats */}
       <div>
-        <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-3">Estadísticas</p>
+        <p className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.3em] uppercase mb-3">Estadísticas</p>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 items-start">
           {stats.map((s) => (
             <Link key={s.label} href={s.href} className="group self-start">
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
 
       {/* Actividad */}
       <div>
-        <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-3">Actividad reciente</p>
+        <p className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.3em] uppercase mb-3">Actividad reciente</p>
         <div className="bg-crema border-2 border-morado-dark block-shadow p-8">
           <ul className="divide-y divide-morado/10">
             {actividad.map((a, i) => (

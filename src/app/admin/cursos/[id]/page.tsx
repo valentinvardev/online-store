@@ -60,7 +60,7 @@ function InlineEdit({ value, onSave, className }: {
         {saving ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />}
       </button>
       <button type="button" onClick={() => { setEditing(false); setDraft(value); }}
-        className="p-1.5 text-tierra/40 hover:text-rosa transition-colors">
+        className="p-1.5 text-tierra/60 hover:text-rosa transition-colors">
         <X size={14} />
       </button>
     </div>
@@ -182,7 +182,7 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
 
           <div className="flex justify-end gap-2">
             <button type="button" onClick={() => setOpen(false)}
-              className="font-sans text-[0.62rem] px-4 py-2 border border-morado/20 text-tierra/50 hover:text-tierra tracking-widest uppercase transition-colors">
+              className="font-sans text-[0.62rem] px-4 py-2 border border-morado/20 text-tierra/70 hover:text-tierra tracking-widest uppercase transition-colors">
               Cancelar
             </button>
             <button type="button" onClick={() => void save()} disabled={saving}
@@ -320,13 +320,13 @@ function ModuleBlock({ mod, onUpdateModule, onDeleteModule, onCreateLesson, onUp
                   {creatingLesson ? <Loader2 size={12} className="animate-spin" /> : "Agregar"}
                 </button>
                 <button type="button" onClick={() => { setAddingLesson(false); setNewLessonTitle(""); }}
-                  className="p-2 text-tierra/40 hover:text-rosa transition-colors">
+                  className="p-2 text-tierra/60 hover:text-rosa transition-colors">
                   <X size={14} />
                 </button>
               </div>
             ) : (
               <button type="button" onClick={() => setAddingLesson(true)}
-                className="flex items-center gap-1.5 font-sans text-[0.6rem] text-tierra/35 hover:text-morado tracking-widest uppercase transition-colors">
+                className="flex items-center gap-1.5 font-sans text-[0.6rem] text-tierra/55 hover:text-morado tracking-widest uppercase transition-colors">
                 <Plus size={12} /> Agregar clase
               </button>
             )}
@@ -339,7 +339,7 @@ function ModuleBlock({ mod, onUpdateModule, onDeleteModule, onCreateLesson, onUp
                 <FileText size={10} /> Archivos adjuntos
               </span>
               <button type="button" onClick={() => pdfRef.current?.click()} disabled={uploading}
-                className="flex items-center gap-1 font-sans text-[0.58rem] text-tierra/40 hover:text-morado tracking-widest uppercase transition-colors disabled:opacity-50">
+                className="flex items-center gap-1 font-sans text-[0.58rem] text-tierra/60 hover:text-morado tracking-widest uppercase transition-colors disabled:opacity-50">
                 {uploading ? <Loader2 size={10} className="animate-spin" /> : <Paperclip size={10} />}
                 {uploading ? "Subiendo..." : "Adjuntar PDF"}
               </button>
@@ -495,7 +495,7 @@ export default function GestionCursoPage() {
   };
 
   if (isLoading) return (
-    <div className="flex items-center justify-center py-24 gap-3 text-tierra/40">
+    <div className="flex items-center justify-center py-24 gap-3 text-tierra/60">
       <Loader2 size={18} className="animate-spin" />
       <span className="font-sans text-sm tracking-wide">Cargando curso...</span>
     </div>
@@ -503,14 +503,14 @@ export default function GestionCursoPage() {
 
   if (!meta) return (
     <div className="py-24 text-center">
-      <p className="font-sans text-tierra/40 text-sm">Curso no encontrado</p>
+      <p className="font-sans text-tierra/60 text-sm">Curso no encontrado</p>
       <Link href="/admin/cursos" className="font-sans text-morado text-sm hover:underline mt-4 block">← Volver a cursos</Link>
     </div>
   );
 
   return (
     <div className="space-y-8">
-      <Link href="/admin/cursos" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/40 hover:text-tierra tracking-widest uppercase transition-colors">
+      <Link href="/admin/cursos" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/60 hover:text-tierra tracking-widest uppercase transition-colors">
         <ArrowLeft size={13} /> Volver a cursos
       </Link>
 
@@ -601,7 +601,7 @@ export default function GestionCursoPage() {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button onClick={() => setEditOpen(false)}
-                className="font-sans text-[0.62rem] px-4 py-2 border border-morado/20 text-tierra/50 hover:text-tierra tracking-widest uppercase transition-colors">
+                className="font-sans text-[0.62rem] px-4 py-2 border border-morado/20 text-tierra/70 hover:text-tierra tracking-widest uppercase transition-colors">
                 Cancelar
               </button>
               <button onClick={() => void saveEditForm()} disabled={editSaving}
@@ -618,7 +618,7 @@ export default function GestionCursoPage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-0.5">Contenido del curso</p>
+            <p className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.3em] uppercase mb-0.5">Contenido del curso</p>
             <h2 className="font-sans font-bold text-tierra-dark tracking-wide">
               {modules.length} módulo{modules.length !== 1 ? "s" : ""}
               {" · "}
@@ -653,7 +653,7 @@ export default function GestionCursoPage() {
               <Plus size={12} /> Crear módulo
             </button>
             <button onClick={() => { setAddingModule(false); setNewModuleTitle(""); }}
-              className="p-2 text-tierra/40 hover:text-rosa transition-colors">
+              className="p-2 text-tierra/60 hover:text-rosa transition-colors">
               <X size={15} />
             </button>
           </div>
@@ -662,7 +662,7 @@ export default function GestionCursoPage() {
         {modules.length === 0 && !addingModule && (
           <div className="bg-crema border-2 border-dashed border-morado/20 py-16 flex flex-col items-center gap-4">
             <span className="font-display text-4xl text-morado/10">✦</span>
-            <p className="font-sans text-tierra/35 text-sm tracking-wide">Este curso no tiene módulos todavía.</p>
+            <p className="font-sans text-tierra/55 text-sm tracking-wide">Este curso no tiene módulos todavía.</p>
             <button onClick={() => setAddingModule(true)}
               className="font-sans text-xs text-morado/50 hover:text-morado tracking-widest uppercase transition-colors">
               + Crear el primer módulo

@@ -102,7 +102,7 @@ export default function AdminConfiguracion() {
               <CheckCircle2 size={13} /> Conectado
             </span>
           ) : (
-            <span className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/35 tracking-widest uppercase">
+            <span className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/55 tracking-widest uppercase">
               <AlertCircle size={13} /> Sin conectar
             </span>
           )}
@@ -121,11 +121,11 @@ export default function AdminConfiguracion() {
                 </p>
               </div>
               {data?.mp_user_id && (
-                <p className="font-mono text-xs text-tierra/40">
+                <p className="font-mono text-xs text-tierra/60">
                   ID de cuenta: {data.mp_user_id}
                 </p>
               )}
-              <p className="font-sans text-xs text-tierra/45 leading-relaxed">
+              <p className="font-sans text-xs text-tierra/65 leading-relaxed">
                 Modo actual:{" "}
                 <strong className={data?.mp_mode === "live" ? "text-verde" : "text-dorado-dark"}>
                   {data?.mp_mode === "live" ? "Producción" : "Prueba"}
@@ -144,19 +144,19 @@ export default function AdminConfiguracion() {
                 Conectar con MercadoPago
                 <ExternalLink size={12} className="opacity-50" />
               </a>
-              <p className="font-sans text-[0.65rem] text-tierra/35 text-center tracking-wide">
+              <p className="font-sans text-[0.65rem] text-tierra/55 text-center tracking-wide">
                 Serás redirigida a MercadoPago para autorizar la conexión.
               </p>
             </div>
           ) : (
             <div className="flex items-center justify-between pt-2 border-t border-morado/10">
-              <p className="font-sans text-xs text-tierra/40">
+              <p className="font-sans text-xs text-tierra/60">
                 ¿Querés usar otra cuenta?
               </p>
               <button
                 onClick={handleDisconnect}
                 disabled={disconnecting}
-                className="flex items-center gap-1.5 font-sans text-[0.62rem] text-tierra/40 hover:text-rosa tracking-widest uppercase transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 font-sans text-[0.62rem] text-tierra/60 hover:text-rosa tracking-widest uppercase transition-colors disabled:opacity-50"
               >
                 {disconnecting
                   ? <Loader2 size={12} className="animate-spin" />

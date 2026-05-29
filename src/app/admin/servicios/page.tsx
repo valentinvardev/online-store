@@ -43,7 +43,7 @@ export default function AdminServicios() {
 
       <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
         {isLoading ? (
-          <div className="flex items-center justify-center py-16 gap-3 text-tierra/40">
+          <div className="flex items-center justify-center py-16 gap-3 text-tierra/60">
             <Loader2 size={18} className="animate-spin" />
             <span className="font-sans text-sm tracking-wide">Cargando servicios...</span>
           </div>
@@ -62,7 +62,7 @@ export default function AdminServicios() {
             <tbody className="divide-y divide-morado/10">
               {servicios.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center font-sans text-sm text-tierra/35 tracking-wide">
+                  <td colSpan={6} className="px-6 py-12 text-center font-sans text-sm text-tierra/55 tracking-wide">
                     No hay servicios cargados aún
                   </td>
                 </tr>
@@ -70,7 +70,7 @@ export default function AdminServicios() {
                 <tr key={s.id} className="hover:bg-dorado/5 transition-colors group">
                   <td className="px-6 py-4">
                     <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{s.name}</p>
-                    {s.subtitle && <p className="font-sans text-xs text-tierra/40 tracking-wide">{s.subtitle}</p>}
+                    {s.subtitle && <p className="font-sans text-xs text-tierra/60 tracking-wide">{s.subtitle}</p>}
                     <p className="font-sans text-xs text-tierra/30 tracking-wide line-clamp-1 mt-0.5">{s.description}</p>
                   </td>
                   <td className="px-4 py-4">
@@ -80,7 +80,7 @@ export default function AdminServicios() {
                     <span className="font-sans text-sm text-tierra/60">{s.duration} min</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="font-sans text-xs text-tierra/50 bg-crema-dark px-2.5 py-1 border border-morado/15">{s.format}</span>
+                    <span className="font-sans text-xs text-tierra/70 bg-crema-dark px-2.5 py-1 border border-morado/15">{s.format}</span>
                   </td>
                   <td className="px-4 py-4">
                     <button
@@ -92,8 +92,8 @@ export default function AdminServicios() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Link href={`/admin/servicios/${s.id}`} title="Editar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></Link>
-                      <button onClick={() => setDeleteId(s.id)} title="Eliminar" className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
+                      <Link href={`/admin/servicios/${s.id}`} title="Editar" className="p-1.5 text-tierra/60 hover:text-morado transition-colors"><Pencil size={14} /></Link>
+                      <button onClick={() => setDeleteId(s.id)} title="Eliminar" className="p-1.5 text-tierra/60 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
                 </tr>

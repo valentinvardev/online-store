@@ -56,7 +56,7 @@ export default function AdminCursos() {
       />
 
       <div className="relative">
-        <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-tierra/35" />
+        <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-tierra/55" />
         <input
           type="text" placeholder="Buscar curso..." value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -66,7 +66,7 @@ export default function AdminCursos() {
 
       <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
         {isLoading ? (
-          <div className="flex items-center justify-center py-16 gap-3 text-tierra/40">
+          <div className="flex items-center justify-center py-16 gap-3 text-tierra/60">
             <Loader2 size={18} className="animate-spin" />
             <span className="font-sans text-sm tracking-wide">Cargando cursos...</span>
           </div>
@@ -85,7 +85,7 @@ export default function AdminCursos() {
             <tbody className="divide-y divide-morado/10">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center font-sans text-sm text-tierra/35 tracking-wide">
+                  <td colSpan={6} className="px-6 py-12 text-center font-sans text-sm text-tierra/55 tracking-wide">
                     {cursos.length === 0 ? "No hay cursos cargados aún" : "No se encontraron cursos"}
                   </td>
                 </tr>
@@ -99,13 +99,13 @@ export default function AdminCursos() {
                       )}
                       <div>
                         <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{c.name}</p>
-                        {c.subtitle && <p className="font-sans text-xs text-tierra/40 tracking-wide">{c.subtitle}</p>}
+                        {c.subtitle && <p className="font-sans text-xs text-tierra/60 tracking-wide">{c.subtitle}</p>}
                         {c.badge && <span className="font-sans text-[0.55rem] text-dorado-dark tracking-widest uppercase">✦ {c.badge}</span>}
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className={`font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[c.level] ?? "bg-tierra/10 text-tierra/50 border-tierra/20"}`}>
+                    <span className={`font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[c.level] ?? "bg-tierra/10 text-tierra/70 border-tierra/20"}`}>
                       {c.level}
                     </span>
                   </td>
@@ -113,7 +113,7 @@ export default function AdminCursos() {
                     <span className="font-sans font-bold text-xl text-morado">${c.price}</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="font-sans text-sm text-tierra/50">{c._count.enrollments}</span>
+                    <span className="font-sans text-sm text-tierra/70">{c._count.enrollments}</span>
                   </td>
                   <td className="px-4 py-4">
                     <button
@@ -125,8 +125,8 @@ export default function AdminCursos() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Link href={`/admin/cursos/${c.id}`} title="Gestionar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></Link>
-                      <button onClick={() => setDeleteId(c.id)} title="Eliminar" className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
+                      <Link href={`/admin/cursos/${c.id}`} title="Gestionar" className="p-1.5 text-tierra/60 hover:text-morado transition-colors"><Pencil size={14} /></Link>
+                      <button onClick={() => setDeleteId(c.id)} title="Eliminar" className="p-1.5 text-tierra/60 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
                 </tr>

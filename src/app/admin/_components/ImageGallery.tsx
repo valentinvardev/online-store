@@ -75,7 +75,7 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
     >
       <Upload size={22} className={dragging ? "text-morado" : "text-tierra/25"} strokeWidth={1.5} />
       <div className="text-center">
-        <p className="font-sans text-sm text-tierra/50 tracking-wide">{dragging ? "Soltá para subir" : "Arrastrá fotos o hacé click"}</p>
+        <p className="font-sans text-sm text-tierra/70 tracking-wide">{dragging ? "Soltá para subir" : "Arrastrá fotos o hacé click"}</p>
         <p className="font-sans text-xs text-tierra/30 tracking-wide mt-0.5">JPG, PNG, WEBP — sin límite de cantidad</p>
       </div>
       <input ref={inputRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => handle(e.target.files)} />
@@ -157,7 +157,7 @@ export function ImageGallery({ images, readyImages, lightbox, setLightbox, uploa
 
       {images.length > 0 && (
         <div className="space-y-3">
-          <p className="font-sans text-xs text-tierra/35 tracking-wide">
+          <p className="font-sans text-xs text-tierra/55 tracking-wide">
             La primera foto es la portada. Hacé click en <Star size={10} className="inline" /> para cambiarla.
           </p>
           <div className="grid grid-cols-4 gap-3">

@@ -189,7 +189,7 @@ export default function DisponibilidadPage() {
                   >
                     <span className={`absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-morado-dark transition-all ${day.enabled ? "left-5" : "left-0.5"}`} />
                   </button>
-                  <span className={`font-sans font-semibold text-sm tracking-wide ${day.enabled ? "text-tierra-dark" : "text-tierra/35"}`}>
+                  <span className={`font-sans font-semibold text-sm tracking-wide ${day.enabled ? "text-tierra-dark" : "text-tierra/55"}`}>
                     {label}
                   </span>
                 </div>
@@ -207,7 +207,7 @@ export default function DisponibilidadPage() {
                             onChange={(e) => updateBlock(key, block.id, "start", e.target.value)}
                             className={`${inputClass} w-28`}
                           />
-                          <span className="font-sans text-xs text-tierra/40 px-1">→</span>
+                          <span className="font-sans text-xs text-tierra/60 px-1">→</span>
                           <input
                             type="time"
                             value={block.end}
@@ -240,7 +240,7 @@ export default function DisponibilidadPage() {
                 {/* Resumen */}
                 <div className="text-right pt-2">
                   {day.enabled && day.blocks.length > 0 && (
-                    <p className="font-sans text-[0.55rem] text-tierra/35 tracking-widest uppercase">
+                    <p className="font-sans text-[0.55rem] text-tierra/55 tracking-widest uppercase">
                       {day.blocks.length} bloque{day.blocks.length !== 1 ? "s" : ""}
                     </p>
                   )}
@@ -407,7 +407,7 @@ export default function DisponibilidadPage() {
               <option value="America/Lima">Lima (GMT-5)</option>
               <option value="Europe/Madrid">Madrid (GMT+1)</option>
             </select>
-            <p className="font-sans text-[0.6rem] text-tierra/40 tracking-wide mt-1.5">
+            <p className="font-sans text-[0.6rem] text-tierra/60 tracking-wide mt-1.5">
               Para sesiones online con clientas de otro huso
             </p>
           </div>
@@ -420,7 +420,7 @@ export default function DisponibilidadPage() {
               onChange={(e) => setConfig((c) => ({ ...c, leadTimeHours: parseInt(e.target.value) || 0 }))}
               className={`${inputClass} w-full`}
             />
-            <p className="font-sans text-[0.6rem] text-tierra/40 tracking-wide mt-1.5">
+            <p className="font-sans text-[0.6rem] text-tierra/60 tracking-wide mt-1.5">
               Cuántas horas antes se puede reservar
             </p>
           </div>
@@ -434,7 +434,7 @@ export default function DisponibilidadPage() {
               onChange={(e) => setConfig((c) => ({ ...c, bufferMinutes: parseInt(e.target.value) || 0 }))}
               className={`${inputClass} w-full`}
             />
-            <p className="font-sans text-[0.6rem] text-tierra/40 tracking-wide mt-1.5">
+            <p className="font-sans text-[0.6rem] text-tierra/60 tracking-wide mt-1.5">
               Descanso entre cada reserva
             </p>
           </div>
@@ -447,7 +447,7 @@ export default function DisponibilidadPage() {
               onChange={(e) => setConfig((c) => ({ ...c, maxBookingsPerDay: parseInt(e.target.value) || 1 }))}
               className={`${inputClass} w-full`}
             />
-            <p className="font-sans text-[0.6rem] text-tierra/40 tracking-wide mt-1.5">
+            <p className="font-sans text-[0.6rem] text-tierra/60 tracking-wide mt-1.5">
               Tope de reservas por día
             </p>
           </div>

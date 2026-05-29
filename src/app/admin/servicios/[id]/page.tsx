@@ -22,8 +22,8 @@ function parseVimeo(input: string): string | null {
 }
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
-const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5";
-const hintClass = "font-sans text-xs text-tierra/35 tracking-wide mb-2";
+const labelClass = "block font-sans text-[0.6rem] text-tierra/70 tracking-widest uppercase mb-1.5";
+const hintClass = "font-sans text-xs text-tierra/55 tracking-wide mb-2";
 
 const formatos = [
   { value: "Zoom",        label: "Zoom",            desc: "Videollamada en vivo" },
@@ -109,7 +109,7 @@ export default function EditarServicioPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-24 gap-3 text-tierra/40">
+      <div className="flex items-center justify-center py-24 gap-3 text-tierra/60">
         <Loader2 size={18} className="animate-spin" />
         <span className="font-sans text-sm tracking-wide">Cargando servicio...</span>
       </div>
@@ -119,7 +119,7 @@ export default function EditarServicioPage() {
   if (!servicio) {
     return (
       <div className="py-24 text-center">
-        <p className="font-sans text-tierra/40 text-sm">Servicio no encontrado</p>
+        <p className="font-sans text-tierra/60 text-sm">Servicio no encontrado</p>
         <Link href="/admin/servicios" className="font-sans text-morado text-sm hover:underline mt-4 block">
           ← Volver a servicios
         </Link>
@@ -129,7 +129,7 @@ export default function EditarServicioPage() {
 
   return (
     <div className="space-y-8">
-      <Link href="/admin/servicios" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/40 hover:text-tierra tracking-widest uppercase transition-colors">
+      <Link href="/admin/servicios" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/60 hover:text-tierra tracking-widest uppercase transition-colors">
         <ArrowLeft size={13} /> Volver a servicios
       </Link>
 
@@ -138,7 +138,7 @@ export default function EditarServicioPage() {
         <h1 className="font-display text-5xl text-morado-dark tracking-wide uppercase leading-none">
           {servicio.name}
         </h1>
-        <p className="font-sans text-tierra/45 mt-2 tracking-wide text-sm">Modificá los datos del servicio</p>
+        <p className="font-sans text-tierra/65 mt-2 tracking-wide text-sm">Modificá los datos del servicio</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -174,7 +174,7 @@ export default function EditarServicioPage() {
               <div className="grid grid-cols-2 gap-3">
                 {formatos.map(({ value, label, desc }) => (
                   <button key={value} type="button" onClick={() => set("format", value)}
-                    className={`py-4 px-4 border-2 text-left transition-colors ${form.format === value ? "bg-verde text-white border-verde" : "bg-white text-tierra/50 border-morado/15 hover:border-morado/40"}`}>
+                    className={`py-4 px-4 border-2 text-left transition-colors ${form.format === value ? "bg-verde text-white border-verde" : "bg-white text-tierra/70 border-morado/15 hover:border-morado/40"}`}>
                     <p className={`font-sans text-[0.62rem] tracking-widest uppercase font-semibold ${form.format === value ? "text-white" : "text-tierra-dark"}`}>{label}</p>
                     <p className={`font-sans text-[0.58rem] mt-1 ${form.format === value ? "text-white/60" : "text-tierra/30"}`}>{desc}</p>
                   </button>
@@ -191,12 +191,12 @@ export default function EditarServicioPage() {
                     <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Material de la sesión</h2>
                   </div>
                   {pdfs.readyPdfs.length > 0 && (
-                    <span className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">
+                    <span className="font-sans text-[0.58rem] text-tierra/55 tracking-widest uppercase">
                       {pdfs.readyPdfs.length} PDF{pdfs.readyPdfs.length !== 1 ? "s" : ""}
                     </span>
                   )}
                 </div>
-                <p className="font-sans text-xs text-tierra/40 tracking-wide mb-4">
+                <p className="font-sans text-xs text-tierra/60 tracking-wide mb-4">
                   Estos PDFs se entregan a la clienta al completar el pago. Podés subir guías, resúmenes, ejercicios o cualquier material complementario.
                 </p>
                 <PdfGallery pdfs={pdfs.pdfs} uploadFiles={pdfs.uploadFiles} removePdf={pdfs.removePdf} />
@@ -246,7 +246,7 @@ export default function EditarServicioPage() {
                   <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Fotos del servicio</h2>
                 </div>
                 {gallery.readyImages.length > 0 && (
-                  <span className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">{gallery.readyImages.length} foto{gallery.readyImages.length !== 1 ? "s" : ""}</span>
+                  <span className="font-sans text-[0.58rem] text-tierra/55 tracking-widest uppercase">{gallery.readyImages.length} foto{gallery.readyImages.length !== 1 ? "s" : ""}</span>
                 )}
               </div>
               <ImageGallery {...gallery} />
@@ -267,7 +267,7 @@ export default function EditarServicioPage() {
                   <p className={hintClass}>Solo el número, ej: 60</p>
                   <input type="number" min="1" className={inputClass} placeholder="60" value={form.duration} onChange={(e) => set("duration", e.target.value)} required />
                   {form.duration && (
-                    <p className="font-sans text-xs text-tierra/35 mt-1.5">
+                    <p className="font-sans text-xs text-tierra/55 mt-1.5">
                       = {parseInt(form.duration) >= 60
                         ? `${Math.floor(parseInt(form.duration) / 60)}h${parseInt(form.duration) % 60 > 0 ? ` ${parseInt(form.duration) % 60}min` : ""}`
                         : `${form.duration} min`}
@@ -283,7 +283,7 @@ export default function EditarServicioPage() {
                 <img src={gallery.readyImages[0].url} alt="Portada" className="w-full aspect-video object-cover" />
                 <div className="px-4 py-3">
                   {form.name && <p className="font-sans font-semibold text-sm text-tierra-dark">{form.name}</p>}
-                  {form.subtitle && <p className="font-sans text-xs text-tierra/45 mt-0.5 italic">{form.subtitle}</p>}
+                  {form.subtitle && <p className="font-sans text-xs text-tierra/65 mt-0.5 italic">{form.subtitle}</p>}
                 </div>
               </div>
             )}
@@ -294,7 +294,7 @@ export default function EditarServicioPage() {
                 {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
                 {saving ? "Guardando..." : gallery.isUploading ? "Subiendo fotos..." : pdfs.isUploading ? "Subiendo PDFs..." : "Guardar cambios"}
               </button>
-              <Link href="/admin/servicios" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors">
+              <Link href="/admin/servicios" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/70 hover:border-morado/50 hover:text-tierra transition-colors">
                 Cancelar
               </Link>
             </div>

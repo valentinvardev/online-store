@@ -18,7 +18,7 @@ const catColors: Record<string, string> = {
 };
 const badgeColors: Record<string, string> = {
   "Nuevo": "text-celeste", "Oferta": "text-naranja",
-  "Más vendido": "text-dorado-dark", "Agotado": "text-tierra/35",
+  "Más vendido": "text-dorado-dark", "Agotado": "text-tierra/55",
 };
 
 export default function AdminProductos() {
@@ -68,7 +68,7 @@ export default function AdminProductos() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-tierra/35" />
+          <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-tierra/55" />
           <input
             type="text" placeholder="Buscar producto..." value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -78,7 +78,7 @@ export default function AdminProductos() {
         <div className="flex gap-2 flex-wrap">
           {cats.map((cat) => (
             <button key={cat} onClick={() => setCatFilter(cat)}
-              className={`px-4 py-2 font-sans text-[0.6rem] tracking-widest uppercase border-2 transition-colors ${catFilter === cat ? "bg-morado-dark text-crema border-morado-dark" : "bg-crema text-tierra/50 border-morado/20 hover:border-morado/50 hover:text-tierra"}`}>
+              className={`px-4 py-2 font-sans text-[0.6rem] tracking-widest uppercase border-2 transition-colors ${catFilter === cat ? "bg-morado-dark text-crema border-morado-dark" : "bg-crema text-tierra/70 border-morado/20 hover:border-morado/50 hover:text-tierra"}`}>
               {cat === "Todos" ? "Todos" : catLabel[cat]}
             </button>
           ))}
@@ -87,7 +87,7 @@ export default function AdminProductos() {
 
       <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
         {isLoading ? (
-          <div className="flex items-center justify-center py-16 gap-3 text-tierra/40">
+          <div className="flex items-center justify-center py-16 gap-3 text-tierra/60">
             <Loader2 size={18} className="animate-spin" />
             <span className="font-sans text-sm tracking-wide">Cargando productos...</span>
           </div>
@@ -105,7 +105,7 @@ export default function AdminProductos() {
             <tbody className="divide-y divide-morado/10">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center font-sans text-sm text-tierra/35 tracking-wide">
+                  <td colSpan={5} className="px-6 py-12 text-center font-sans text-sm text-tierra/55 tracking-wide">
                     {productos.length === 0 ? "No hay productos cargados aún" : "No se encontraron productos"}
                   </td>
                 </tr>
@@ -113,8 +113,8 @@ export default function AdminProductos() {
                 <tr key={p.id} className="hover:bg-dorado/5 transition-colors group">
                   <td className="px-6 py-4">
                     <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{p.name}</p>
-                    <p className="font-sans text-xs text-tierra/40 tracking-wide line-clamp-1">{p.description}</p>
-                    {p.badge && <span className={`font-sans text-[0.55rem] tracking-widest uppercase ${badgeColors[p.badge] ?? "text-tierra/50"}`}>✦ {p.badge}</span>}
+                    <p className="font-sans text-xs text-tierra/60 tracking-wide line-clamp-1">{p.description}</p>
+                    {p.badge && <span className={`font-sans text-[0.55rem] tracking-widest uppercase ${badgeColors[p.badge] ?? "text-tierra/70"}`}>✦ {p.badge}</span>}
                   </td>
                   <td className="px-4 py-4">
                     <span className={`font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${catColors[p.type]}`}>{catLabel[p.type]}</span>
@@ -135,8 +135,8 @@ export default function AdminProductos() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Link href={`/admin/productos/${p.id}`} title="Editar" className="p-1.5 text-tierra/40 hover:text-morado transition-colors"><Pencil size={14} /></Link>
-                      <button onClick={() => setDeleteId(p.id)} title="Eliminar" className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
+                      <Link href={`/admin/productos/${p.id}`} title="Editar" className="p-1.5 text-tierra/60 hover:text-morado transition-colors"><Pencil size={14} /></Link>
+                      <button onClick={() => setDeleteId(p.id)} title="Eliminar" className="p-1.5 text-tierra/60 hover:text-rosa transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
                 </tr>

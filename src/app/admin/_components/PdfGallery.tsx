@@ -79,7 +79,7 @@ function PdfDropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
     >
       <Upload size={22} className={dragging ? "text-morado" : "text-tierra/25"} strokeWidth={1.5} />
       <div className="text-center">
-        <p className="font-sans text-sm text-tierra/50 tracking-wide">
+        <p className="font-sans text-sm text-tierra/70 tracking-wide">
           {dragging ? "Soltá para subir" : "Arrastrá PDFs o hacé click"}
         </p>
         <p className="font-sans text-xs text-tierra/30 tracking-wide mt-0.5">Solo PDF — máximo 20 MB por archivo</p>
@@ -130,7 +130,7 @@ export function PdfGallery({ pdfs, uploadFiles, removePdf }: PdfGalleryProps) {
                   {pdf.name}
                 </p>
                 {pdf.size && (
-                  <p className="font-sans text-[0.6rem] text-tierra/35 tracking-wide mt-0.5">
+                  <p className="font-sans text-[0.6rem] text-tierra/55 tracking-wide mt-0.5">
                     {formatBytes(pdf.size)}
                   </p>
                 )}
@@ -149,7 +149,7 @@ export function PdfGallery({ pdfs, uploadFiles, removePdf }: PdfGalleryProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="p-1.5 text-tierra/40 hover:text-morado transition-colors"
+                    className="p-1.5 text-tierra/60 hover:text-morado transition-colors"
                     title="Ver PDF"
                   >
                     <ExternalLink size={13} />
@@ -157,7 +157,7 @@ export function PdfGallery({ pdfs, uploadFiles, removePdf }: PdfGalleryProps) {
                   <button
                     type="button"
                     onClick={() => removePdf(i)}
-                    className="p-1.5 text-tierra/40 hover:text-rosa transition-colors"
+                    className="p-1.5 text-tierra/60 hover:text-rosa transition-colors"
                     title="Eliminar"
                   >
                     <X size={13} />

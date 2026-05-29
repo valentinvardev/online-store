@@ -31,14 +31,14 @@ export default function AdminFormModal({ open, title, subtitle, onClose, onSubmi
         <div className="px-8 pt-8 pb-6 border-b-2 border-morado/15 bg-crema shrink-0">
           <div className="flex items-start justify-between">
             <div>
-              <p className="font-sans text-[0.58rem] text-tierra/35 tracking-[0.3em] uppercase mb-1">
+              <p className="font-sans text-[0.58rem] text-tierra/55 tracking-[0.3em] uppercase mb-1">
                 ✦ Panel de administración
               </p>
               <h2 className="font-display text-3xl text-morado-dark tracking-wide uppercase leading-none">
                 {title}
               </h2>
               {subtitle && (
-                <p className="font-sans text-sm text-tierra/45 mt-2 tracking-wide">{subtitle}</p>
+                <p className="font-sans text-sm text-tierra/65 mt-2 tracking-wide">{subtitle}</p>
               )}
             </div>
             <button
@@ -96,10 +96,10 @@ interface FieldProps {
 export function Field({ label, hint, required, children }: FieldProps) {
   return (
     <div>
-      <label className="block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5">
+      <label className="block font-sans text-[0.6rem] text-tierra/70 tracking-widest uppercase mb-1.5">
         {label} {required && <span className="text-rosa">*</span>}
       </label>
-      {hint && <p className="font-sans text-xs text-tierra/35 tracking-wide mb-2">{hint}</p>}
+      {hint && <p className="font-sans text-xs text-tierra/55 tracking-wide mb-2">{hint}</p>}
       {children}
     </div>
   );

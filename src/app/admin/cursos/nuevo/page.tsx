@@ -9,8 +9,8 @@ import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
 import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
-const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase mb-1.5";
-const hintClass = "font-sans text-xs text-tierra/35 tracking-wide mb-2";
+const labelClass = "block font-sans text-[0.6rem] text-tierra/70 tracking-widest uppercase mb-1.5";
+const hintClass = "font-sans text-xs text-tierra/55 tracking-wide mb-2";
 
 function parseVimeo(input: string): string | null {
   const s = input.trim();
@@ -74,7 +74,7 @@ function CoverUpload({ url, uploading, onFile, onRemove }: {
         : <Upload size={22} className={drag ? "text-morado" : "text-tierra/25"} strokeWidth={1.5} />
       }
       <div className="text-center">
-        <p className="font-sans text-sm text-tierra/50 tracking-wide">{drag ? "Soltá para subir" : "Arrastrá o hacé click"}</p>
+        <p className="font-sans text-sm text-tierra/70 tracking-wide">{drag ? "Soltá para subir" : "Arrastrá o hacé click"}</p>
         <p className="font-sans text-xs text-tierra/30 tracking-wide mt-0.5">JPG, PNG, WEBP — imagen principal del curso</p>
       </div>
       <input ref={ref} type="file" accept="image/*" className="hidden" onChange={(e) => handle(e.target.files)} />
@@ -111,14 +111,14 @@ function CourseCardPreview({ name, subtitle, price, level, badge, coverUrl, dura
           {name || <span className="text-tierra/25">Título del curso</span>}
         </h3>
         {subtitle && (
-          <p className="font-sans text-xs text-tierra/50 italic mb-3 leading-snug">{subtitle}</p>
+          <p className="font-sans text-xs text-tierra/70 italic mb-3 leading-snug">{subtitle}</p>
         )}
         <div className="flex items-center gap-3 mt-auto pt-3 border-t border-morado/8">
           {durationWeeks && (
-            <span className="font-sans text-[0.6rem] text-tierra/40 tracking-wide">{durationWeeks} sem.</span>
+            <span className="font-sans text-[0.6rem] text-tierra/60 tracking-wide">{durationWeeks} sem.</span>
           )}
           {lessonsCount && (
-            <span className="font-sans text-[0.6rem] text-tierra/40 tracking-wide">{lessonsCount} clases</span>
+            <span className="font-sans text-[0.6rem] text-tierra/60 tracking-wide">{lessonsCount} clases</span>
           )}
           <span className="font-sans font-bold text-lg text-morado ml-auto">
             {price ? `$${price}` : <span className="text-tierra/20 text-sm">$—</span>}
@@ -185,14 +185,14 @@ export default function NuevoCursoPage() {
 
   return (
     <div className="space-y-8">
-      <Link href="/admin/cursos" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/40 hover:text-tierra tracking-widest uppercase transition-colors">
+      <Link href="/admin/cursos" className="inline-flex items-center gap-2 font-sans text-[0.65rem] text-tierra/60 hover:text-tierra tracking-widest uppercase transition-colors">
         <ArrowLeft size={13} /> Volver a cursos
       </Link>
 
       <div>
         <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.35em] uppercase mb-1">Nuevo contenido</p>
         <h1 className="font-display text-5xl text-morado-dark tracking-wide uppercase leading-none">Nuevo Curso</h1>
-        <p className="font-sans text-tierra/45 mt-2 tracking-wide text-sm">Completá los datos para publicar un curso en el sitio</p>
+        <p className="font-sans text-tierra/65 mt-2 tracking-wide text-sm">Completá los datos para publicar un curso en el sitio</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -291,7 +291,7 @@ export default function NuevoCursoPage() {
                   <h2 className="font-sans font-semibold text-sm text-tierra-dark tracking-widest uppercase">Galería de fotos</h2>
                 </div>
                 {gallery.readyImages.length > 0 && (
-                  <span className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">{gallery.readyImages.length} foto{gallery.readyImages.length !== 1 ? "s" : ""}</span>
+                  <span className="font-sans text-[0.58rem] text-tierra/55 tracking-widest uppercase">{gallery.readyImages.length} foto{gallery.readyImages.length !== 1 ? "s" : ""}</span>
                 )}
               </div>
               <p className={hintClass}>Fotos adicionales que aparecen en la página del curso — ambiente, materiales, capturas</p>
@@ -333,7 +333,7 @@ export default function NuevoCursoPage() {
 
             {/* Card preview */}
             <div className="space-y-2">
-              <p className="font-sans text-[0.58rem] text-tierra/35 tracking-widest uppercase">Así se ve en el catálogo</p>
+              <p className="font-sans text-[0.58rem] text-tierra/55 tracking-widest uppercase">Así se ve en el catálogo</p>
               <CourseCardPreview
                 name={form.name} subtitle={form.subtitle} price={form.price}
                 level={form.level} badge={form.badge}
@@ -348,7 +348,7 @@ export default function NuevoCursoPage() {
                 {saving ? <Loader2 size={13} className="animate-spin" /> : "✦"}
                 {saving ? "Publicando..." : cover?.uploading || gallery.isUploading ? "Subiendo imágenes..." : "Publicar curso"}
               </button>
-              <Link href="/admin/cursos" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/50 hover:border-morado/50 hover:text-tierra transition-colors">
+              <Link href="/admin/cursos" className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/70 hover:border-morado/50 hover:text-tierra transition-colors">
                 Cancelar
               </Link>
             </div>

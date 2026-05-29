@@ -25,10 +25,10 @@ export default function AdminUsuarios() {
         <table className="w-full">
           <thead>
             <tr className="border-b-2 border-morado/8 bg-crema/60">
-              <th className="text-left font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase px-6 py-4">Usuario</th>
-              <th className="text-left font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase px-4 py-4">Ingresó</th>
-              <th className="text-left font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase px-4 py-4">Cursos</th>
-              <th className="text-left font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase px-4 py-4">Rol</th>
+              <th className="text-left font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase px-6 py-4">Usuario</th>
+              <th className="text-left font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase px-4 py-4">Ingresó</th>
+              <th className="text-left font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase px-4 py-4">Cursos</th>
+              <th className="text-left font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase px-4 py-4">Rol</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-morado/6">
@@ -41,7 +41,7 @@ export default function AdminUsuarios() {
                     </div>
                     <div>
                       <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{u.name}</p>
-                      <p className="font-sans text-xs text-tierra/40">{u.email}</p>
+                      <p className="font-sans text-xs text-tierra/60">{u.email}</p>
                     </div>
                   </div>
                 </td>
@@ -55,7 +55,7 @@ export default function AdminUsuarios() {
                   <span className={`font-sans text-[0.6rem] px-2.5 py-1 border rounded-full tracking-widest uppercase ${
                     u.role === "admin"
                       ? "bg-morado/15 text-morado border-morado/25"
-                      : "bg-tierra/8 text-tierra/50 border-tierra/15"
+                      : "bg-tierra/8 text-tierra/70 border-tierra/15"
                   }`}>
                     {u.role}
                   </span>
