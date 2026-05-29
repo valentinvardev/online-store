@@ -51,33 +51,34 @@ export default function CursosCatalog() {
     return () => document.removeEventListener("mousedown", onClick);
   }, [dropdownOpen]);
 
-  // Pill reutilizable — mismo estilo en trigger y opciones
-  const renderPill = (
-    { value, label, icon, color, activeColor }: typeof levels[number],
-    opts?: { onClick?: () => void; withChevron?: boolean; isOpen?: boolean }
+  // Item rectangular tipo lista — mismo estilo en trigger y opciones del dropdown
+  const renderListItem = (
+    { value, label, icon }: typeof levels[number],
+    opts?: { onClick?: () => void; withChevron?: boolean; isOpen?: boolean; isTrigger?: boolean }
   ) => {
     const isActive = active === value;
     const count = countFor(value);
     return (
       <button
         key={value}
+        type="button"
         onClick={opts?.onClick ?? (() => setActive(value))}
-        className={`group flex items-center gap-2.5 px-4 sm:px-5 py-2.5 border-2 rounded-full transition-all duration-200 ${
-          isActive ? activeColor : `bg-transparent ${color}`
-        } ${opts?.withChevron ? "w-full justify-between" : ""}`}
+        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
+          opts?.isTrigger
+            ? "bg-morado/8 text-morado border-2 border-morado/20"
+            : isActive
+              ? "bg-morado/8 text-morado"
+              : "text-tierra-dark hover:bg-morado/5"
+        }`}
       >
-        <span className="flex items-center gap-2.5 min-w-0">
-          <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
-            {icon}
-          </span>
-          <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
-            {label}
-          </span>
-          <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-            isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
-          }`}>
-            {count}
-          </span>
+        <span className="text-[0.75rem]">{icon}</span>
+        <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold flex-1">
+          {label}
+        </span>
+        <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full ${
+          opts?.isTrigger || isActive ? "bg-morado/15 text-morado" : "bg-morado/10 text-tierra/60"
+        }`}>
+          {count}
         </span>
         {opts?.withChevron && (
           <ChevronDown size={14} className={`shrink-0 transition-transform ${opts.isOpen ? "rotate-180" : ""}`} />
@@ -97,31 +98,54 @@ export default function CursosCatalog() {
             Filtrar por nivel
           </p>
 
-          {/* Mobile: dropdown */}
+          {/* Mobile: dropdown estilo lista */}
           <div ref={dropdownRef} className="sm:hidden relative">
-            {renderPill(activeLevel, {
+            {renderListItem(activeLevel, {
               onClick: () => setDropdownOpen(!dropdownOpen),
               withChevron: true,
               isOpen: dropdownOpen,
+              isTrigger: true,
             })}
             {dropdownOpen && (
-              <div className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 p-3 space-y-2">
-                {levels.map((level) =>
-                  renderPill(level, {
-                    onClick: () => { setActive(level.value); setDropdownOpen(false); },
-                  })
-                )}
-              </div>
+              <ul className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 overflow-hidden">
+                {levels.map((level) => (
+                  <li key={level.value} className="border-b border-morado/8 last:border-0">
+                    {renderListItem(level, {
+                      onClick: () => { setActive(level.value); setDropdownOpen(false); },
+                    })}
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
 
           {/* Desktop: pills horizontales sin wrap */}
           <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1">
-            {levels.map((level) => (
-              <div key={level.value} className="shrink-0">
-                {renderPill(level)}
-              </div>
-            ))}
+            {levels.map(({ value, label, icon, color, activeColor }) => {
+              const isActive = active === value;
+              const count = countFor(value);
+              return (
+                <button
+                  key={value}
+                  onClick={() => setActive(value)}
+                  className={`group shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 border-2 rounded-full transition-all duration-200 ${
+                    isActive ? activeColor : `bg-transparent ${color}`
+                  }`}
+                >
+                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
+                    {icon}
+                  </span>
+                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
+                    {label}
+                  </span>
+                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
