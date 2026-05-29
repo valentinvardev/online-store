@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+export const dynamic = "force-dynamic";
+
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, AlertCircle, Unplug, Loader2, ExternalLink } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
@@ -34,7 +36,15 @@ type SettingsData = {
   mp_user_id: string | null;
 };
 
-export default function AdminConfiguracion() {
+export default function AdminConfiguracionPage() {
+  return (
+    <Suspense fallback={null}>
+      <AdminConfiguracion />
+    </Suspense>
+  );
+}
+
+function AdminConfiguracion() {
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const [data, setData] = useState<SettingsData | null>(null);

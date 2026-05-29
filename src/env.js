@@ -3,25 +3,22 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    AUTH_SECRET:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
+    AUTH_SECRET: z.string().optional(),
     AUTH_GOOGLE_ID: z.string().optional(),
     AUTH_GOOGLE_SECRET: z.string().optional(),
     AUTH_RESEND_KEY: z.string().optional(),
-    DATABASE_URL: z.string().url(),
-    DIRECT_URL: z.string().url(),
+    DATABASE_URL: z.string().url().optional(),
+    DIRECT_URL: z.string().url().optional(),
     SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
     MP_ACCESS_TOKEN: z.string().optional(),
     MP_WEBHOOK_SECRET: z.string().optional(),
-    NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
   },
 
   client: {
+    NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
     NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
     NEXT_PUBLIC_MP_PUBLIC_KEY: z.string().optional(),

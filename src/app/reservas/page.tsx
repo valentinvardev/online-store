@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+export const dynamic = "force-dynamic";
+
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Clock, Video, Bell, BellOff } from "lucide-react";
@@ -92,6 +94,14 @@ const labelClass = "block font-sans text-[0.6rem] text-tierra/50 tracking-widest
 const STEPS = ["Elegí tu sesión", "Tus datos", "Coordinemos"];
 
 export default function ReservasPage() {
+  return (
+    <Suspense fallback={null}>
+      <ReservasContent />
+    </Suspense>
+  );
+}
+
+function ReservasContent() {
   const searchParams = useSearchParams();
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
