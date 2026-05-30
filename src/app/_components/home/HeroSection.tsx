@@ -57,8 +57,8 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="relative z-10 flex flex-col items-center gap-2 pb-8 text-morado/20">
-        <span className="font-sans text-[0.5rem] tracking-[0.5em] uppercase">Descubrí más</span>
+      <div className="relative z-10 flex flex-col items-center gap-2 pb-8 text-morado/20 w-full overflow-hidden">
+        <span className="font-sans text-[0.5rem] tracking-[0.5em] uppercase pl-[0.5em]">Descubrí más</span>
         <div className="w-px h-6 bg-gradient-to-b from-morado/20 to-transparent" />
       </div>
 

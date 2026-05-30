@@ -168,6 +168,19 @@
   transform: translate(0, 0) !important;
 }
 
+/* ── Marquee infinito (PromoBanner) ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* ── Estrellas de fondo ── */
 @keyframes twinkle {
   0%, 100% { opacity: 0.08; transform: scale(1); }

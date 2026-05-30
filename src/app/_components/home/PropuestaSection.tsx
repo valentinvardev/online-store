@@ -1,6 +1,5 @@
 import Image from "next/image";
 import RevealOnScroll from "./RevealOnScroll";
-import StarField from "./StarField";
 
 const pillars = [
   {
@@ -28,10 +27,28 @@ const pillars = [
 
 export default function PropuestaSection() {
   return (
-    <section className="bg-morado py-24 px-6 relative overflow-hidden">
-      <StarField />
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-morado-light opacity-15 blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-rosa opacity-10 blur-3xl -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+    <section className="bg-verde-light py-24 px-6 relative overflow-hidden">
+      {/* Aurora boreal — verde puro */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[5%] left-[5%] w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full bg-verde blur-3xl opacity-70 animate-blob" />
+        <div className="absolute top-[8%] right-[10%] w-80 sm:w-[30rem] h-80 sm:h-[30rem] rounded-full bg-verde-pale blur-3xl opacity-65 animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="absolute bottom-[5%] left-[15%] w-96 sm:w-[36rem] h-96 sm:h-[36rem] rounded-full bg-verde blur-3xl opacity-70 animate-blob" style={{ animationDelay: "6s" }} />
+        <div className="absolute top-[35%] right-[8%] w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-verde blur-3xl opacity-60 animate-blob" style={{ animationDelay: "9s" }} />
+        <div className="absolute top-[42%] left-[38%] w-64 sm:w-80 h-64 sm:h-80 rounded-full bg-verde blur-3xl opacity-55 animate-blob" style={{ animationDelay: "4.5s" }} />
+        <div className="absolute bottom-[12%] right-[20%] w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-verde-pale blur-3xl opacity-55 animate-blob" style={{ animationDelay: "7.5s" }} />
+        <div className="absolute top-[18%] left-[50%] w-56 sm:w-72 h-56 sm:h-72 rounded-full bg-verde-pale blur-3xl opacity-50 animate-blob" style={{ animationDelay: "1.5s" }} />
+
+        {/* Estrellitas dispersas */}
+        <span className="absolute top-[12%] right-[14%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
+        <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-xs select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
+        <span className="absolute top-[38%] right-[20%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
+        <span className="absolute top-[55%] left-[38%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
+        <span className="absolute top-[70%] right-[10%] font-display text-crema/90 text-[0.7rem] select-none">⋆</span>
+        <span className="absolute top-[82%] left-[55%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
+        <span className="absolute top-[18%] left-[48%] font-display text-crema/75 text-[0.55rem] select-none">·</span>
+        <span className="absolute top-[48%] right-[48%] font-display text-crema/70 text-[0.6rem] select-none">·</span>
+        <span className="absolute top-[88%] right-[35%] font-display text-crema/80 text-xs select-none">⋆</span>
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <RevealOnScroll direction="up" delay={0}>
@@ -45,7 +62,7 @@ export default function PropuestaSection() {
         <div className="grid md:grid-cols-3 gap-6">
           {pillars.map((p, i) => (
             <RevealOnScroll key={p.title} direction="up" delay={150 * (i + 1)}>
-              <div className="border-2 border-crema/30 p-8 group h-full hover:border-dorado/70 transition-colors">
+              <div className="bg-crema border-2 border-morado-dark block-shadow p-8 group h-full hover:border-morado transition-colors">
                 <div className="mb-5 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                   <Image
                     src={p.icon}
@@ -55,13 +72,13 @@ export default function PropuestaSection() {
                     className="w-44 h-44 object-contain"
                   />
                 </div>
-                <h3 className="font-sans font-bold uppercase text-2xl text-crema mb-3 group-hover:text-dorado transition-colors duration-300 tracking-wide">
+                <h3 className="font-sans font-bold uppercase text-2xl text-tierra-dark mb-3 group-hover:text-morado transition-colors duration-300 tracking-wide">
                   {p.title}
                 </h3>
-                <p className="font-sans text-crema/55 text-sm leading-relaxed mb-7 tracking-wide">
+                <p className="font-sans text-tierra/75 text-sm leading-relaxed mb-7 tracking-wide">
                   {p.desc}
                 </p>
-                <a href={p.href} className="inline-flex items-center gap-2 font-sans text-xs text-dorado/70 hover:text-dorado transition-colors tracking-widest uppercase group/link">
+                <a href={p.href} className="inline-flex items-center gap-2 font-sans text-xs text-morado hover:text-morado-dark transition-colors tracking-widest uppercase group/link">
                   <span>{p.linkText}</span>
                   <span className="transition-transform group-hover/link:translate-x-1">→</span>
                 </a>

@@ -50,22 +50,20 @@ const products: Product[] = [
 export default function TiendaSection() {
   const { addItem } = useCart();
   return (
-    <section className="bg-crema py-24 px-6">
+    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <RevealOnScroll direction="left" delay={0}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
-            <div>
-              <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-tierra-dark leading-none tracking-wide">
-                Del altar<br />a tu vida
-              </h2>
-            </div>
-            <a href="/tienda" className="font-sans text-xs text-morado hover:text-morado-light transition-colors tracking-widest uppercase self-start md:self-end">
+        <RevealOnScroll direction="up" delay={0}>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 lg:mb-14 gap-4 text-center sm:text-left">
+            <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
+              Del altar<br />a tu vida
+            </h2>
+            <a href="/tienda" className="font-sans text-xs text-morado hover:text-morado-light transition-colors tracking-widest uppercase self-center sm:self-end shrink-0">
               Ver toda la tienda →
             </a>
           </div>
         </RevealOnScroll>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {products.map((product, i) => (
             <RevealOnScroll key={product.id} direction="up" delay={100 * i}>
               <article className="bg-white border-2 border-morado-dark overflow-hidden block-shadow cursor-pointer h-full group">
