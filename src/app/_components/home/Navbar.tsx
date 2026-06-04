@@ -155,7 +155,7 @@ export default function Navbar() {
 
       {/* Mobile menu fullscreen overlay */}
       <div
-        className={`md:hidden fixed inset-0 z-[60] bg-crema transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 z-[60] bg-morado-dark transition-all duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -163,7 +163,7 @@ export default function Navbar() {
         <button
           onClick={() => setOpen(false)}
           aria-label="Cerrar menú"
-          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-morado-dark hover:text-morado transition-colors z-10"
+          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-crema hover:text-dorado transition-colors z-10"
         >
           <X size={32} strokeWidth={1.8} />
         </button>
@@ -178,6 +178,7 @@ export default function Navbar() {
               width={140}
               height={140}
               className="h-16 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
             />
           </Link>
 
@@ -188,25 +189,25 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-morado-dark hover:text-morado transition-all duration-300 tracking-wide leading-none flex items-center gap-3 group"
+                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado transition-all duration-300 tracking-wide leading-none flex items-center gap-3 group"
                 style={{
                   transitionDelay: open ? `${100 + i * 70}ms` : "0ms",
                   transform: open ? "translateX(0)" : "translateX(2rem)",
                   opacity: open ? 1 : 0,
                 }}
               >
-                <span className="font-display text-dorado/60 group-hover:text-dorado text-2xl transition-colors">✦</span>
+                <span className="font-display text-dorado/70 group-hover:text-dorado text-2xl transition-colors">✦</span>
                 {link.label}
               </Link>
             ))}
           </nav>
 
           {/* Acciones abajo */}
-          <div className="pt-8 border-t-2 border-morado/15 shrink-0 space-y-3">
+          <div className="pt-8 border-t-2 border-crema/15 shrink-0 space-y-3">
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-morado-dark hover:text-morado transition-colors tracking-widest uppercase py-3.5 border-2 border-morado/30"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/30 hover:border-dorado/50"
               >
                 <LogOut size={16} strokeWidth={1.8} /> Cerrar sesión
               </button>
@@ -214,7 +215,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-morado-dark hover:text-morado transition-colors tracking-widest uppercase py-3.5 border-2 border-morado/30"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/30 hover:border-dorado/50"
               >
                 <LogIn size={16} strokeWidth={1.8} /> Entrar
               </Link>
@@ -222,7 +223,7 @@ export default function Navbar() {
             <Link
               href="/reservas"
               onClick={() => setOpen(false)}
-              className="w-full block text-center bg-morado text-crema font-sans font-semibold text-sm py-4 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors block-shadow-sm"
+              className="w-full block text-center bg-dorado text-tierra-dark font-sans font-semibold text-sm py-4 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors block-shadow-sm"
             >
               ✦ Reservar
             </Link>
