@@ -9,9 +9,15 @@ import CartProviders from "./_components/cart/CartProviders";
 import PageTransition from "./_components/PageTransition";
 import MagicCursor from "./_components/MagicCursor";
 
+const retroMother = localFont({
+  src: "../fonts/RetroMother-Regular.otf",
+  variable: "--font-tropi",
+  display: "swap",
+});
+
 const lostar = localFont({
   src: "../fonts/lostar.ttf",
-  variable: "--font-tropi",
+  variable: "--font-lostar",
   display: "swap",
 });
 
@@ -43,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${lostar.variable} ${chevrola.variable} ${jost.variable}`}
+      className={`${retroMother.variable} ${lostar.variable} ${chevrola.variable} ${jost.variable}`}
     >
       <body className="bg-crema font-sans text-tierra antialiased">
         <TRPCReactProvider>
