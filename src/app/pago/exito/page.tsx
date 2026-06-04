@@ -14,10 +14,10 @@ export default function PagoExitoPage() {
           <h1 className="font-display uppercase text-[clamp(2rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide mb-4">
             ¡Gracias por tu compra!
           </h1>
-          <p className="font-sans text-tierra/55 text-base leading-relaxed mb-2">
+          <p className="font-sans text-tierra/80 text-[17px] leading-relaxed mb-2">
             Tu pago fue procesado con éxito.
           </p>
-          <p className="font-sans text-tierra/40 text-sm leading-relaxed mb-10">
+          <p className="font-sans text-tierra/65 text-sm leading-relaxed mb-10">
             Vas a recibir un email con los detalles de tu pedido en los próximos minutos.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

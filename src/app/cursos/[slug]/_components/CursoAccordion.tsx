@@ -13,7 +13,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
     <div>
       {/* Encabezado resumen */}
       <div className="flex items-center justify-between mb-4">
-        <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase">
+        <p className="font-sans text-[0.6rem] text-tierra/60 tracking-[0.3em] uppercase">
           {modules.length} módulos · {totalLessons} clases
         </p>
         <button
@@ -55,7 +55,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
                     >
                       {modulo.title}
                     </p>
-                    <p className="font-sans text-[0.62rem] text-tierra/35 tracking-wide mt-0.5">
+                    <p className="font-sans text-[0.62rem] text-tierra/60 tracking-wide mt-0.5">
                       {modulo.lessons.length} clase{modulo.lessons.length !== 1 ? "s" : ""}
                     </p>
                   </div>
@@ -96,7 +96,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
                       </span>
 
                       {/* Título */}
-                      <span className="font-sans text-sm text-tierra/60 tracking-wide group-hover/lesson:text-tierra-dark transition-colors">
+                      <span className="font-sans text-[15px] text-tierra/60 tracking-wide group-hover/lesson:text-tierra-dark transition-colors">
                         {lesson}
                       </span>
 

@@ -35,7 +35,7 @@ export default function HeroSection() {
         <p className="font-sans font-semibold text-tierra/70 text-lg mb-3 max-w-sm leading-snug">
           Magia que se siente en el cuerpo.
         </p>
-        <p className="font-sans font-medium text-tierra/45 text-base tracking-wide mb-12 max-w-sm leading-relaxed">
+        <p className="font-sans font-medium text-tierra/70 text-[17px] tracking-wide mb-12 max-w-sm leading-relaxed">
           Una práctica sagrada que no le niega un vino al cuerpo ni una canción al alma.
         </p>
 

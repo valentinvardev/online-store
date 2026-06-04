@@ -67,7 +67,7 @@ export default function ComoFunciona() {
                 <h3 className="font-sans font-semibold uppercase text-base text-tierra-dark tracking-wide mb-3">
                   {paso.title}
                 </h3>
-                <p className="font-sans text-tierra/70 text-sm leading-relaxed tracking-wide">
+                <p className="font-sans text-tierra/70 text-[15px] leading-relaxed tracking-wide">
                   {paso.desc}
                 </p>
               </div>

@@ -131,7 +131,7 @@ export default function SobreMiPage() {
                       <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/60 border-2 border-morado/20 flex items-center justify-center">
                         <span className="text-morado text-2xl sm:text-3xl">✦</span>
                       </div>
-                      <p className="font-sans text-tierra/35 text-[0.65rem] sm:text-xs tracking-widest uppercase">Tu foto acá</p>
+                      <p className="font-sans text-tierra/60 text-[0.65rem] sm:text-xs tracking-widest uppercase">Tu foto acá</p>
                     </div>
                   </div>
 
@@ -147,7 +147,7 @@ export default function SobreMiPage() {
 
                 {/* Cita */}
                 <blockquote className="mt-8 sm:mt-10 border-l-4 border-dorado pl-4 sm:pl-5 max-w-md mx-auto lg:mx-0">
-                  <p className="font-sans italic text-tierra/60 text-sm leading-relaxed">
+                  <p className="font-sans italic text-tierra/60 text-[15px] leading-relaxed">
                     &ldquo;Ser sagrada y humana al mismo tiempo. Eso es todo lo que enseño.&rdquo;
                   </p>
                 </blockquote>
@@ -182,7 +182,7 @@ export default function SobreMiPage() {
 
                 {/* Formación */}
                 <div className="pt-6 border-t border-morado/10 max-w-prose mx-auto lg:mx-0">
-                  <p className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.3em] uppercase mb-4">Formación</p>
+                  <p className="font-sans text-[0.6rem] text-tierra/80 tracking-[0.3em] uppercase mb-4">Formación</p>
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                     {formacion.map((item) => (
                       <span key={item} className="font-sans text-[0.62rem] px-3 py-1.5 border border-morado/20 text-tierra/65 tracking-wide bg-white">
@@ -244,7 +244,7 @@ export default function SobreMiPage() {
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center lg:text-left">
-              <span className="font-sans text-[0.6rem] text-tierra/55 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>
+              <span className="font-sans text-[0.6rem] text-tierra/80 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>
               <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
                 Mi filosofía
               </h2>

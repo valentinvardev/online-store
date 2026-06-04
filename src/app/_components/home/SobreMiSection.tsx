@@ -16,7 +16,7 @@ export default function SobreMiSection() {
               <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-white/60 flex items-center justify-center border border-morado/20">
                 <span className="text-morado text-3xl sm:text-4xl">✦</span>
               </div>
-              <p className="font-sans text-tierra/40 text-xs tracking-wide">Tu foto acá</p>
+              <p className="font-sans text-tierra/65 text-xs tracking-wide">Tu foto acá</p>
             </div>
           </div>
         </div>

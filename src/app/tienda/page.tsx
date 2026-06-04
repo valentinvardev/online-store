@@ -20,7 +20,7 @@ export default function TiendaPage() {
           <h1 className="font-display uppercase text-[clamp(3rem,12vw,7.5rem)] text-tierra-dark leading-[0.88] tracking-tight">
             Del altar<br />a tu vida
           </h1>
-          <p className="font-sans italic text-tierra/55 text-sm sm:text-base mt-3 sm:mt-4 max-w-md leading-relaxed">
+          <p className="font-sans italic text-tierra/80 text-sm sm:text-base mt-3 sm:mt-4 max-w-md leading-relaxed">
             Cada pieza lleva el cuidado de una práctica real. No es decoración — es herramienta.
           </p>
         </div>

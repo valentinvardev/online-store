@@ -65,7 +65,7 @@ export default function FAQ() {
               </button>
               {open === i && (
                 <div className="pb-5">
-                  <p className="font-sans text-tierra/60 text-sm leading-relaxed tracking-wide">
+                  <p className="font-sans text-tierra/60 text-[15px] leading-relaxed tracking-wide">
                     {faq.a}
                   </p>
                 </div>

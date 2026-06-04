@@ -47,12 +47,12 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
 
       {/* Barra breadcrumb */}
       <div className="bg-crema border-b border-morado/8">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 font-sans text-[0.6rem] text-tierra/35 tracking-widest uppercase">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase">
           <Link href="/tienda" className="hover:text-morado transition-colors flex items-center gap-1.5">
             <ArrowLeft size={11} /> Tienda
           </Link>
           <span>/</span>
-          <span className="text-tierra/55">{producto.name}</span>
+          <span className="text-tierra/80">{producto.name}</span>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                 <h1 className="font-display uppercase text-[clamp(2rem,5vw,3.8rem)] text-tierra-dark leading-none tracking-wide">
                   {producto.name}
                 </h1>
-                <p className="font-sans text-tierra/50 text-sm mt-3 leading-relaxed tracking-wide max-w-md">
+                <p className="font-sans text-tierra/75 text-sm mt-3 leading-relaxed tracking-wide max-w-md">
                   {producto.desc}
                 </p>
               </div>
@@ -166,7 +166,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                 </button>
                 <Link
                   href="/tienda"
-                  className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/15 text-tierra/40 hover:border-morado/40 hover:text-tierra transition-colors"
+                  className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/15 text-tierra/65 hover:border-morado/40 hover:text-tierra transition-colors"
                 >
                   Seguir comprando
                 </Link>
@@ -176,7 +176,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
               <div className="border-t border-morado/10 pt-5 space-y-3">
                 {producto.details.map(({ label, value }) => (
                   <div key={label} className="flex items-center justify-between">
-                    <span className="font-sans text-[0.65rem] text-tierra/40 tracking-widest uppercase">{label}</span>
+                    <span className="font-sans text-[0.65rem] text-tierra/65 tracking-widest uppercase">{label}</span>
                     <span className="font-sans text-sm text-tierra-dark font-medium">{value}</span>
                   </div>
                 ))}
@@ -211,7 +211,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
               {producto.features.map((f, i) => (
                 <div key={i} className="flex items-start gap-3 py-2.5 border-b border-morado/8 last:border-0">
                   <span className="text-dorado text-sm shrink-0 mt-0.5">✦</span>
-                  <span className="font-sans text-sm text-tierra/70 tracking-wide">{f}</span>
+                  <span className="font-sans text-[15px] text-tierra/70 tracking-wide">{f}</span>
                 </div>
               ))}
             </div>
@@ -261,7 +261,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <h3 className="font-sans font-semibold text-sm text-tierra-dark group-hover:text-morado transition-colors mb-1">{p.name}</h3>
-                    <p className="font-sans text-[0.68rem] text-tierra/45 leading-relaxed flex-1 mb-4">{p.desc}</p>
+                    <p className="font-sans text-[0.68rem] text-tierra/70 leading-relaxed flex-1 mb-4">{p.desc}</p>
                     <div className="flex items-center justify-between">
                       <span className="font-display text-2xl text-morado">{p.price}</span>
                       <span className="font-sans text-[0.62rem] text-morado border border-morado/30 px-3 py-1.5 tracking-widest uppercase group-hover:bg-morado group-hover:text-crema transition-colors">

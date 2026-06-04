@@ -51,7 +51,7 @@ function CursosSection({ email }: { email: string }) {
             <CheckCircle2 size={40} className="text-verde" strokeWidth={1.5} />
             <div>
               <p className="font-sans font-semibold text-tierra-dark">¡Tu cuenta está activa!</p>
-              <p className="font-sans text-sm text-tierra/50 mt-1 tracking-wide">
+              <p className="font-sans text-sm text-tierra/75 mt-1 tracking-wide">
                 Ya podés acceder a tus cursos con <strong className="text-tierra-dark">{email}</strong>
               </p>
             </div>
@@ -74,7 +74,7 @@ function CursosSection({ email }: { email: string }) {
 
             <form onSubmit={handleActivate} className="space-y-4 max-w-sm">
               <div>
-                <label className="block font-sans text-[0.58rem] text-tierra/45 tracking-widest uppercase mb-1.5">
+                <label className="block font-sans text-[0.58rem] text-tierra/70 tracking-widest uppercase mb-1.5">
                   Elegí tu contraseña <span className="text-rosa">*</span>
                 </label>
                 <div className="relative">
@@ -92,7 +92,7 @@ function CursosSection({ email }: { email: string }) {
                 </div>
               </div>
               <div>
-                <label className="block font-sans text-[0.58rem] text-tierra/45 tracking-widest uppercase mb-1.5">
+                <label className="block font-sans text-[0.58rem] text-tierra/70 tracking-widest uppercase mb-1.5">
                   Confirmá tu contraseña <span className="text-rosa">*</span>
                 </label>
                 <input
@@ -143,7 +143,7 @@ function ProductosSection({ items }: { items: LastOrder["items"] }) {
                 </div>
                 <div>
                   <p className="font-sans text-sm text-tierra-dark font-semibold leading-none">{item.name}</p>
-                  <p className="font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase mt-0.5">{item.category} · ×{item.quantity}</p>
+                  <p className="font-sans text-[0.6rem] text-tierra/65 tracking-widest uppercase mt-0.5">{item.category} · ×{item.quantity}</p>
                 </div>
               </div>
               <span className="font-sans text-sm font-bold text-morado shrink-0">${(item.price * item.quantity).toFixed(0)}</span>
@@ -152,7 +152,7 @@ function ProductosSection({ items }: { items: LastOrder["items"] }) {
         </ul>
 
         <div className="space-y-3">
-          <p className="font-sans text-tierra/55 text-sm leading-relaxed tracking-wide">
+          <p className="font-sans text-tierra/80 text-[15px] leading-relaxed tracking-wide">
             Vamos a preparar tu pedido y te avisamos por email cuando esté en camino.
           </p>
           {/* TODO: enlazar a página de tracking cuando esté implementada */}
@@ -214,7 +214,7 @@ function ServiciosSection({ items, buyerName }: { items: LastOrder["items"]; buy
 
         {/* WhatsApp */}
         <div>
-          <p className="font-sans text-xs text-tierra/40 tracking-wide mb-3">
+          <p className="font-sans text-xs text-tierra/65 tracking-wide mb-3">
             ¿Querés coordinar antes? Escribinos directamente:
           </p>
           <a
@@ -284,17 +284,17 @@ export default function GraciasPage() {
           {/* Resumen del pedido */}
           {ready && order && (
             <div className="bg-white border-2 border-morado/15 px-6 py-5">
-              <p className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.3em] uppercase mb-3">Resumen de tu compra</p>
+              <p className="font-sans text-[0.6rem] text-tierra/60 tracking-[0.3em] uppercase mb-3">Resumen de tu compra</p>
               <div className="space-y-1.5">
                 {order.items.map((item, i) => (
                   <div key={i} className="flex items-center justify-between gap-3 font-sans text-sm">
-                    <span className="text-tierra/65 truncate">{item.name} <span className="text-tierra/35">×{item.quantity}</span></span>
+                    <span className="text-tierra/65 truncate">{item.name} <span className="text-tierra/60">×{item.quantity}</span></span>
                     <span className="font-semibold text-tierra-dark shrink-0">${(item.price * item.quantity).toFixed(0)}</span>
                   </div>
                 ))}
               </div>
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-morado/10">
-                <span className="font-sans text-[0.62rem] text-tierra/40 tracking-widest uppercase">Total</span>
+                <span className="font-sans text-[0.62rem] text-tierra/65 tracking-widest uppercase">Total</span>
                 <span className="font-sans font-bold text-xl text-morado">${order.total.toFixed(0)}</span>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function GraciasPage() {
           {/* Sin orden — acceso directo a la URL */}
           {ready && !order && (
             <div className="text-center py-8">
-              <p className="font-sans text-tierra/40 text-sm tracking-wide mb-6">
+              <p className="font-sans text-tierra/65 text-sm tracking-wide mb-6">
                 No encontramos los detalles de tu compra. Si acabás de comprar, revisá tu email.
               </p>
               <Link href="/" className="font-sans text-xs text-morado hover:text-morado-dark tracking-widest uppercase transition-colors">
@@ -331,13 +331,13 @@ export default function GraciasPage() {
           {/* Footer links */}
           {ready && (
             <div className="flex flex-wrap items-center justify-center gap-6 pt-6">
-              <Link href="/tienda" className="font-sans text-xs text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase">
+              <Link href="/tienda" className="font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase">
                 Seguir comprando
               </Link>
-              <Link href="/cursos" className="font-sans text-xs text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase">
+              <Link href="/cursos" className="font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase">
                 Ver cursos
               </Link>
-              <Link href="/" className="font-sans text-xs text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase">
+              <Link href="/" className="font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase">
                 Volver al inicio
               </Link>
             </div>

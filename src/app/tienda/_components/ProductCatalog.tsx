@@ -95,8 +95,8 @@ export default function ProductCatalog() {
             Filtrar por categoría
           </p>
 
-          {/* Mobile: dropdown estilo lista */}
-          <div ref={dropdownRef} className="sm:hidden relative">
+          {/* Dropdown estilo lista — siempre visible */}
+          <div ref={dropdownRef} className="relative max-w-xs">
             {renderListItem(activeCategory, {
               onClick: () => setDropdownOpen(!dropdownOpen),
               withChevron: true,
@@ -114,34 +114,6 @@ export default function ProductCatalog() {
                 ))}
               </ul>
             )}
-          </div>
-
-          {/* Desktop: pills horizontales sin wrap */}
-          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1">
-            {categories.map(({ value, label, icon, color, activeColor }) => {
-              const isActive = active === value;
-              return (
-                <button
-                  key={value}
-                  onClick={() => setActive(value)}
-                  className={`group shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 border-2 rounded-full transition-all duration-200 ${
-                    isActive ? activeColor : `bg-transparent ${color}`
-                  }`}
-                >
-                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
-                    {icon}
-                  </span>
-                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
-                    {label}
-                  </span>
-                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
-                  }`}>
-                    {countFor(value)}
-                  </span>
-                </button>
-              );
-            })}
           </div>
         </div>
       </div>
@@ -175,14 +147,14 @@ export default function ProductCatalog() {
                 <h3 className="font-sans font-semibold text-base text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                   {product.name}
                 </h3>
-                <p className="font-sans text-[0.72rem] text-tierra/50 mb-5 leading-relaxed tracking-wide flex-1">
+                <p className="font-sans text-[0.72rem] text-tierra/75 mb-5 leading-relaxed tracking-wide flex-1">
                   {product.desc}
                 </p>
                 <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-baseline gap-2">
                     <span className="font-sans font-bold text-2xl text-morado">{product.price}</span>
                     {product.priceOld && (
-                      <span className="font-sans text-xs text-tierra/35 line-through">{product.priceOld}</span>
+                      <span className="font-sans text-xs text-tierra/60 line-through">{product.priceOld}</span>
                     )}
                   </div>
                   <button

@@ -84,7 +84,7 @@ export default function Navbar() {
               )}
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase"
+                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase"
                 aria-label="Cerrar sesión"
               >
                 <LogOut size={13} strokeWidth={1.5} className="text-verde-light" />
@@ -163,7 +163,7 @@ export default function Navbar() {
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
+                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
               >
                 <LogOut size={13} strokeWidth={1.5} className="text-verde-light" /> Salir
               </button>

@@ -139,7 +139,7 @@ export default function CursosCatalog() {
                     {label}
                   </span>
                   <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/40"
+                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/65"
                   }`}>
                     {count}
                   </span>
@@ -195,15 +195,15 @@ export default function CursosCatalog() {
                 <h3 className="font-sans font-bold uppercase text-xl text-tierra-dark leading-tight tracking-wide mb-1 group-hover:text-morado transition-colors">
                   {curso.title}
                 </h3>
-                <p className="font-sans italic text-tierra/45 text-sm mb-4">{curso.subtitle}</p>
-                <p className="font-sans text-tierra/55 text-sm leading-relaxed mb-5 flex-1 tracking-wide">
+                <p className="font-sans italic text-tierra/70 text-sm mb-4">{curso.subtitle}</p>
+                <p className="font-sans text-tierra/80 text-[15px] leading-relaxed mb-5 flex-1 tracking-wide">
                   {curso.desc}
                 </p>
 
                 {/* Includes */}
                 <ul className="space-y-1.5 mb-5 border-t border-morado/10 pt-5">
                   {curso.includes.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 font-sans text-[0.7rem] text-tierra/50 tracking-wide">
+                    <li key={i} className="flex items-center gap-2 font-sans text-[0.7rem] text-tierra/75 tracking-wide">
                       <span className="text-dorado text-[0.55rem] shrink-0">✦</span>
                       {item}
                     </li>
@@ -211,7 +211,7 @@ export default function CursosCatalog() {
                 </ul>
 
                 {/* Meta */}
-                <div className="flex gap-5 font-sans text-xs text-tierra/35 mb-6 tracking-wide">
+                <div className="flex gap-5 font-sans text-xs text-tierra/60 mb-6 tracking-wide">
                   <span className="flex items-center gap-1.5">
                     <Clock size={12} strokeWidth={1.5} />
                     {curso.duration}
@@ -231,7 +231,7 @@ export default function CursosCatalog() {
                   <div className="flex items-baseline gap-2">
                     <span className="font-sans font-bold text-3xl text-morado">{curso.price}</span>
                     {curso.priceOld && (
-                      <span className="font-sans text-xs text-tierra/35 line-through">{curso.priceOld}</span>
+                      <span className="font-sans text-xs text-tierra/60 line-through">{curso.priceOld}</span>
                     )}
                   </div>
                   <span className="font-sans font-semibold text-[0.65rem] px-5 py-2.5 bg-dorado text-tierra-dark border-2 border-morado-dark group-hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap">

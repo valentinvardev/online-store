@@ -22,7 +22,6 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
     NEXT_PUBLIC_MP_PUBLIC_KEY: z.string().optional(),
-    NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
   },
 
   runtimeEnv: {

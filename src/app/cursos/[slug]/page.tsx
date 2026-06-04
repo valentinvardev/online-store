@@ -122,7 +122,7 @@ export default async function CursoInfoPage({ params }: Props) {
                 <div className="flex items-baseline gap-3">
                   <span className="font-display text-5xl text-morado">{curso.price}</span>
                   {curso.priceOld && (
-                    <span className="font-sans text-sm text-tierra/35 line-through">{curso.priceOld}</span>
+                    <span className="font-sans text-[15px] text-tierra/60 line-through">{curso.priceOld}</span>
                   )}
                 </div>
 
@@ -135,13 +135,13 @@ export default async function CursoInfoPage({ params }: Props) {
                 </button>
 
                 {/* Garantía */}
-                <p className="font-sans text-[0.6rem] text-tierra/40 text-center tracking-wide">
+                <p className="font-sans text-[0.6rem] text-tierra/65 text-center tracking-wide">
                   ✦ 7 días de garantía de devolución
                 </p>
 
                 {/* Incluye */}
                 <div className="border-t border-morado/10 pt-5 space-y-2.5">
-                  <p className="font-sans text-[0.58rem] text-tierra/35 tracking-[0.3em] uppercase mb-3">Este curso incluye</p>
+                  <p className="font-sans text-[0.58rem] text-tierra/60 tracking-[0.3em] uppercase mb-3">Este curso incluye</p>
                   {curso.includes.map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">
                       <Check size={12} className="text-verde shrink-0" strokeWidth={2.5} />
@@ -238,20 +238,20 @@ export default async function CursoInfoPage({ params }: Props) {
                   <div className="flex items-baseline gap-3">
                     <span className="font-display text-5xl text-morado">{curso.price}</span>
                     {curso.priceOld && (
-                      <span className="font-sans text-sm text-tierra/35 line-through">{curso.priceOld}</span>
+                      <span className="font-sans text-[15px] text-tierra/60 line-through">{curso.priceOld}</span>
                     )}
                   </div>
                   <button className="w-full bg-morado-dark text-crema font-sans font-semibold text-[0.7rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
                     ✦ Inscribirme ahora
                   </button>
-                  <p className="font-sans text-[0.6rem] text-tierra/35 text-center tracking-wide">
+                  <p className="font-sans text-[0.6rem] text-tierra/60 text-center tracking-wide">
                     ✦ 7 días de garantía de devolución
                   </p>
                   <div className="border-t border-morado/10 pt-4 space-y-2.5">
                     {curso.includes.map((item, i) => (
                       <div key={i} className="flex items-center gap-2.5">
                         <Check size={12} className="text-verde shrink-0" strokeWidth={2.5} />
-                        <span className="font-sans text-xs text-tierra/55 tracking-wide">{item}</span>
+                        <span className="font-sans text-xs text-tierra/80 tracking-wide">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -266,7 +266,7 @@ export default async function CursoInfoPage({ params }: Props) {
                     { icon: <Users size={13} strokeWidth={1.5} />, label: "Alumnas", val: curso.students },
                   ].map(({ icon, label, val }) => (
                     <div key={label} className="flex items-center justify-between">
-                      <span className="flex items-center gap-2 font-sans text-xs text-tierra/45 tracking-wide">
+                      <span className="flex items-center gap-2 font-sans text-xs text-tierra/70 tracking-wide">
                         {icon} {label}
                       </span>
                       <span className="font-sans text-xs font-semibold text-tierra-dark">{val}</span>

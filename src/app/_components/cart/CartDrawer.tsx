@@ -6,7 +6,7 @@ import { X, Plus, Minus, ShoppingBag, Trash2, ArrowLeft, User, Mail, Phone } fro
 import { useCart, type BuyerInfo, type LastOrder } from "./CartContext";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-3 py-2.5 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
-const labelClass = "block font-sans text-[0.58rem] text-tierra/45 tracking-widest uppercase mb-1";
+const labelClass = "block font-sans text-[0.58rem] text-tierra/70 tracking-widest uppercase mb-1";
 
 type Step = "cart" | "checkout";
 
@@ -80,7 +80,7 @@ export default function CartDrawer() {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-5 text-center">
                   <span className="font-display text-6xl text-morado/10">✦</span>
-                  <p className="font-sans text-tierra/40 text-sm tracking-wide">Tu carrito está vacío</p>
+                  <p className="font-sans text-tierra/65 text-sm tracking-wide">Tu carrito está vacío</p>
                   <button onClick={handleClose} className="font-sans text-xs text-morado/50 hover:text-morado transition-colors tracking-widest uppercase">
                     Seguir viendo →
                   </button>
@@ -94,7 +94,7 @@ export default function CartDrawer() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-sans font-semibold text-sm text-tierra-dark leading-snug truncate">{item.name}</p>
-                        <p className="font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase mt-0.5 mb-3">{item.category}</p>
+                        <p className="font-sans text-[0.6rem] text-tierra/65 tracking-widest uppercase mt-0.5 mb-3">{item.category}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center border-2 border-morado/15">
                             <button onClick={() => updateQty(item.id, item.quantity - 1)} className="w-7 h-7 flex items-center justify-center text-morado/40 hover:text-morado hover:bg-morado/5 transition-colors">
@@ -122,7 +122,7 @@ export default function CartDrawer() {
             {items.length > 0 && (
               <div className="border-t-2 border-morado/10 px-6 py-6 space-y-4 shrink-0">
                 <div className="flex items-center justify-between">
-                  <span className="font-sans text-sm text-tierra/55 tracking-wide">Subtotal</span>
+                  <span className="font-sans text-[15px] text-tierra/80 tracking-wide">Subtotal</span>
                   <span className="font-sans font-bold text-2xl text-tierra-dark">${total.toFixed(0)}</span>
                 </div>
                 <button
@@ -131,7 +131,7 @@ export default function CartDrawer() {
                 >
                   Finalizar compra
                 </button>
-                <button onClick={handleClose} className="w-full font-sans text-xs text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase py-1">
+                <button onClick={handleClose} className="w-full font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1">
                   Seguir comprando
                 </button>
               </div>
@@ -153,7 +153,7 @@ export default function CartDrawer() {
                   </div>
                 ))}
                 <div className="flex items-center justify-between border-t border-morado/10 pt-2 mt-2">
-                  <span className="font-sans text-[0.65rem] text-tierra/40 tracking-widest uppercase">Total</span>
+                  <span className="font-sans text-[0.65rem] text-tierra/65 tracking-widest uppercase">Total</span>
                   <span className="font-sans font-bold text-base text-morado">${total.toFixed(0)}</span>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function CartDrawer() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-1">
                   <User size={13} className="text-morado/50" strokeWidth={1.5} />
-                  <p className="font-sans text-[0.62rem] text-tierra/40 tracking-widest uppercase">Información de contacto</p>
+                  <p className="font-sans text-[0.62rem] text-tierra/65 tracking-widest uppercase">Información de contacto</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -234,7 +234,7 @@ export default function CartDrawer() {
               <button
                 type="button"
                 onClick={() => setStep("cart")}
-                className="w-full font-sans text-xs text-tierra/40 hover:text-morado transition-colors tracking-widest uppercase py-1"
+                className="w-full font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1"
               >
                 ← Volver al carrito
               </button>

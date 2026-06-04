@@ -38,7 +38,7 @@ export default async function ServicioDetailPage({ params }: Props) {
         {/* Breadcrumb */}
         <div className="border-b-2 border-morado/8 px-6 py-4">
           <div className="max-w-6xl mx-auto">
-            <nav className="flex items-center gap-2 font-sans text-[0.62rem] text-tierra/35 tracking-widest uppercase">
+            <nav className="flex items-center gap-2 font-sans text-[0.62rem] text-tierra/60 tracking-widest uppercase">
               <Link href="/servicios" className="hover:text-tierra transition-colors">Sesiones</Link>
               <span>›</span>
               <span className="text-tierra/60">{service.name}</span>
@@ -73,7 +73,7 @@ export default async function ServicioDetailPage({ params }: Props) {
                   {service.name}
                 </h1>
                 {service.subtitle && (
-                  <p className="font-sans italic text-tierra/50 mt-2">{service.subtitle}</p>
+                  <p className="font-sans italic text-tierra/75 mt-2">{service.subtitle}</p>
                 )}
               </div>
 
@@ -109,7 +109,7 @@ export default async function ServicioDetailPage({ params }: Props) {
                 </a>
                 <Link
                   href="/servicios"
-                  className="block w-full text-center font-sans text-[0.62rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/45 hover:border-morado/50 hover:text-tierra transition-colors"
+                  className="block w-full text-center font-sans text-[0.62rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/70 hover:border-morado/50 hover:text-tierra transition-colors"
                 >
                   Ver todas las sesiones
                 </Link>

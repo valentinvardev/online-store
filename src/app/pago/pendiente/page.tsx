@@ -14,10 +14,10 @@ export default function PagoPendientePage() {
           <h1 className="font-display uppercase text-[clamp(2rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide mb-4">
             Pago pendiente
           </h1>
-          <p className="font-sans text-tierra/55 text-base leading-relaxed mb-2">
+          <p className="font-sans text-tierra/80 text-[17px] leading-relaxed mb-2">
             Tu pago está siendo procesado.
           </p>
-          <p className="font-sans text-tierra/40 text-sm leading-relaxed mb-10">
+          <p className="font-sans text-tierra/65 text-sm leading-relaxed mb-10">
             Esto puede tardar unos minutos. Te avisamos por email cuando se confirme.
           </p>
           <Link

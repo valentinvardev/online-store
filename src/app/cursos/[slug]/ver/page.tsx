@@ -41,12 +41,12 @@ export default async function CourseViewerPage({ params }: Props) {
             <h1 className="font-display uppercase text-[clamp(1.8rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-4">
               {course.name}
             </h1>
-            <p className="font-sans text-tierra/50 text-sm leading-relaxed mb-8">
+            <p className="font-sans text-tierra/75 text-sm leading-relaxed mb-8">
               {course.description}
             </p>
             {session ? (
               <div className="space-y-3">
-                <p className="font-sans text-tierra/40 text-xs tracking-wide">
+                <p className="font-sans text-tierra/65 text-xs tracking-wide">
                   No tenés acceso a este curso todavía.
                 </p>
                 <Link
@@ -58,7 +58,7 @@ export default async function CourseViewerPage({ params }: Props) {
               </div>
             ) : (
               <div className="space-y-3">
-                <p className="font-sans text-tierra/40 text-xs tracking-wide">
+                <p className="font-sans text-tierra/65 text-xs tracking-wide">
                   Iniciá sesión para ver si tenés acceso.
                 </p>
                 <Link
@@ -103,7 +103,7 @@ export default async function CourseViewerPage({ params }: Props) {
           {course.modules.length === 0 ? (
             <div className="text-center py-20">
               <span className="font-display text-5xl text-morado/15 block mb-4">✦</span>
-              <p className="font-sans text-tierra/40 text-sm tracking-wide">
+              <p className="font-sans text-tierra/65 text-sm tracking-wide">
                 El contenido de este curso estará disponible pronto.
               </p>
             </div>
@@ -115,7 +115,7 @@ export default async function CourseViewerPage({ params }: Props) {
                     <h2 className="font-sans font-bold text-base text-tierra-dark tracking-wide">
                       {mod.title}
                     </h2>
-                    <p className="font-sans text-xs text-tierra/40 tracking-widest uppercase mt-0.5">
+                    <p className="font-sans text-xs text-tierra/65 tracking-widest uppercase mt-0.5">
                       {mod.lessons.length} lección{mod.lessons.length !== 1 ? "es" : ""}
                     </p>
                   </div>
@@ -135,7 +135,7 @@ export default async function CourseViewerPage({ params }: Props) {
                           </div>
                         )}
                         {lesson.content && (
-                          <p className="font-sans text-xs text-tierra/50 leading-relaxed mt-2">
+                          <p className="font-sans text-xs text-tierra/75 leading-relaxed mt-2">
                             {lesson.content}
                           </p>
                         )}

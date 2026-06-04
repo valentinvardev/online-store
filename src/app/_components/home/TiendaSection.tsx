@@ -73,11 +73,11 @@ export default function TiendaSection() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="font-sans text-[0.6rem] text-tierra/40 tracking-widest uppercase mb-1">{product.category}</p>
+                  <p className="font-sans text-[0.6rem] text-tierra/65 tracking-widest uppercase mb-1">{product.category}</p>
                   <h3 className="font-sans font-semibold text-lg text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="font-sans text-[0.72rem] text-tierra/50 mb-4 leading-relaxed tracking-wide">
+                  <p className="font-sans text-[0.72rem] text-tierra/75 mb-4 leading-relaxed tracking-wide">
                     {product.desc}
                   </p>
                   <div className="flex items-center justify-between">

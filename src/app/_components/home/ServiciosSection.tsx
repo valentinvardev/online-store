@@ -66,7 +66,7 @@ export default function ServiciosSection() {
                 <h3 className="font-sans font-bold uppercase text-xl text-tierra-dark mb-4 leading-tight tracking-wide">
                   {s.title}
                 </h3>
-                <p className="font-sans text-tierra/60 text-sm leading-relaxed mb-6 flex-1 tracking-wide">
+                <p className="font-sans text-tierra/60 text-[15px] leading-relaxed mb-6 flex-1 tracking-wide">
                   {s.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-7">

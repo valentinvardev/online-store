@@ -419,9 +419,9 @@ export default function ServiciosGrid() {
                 <h3 className="font-sans font-bold uppercase text-xl text-tierra-dark leading-tight tracking-wide">
                   {s.title}
                 </h3>
-                <p className="font-sans italic text-tierra/50 text-sm mt-1 mb-4">{s.subtitle}</p>
+                <p className="font-sans italic text-tierra/75 text-sm mt-1 mb-4">{s.subtitle}</p>
 
-                <p className="font-sans text-tierra/60 text-sm leading-relaxed mb-5 tracking-wide flex-1">
+                <p className="font-sans text-tierra/60 text-[15px] leading-relaxed mb-5 tracking-wide flex-1">
                   {s.desc}
                 </p>
 
@@ -438,7 +438,7 @@ export default function ServiciosGrid() {
                 {/* Incluye */}
                 <ul className="space-y-2 mb-7 border-t border-morado/10 pt-5">
                   {s.contenido.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 font-sans text-[0.7rem] text-tierra/55 tracking-wide">
+                    <li key={i} className="flex items-start gap-2 font-sans text-[0.7rem] text-tierra/80 tracking-wide">
                       <span className={`${s.accentColor} text-[0.55rem] mt-[3px] shrink-0`}>✦</span>
                       {item}
                     </li>
