@@ -158,7 +158,7 @@ export default function Navbar() {
 
       {/* Mobile menu fullscreen overlay — fuera del header para evitar stacking context */}
       <div
-        className={`md:hidden fixed inset-0 z-[100] bg-morado-dark transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 z-[100] bg-verde transition-opacity duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -172,19 +172,7 @@ export default function Navbar() {
         </button>
 
         {/* Contenido */}
-        <div className="h-full flex flex-col px-8 pt-10 pb-10">
-          {/* Logo */}
-          <Link href="/" onClick={() => setOpen(false)} className="block mb-12 shrink-0">
-            <Image
-              src="/logo-rdb.png"
-              alt="La Reina de Bastos"
-              width={140}
-              height={140}
-              className="h-16 w-auto"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-          </Link>
-
+        <div className="h-full flex flex-col px-8 pt-20 pb-10">
           {/* Nav links grandes */}
           <nav className="flex-1 flex flex-col justify-center gap-5">
             {links.map((link, i) => (
@@ -192,25 +180,23 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado transition-all duration-300 tracking-wide leading-none flex items-center gap-3 group"
-                style={{
-                  transitionDelay: open ? `${100 + i * 70}ms` : "0ms",
-                  transform: open ? "translateX(0)" : "translateX(2rem)",
-                  opacity: open ? 1 : 0,
-                }}
+                className={`font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado tracking-wide leading-none flex items-center gap-3 group transition-[transform,opacity,color] duration-500 ${
+                  open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+                }`}
+                style={{ transitionDelay: open ? `${i * 80}ms` : "0ms" }}
               >
-                <span className="font-display text-dorado/70 group-hover:text-dorado text-2xl transition-colors">✦</span>
+                <span className="font-display text-dorado/80 group-hover:text-dorado text-2xl transition-colors">✦</span>
                 {link.label}
               </Link>
             ))}
           </nav>
 
           {/* Acciones abajo */}
-          <div className="pt-8 border-t-2 border-crema/15 shrink-0 space-y-3">
+          <div className="pt-8 border-t-2 border-crema/20 shrink-0 space-y-3">
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/30 hover:border-dorado/50"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/40 hover:border-dorado/60"
               >
                 <LogOut size={16} strokeWidth={1.8} /> Cerrar sesión
               </button>
@@ -218,7 +204,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/30 hover:border-dorado/50"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/40 hover:border-dorado/60"
               >
                 <LogIn size={16} strokeWidth={1.8} /> Entrar
               </Link>
