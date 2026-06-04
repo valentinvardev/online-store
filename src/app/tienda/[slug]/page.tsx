@@ -115,7 +115,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
 
               {/* Nombre */}
               <div>
-                <h1 className="font-display uppercase text-[clamp(2rem,5vw,3.8rem)] text-tierra-dark leading-none tracking-wide">
+                <h1 className="font-display uppercase text-[clamp(3rem,5vw,3.8rem)] text-tierra-dark leading-none tracking-wide">
                   {producto.name}
                 </h1>
                 <p className="font-sans text-tierra/75 text-sm mt-3 leading-relaxed tracking-wide max-w-md">

@@ -80,7 +80,7 @@ export default async function CursoInfoPage({ params }: Props) {
 
               {/* Título */}
               <div>
-                <h1 className="font-display uppercase text-[clamp(2.8rem,7vw,5.5rem)] text-crema leading-none tracking-wide">
+                <h1 className="font-display uppercase text-[clamp(3.25rem,7vw,5.5rem)] text-crema leading-none tracking-wide">
                   {curso.title}
                 </h1>
                 <p className="font-sans italic text-crema/45 text-lg mt-3 leading-snug max-w-lg">
@@ -169,7 +169,7 @@ export default async function CursoInfoPage({ params }: Props) {
               {/* Video de presentación */}
               {curso.videoId && (
                 <section>
-                  <h2 className="font-display uppercase text-[clamp(1.8rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
+                  <h2 className="font-display uppercase text-[clamp(2.75rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
                     Video de presentación
                   </h2>
                   <div
@@ -189,7 +189,7 @@ export default async function CursoInfoPage({ params }: Props) {
 
               {/* ¿Para quién es? */}
               <section>
-                <h2 className="font-display uppercase text-[clamp(1.8rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
+                <h2 className="font-display uppercase text-[clamp(2.75rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
                   ¿Para quién es?
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -209,7 +209,7 @@ export default async function CursoInfoPage({ params }: Props) {
 
               {/* Descripción larga */}
               <section>
-                <h2 className="font-display uppercase text-[clamp(1.8rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
+                <h2 className="font-display uppercase text-[clamp(2.75rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
                   Sobre este curso
                 </h2>
                 <div className="bg-white border-2 border-morado/10 p-8">
@@ -221,7 +221,7 @@ export default async function CursoInfoPage({ params }: Props) {
 
               {/* Currículum */}
               <section>
-                <h2 className="font-display uppercase text-[clamp(1.8rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-8">
+                <h2 className="font-display uppercase text-[clamp(2.75rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-8">
                   Contenido del curso
                 </h2>
                 <CursoAccordion modules={curso.modules} />
@@ -284,7 +284,7 @@ export default async function CursoInfoPage({ params }: Props) {
       <section className="bg-rosa border-t-4 border-dorado/40">
         <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-6">
           <span className="font-display text-dorado text-6xl block">✦</span>
-          <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
+          <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
             ¿Lista para empezar?
           </h2>
           <p className="font-sans text-crema/40 text-sm tracking-wide max-w-sm mx-auto leading-relaxed">

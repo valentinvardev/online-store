@@ -42,7 +42,7 @@ export default function FAQ() {
               Preguntas frecuentes
             </span>
           </div>
-          <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
+          <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
             Antes de reservar
           </h2>
         </div>

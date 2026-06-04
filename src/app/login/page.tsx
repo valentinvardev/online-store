@@ -13,7 +13,7 @@ export default async function LoginPage() {
           <p className="font-sans text-[0.8rem] text-morado/65 tracking-[0.45em] uppercase mb-4">
             La Reina de Bastos
           </p>
-          <h1 className="font-display uppercase text-[clamp(2rem,8vw,3rem)] text-tierra-dark leading-none tracking-wide">
+          <h1 className="font-display uppercase text-[clamp(3rem,8vw,3rem)] text-tierra-dark leading-none tracking-wide">
             Iniciar sesión
           </h1>
           <div className="flex items-center gap-4 mt-5 justify-center">

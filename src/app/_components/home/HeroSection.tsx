@@ -16,10 +16,10 @@ export default function HeroSection() {
 
         {/* Título */}
         <h1 className="font-display leading-[0.85] mb-8 sm:mb-10 select-none">
-          <span className="block text-[clamp(2.25rem,14vw,9rem)] text-morado tracking-wide">
+          <span className="block text-[clamp(3rem,14vw,9rem)] text-morado tracking-wide">
             La Reina
           </span>
-          <span className="block text-[clamp(2.25rem,14vw,9rem)] text-morado-dark tracking-wide">
+          <span className="block text-[clamp(3rem,14vw,9rem)] text-morado-dark tracking-wide">
             de Bastos
           </span>
         </h1>

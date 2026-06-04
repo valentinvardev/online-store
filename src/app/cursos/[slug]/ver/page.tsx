@@ -38,7 +38,7 @@ export default async function CourseViewerPage({ params }: Props) {
         <main className="min-h-[70vh] bg-crema flex items-center justify-center px-6 py-20">
           <div className="max-w-md w-full text-center">
             <span className="font-display text-6xl text-morado/15 block mb-8">✦</span>
-            <h1 className="font-display uppercase text-[clamp(1.8rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-4">
+            <h1 className="font-display uppercase text-[clamp(2.75rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-4">
               {course.name}
             </h1>
             <p className="font-sans text-tierra/75 text-sm leading-relaxed mb-8">
@@ -89,7 +89,7 @@ export default async function CourseViewerPage({ params }: Props) {
             >
               ← Volver a cursos
             </Link>
-            <h1 className="font-display uppercase text-[clamp(2rem,6vw,4rem)] text-crema leading-none tracking-wide">
+            <h1 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide">
               {course.name}
             </h1>
             <p className="font-sans text-crema/50 text-sm mt-3 leading-relaxed max-w-xl">

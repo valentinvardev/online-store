@@ -141,7 +141,7 @@ function ReservasContent() {
           >
             <ArrowLeft size={12} /> Volver a servicios
           </Link>
-          <h1 className="font-display uppercase text-[clamp(2.5rem,7vw,4.5rem)] text-crema leading-none tracking-wide">
+          <h1 className="font-display uppercase text-[clamp(3rem,7vw,4.5rem)] text-crema leading-none tracking-wide">
             Reservá tu<br />
             <span className="text-dorado">sesión</span>
           </h1>
@@ -202,7 +202,7 @@ function ReservasContent() {
               <div className="w-20 h-20 bg-dorado border-4 border-morado-dark block-shadow flex items-center justify-center mx-auto">
                 <Check size={32} className="text-tierra-dark" strokeWidth={2.5} />
               </div>
-              <h2 className="font-display uppercase text-[clamp(2rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 ¡Reserva recibida!
               </h2>
               <p className="font-sans text-tierra/80 text-[15px] tracking-wide max-w-sm mx-auto leading-relaxed">

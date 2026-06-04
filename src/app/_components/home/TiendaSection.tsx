@@ -50,7 +50,7 @@ export default function TiendaSection() {
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 lg:mb-14 gap-4 text-center sm:text-left">
-            <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
+            <h2 className="font-display uppercase text-[clamp(2.75rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
               Del altar<br />a tu vida
             </h2>
             <a href="/tienda" className="font-sans text-[13px] text-morado hover:text-morado-light transition-colors tracking-widest uppercase self-center sm:self-end shrink-0">

@@ -100,7 +100,7 @@ export default function SobreMiPage() {
           <span className="font-sans text-[0.8rem] text-crema/85 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
             La historia detrás
           </span>
-          <h1 className="font-display uppercase text-[clamp(2.5rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
+          <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
             Sobre<br />
             <span className="text-dorado">mí</span>
           </h1>
@@ -155,7 +155,7 @@ export default function SobreMiPage() {
             <RevealOnScroll direction="up" delay={150}>
               <div className="space-y-8 text-center lg:text-left">
                 <div>
-                  <h2 className="font-display uppercase text-[clamp(2rem,7vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-6">
+                  <h2 className="font-display uppercase text-[clamp(3rem,7vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-6">
                     Hola,<br />soy la Reina
                   </h2>
                   <div className="space-y-4 sm:space-y-5 font-sans text-tierra/65 leading-relaxed tracking-wide text-sm sm:text-[15px] max-w-prose mx-auto lg:mx-0">
@@ -200,7 +200,7 @@ export default function SobreMiPage() {
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center">
               <span className="font-sans text-[0.8rem] text-crema/70 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">El camino</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide">
                 Mi historia
               </h2>
             </div>
@@ -242,7 +242,7 @@ export default function SobreMiPage() {
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center lg:text-left">
               <span className="font-sans text-[0.8rem] text-tierra/80 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
                 Mi filosofía
               </h2>
             </div>
@@ -267,7 +267,7 @@ export default function SobreMiPage() {
         <div className="max-w-3xl mx-auto text-center">
           <RevealOnScroll>
             <span className="font-display text-5xl sm:text-6xl text-dorado block mb-5 sm:mb-6">✦</span>
-            <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide mb-4 sm:mb-5">
+            <h2 className="font-display uppercase text-[clamp(3rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide mb-4 sm:mb-5">
               ¿Trabajamos juntas?
             </h2>
             <p className="font-sans text-crema/80 text-sm leading-relaxed tracking-wide max-w-xl mx-auto mb-8 sm:mb-10">

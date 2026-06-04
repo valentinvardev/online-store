@@ -50,7 +50,7 @@ export default function ServiciosSection() {
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>
           <div className="mb-10 sm:mb-12 lg:mb-16 text-center lg:text-left">
-            <h2 className="font-display uppercase text-[clamp(2rem,8vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
+            <h2 className="font-display uppercase text-[clamp(3rem,8vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
               Solo para vos
             </h2>
           </div>

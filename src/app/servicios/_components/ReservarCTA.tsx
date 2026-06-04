@@ -10,7 +10,7 @@ export default function ReservarCTA() {
           <div className="h-px w-8 bg-crema/40" />
         </div>
 
-        <h2 className="font-display uppercase text-[clamp(2rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
+        <h2 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
           ¿Cuándo<br />empezamos?
         </h2>
         <p className="font-sans italic text-crema/65 text-lg leading-snug mb-10 max-w-sm mx-auto">

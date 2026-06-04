@@ -11,7 +11,7 @@ export default function PagoExitoPage() {
           <div className="w-20 h-20 bg-verde/10 border-2 border-verde/30 flex items-center justify-center mx-auto mb-8">
             <span className="text-4xl">✦</span>
           </div>
-          <h1 className="font-display uppercase text-[clamp(2rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide mb-4">
+          <h1 className="font-display uppercase text-[clamp(3rem,6vw,3.5rem)] text-tierra-dark leading-none tracking-wide mb-4">
             ¡Gracias por tu compra!
           </h1>
           <p className="font-sans text-tierra/80 text-[17px] leading-relaxed mb-2">

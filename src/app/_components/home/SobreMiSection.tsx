@@ -23,7 +23,7 @@ export default function SobreMiSection() {
 
         {/* Texto */}
         <div className="w-full lg:flex-1 lg:basis-3/5 text-center lg:text-left">
-          <h2 className="font-display uppercase text-[clamp(2rem,8vw,3.8rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-7 lg:mb-8">
+          <h2 className="font-display uppercase text-[clamp(3rem,8vw,3.8rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-7 lg:mb-8">
             Hola,<br />soy la Reina
           </h2>
 

@@ -27,7 +27,7 @@ export default function ServiciosPage() {
                 Solo para vos
               </span>
             </div>
-            <h1 className="font-display uppercase text-[clamp(2rem,8vw,5rem)] text-tierra-dark leading-none tracking-wide">
+            <h1 className="font-display uppercase text-[clamp(3rem,8vw,5rem)] text-tierra-dark leading-none tracking-wide">
               Sesiones<br />personales
             </h1>
           </div>

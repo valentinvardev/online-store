@@ -50,7 +50,7 @@ export default function PropuestaSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <RevealOnScroll direction="up" delay={0}>
           <div className="text-center mb-16">
-            <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4.5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
+            <h2 className="font-display uppercase text-[clamp(2.75rem,7vw,4.5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
               Todo en un solo lugar
             </h2>
           </div>

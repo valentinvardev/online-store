@@ -165,7 +165,7 @@ export default function SuscripcionesPage() {
           <RevealOnScroll>
             <div className="text-center mb-10">
               <span className="font-sans text-[0.8rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Antes de suscribirte</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 Mirá cómo funciona
               </h2>
               <p className="font-sans italic text-tierra/45 text-base mt-3 max-w-md mx-auto leading-relaxed">
@@ -200,7 +200,7 @@ export default function SuscripcionesPage() {
           <RevealOnScroll>
             <div className="text-center mb-14">
               <span className="font-sans text-[0.8rem] text-dorado tracking-[0.4em] uppercase block mb-4">Lo que te llevás</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
                 Qué se despierta<br />en vos
               </h2>
             </div>
@@ -228,7 +228,7 @@ export default function SuscripcionesPage() {
           <RevealOnScroll>
             <div className="mb-14">
               <span className="font-sans text-[0.8rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Cada mes recibís</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 El contenido de<br />la membresía
               </h2>
             </div>
@@ -286,7 +286,7 @@ export default function SuscripcionesPage() {
         <div className="max-w-6xl mx-auto">
           <RevealOnScroll>
             <div className="text-center mb-12">
-              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
+              <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 Elegí tu plan
               </h2>
             </div>
@@ -351,7 +351,7 @@ export default function SuscripcionesPage() {
       <section className="bg-crema py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <RevealOnScroll>
-            <h2 className="font-display uppercase text-[clamp(2rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-12">
+            <h2 className="font-display uppercase text-[clamp(3rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-12">
               Preguntas frecuentes
             </h2>
           </RevealOnScroll>
@@ -384,7 +384,7 @@ export default function SuscripcionesPage() {
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <RevealOnScroll>
             <span className="font-display text-dorado/20 text-6xl block">✦</span>
-            <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
+            <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
               ¿Te sumás?
             </h2>
             <p className="font-sans text-crema/40 text-sm tracking-wide leading-relaxed max-w-sm mx-auto">

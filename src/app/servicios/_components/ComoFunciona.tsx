@@ -45,7 +45,7 @@ export default function ComoFunciona() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-12 sm:mb-14">
-          <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
+          <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
             Cómo funciona
           </h2>
         </div>
