@@ -53,6 +53,10 @@ export default function ShaderBackground({
 }: Props) {
   const colors = [...palettes[palette]];
 
+  // Limita la resolución de render: clave para que no lagee en PC con pantallas
+  // grandes / alto DPI. Como es un fondo difuminado, la menor resolución no se nota.
+  const perf = { maxPixelCount: 1280 * 720, minPixelRatio: 1 };
+
   return (
     <div
       className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
@@ -69,6 +73,7 @@ export default function ShaderBackground({
           proportion={0.5}
           softness={1}
           shapeScale={0.5}
+          {...perf}
           style={{ width: "100%", height: "100%" }}
         />
       ) : (
@@ -78,6 +83,7 @@ export default function ShaderBackground({
           distortion={distortion}
           swirl={swirl}
           grainOverlay={grain}
+          {...perf}
           style={{ width: "100%", height: "100%" }}
         />
       )}
