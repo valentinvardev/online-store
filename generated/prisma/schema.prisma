@@ -85,7 +85,6 @@ enum ItemType {
 
 model Product {
   id          String      @id @default(cuid())
-  slug        String      @unique
   name        String
   description String
   price       Float
@@ -94,7 +93,6 @@ model Product {
   badge       String?
   imageUrl    String?
   images      String[]
-  videoUrl    String?
   fileUrl     String?
   stock       Int?
   active      Boolean     @default(true)
@@ -115,8 +113,6 @@ model Course {
   durationWeeks Int?
   lessonsCount  Int?
   imageUrl      String?
-  images        String[]
-  videoUrl      String?
   active        Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -126,13 +122,12 @@ model Course {
 }
 
 model CourseModule {
-  id          String         @id @default(cuid())
-  courseId    String
-  course      Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  title       String
-  order       Int
-  attachments String[]
-  lessons     CourseLesson[]
+  id       String         @id @default(cuid())
+  courseId String
+  course   Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title    String
+  order    Int
+  lessons  CourseLesson[]
 }
 
 model CourseLesson {
@@ -149,17 +144,12 @@ model CourseLesson {
 
 model Service {
   id          String      @id @default(cuid())
-  slug        String      @unique
   name        String
   subtitle    String?
   description String
   price       Float
   duration    Int
   format      String      @default("Zoom")
-  imageUrl    String?
-  images      String[]
-  videoUrl    String?
-  attachments String[]
   active      Boolean     @default(true)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
