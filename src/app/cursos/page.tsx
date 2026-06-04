@@ -44,7 +44,7 @@ export default function CursosPage() {
               Aprendé a tu ritmo
             </span>
           </div>
-          <h1 className="font-display uppercase text-[clamp(3rem,8vw,5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
+          <h1 className="font-display uppercase text-[clamp(3rem,8vw,5rem)] text-crema leading-none tracking-wide">
             Tu lenguaje<br />sagrado
           </h1>
           <p className="font-sans italic text-crema/85 text-base mt-4 max-w-md leading-relaxed">

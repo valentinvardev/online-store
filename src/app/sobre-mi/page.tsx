@@ -100,7 +100,7 @@ export default function SobreMiPage() {
           <span className="font-sans text-[0.8rem] text-crema/85 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
             La historia detrás
           </span>
-          <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
+          <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6">
             Sobre<br />
             <span className="text-dorado">mí</span>
           </h1>
