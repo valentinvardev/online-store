@@ -27,7 +27,7 @@ export default function SobreMiSection() {
             Hola,<br />soy la Reina
           </h2>
 
-          <div className="space-y-4 sm:space-y-5 font-sans text-tierra/65 leading-relaxed tracking-wide text-sm sm:text-[15px] max-w-prose mx-auto lg:mx-0">
+          <div className="space-y-4 sm:space-y-5 font-sans text-tierra-dark/85 leading-relaxed tracking-wide text-[16px] sm:text-[17px] max-w-prose mx-auto lg:mx-0">
             <p>
               Empecé mi camino espiritual en el mismo lugar que muchas: confundida,
               buscando respuestas y con un mazo de tarot que no entendía del todo.
@@ -38,7 +38,7 @@ export default function SobreMiSection() {
               abandones el mundo. Te pide que lo habitás con más conciencia. Que te
               tomés un vino y también agradezcás.
             </p>
-            <p className="font-sans italic text-tierra text-base sm:text-lg lg:text-xl leading-snug">
+            <p className="font-sans italic font-medium text-tierra-dark text-lg sm:text-xl lg:text-2xl leading-snug">
               &ldquo;Ser sagrada y humana al mismo tiempo. Eso es lo que enseño.&rdquo;
             </p>
           </div>
