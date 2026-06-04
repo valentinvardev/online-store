@@ -28,17 +28,21 @@ const pillars = [
 export default function PropuestaSection() {
   return (
     <section className="bg-verde py-24 px-6 relative overflow-hidden">
-      {/* SVG waves flowing — ondas orgánicas de verde */}
+      {/* Conic spin — caleidoscopio circular de verdes que rota */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[75%] animate-wave-slow">
-          <path d="M0,200 C300,140 600,260 900,200 C1200,140 1500,260 1800,200 C2100,140 2400,260 2400,200 L2400,400 L0,400 Z" fill="#0f3d24" />
-        </svg>
-        <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[55%] animate-wave-medium">
-          <path d="M0,150 C400,80 800,220 1200,150 C1600,80 2000,220 2400,150 L2400,400 L0,400 Z" fill="#1a4d2e" />
-        </svg>
-        <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[35%] animate-wave-fast">
-          <path d="M0,100 C500,50 1000,150 1500,100 C2000,50 2400,150 2400,100 L2400,400 L0,400 Z" fill="#2d6a3e" />
-        </svg>
+        <div
+          className="absolute top-1/2 left-1/2 w-[200vmax] h-[200vmax] animate-conic-spin"
+          style={{
+            background: "conic-gradient(from 0deg at 50% 50%, #0f3d24 0deg, #3d7a47 60deg, #1a4d2e 120deg, #2d6a3e 180deg, #3d7a47 240deg, #0f3d24 300deg, #1a4d2e 360deg)",
+          }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 w-[180vmax] h-[180vmax] opacity-40 mix-blend-overlay animate-conic-spin-reverse"
+          style={{
+            background: "conic-gradient(from 45deg at 50% 50%, #1a4d2e 0deg, transparent 90deg, #2d6a3e 180deg, transparent 270deg, #1a4d2e 360deg)",
+          }}
+        />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 35%, rgba(15,61,36,0.55) 100%)" }} />
 
         {/* Estrellitas dispersas */}
         <span className="absolute top-[12%] right-[14%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>

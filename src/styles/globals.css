@@ -110,33 +110,21 @@
   50%       { transform: rotate(9deg); }
 }
 
-/* ── SVG waves flowing — ondas orgánicas que flotan lento ── */
-@keyframes wave-slide-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* ── Conic spin — caleidoscopio circular de verdes que rota ── */
+@keyframes conic-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
-@keyframes wave-slide-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+@keyframes conic-rotate-reverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to   { transform: translate(-50%, -50%) rotate(0deg); }
 }
-@keyframes wave-float {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50%       { transform: translateX(-25%) translateY(-8px); }
-}
-.animate-wave-slow {
-  animation: wave-slide-left 45s linear infinite;
+.animate-conic-spin {
+  animation: conic-rotate 55s linear infinite;
   will-change: transform;
 }
-.animate-wave-medium {
-  animation: wave-slide-right 32s linear infinite;
-  will-change: transform;
-}
-.animate-wave-fast {
-  animation: wave-slide-left 22s linear infinite;
-  will-change: transform;
-}
-.animate-wave-float {
-  animation: wave-float 38s ease-in-out infinite;
+.animate-conic-spin-reverse {
+  animation: conic-rotate-reverse 75s linear infinite;
   will-change: transform;
 }
 
