@@ -156,15 +156,9 @@ export default function Navbar() {
 
       </header>
 
-      {/* Mobile menu fullscreen overlay — fuera del header para evitar stacking context */}
-      <div
-        className={`md:hidden fixed inset-0 z-[100] transition-opacity duration-300 ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Capa de fondo */}
-        <div className="absolute inset-0 bg-verde" />
-
+      {/* Mobile menu fullscreen overlay — render condicional para evitar issues de stacking */}
+      {open && (
+      <div className="md:hidden fixed inset-0 z-[100] bg-verde flex flex-col">
         {/* Cerrar */}
         <button
           onClick={() => setOpen(false)}
@@ -175,18 +169,15 @@ export default function Navbar() {
         </button>
 
         {/* Contenido */}
-        <div className="relative z-10 h-full flex flex-col px-8 pt-20 pb-10">
+        <div className="h-full flex flex-col px-8 pt-20 pb-10">
           {/* Nav links grandes */}
           <nav className="flex-1 flex flex-col justify-center gap-5">
-            {links.map((link, i) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado tracking-wide leading-none flex items-center gap-3 group transition-[transform,opacity,color] duration-500 ${
-                  open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-                }`}
-                style={{ transitionDelay: open ? `${i * 80}ms` : "0ms" }}
+                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado tracking-wide leading-none flex items-center gap-3 group transition-colors"
               >
                 <span className="font-display text-dorado/80 group-hover:text-dorado text-2xl transition-colors">✦</span>
                 {link.label}
@@ -222,6 +213,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 }

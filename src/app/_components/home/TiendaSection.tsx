@@ -69,15 +69,15 @@ export default function TiendaSection() {
                   </div>
                 </div>
                 <div className="p-5 flex flex-col flex-1">
-                  <h3 className="font-sans font-semibold text-lg text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
+                  <h3 className="font-sans font-bold text-xl text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="font-sans text-[0.82rem] text-tierra/75 mb-5 leading-relaxed tracking-wide flex-1">
+                  <p className="font-sans text-[15px] text-tierra-dark/85 mb-5 leading-relaxed tracking-wide flex-1">
                     {product.desc}
                   </p>
                   <a
                     href="/tienda"
-                    className="inline-flex items-center gap-2 font-sans font-semibold text-[0.85rem] text-morado hover:text-morado-dark transition-colors tracking-wide group/link mt-auto"
+                    className="inline-flex items-center gap-2 font-sans font-semibold text-[14px] text-morado hover:text-morado-dark transition-colors tracking-wide group/link mt-auto"
                   >
                     Ver producto
                     <span className="transition-transform group-hover/link:translate-x-1">→</span>

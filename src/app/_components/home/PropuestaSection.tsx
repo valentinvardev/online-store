@@ -72,10 +72,10 @@ export default function PropuestaSection() {
                 <h3 className="font-sans font-bold uppercase text-2xl text-tierra-dark mb-3 group-hover:text-morado transition-colors duration-300 tracking-wide">
                   {p.title}
                 </h3>
-                <p className="font-sans text-tierra/75 text-sm leading-relaxed mb-7 tracking-wide">
+                <p className="font-sans text-tierra-dark/90 text-[16px] leading-relaxed mb-7 tracking-wide">
                   {p.desc}
                 </p>
-                <a href={p.href} className="inline-flex items-center gap-2 font-sans text-[13px] text-morado hover:text-morado-dark transition-colors tracking-widest uppercase group/link">
+                <a href={p.href} className="inline-flex items-center gap-2 font-sans font-semibold text-[14px] text-morado hover:text-morado-dark transition-colors tracking-widest uppercase group/link">
                   <span>{p.linkText}</span>
                   <span className="transition-transform group-hover/link:translate-x-1">→</span>
                 </a>
