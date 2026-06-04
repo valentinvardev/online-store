@@ -62,24 +62,25 @@ export default function TiendaSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {products.map((product, i) => (
             <RevealOnScroll key={product.id} direction="up" delay={100 * i}>
-              <article className="bg-white border-2 border-morado-dark overflow-hidden block-shadow cursor-pointer h-full group">
-                <div className={`h-52 bg-gradient-to-br ${product.gradient} relative flex items-center justify-center`}>
+              <article className="bg-white border-2 border-morado-dark overflow-hidden block-shadow cursor-pointer h-full group flex flex-col">
+                <div className={`h-52 bg-gradient-to-br ${product.gradient} relative flex items-center justify-center shrink-0`}>
                   <div className="w-14 h-14 bg-white/20 border-2 border-white/60 flex items-center justify-center">
                     <span className="text-white text-xl">✦</span>
                   </div>
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex flex-col flex-1">
                   <h3 className="font-sans font-semibold text-lg text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="font-sans text-[0.82rem] text-tierra/75 mb-4 leading-relaxed tracking-wide">
+                  <p className="font-sans text-[0.82rem] text-tierra/75 mb-5 leading-relaxed tracking-wide flex-1">
                     {product.desc}
                   </p>
                   <a
                     href="/tienda"
-                    className="block w-full text-center font-sans text-[0.8rem] px-4 py-2 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
+                    className="inline-flex items-center gap-2 font-sans font-semibold text-[0.85rem] text-morado hover:text-morado-dark transition-colors tracking-wide group/link mt-auto"
                   >
-                    Ver más →
+                    Ver producto
+                    <span className="transition-transform group-hover/link:translate-x-1">→</span>
                   </a>
                 </div>
               </article>
