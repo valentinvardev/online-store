@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, LogIn, LogOut, User, X } from "lucide-react";
@@ -17,10 +18,14 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { count, openCart } = useCart();
   const { data: session } = useSession();
 
-  // Body scroll lock cuando el menú fullscreen está abierto
+  // Portal solo en cliente
+  useEffect(() => { setMounted(true); }, []);
+
+  // Body scroll lock cuando el drawer está abierto
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -156,7 +161,8 @@ export default function Navbar() {
 
       </header>
 
-      {/* ── Drawer lateral mobile — se desliza desde la derecha ── */}
+      {/* ── Drawer lateral mobile (portal a body para escapar del page-transition) ── */}
+      {mounted && createPortal(
       <div
         className={`md:hidden fixed inset-0 z-[100] ${open ? "" : "pointer-events-none"}`}
         aria-hidden={!open}
@@ -232,7 +238,9 @@ export default function Navbar() {
             </Link>
           </div>
         </aside>
-      </div>
+      </div>,
+      document.body
+      )}
     </>
   );
 }
