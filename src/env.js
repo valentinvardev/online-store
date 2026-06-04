@@ -15,7 +15,6 @@ export const env = createEnv({
     SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
     MP_ACCESS_TOKEN: z.string().optional(),
     MP_WEBHOOK_SECRET: z.string().optional(),
-    NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -25,6 +24,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
     NEXT_PUBLIC_MP_PUBLIC_KEY: z.string().optional(),
+    NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
   },
 
   runtimeEnv: {
@@ -37,8 +37,8 @@ export const env = createEnv({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     MP_ACCESS_TOKEN: process.env.MP_ACCESS_TOKEN,
     MP_WEBHOOK_SECRET: process.env.MP_WEBHOOK_SECRET,
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_MP_PUBLIC_KEY: process.env.NEXT_PUBLIC_MP_PUBLIC_KEY,
     NODE_ENV: process.env.NODE_ENV,
