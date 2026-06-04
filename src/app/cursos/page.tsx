@@ -15,15 +15,12 @@ export default function CursosPage() {
       <CursosBanner />
 
       {/* Encabezado */}
-      <div className="bg-verde-light relative py-14 px-6 overflow-hidden">
-        {/* Mesh breathing — gradientes radiales que respiran */}
+      <div className="bg-verde relative py-14 px-6 overflow-hidden">
+        {/* Gradient flow — ondas de verde que se mueven lento */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-[10%] -left-[5%] w-[40rem] h-[40rem] animate-mesh" style={{ background: "radial-gradient(circle, rgba(15,61,36,0.7) 0%, transparent 60%)", animationDuration: "13s" }} />
-          <div className="absolute -top-[5%] -right-[10%] w-[42rem] h-[42rem] animate-mesh-alt" style={{ background: "radial-gradient(circle, rgba(26,77,46,0.65) 0%, transparent 60%)", animationDuration: "17s", animationDelay: "2s" }} />
-          <div className="absolute -bottom-[15%] left-[10%] w-[48rem] h-[48rem] animate-mesh" style={{ background: "radial-gradient(circle, rgba(61,122,71,0.7) 0%, transparent 60%)", animationDuration: "15s", animationDelay: "5s" }} />
-          <div className="absolute top-[30%] -right-[5%] w-[36rem] h-[36rem] animate-mesh-alt" style={{ background: "radial-gradient(circle, rgba(45,106,62,0.6) 0%, transparent 60%)", animationDuration: "19s", animationDelay: "7s" }} />
-          <div className="absolute top-[40%] left-[30%] w-[32rem] h-[32rem] animate-mesh" style={{ background: "radial-gradient(circle, rgba(15,61,36,0.55) 0%, transparent 60%)", animationDuration: "16s", animationDelay: "3s" }} />
-          <div className="absolute -bottom-[10%] -right-[15%] w-[40rem] h-[40rem] animate-mesh-alt" style={{ background: "radial-gradient(circle, rgba(61,122,71,0.6) 0%, transparent 60%)", animationDuration: "14s", animationDelay: "6s" }} />
+          <div className="absolute inset-0 animate-gradient-flow" style={{ background: "linear-gradient(135deg, #1a4d2e 0%, #3d7a47 22%, #2d6a3e 44%, #0f3d24 66%, #3d7a47 88%, #1a4d2e 100%)" }} />
+          <div className="absolute inset-0 opacity-60 mix-blend-overlay animate-gradient-flow-vertical" style={{ background: "linear-gradient(180deg, rgba(15,61,36,0.5) 0%, transparent 35%, rgba(61,122,71,0.4) 70%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(15,61,36,0.5) 100%)" }} />
 
           {/* Estrellitas dispersas */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
