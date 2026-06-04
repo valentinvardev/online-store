@@ -72,10 +72,10 @@ export default function CursosCatalog() {
         }`}
       >
         <span className="text-[0.75rem]">{icon}</span>
-        <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold flex-1">
+        <span className="font-sans text-[0.8rem] tracking-widest uppercase font-semibold flex-1">
           {label}
         </span>
-        <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full ${
+        <span className={`font-sans text-[0.75rem] font-bold px-1.5 py-0.5 rounded-full ${
           opts?.isTrigger || isActive ? "bg-morado/15 text-morado" : "bg-morado/10 text-tierra/60"
         }`}>
           {count}
@@ -94,12 +94,12 @@ export default function CursosCatalog() {
       {/* Filtros sticky */}
       <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
-          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
+          <p className="font-sans text-[0.8rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por nivel
           </p>
 
-          {/* Mobile: dropdown estilo lista */}
-          <div ref={dropdownRef} className="sm:hidden relative">
+          {/* Dropdown estilo lista — siempre visible */}
+          <div ref={dropdownRef} className="relative max-w-xs">
             {renderListItem(activeLevel, {
               onClick: () => setDropdownOpen(!dropdownOpen),
               withChevron: true,
@@ -117,35 +117,6 @@ export default function CursosCatalog() {
                 ))}
               </ul>
             )}
-          </div>
-
-          {/* Desktop: pills horizontales sin wrap */}
-          <div className="hidden sm:flex items-center gap-3 lg:gap-5 overflow-x-auto -mx-1 px-1">
-            {levels.map(({ value, label, icon, color, activeColor }) => {
-              const isActive = active === value;
-              const count = countFor(value);
-              return (
-                <button
-                  key={value}
-                  onClick={() => setActive(value)}
-                  className={`group shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 border-2 rounded-full transition-all duration-200 ${
-                    isActive ? activeColor : `bg-transparent ${color}`
-                  }`}
-                >
-                  <span className={`text-[0.7rem] transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"}`}>
-                    {icon}
-                  </span>
-                  <span className="font-sans text-[0.65rem] tracking-widest uppercase font-semibold whitespace-nowrap">
-                    {label}
-                  </span>
-                  <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isActive ? "bg-white/20 text-inherit" : "bg-morado/8 text-tierra/65"
-                  }`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
           </div>
         </div>
       </div>
@@ -169,7 +140,7 @@ export default function CursosCatalog() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                    <span className="font-sans text-[0.55rem] text-crema/20 tracking-[0.3em] uppercase">
+                    <span className="font-sans text-[0.75rem] text-crema/20 tracking-[0.3em] uppercase">
                       Portada del curso
                     </span>
                     <div className="w-8 h-px bg-crema/10" />
@@ -178,13 +149,13 @@ export default function CursosCatalog() {
                 )}
 
                 {/* Nivel */}
-                <span className={`absolute top-3 left-3 font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
+                <span className={`absolute top-3 left-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
                   {curso.level}
                 </span>
 
                 {/* Badge */}
                 {curso.badge && (
-                  <span className={`absolute top-3 right-3 font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
+                  <span className={`absolute top-3 right-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
                     {curso.badge}
                   </span>
                 )}
@@ -203,15 +174,15 @@ export default function CursosCatalog() {
                 {/* Includes */}
                 <ul className="space-y-1.5 mb-5 border-t border-morado/10 pt-5">
                   {curso.includes.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 font-sans text-[0.7rem] text-tierra/75 tracking-wide">
-                      <span className="text-dorado text-[0.55rem] shrink-0">✦</span>
+                    <li key={i} className="flex items-center gap-2 font-sans text-[0.8rem] text-tierra/75 tracking-wide">
+                      <span className="text-dorado text-[0.75rem] shrink-0">✦</span>
                       {item}
                     </li>
                   ))}
                 </ul>
 
                 {/* Meta */}
-                <div className="flex gap-5 font-sans text-xs text-tierra/60 mb-6 tracking-wide">
+                <div className="flex gap-5 font-sans text-[13px] text-tierra/60 mb-6 tracking-wide">
                   <span className="flex items-center gap-1.5">
                     <Clock size={12} strokeWidth={1.5} />
                     {curso.duration}
@@ -231,10 +202,10 @@ export default function CursosCatalog() {
                   <div className="flex items-baseline gap-2">
                     <span className="font-sans font-bold text-3xl text-morado">{curso.price}</span>
                     {curso.priceOld && (
-                      <span className="font-sans text-xs text-tierra/60 line-through">{curso.priceOld}</span>
+                      <span className="font-sans text-[13px] text-tierra/60 line-through">{curso.priceOld}</span>
                     )}
                   </div>
-                  <span className="font-sans font-semibold text-[0.65rem] px-5 py-2.5 bg-dorado text-tierra-dark border-2 border-morado-dark group-hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap">
+                  <span className="font-sans font-semibold text-[0.75rem] px-5 py-2.5 bg-dorado text-tierra-dark border-2 border-morado-dark group-hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap">
                     Ver curso →
                   </span>
                 </div>

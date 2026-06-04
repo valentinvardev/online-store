@@ -6,7 +6,7 @@ import { X, Plus, Minus, ShoppingBag, Trash2, ArrowLeft, User, Mail, Phone } fro
 import { useCart, type BuyerInfo, type LastOrder } from "./CartContext";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-3 py-2.5 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
-const labelClass = "block font-sans text-[0.58rem] text-tierra/70 tracking-widest uppercase mb-1";
+const labelClass = "block font-sans text-[0.78rem] text-tierra/70 tracking-widest uppercase mb-1";
 
 type Step = "cart" | "checkout";
 
@@ -63,7 +63,7 @@ export default function CartDrawer() {
               {step === "cart" ? "Tu carrito" : "Tus datos"}
             </span>
             {step === "cart" && count > 0 && (
-              <span className="bg-dorado text-tierra-dark font-sans font-bold text-[0.65rem] w-5 h-5 flex items-center justify-center">
+              <span className="bg-dorado text-tierra-dark font-sans font-bold text-[0.75rem] w-5 h-5 flex items-center justify-center">
                 {count}
               </span>
             )}
@@ -81,7 +81,7 @@ export default function CartDrawer() {
                 <div className="flex flex-col items-center justify-center h-full gap-5 text-center">
                   <span className="font-display text-6xl text-morado/10">✦</span>
                   <p className="font-sans text-tierra/65 text-sm tracking-wide">Tu carrito está vacío</p>
-                  <button onClick={handleClose} className="font-sans text-xs text-morado/50 hover:text-morado transition-colors tracking-widest uppercase">
+                  <button onClick={handleClose} className="font-sans text-[13px] text-morado/50 hover:text-morado transition-colors tracking-widest uppercase">
                     Seguir viendo →
                   </button>
                 </div>
@@ -94,13 +94,13 @@ export default function CartDrawer() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-sans font-semibold text-sm text-tierra-dark leading-snug truncate">{item.name}</p>
-                        <p className="font-sans text-[0.6rem] text-tierra/65 tracking-widest uppercase mt-0.5 mb-3">{item.category}</p>
+                        <p className="font-sans text-[0.8rem] text-tierra/65 tracking-widest uppercase mt-0.5 mb-3">{item.category}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center border-2 border-morado/15">
                             <button onClick={() => updateQty(item.id, item.quantity - 1)} className="w-7 h-7 flex items-center justify-center text-morado/40 hover:text-morado hover:bg-morado/5 transition-colors">
                               <Minus size={11} strokeWidth={2} />
                             </button>
-                            <span className="w-7 h-7 flex items-center justify-center font-sans text-xs text-tierra-dark font-semibold border-x-2 border-morado/15">
+                            <span className="w-7 h-7 flex items-center justify-center font-sans text-[13px] text-tierra-dark font-semibold border-x-2 border-morado/15">
                               {item.quantity}
                             </span>
                             <button onClick={() => updateQty(item.id, item.quantity + 1)} className="w-7 h-7 flex items-center justify-center text-morado/40 hover:text-morado hover:bg-morado/5 transition-colors">
@@ -127,11 +127,11 @@ export default function CartDrawer() {
                 </div>
                 <button
                   onClick={() => setStep("checkout")}
-                  className="w-full bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+                  className="w-full bg-dorado text-tierra-dark font-sans font-bold text-[13px] py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
                 >
                   Finalizar compra
                 </button>
-                <button onClick={handleClose} className="w-full font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1">
+                <button onClick={handleClose} className="w-full font-sans text-[13px] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1">
                   Seguir comprando
                 </button>
               </div>
@@ -148,12 +148,12 @@ export default function CartDrawer() {
               <div className="bg-white border-2 border-morado/10 p-4 space-y-2">
                 {items.map((item) => (
                   <div key={item.id} className="flex items-center justify-between gap-2">
-                    <span className="font-sans text-xs text-tierra/60 truncate flex-1">{item.name} ×{item.quantity}</span>
-                    <span className="font-sans text-xs font-semibold text-tierra-dark shrink-0">${(item.price * item.quantity).toFixed(0)}</span>
+                    <span className="font-sans text-[13px] text-tierra/60 truncate flex-1">{item.name} ×{item.quantity}</span>
+                    <span className="font-sans text-[13px] font-semibold text-tierra-dark shrink-0">${(item.price * item.quantity).toFixed(0)}</span>
                   </div>
                 ))}
                 <div className="flex items-center justify-between border-t border-morado/10 pt-2 mt-2">
-                  <span className="font-sans text-[0.65rem] text-tierra/65 tracking-widest uppercase">Total</span>
+                  <span className="font-sans text-[0.75rem] text-tierra/65 tracking-widest uppercase">Total</span>
                   <span className="font-sans font-bold text-base text-morado">${total.toFixed(0)}</span>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function CartDrawer() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-1">
                   <User size={13} className="text-morado/50" strokeWidth={1.5} />
-                  <p className="font-sans text-[0.62rem] text-tierra/65 tracking-widest uppercase">Información de contacto</p>
+                  <p className="font-sans text-[0.82rem] text-tierra/65 tracking-widest uppercase">Información de contacto</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -201,7 +201,7 @@ export default function CartDrawer() {
                     onChange={(e) => set("email", e.target.value)}
                     required
                   />
-                  <p className="font-sans text-[0.58rem] text-tierra/30 tracking-wide mt-1">
+                  <p className="font-sans text-[0.78rem] text-tierra/30 tracking-wide mt-1">
                     Vamos a enviarte los detalles de tu pedido a este email.
                   </p>
                 </div>
@@ -227,14 +227,14 @@ export default function CartDrawer() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-dorado text-tierra-dark font-sans font-bold text-[13px] py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {submitting ? "Procesando..." : "Confirmar compra ✦"}
               </button>
               <button
                 type="button"
                 onClick={() => setStep("cart")}
-                className="w-full font-sans text-xs text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1"
+                className="w-full font-sans text-[13px] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase py-1"
               >
                 ← Volver al carrito
               </button>

@@ -13,12 +13,12 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
     <div>
       {/* Encabezado resumen */}
       <div className="flex items-center justify-between mb-4">
-        <p className="font-sans text-[0.6rem] text-tierra/60 tracking-[0.3em] uppercase">
+        <p className="font-sans text-[0.8rem] text-tierra/60 tracking-[0.3em] uppercase">
           {modules.length} módulos · {totalLessons} clases
         </p>
         <button
           onClick={() => setOpen(open === null ? 0 : null)}
-          className="font-sans text-[0.6rem] text-morado hover:text-morado-dark tracking-widest uppercase transition-colors"
+          className="font-sans text-[0.8rem] text-morado hover:text-morado-dark tracking-widest uppercase transition-colors"
         >
           {open === null ? "Expandir todo" : "Colapsar"}
         </button>
@@ -55,7 +55,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
                     >
                       {modulo.title}
                     </p>
-                    <p className="font-sans text-[0.62rem] text-tierra/60 tracking-wide mt-0.5">
+                    <p className="font-sans text-[0.82rem] text-tierra/60 tracking-wide mt-0.5">
                       {modulo.lessons.length} clase{modulo.lessons.length !== 1 ? "s" : ""}
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
                       </div>
 
                       {/* Número */}
-                      <span className="font-sans text-[0.58rem] text-tierra/25 w-5 shrink-0 tabular-nums">
+                      <span className="font-sans text-[0.78rem] text-tierra/25 w-5 shrink-0 tabular-nums">
                         {j + 1}
                       </span>
 
@@ -102,7 +102,7 @@ export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
 
                       {/* Preview label en la primera clase */}
                       {j === 0 && i === 0 && (
-                        <span className="ml-auto font-sans text-[0.55rem] text-verde tracking-widest uppercase border border-verde/25 px-2 py-0.5 shrink-0">
+                        <span className="ml-auto font-sans text-[0.75rem] text-verde tracking-widest uppercase border border-verde/25 px-2 py-0.5 shrink-0">
                           Preview
                         </span>
                       )}

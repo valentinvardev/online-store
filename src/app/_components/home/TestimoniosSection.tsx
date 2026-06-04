@@ -67,8 +67,8 @@ export default function TestimoniosSection() {
                   "{t.texto}"
                 </blockquote>
                 <figcaption>
-                  <p className="font-sans font-semibold text-tierra-dark text-xs tracking-widest uppercase">{t.nombre}</p>
-                  <p className="font-sans text-morado/60 text-xs mt-0.5 tracking-wide">{t.servicio}</p>
+                  <p className="font-sans font-semibold text-tierra-dark text-[13px] tracking-widest uppercase">{t.nombre}</p>
+                  <p className="font-sans text-morado/60 text-[13px] mt-0.5 tracking-wide">{t.servicio}</p>
                 </figcaption>
               </figure>
             </RevealOnScroll>

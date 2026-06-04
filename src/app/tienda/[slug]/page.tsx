@@ -47,7 +47,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
 
       {/* Barra breadcrumb */}
       <div className="bg-crema border-b border-morado/8">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 font-sans text-[0.6rem] text-tierra/60 tracking-widest uppercase">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 font-sans text-[0.8rem] text-tierra/60 tracking-widest uppercase">
           <Link href="/tienda" className="hover:text-morado transition-colors flex items-center gap-1.5">
             <ArrowLeft size={11} /> Tienda
           </Link>
@@ -74,13 +74,13 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   <div className="w-20 h-20 bg-white/20 border-2 border-white/40 flex items-center justify-center backdrop-blur-sm">
                     <span className="text-white text-3xl">✦</span>
                   </div>
-                  <p className="font-sans text-[0.55rem] text-white/40 tracking-[0.35em] uppercase">
+                  <p className="font-sans text-[0.75rem] text-white/40 tracking-[0.35em] uppercase">
                     {producto.category}
                   </p>
                 </div>
                 {/* Badge */}
                 {producto.badge && (
-                  <span className={`absolute top-4 left-4 font-sans text-[0.6rem] px-3 py-1.5 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
+                  <span className={`absolute top-4 left-4 font-sans text-[0.8rem] px-3 py-1.5 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
                     {producto.badge}
                   </span>
                 )}
@@ -102,12 +102,12 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
             <div className="space-y-6">
               {/* Chips */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className={`flex items-center gap-1.5 font-sans text-[0.6rem] px-2.5 py-1 border tracking-widest uppercase ${categoryColors[producto.category]}`}>
+                <span className={`flex items-center gap-1.5 font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${categoryColors[producto.category]}`}>
                   {categoryIcons[producto.category]}
                   {producto.category}
                 </span>
                 {producto.badge && producto.badge !== "Agotado" && (
-                  <span className={`font-sans text-[0.6rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
+                  <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
                     {producto.badge}
                   </span>
                 )}
@@ -130,7 +130,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   <span className="font-sans text-base text-tierra/30 line-through">{producto.priceOld}</span>
                 )}
                 {producto.priceOld && (
-                  <span className="font-sans text-[0.6rem] text-rosa tracking-widest uppercase border border-rosa/30 px-2 py-1">
+                  <span className="font-sans text-[0.8rem] text-rosa tracking-widest uppercase border border-rosa/30 px-2 py-1">
                     Oferta
                   </span>
                 )}
@@ -159,14 +159,14 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                     priceLabel: producto.price,
                     gradient: producto.gradient,
                   })}
-                  className="w-full flex items-center justify-center gap-2.5 bg-morado-dark text-crema font-sans font-semibold text-[0.7rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2.5 bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <ShoppingBag size={15} strokeWidth={1.8} />
                   {isAgotado ? "Agotado" : "Agregar al carrito"}
                 </button>
                 <Link
                   href="/tienda"
-                  className="block w-full text-center font-sans text-[0.65rem] py-3 tracking-widest uppercase border-2 border-morado/15 text-tierra/65 hover:border-morado/40 hover:text-tierra transition-colors"
+                  className="block w-full text-center font-sans text-[0.75rem] py-3 tracking-widest uppercase border-2 border-morado/15 text-tierra/65 hover:border-morado/40 hover:text-tierra transition-colors"
                 >
                   Seguir comprando
                 </Link>
@@ -176,7 +176,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
               <div className="border-t border-morado/10 pt-5 space-y-3">
                 {producto.details.map(({ label, value }) => (
                   <div key={label} className="flex items-center justify-between">
-                    <span className="font-sans text-[0.65rem] text-tierra/65 tracking-widest uppercase">{label}</span>
+                    <span className="font-sans text-[0.75rem] text-tierra/65 tracking-widest uppercase">{label}</span>
                     <span className="font-sans text-sm text-tierra-dark font-medium">{value}</span>
                   </div>
                 ))}
@@ -228,7 +228,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                 priceLabel: producto.price,
                 gradient: producto.gradient,
               })}
-              className="w-full mt-4 flex items-center justify-center gap-2.5 bg-dorado text-tierra-dark font-sans font-semibold text-[0.7rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full mt-4 flex items-center justify-center gap-2.5 bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <ShoppingBag size={15} strokeWidth={1.8} />
               {isAgotado ? "Agotado" : `Agregar — ${producto.price}`}
@@ -254,17 +254,17 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   <div className={`h-40 bg-gradient-to-br ${p.gradient} flex items-center justify-center relative`}>
                     <span className="text-white/40 text-3xl">✦</span>
                     {p.badge && (
-                      <span className={`absolute top-3 left-3 font-sans text-[0.55rem] px-2 py-1 border tracking-widest uppercase ${badgeStyles[p.badge]}`}>
+                      <span className={`absolute top-3 left-3 font-sans text-[0.75rem] px-2 py-1 border tracking-widest uppercase ${badgeStyles[p.badge]}`}>
                         {p.badge}
                       </span>
                     )}
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <h3 className="font-sans font-semibold text-sm text-tierra-dark group-hover:text-morado transition-colors mb-1">{p.name}</h3>
-                    <p className="font-sans text-[0.68rem] text-tierra/70 leading-relaxed flex-1 mb-4">{p.desc}</p>
+                    <p className="font-sans text-[0.78rem] text-tierra/70 leading-relaxed flex-1 mb-4">{p.desc}</p>
                     <div className="flex items-center justify-between">
                       <span className="font-display text-2xl text-morado">{p.price}</span>
-                      <span className="font-sans text-[0.62rem] text-morado border border-morado/30 px-3 py-1.5 tracking-widest uppercase group-hover:bg-morado group-hover:text-crema transition-colors">
+                      <span className="font-sans text-[0.82rem] text-morado border border-morado/30 px-3 py-1.5 tracking-widest uppercase group-hover:bg-morado group-hover:text-crema transition-colors">
                         Ver →
                       </span>
                     </div>

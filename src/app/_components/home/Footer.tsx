@@ -91,7 +91,7 @@ export default function Footer() {
             </p>
             {/* Redes */}
             <div>
-              <p className="font-sans text-[0.58rem] text-crema/60 tracking-[0.3em] uppercase mb-3">Seguime</p>
+              <p className="font-sans text-[0.78rem] text-crema/60 tracking-[0.3em] uppercase mb-3">Seguime</p>
               <div className="flex flex-wrap gap-2">
                 {socials.map(({ label, Icon, href, color }) => (
                   <a
@@ -101,7 +101,7 @@ export default function Footer() {
                     className={`flex items-center gap-2 border border-crema/30 text-crema/75 px-3.5 py-2.5 transition-colors ${color}`}
                   >
                     <Icon />
-                    <span className="font-sans text-[0.6rem] tracking-widest uppercase">{label}</span>
+                    <span className="font-sans text-[0.8rem] tracking-widest uppercase">{label}</span>
                   </a>
                 ))}
               </div>
@@ -110,14 +110,14 @@ export default function Footer() {
 
           {/* Navegar */}
           <div>
-            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
+            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.8rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
               Navegar
             </h4>
             <ul className="space-y-3.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="group flex items-center gap-2 font-sans text-xs text-crema/75 hover:text-dorado transition-colors tracking-wide">
-                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.5rem] transition-colors">✦</span>
+                  <Link href={link.href} className="group flex items-center gap-2 font-sans text-[13px] text-crema/75 hover:text-dorado transition-colors tracking-wide">
+                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.8rem] transition-colors">✦</span>
                     {link.label}
                   </Link>
                 </li>
@@ -127,14 +127,14 @@ export default function Footer() {
 
           {/* Servicios */}
           <div>
-            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
+            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.8rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
               Servicios
             </h4>
             <ul className="space-y-3.5">
               {servicios.map((s) => (
                 <li key={s}>
-                  <Link href="/servicios" className="group flex items-center gap-2 font-sans text-xs text-crema/75 hover:text-dorado transition-colors tracking-wide">
-                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.5rem] transition-colors">✦</span>
+                  <Link href="/servicios" className="group flex items-center gap-2 font-sans text-[13px] text-crema/75 hover:text-dorado transition-colors tracking-wide">
+                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.8rem] transition-colors">✦</span>
                     {s}
                   </Link>
                 </li>
@@ -144,19 +144,19 @@ export default function Footer() {
 
           {/* Contacto */}
           <div>
-            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.6rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
+            <h4 className="font-sans font-semibold uppercase text-crema/80 text-[0.8rem] tracking-[0.35em] mb-6 pb-3 border-b border-crema/20">
               Contacto
             </h4>
             <div className="space-y-4">
               <a
                 href="mailto:hola@lareinadebastos.com"
-                className="block font-sans text-xs text-crema/75 hover:text-dorado transition-colors tracking-wide"
+                className="block font-sans text-[13px] text-crema/75 hover:text-dorado transition-colors tracking-wide"
               >
                 hola@lareinadebastos.com
               </a>
               <Link
                 href="/sobre-mi"
-                className="inline-flex items-center gap-2 font-sans text-[0.62rem] text-crema/75 hover:text-dorado border border-crema/25 hover:border-dorado/40 px-4 py-2.5 tracking-widest uppercase transition-colors"
+                className="inline-flex items-center gap-2 font-sans text-[0.82rem] text-crema/75 hover:text-dorado border border-crema/25 hover:border-dorado/40 px-4 py-2.5 tracking-widest uppercase transition-colors"
               >
                 ✦ Mi historia
               </Link>
@@ -168,10 +168,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-crema/20 px-6 py-5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="font-sans text-[0.6rem] text-crema/55 tracking-wide">
+          <p className="font-sans text-[0.8rem] text-crema/55 tracking-wide">
             © 2025 La Reina de Bastos — Todos los derechos reservados.
           </p>
-          <p className="font-sans text-[0.6rem] text-crema/55 tracking-wide italic">
+          <p className="font-sans text-[0.8rem] text-crema/55 tracking-wide italic">
             Hecho con amor, intuición y un poco de vino
           </p>
         </div>

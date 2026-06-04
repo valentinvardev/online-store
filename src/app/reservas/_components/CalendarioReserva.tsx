@@ -92,7 +92,7 @@ export default function CalendarioReserva({ fecha, hora, onFecha, onHora }: Prop
         {/* Días de la semana */}
         <div className="grid grid-cols-7 border-b border-morado/10">
           {DIAS_SEMANA.map((d) => (
-            <div key={d} className="py-2 text-center font-sans text-[0.55rem] text-tierra/60 tracking-widest uppercase">
+            <div key={d} className="py-2 text-center font-sans text-[0.75rem] text-tierra/60 tracking-widest uppercase">
               {d}
             </div>
           ))}
@@ -143,13 +143,13 @@ export default function CalendarioReserva({ fecha, hora, onFecha, onHora }: Prop
 
         {/* Leyenda */}
         <div className="flex items-center gap-5 px-5 py-3 border-t border-morado/8 bg-crema-dark">
-          <span className="flex items-center gap-1.5 font-sans text-[0.55rem] text-tierra/65 tracking-wide">
+          <span className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 tracking-wide">
             <span className="w-3 h-3 border border-morado inline-block" /> Hoy
           </span>
-          <span className="flex items-center gap-1.5 font-sans text-[0.55rem] text-tierra/65 tracking-wide">
+          <span className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 tracking-wide">
             <span className="w-3 h-3 bg-dorado inline-block" /> Seleccionado
           </span>
-          <span className="flex items-center gap-1.5 font-sans text-[0.55rem] text-tierra/30 tracking-wide">
+          <span className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/30 tracking-wide">
             <span className="w-3 h-3 bg-tierra/10 inline-block" /> No disponible
           </span>
         </div>
@@ -158,7 +158,7 @@ export default function CalendarioReserva({ fecha, hora, onFecha, onHora }: Prop
       {/* ── Selector de hora (aparece al elegir fecha) ── */}
       {fecha && (
         <div className="reminder-in">
-          <p className="font-sans text-[0.6rem] text-tierra/65 tracking-[0.3em] uppercase mb-3">
+          <p className="font-sans text-[0.8rem] text-tierra/65 tracking-[0.3em] uppercase mb-3">
             Horario para el {fmtSelected}
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
@@ -166,7 +166,7 @@ export default function CalendarioReserva({ fecha, hora, onFecha, onHora }: Prop
               <button
                 key={h}
                 onClick={() => onHora(h)}
-                className={`py-2.5 font-sans text-[0.65rem] border-2 tracking-widest uppercase transition-all ${
+                className={`py-2.5 font-sans text-[0.75rem] border-2 tracking-widest uppercase transition-all ${
                   hora === h
                     ? "bg-morado-dark text-crema border-morado-dark font-semibold"
                     : "border-morado/15 text-tierra/80 hover:border-morado/50 hover:text-tierra-dark"

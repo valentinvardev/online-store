@@ -26,8 +26,8 @@ function ReseñaCard({ r }: { r: typeof reseñas[0] }) {
           <span className="font-display text-crema text-sm leading-none">{r.inicial}</span>
         </div>
         <div>
-          <p className="font-sans font-semibold text-crema text-xs tracking-wide">{r.nombre}</p>
-          <p className="font-sans text-[0.58rem] text-crema/40 tracking-widest uppercase">{r.curso}</p>
+          <p className="font-sans font-semibold text-crema text-[13px] tracking-wide">{r.nombre}</p>
+          <p className="font-sans text-[0.78rem] text-crema/40 tracking-widest uppercase">{r.curso}</p>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@ export default function ReseñasScroll() {
       />
 
       <div className="max-w-7xl mx-auto px-6 mb-8">
-        <span className="font-sans text-[0.58rem] text-crema/30 tracking-[0.4em] uppercase">
+        <span className="font-sans text-[0.78rem] text-crema/30 tracking-[0.4em] uppercase">
           Lo que dicen nuestras alumnas
         </span>
       </div>

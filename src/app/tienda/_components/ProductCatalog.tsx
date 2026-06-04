@@ -71,10 +71,10 @@ export default function ProductCatalog() {
         }`}
       >
         <span className="text-[0.75rem]">{icon}</span>
-        <span className="font-sans text-[0.7rem] tracking-widest uppercase font-semibold flex-1">
+        <span className="font-sans text-[0.8rem] tracking-widest uppercase font-semibold flex-1">
           {label}
         </span>
-        <span className={`font-sans text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full ${
+        <span className={`font-sans text-[0.75rem] font-bold px-1.5 py-0.5 rounded-full ${
           opts?.isTrigger || isActive ? "bg-morado/15 text-morado" : "bg-morado/10 text-tierra/60"
         }`}>
           {count}
@@ -91,7 +91,7 @@ export default function ProductCatalog() {
       {/* Filtros sticky */}
       <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
-          <p className="font-sans text-[0.6rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
+          <p className="font-sans text-[0.8rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por categoría
           </p>
 
@@ -133,11 +133,11 @@ export default function ProductCatalog() {
                   <span className="text-white text-xl">✦</span>
                 </div>
                 {product.badge && (
-                  <span className={`absolute top-3 left-3 font-sans text-[0.58rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[product.badge]}`}>
+                  <span className={`absolute top-3 left-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[product.badge]}`}>
                     {product.badge}
                   </span>
                 )}
-                <span className="absolute top-3 right-3 font-sans text-[0.55rem] text-white/50 tracking-[0.3em] uppercase bg-black/20 px-2 py-1">
+                <span className="absolute top-3 right-3 font-sans text-[0.75rem] text-white/50 tracking-[0.3em] uppercase bg-black/20 px-2 py-1">
                   {product.category}
                 </span>
               </div>
@@ -147,14 +147,14 @@ export default function ProductCatalog() {
                 <h3 className="font-sans font-semibold text-base text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                   {product.name}
                 </h3>
-                <p className="font-sans text-[0.72rem] text-tierra/75 mb-5 leading-relaxed tracking-wide flex-1">
+                <p className="font-sans text-[0.82rem] text-tierra/75 mb-5 leading-relaxed tracking-wide flex-1">
                   {product.desc}
                 </p>
                 <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-baseline gap-2">
                     <span className="font-sans font-bold text-2xl text-morado">{product.price}</span>
                     {product.priceOld && (
-                      <span className="font-sans text-xs text-tierra/60 line-through">{product.priceOld}</span>
+                      <span className="font-sans text-[13px] text-tierra/60 line-through">{product.priceOld}</span>
                     )}
                   </div>
                   <button
@@ -171,7 +171,7 @@ export default function ProductCatalog() {
                         gradient: product.gradient,
                       });
                     }}
-                    className="font-sans text-[0.65rem] px-4 py-2.5 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="font-sans text-[0.75rem] px-4 py-2.5 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {product.badge === "Agotado" ? "Agotado" : "Agregar"}
                   </button>

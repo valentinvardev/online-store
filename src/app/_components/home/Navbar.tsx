@@ -42,7 +42,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-sans font-extrabold text-morado/60 hover:text-morado transition-colors text-xs tracking-[0.2em] uppercase"
+                className="font-sans font-extrabold text-morado/60 hover:text-morado transition-colors text-[13px] tracking-[0.2em] uppercase"
               >
                 {link.label}
               </Link>
@@ -61,7 +61,7 @@ export default function Navbar() {
           >
             <ShoppingBag size={18} strokeWidth={1.5} className="text-morado" />
             {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.8rem] w-4 h-4 flex items-center justify-center">
                 {count}
               </span>
             )}
@@ -85,7 +85,7 @@ export default function Navbar() {
               )}
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase"
+                className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase"
                 aria-label="Cerrar sesión"
               >
                 <LogOut size={13} strokeWidth={1.5} className="text-verde-light" />
@@ -95,7 +95,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-2 font-sans font-semibold text-[0.65rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase"
+              className="flex items-center gap-2 font-sans font-semibold text-[0.75rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase"
             >
               <LogIn size={14} strokeWidth={1.8} className="text-morado" />
               Entrar
@@ -108,7 +108,7 @@ export default function Navbar() {
           {/* CTA Reservar */}
           <Link
             href="/reservas"
-            className="bg-morado text-crema font-sans font-semibold text-[0.65rem] px-6 py-2.5 border-2 border-morado hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
+            className="bg-morado text-crema font-sans font-semibold text-[0.75rem] px-6 py-2.5 border-2 border-morado hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
           >
             ✦ Reservar
           </Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
           >
             <ShoppingBag size={18} strokeWidth={1.5} className="text-morado" />
             {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.5rem] w-4 h-4 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.8rem] w-4 h-4 flex items-center justify-center">
                 {count}
               </span>
             )}
@@ -151,10 +151,10 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="flex items-center gap-2 font-sans font-extrabold text-morado/55 hover:text-morado transition-colors text-xs tracking-[0.2em] uppercase py-2.5 border-b border-morado/6 last:border-0"
+                  className="flex items-center gap-2 font-sans font-extrabold text-morado/55 hover:text-morado transition-colors text-[13px] tracking-[0.2em] uppercase py-2.5 border-b border-morado/6 last:border-0"
                   onClick={() => setOpen(false)}
                 >
-                  <span className="text-dorado/40 text-[0.5rem]">✦</span>
+                  <span className="text-dorado/40 text-[0.8rem]">✦</span>
                   {link.label}
                 </Link>
               </li>
@@ -164,14 +164,14 @@ export default function Navbar() {
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="flex items-center gap-1.5 font-sans text-[0.65rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
+                className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
               >
                 <LogOut size={13} strokeWidth={1.5} className="text-verde-light" /> Salir
               </button>
             ) : (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 font-sans font-semibold text-[0.65rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
+                className="flex items-center gap-1.5 font-sans font-semibold text-[0.75rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
                 onClick={() => setOpen(false)}
               >
                 <LogIn size={13} strokeWidth={1.8} className="text-morado" /> Entrar
@@ -179,7 +179,7 @@ export default function Navbar() {
             )}
             <Link
               href="/reservas"
-              className="flex-1 text-center bg-morado text-crema font-sans font-semibold text-[0.65rem] py-2.5 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors"
+              className="flex-1 text-center bg-morado text-crema font-sans font-semibold text-[0.75rem] py-2.5 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors"
               onClick={() => setOpen(false)}
             >
               ✦ Reservar

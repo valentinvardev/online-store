@@ -23,13 +23,13 @@ export default function PagoExitoPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/tienda"
-              className="font-sans font-semibold text-xs px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+              className="font-sans font-semibold text-[13px] px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
             >
               Seguir comprando
             </Link>
             <Link
               href="/"
-              className="font-sans font-semibold text-xs px-8 py-4 border-2 border-morado text-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
+              className="font-sans font-semibold text-[13px] px-8 py-4 border-2 border-morado text-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
             >
               Volver al inicio
             </Link>

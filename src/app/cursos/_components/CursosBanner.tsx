@@ -11,8 +11,8 @@ export default function CursosBanner() {
         {items.map((item, i) => (
           <div key={i} className="flex items-center">
             <div className="flex items-center gap-2.5">
-              <span className="text-dorado text-[0.6rem]">{item.icon}</span>
-              <span className="font-sans text-[0.68rem] text-crema/75 tracking-widest uppercase whitespace-nowrap">
+              <span className="text-dorado text-[0.8rem]">{item.icon}</span>
+              <span className="font-sans text-[0.78rem] text-crema/75 tracking-widest uppercase whitespace-nowrap">
                 {item.text}
               </span>
             </div>

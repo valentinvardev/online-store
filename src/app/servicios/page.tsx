@@ -23,7 +23,7 @@ export default function ServiciosPage() {
           <div>
             <div className="flex items-center gap-4 mb-5">
               <div className="h-px w-8 bg-morado/40" />
-              <span className="font-sans text-[0.6rem] text-morado/65 tracking-[0.4em] uppercase">
+              <span className="font-sans text-[0.8rem] text-morado/65 tracking-[0.4em] uppercase">
                 Solo para vos
               </span>
             </div>

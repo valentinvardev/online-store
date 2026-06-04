@@ -10,7 +10,7 @@ export default async function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo text */}
         <div className="text-center mb-12">
-          <p className="font-sans text-[0.6rem] text-morado/65 tracking-[0.45em] uppercase mb-4">
+          <p className="font-sans text-[0.8rem] text-morado/65 tracking-[0.45em] uppercase mb-4">
             La Reina de Bastos
           </p>
           <h1 className="font-display uppercase text-[clamp(2rem,8vw,3rem)] text-tierra-dark leading-none tracking-wide">
@@ -18,7 +18,7 @@ export default async function LoginPage() {
           </h1>
           <div className="flex items-center gap-4 mt-5 justify-center">
             <div className="h-px w-10 bg-dorado/40" />
-            <span className="text-dorado/40 text-xs">✦</span>
+            <span className="text-dorado/40 text-[13px]">✦</span>
             <div className="h-px w-10 bg-dorado/40" />
           </div>
         </div>
@@ -33,7 +33,7 @@ export default async function LoginPage() {
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-white border-2 border-morado/20 text-tierra-dark font-sans font-semibold text-xs py-4 px-6 hover:border-morado/50 transition-colors tracking-widest uppercase block-shadow-sm"
+              className="w-full flex items-center justify-center gap-3 bg-white border-2 border-morado/20 text-tierra-dark font-sans font-semibold text-[13px] py-4 px-6 hover:border-morado/50 transition-colors tracking-widest uppercase block-shadow-sm"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -48,7 +48,7 @@ export default async function LoginPage() {
           {/* Divider */}
           <div className="flex items-center gap-3 py-1">
             <div className="flex-1 h-px bg-morado/10" />
-            <span className="font-sans text-[0.6rem] text-tierra/30 tracking-widest uppercase">o</span>
+            <span className="font-sans text-[0.8rem] text-tierra/30 tracking-widest uppercase">o</span>
             <div className="flex-1 h-px bg-morado/10" />
           </div>
 
@@ -70,14 +70,14 @@ export default async function LoginPage() {
             />
             <button
               type="submit"
-              className="w-full bg-morado text-crema font-sans font-semibold text-xs py-4 px-6 hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
+              className="w-full bg-morado text-crema font-sans font-semibold text-[13px] py-4 px-6 hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
             >
               Recibir link por email
             </button>
           </form>
         </div>
 
-        <p className="font-sans text-[0.65rem] text-tierra/30 text-center mt-8 tracking-wide leading-relaxed">
+        <p className="font-sans text-[0.75rem] text-tierra/30 text-center mt-8 tracking-wide leading-relaxed">
           Al continuar aceptás los términos de uso y la política de privacidad.
         </p>
       </div>

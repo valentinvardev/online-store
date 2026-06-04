@@ -14,8 +14,8 @@ export default function PromoBanner() {
         {loop.map((promo, i) => (
           <div key={i} className="flex items-center shrink-0">
             <div className="flex items-center gap-2.5 px-8">
-              <span className="text-dorado text-[0.6rem]">{promo.icon}</span>
-              <span className="font-sans text-[0.68rem] text-crema/80 tracking-widest uppercase whitespace-nowrap">
+              <span className="text-dorado text-[0.8rem]">{promo.icon}</span>
+              <span className="font-sans text-[0.78rem] text-crema/80 tracking-widest uppercase whitespace-nowrap">
                 {promo.text}
               </span>
             </div>

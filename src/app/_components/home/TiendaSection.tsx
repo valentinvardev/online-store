@@ -50,14 +50,14 @@ const products: Product[] = [
 export default function TiendaSection() {
   const { addItem } = useCart();
   return (
-    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
+    <section className="bg-dorado-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 lg:mb-14 gap-4 text-center sm:text-left">
             <h2 className="font-display uppercase text-[clamp(1.75rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
               Del altar<br />a tu vida
             </h2>
-            <a href="/tienda" className="font-sans text-xs text-morado hover:text-morado-light transition-colors tracking-widest uppercase self-center sm:self-end shrink-0">
+            <a href="/tienda" className="font-sans text-[13px] text-morado hover:text-morado-light transition-colors tracking-widest uppercase self-center sm:self-end shrink-0">
               Ver toda la tienda →
             </a>
           </div>
@@ -73,11 +73,11 @@ export default function TiendaSection() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="font-sans text-[0.6rem] text-tierra/65 tracking-widest uppercase mb-1">{product.category}</p>
+                  <p className="font-sans text-[0.8rem] text-tierra/65 tracking-widest uppercase mb-1">{product.category}</p>
                   <h3 className="font-sans font-semibold text-lg text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="font-sans text-[0.72rem] text-tierra/75 mb-4 leading-relaxed tracking-wide">
+                  <p className="font-sans text-[0.82rem] text-tierra/75 mb-4 leading-relaxed tracking-wide">
                     {product.desc}
                   </p>
                   <div className="flex items-center justify-between">
@@ -92,7 +92,7 @@ export default function TiendaSection() {
                         priceLabel: product.price,
                         gradient: product.gradient,
                       })}
-                      className="font-sans text-[0.7rem] px-4 py-2 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
+                      className="font-sans text-[0.8rem] px-4 py-2 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
                     >
                       Agregar
                     </button>

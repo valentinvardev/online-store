@@ -22,7 +22,7 @@ export default function PagoPendientePage() {
           </p>
           <Link
             href="/"
-            className="inline-block font-sans font-semibold text-xs px-8 py-4 border-2 border-morado text-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
+            className="inline-block font-sans font-semibold text-[13px] px-8 py-4 border-2 border-morado text-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
           >
             Volver al inicio
           </Link>

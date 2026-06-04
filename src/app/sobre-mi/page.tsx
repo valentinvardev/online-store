@@ -86,21 +86,21 @@ export default function SobreMiPage() {
 
           {/* Estrellitas dispersas por todo el banner */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
-          <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-xs select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
+          <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
           <span className="absolute top-[38%] right-[18%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
           <span className="absolute top-[52%] left-[35%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
-          <span className="absolute top-[68%] right-[8%] font-display text-crema/90 text-[0.7rem] select-none">⋆</span>
+          <span className="absolute top-[68%] right-[8%] font-display text-crema/90 text-[0.8rem] select-none">⋆</span>
           <span className="absolute top-[78%] left-[60%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-          <span className="absolute top-[18%] left-[42%] font-display text-crema/75 text-[0.55rem] select-none">·</span>
-          <span className="absolute top-[44%] right-[45%] font-display text-crema/70 text-[0.6rem] select-none">·</span>
-          <span className="absolute top-[60%] right-[55%] font-display text-crema/80 text-xs select-none">⋆</span>
-          <span className="absolute top-[85%] right-[25%] font-display text-crema/65 text-[0.55rem] select-none">·</span>
-          <span className="absolute top-[30%] left-[5%] font-display text-crema/85 text-[0.7rem] select-none">⋆</span>
-          <span className="absolute top-[88%] left-[8%] font-display text-crema text-xs select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.7)]">✦</span>
+          <span className="absolute top-[18%] left-[42%] font-display text-crema/75 text-[0.75rem] select-none">·</span>
+          <span className="absolute top-[44%] right-[45%] font-display text-crema/70 text-[0.8rem] select-none">·</span>
+          <span className="absolute top-[60%] right-[55%] font-display text-crema/80 text-[13px] select-none">⋆</span>
+          <span className="absolute top-[85%] right-[25%] font-display text-crema/65 text-[0.75rem] select-none">·</span>
+          <span className="absolute top-[30%] left-[5%] font-display text-crema/85 text-[0.8rem] select-none">⋆</span>
+          <span className="absolute top-[88%] left-[8%] font-display text-crema text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.7)]">✦</span>
         </div>
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-14 sm:py-16 lg:py-20 relative z-10">
-          <span className="font-sans text-[0.6rem] text-crema/85 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
+          <span className="font-sans text-[0.8rem] text-crema/85 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
             La historia detrás
           </span>
           <h1 className="font-display uppercase text-[clamp(2.5rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6">
@@ -131,16 +131,16 @@ export default function SobreMiPage() {
                       <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/60 border-2 border-morado/20 flex items-center justify-center">
                         <span className="text-morado text-2xl sm:text-3xl">✦</span>
                       </div>
-                      <p className="font-sans text-tierra/60 text-[0.65rem] sm:text-xs tracking-widest uppercase">Tu foto acá</p>
+                      <p className="font-sans text-tierra/60 text-[0.75rem] sm:text-[13px] tracking-widest uppercase">Tu foto acá</p>
                     </div>
                   </div>
 
                   {/* Badge certificación */}
-                  <div className="absolute -top-3 left-2 bg-morado text-crema font-sans text-[0.55rem] sm:text-[0.58rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase">
+                  <div className="absolute -top-3 left-2 bg-morado text-crema font-sans text-[0.75rem] sm:text-[0.78rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase">
                     ✦ Certificada en Tarot
                   </div>
                   {/* Badge años */}
-                  <div className="absolute -bottom-3 right-2 bg-dorado text-tierra-dark font-sans text-[0.55rem] sm:text-[0.58rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase font-semibold">
+                  <div className="absolute -bottom-3 right-2 bg-dorado text-tierra-dark font-sans text-[0.75rem] sm:text-[0.78rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase font-semibold">
                     +8 años de práctica
                   </div>
                 </div>
@@ -182,10 +182,10 @@ export default function SobreMiPage() {
 
                 {/* Formación */}
                 <div className="pt-6 border-t border-morado/10 max-w-prose mx-auto lg:mx-0">
-                  <p className="font-sans text-[0.6rem] text-tierra/80 tracking-[0.3em] uppercase mb-4">Formación</p>
+                  <p className="font-sans text-[0.8rem] text-tierra/80 tracking-[0.3em] uppercase mb-4">Formación</p>
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                     {formacion.map((item) => (
-                      <span key={item} className="font-sans text-[0.62rem] px-3 py-1.5 border border-morado/20 text-tierra/65 tracking-wide bg-white">
+                      <span key={item} className="font-sans text-[0.82rem] px-3 py-1.5 border border-morado/20 text-tierra/65 tracking-wide bg-white">
                         {item}
                       </span>
                     ))}
@@ -202,7 +202,7 @@ export default function SobreMiPage() {
         <div className="max-w-4xl mx-auto">
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center">
-              <span className="font-sans text-[0.6rem] text-crema/70 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">El camino</span>
+              <span className="font-sans text-[0.8rem] text-crema/70 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">El camino</span>
               <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide">
                 Mi historia
               </h2>
@@ -244,7 +244,7 @@ export default function SobreMiPage() {
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center lg:text-left">
-              <span className="font-sans text-[0.6rem] text-tierra/80 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>
+              <span className="font-sans text-[0.8rem] text-tierra/80 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>
               <h2 className="font-display uppercase text-[clamp(2rem,7vw,4rem)] text-tierra-dark leading-[0.95] tracking-wide">
                 Mi filosofía
               </h2>
@@ -279,13 +279,13 @@ export default function SobreMiPage() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
                 href="/servicios"
-                className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.7rem] px-7 sm:px-8 py-3.5 sm:py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors"
+                className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-7 sm:px-8 py-3.5 sm:py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors"
               >
                 ✦ Ver mis servicios
               </a>
               <a
                 href="/cursos"
-                className="bg-transparent text-crema font-sans font-semibold text-[0.7rem] px-7 sm:px-8 py-3.5 sm:py-4 tracking-widest uppercase border-2 border-crema/40 hover:border-crema hover:bg-crema/10 transition-colors"
+                className="bg-transparent text-crema font-sans font-semibold text-[0.8rem] px-7 sm:px-8 py-3.5 sm:py-4 tracking-widest uppercase border-2 border-crema/40 hover:border-crema hover:bg-crema/10 transition-colors"
               >
                 Explorar cursos
               </a>

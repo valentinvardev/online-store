@@ -36,14 +36,14 @@ export default function ComoFunciona() {
 
         {/* Estrellitas dispersas */}
         <span className="absolute top-[12%] right-[14%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
-        <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-xs select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
+        <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
         <span className="absolute top-[38%] right-[20%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
         <span className="absolute top-[55%] left-[38%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
-        <span className="absolute top-[70%] right-[10%] font-display text-crema/90 text-[0.7rem] select-none">⋆</span>
+        <span className="absolute top-[70%] right-[10%] font-display text-crema/90 text-[0.8rem] select-none">⋆</span>
         <span className="absolute top-[82%] left-[55%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-        <span className="absolute top-[18%] left-[48%] font-display text-crema/75 text-[0.55rem] select-none">·</span>
-        <span className="absolute top-[48%] right-[48%] font-display text-crema/70 text-[0.6rem] select-none">·</span>
-        <span className="absolute top-[88%] right-[35%] font-display text-crema/80 text-xs select-none">⋆</span>
+        <span className="absolute top-[18%] left-[48%] font-display text-crema/75 text-[0.75rem] select-none">·</span>
+        <span className="absolute top-[48%] right-[48%] font-display text-crema/70 text-[0.8rem] select-none">·</span>
+        <span className="absolute top-[88%] right-[35%] font-display text-crema/80 text-[13px] select-none">⋆</span>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">

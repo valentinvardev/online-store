@@ -89,7 +89,7 @@ const servicios = [
 
 const inputClass =
   "w-full bg-white border-2 border-morado/15 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
-const labelClass = "block font-sans text-[0.6rem] text-tierra/75 tracking-widest uppercase mb-1.5";
+const labelClass = "block font-sans text-[0.8rem] text-tierra/75 tracking-widest uppercase mb-1.5";
 
 const STEPS = ["Elegí tu sesión", "Tus datos", "Coordinemos"];
 
@@ -137,7 +137,7 @@ function ReservasContent() {
         <div className="max-w-3xl mx-auto px-6 py-10">
           <Link
             href="/servicios"
-            className="inline-flex items-center gap-2 font-sans text-[0.62rem] text-crema/30 hover:text-dorado tracking-widest uppercase transition-colors mb-6"
+            className="inline-flex items-center gap-2 font-sans text-[0.82rem] text-crema/30 hover:text-dorado tracking-widest uppercase transition-colors mb-6"
           >
             <ArrowLeft size={12} /> Volver a servicios
           </Link>
@@ -170,12 +170,12 @@ function ReservasContent() {
                       {i < step ? (
                         <Check size={13} className="text-crema" strokeWidth={2.5} />
                       ) : (
-                        <span className={`font-sans font-bold text-[0.65rem] ${i === step ? "text-tierra-dark" : "text-tierra/30"}`}>
+                        <span className={`font-sans font-bold text-[0.75rem] ${i === step ? "text-tierra-dark" : "text-tierra/30"}`}>
                           {i + 1}
                         </span>
                       )}
                     </div>
-                    <span className={`font-sans text-[0.55rem] tracking-widest uppercase whitespace-nowrap hidden sm:block ${
+                    <span className={`font-sans text-[0.75rem] tracking-widest uppercase whitespace-nowrap hidden sm:block ${
                       i === step ? "text-tierra-dark font-semibold" : "text-tierra/30"
                     }`}>
                       {label}
@@ -215,10 +215,10 @@ function ReservasContent() {
               )}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-                <Link href="/servicios" className="bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] px-8 py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
+                <Link href="/servicios" className="bg-morado-dark text-crema font-sans font-semibold text-[0.75rem] px-8 py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
                   Ver otros servicios
                 </Link>
-                <Link href="/" className="border-2 border-morado/20 text-tierra/75 font-sans text-[0.65rem] px-8 py-4 tracking-widest uppercase hover:border-morado/40 hover:text-tierra transition-colors">
+                <Link href="/" className="border-2 border-morado/20 text-tierra/75 font-sans text-[0.75rem] px-8 py-4 tracking-widest uppercase hover:border-morado/40 hover:text-tierra transition-colors">
                   Volver al inicio
                 </Link>
               </div>
@@ -261,8 +261,8 @@ function ReservasContent() {
                     }`}>
                       {s.nombre}
                     </p>
-                    <p className="font-sans italic text-tierra/65 text-xs mb-3">{s.subtitulo}</p>
-                    <div className="flex flex-wrap items-center gap-3 font-sans text-[0.62rem] text-tierra/70 tracking-wide">
+                    <p className="font-sans italic text-tierra/65 text-[13px] mb-3">{s.subtitulo}</p>
+                    <div className="flex flex-wrap items-center gap-3 font-sans text-[0.82rem] text-tierra/70 tracking-wide">
                       <span className="flex items-center gap-1"><Clock size={10} strokeWidth={1.5} />{s.duracion}</span>
                       <span className="flex items-center gap-1"><Video size={10} strokeWidth={1.5} />{s.formato}</span>
                       <span className={`ml-auto font-bold text-sm ${servicioId === s.id ? s.acento : "text-tierra/60"}`}>
@@ -292,11 +292,11 @@ function ReservasContent() {
                   </div>
                   <div>
                     <p className={`font-sans font-bold text-sm ${servicio.acento}`}>{servicio.nombre}</p>
-                    <p className="font-sans text-[0.65rem] text-tierra/65 tracking-wide">{servicio.duracion} · {servicio.precio}</p>
+                    <p className="font-sans text-[0.75rem] text-tierra/65 tracking-wide">{servicio.duracion} · {servicio.precio}</p>
                   </div>
                   <button
                     onClick={() => setStep(0)}
-                    className="ml-auto font-sans text-[0.58rem] text-tierra/60 hover:text-morado tracking-widest uppercase transition-colors"
+                    className="ml-auto font-sans text-[0.78rem] text-tierra/60 hover:text-morado tracking-widest uppercase transition-colors"
                   >
                     Cambiar
                   </button>
@@ -366,7 +366,7 @@ function ReservasContent() {
               {/* Mensaje */}
               <div>
                 <label className={labelClass}>¿Qué te trae? ¿Desde dónde llegás?</label>
-                <p className="font-sans text-[0.62rem] text-tierra/30 tracking-wide mb-2">
+                <p className="font-sans text-[0.82rem] text-tierra/30 tracking-wide mb-2">
                   Opcional — cuanto más me contés, mejor puedo prepararme para tu sesión.
                 </p>
                 <textarea
@@ -397,7 +397,7 @@ function ReservasContent() {
                     <p className={`font-sans font-semibold text-sm tracking-wide transition-colors ${recordatorio ? "text-tierra-dark" : "text-tierra/65"}`}>
                       Recordatorio 24 horas antes
                     </p>
-                    <p className="font-sans text-[0.65rem] text-tierra/65 tracking-wide mt-0.5">
+                    <p className="font-sans text-[0.75rem] text-tierra/65 tracking-wide mt-0.5">
                       {recordatorio
                         ? `Te avisamos a ${form.email || "tu email"} el día anterior para que no se te pase.`
                         : "Activá el recordatorio para recibir un aviso por email antes de tu sesión."
@@ -408,7 +408,7 @@ function ReservasContent() {
 
                 {recordatorio && form.fecha && form.hora && (
                   <div className="reminder-in mt-4 ml-14 border-t border-dorado/20 pt-4">
-                    <p className="font-sans text-[0.6rem] text-tierra/60 tracking-[0.3em] uppercase mb-2">Tu recordatorio llegará</p>
+                    <p className="font-sans text-[0.8rem] text-tierra/60 tracking-[0.3em] uppercase mb-2">Tu recordatorio llegará</p>
                     <div className="flex items-center gap-2">
                       <Bell size={12} className="text-dorado shrink-0" />
                       <p className="font-sans text-sm text-tierra-dark font-medium">
@@ -426,7 +426,7 @@ function ReservasContent() {
 
               {/* Resumen */}
               <div className="bg-crema-dark border-2 border-morado/10 p-6">
-                <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.3em] uppercase mb-4">Resumen de tu reserva</p>
+                <p className="font-sans text-[0.78rem] text-tierra/30 tracking-[0.3em] uppercase mb-4">Resumen de tu reserva</p>
                 <div className="space-y-2.5">
                   {[
                     { label: "Sesión",   val: servicio?.nombre ?? "—" },
@@ -438,7 +438,7 @@ function ReservasContent() {
                     { label: "Email",    val: form.email || "—" },
                   ].map(({ label, val }) => (
                     <div key={label} className="flex items-center justify-between border-b border-morado/6 pb-2 last:border-0 last:pb-0">
-                      <span className="font-sans text-[0.62rem] text-tierra/60 tracking-widest uppercase">{label}</span>
+                      <span className="font-sans text-[0.82rem] text-tierra/60 tracking-widest uppercase">{label}</span>
                       <span className="font-sans text-sm text-tierra-dark font-medium truncate max-w-[60%] text-right">{val}</span>
                     </div>
                   ))}
@@ -452,7 +452,7 @@ function ReservasContent() {
             <div className="flex items-center justify-between mt-10">
               <button
                 onClick={() => step > 0 ? setStep(step - 1) : undefined}
-                className={`flex items-center gap-2 font-sans text-[0.65rem] tracking-widest uppercase transition-colors ${
+                className={`flex items-center gap-2 font-sans text-[0.75rem] tracking-widest uppercase transition-colors ${
                   step === 0 ? "invisible" : "text-tierra/65 hover:text-tierra"
                 }`}
               >
@@ -463,7 +463,7 @@ function ReservasContent() {
                 <button
                   onClick={() => setStep(step + 1)}
                   disabled={!canNext}
-                  className="flex items-center gap-2 bg-morado-dark text-crema font-sans font-semibold text-[0.65rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 bg-morado-dark text-crema font-sans font-semibold text-[0.75rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Siguiente <ArrowRight size={14} />
                 </button>
@@ -471,7 +471,7 @@ function ReservasContent() {
                 <button
                   onClick={handleSubmit}
                   disabled={!canNext}
-                  className="flex items-center gap-2 bg-dorado text-tierra-dark font-sans font-semibold text-[0.65rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 bg-dorado text-tierra-dark font-sans font-semibold text-[0.75rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   ✦ Confirmar reserva <Check size={14} />
                 </button>

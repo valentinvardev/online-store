@@ -46,24 +46,24 @@ export default async function CourseViewerPage({ params }: Props) {
             </p>
             {session ? (
               <div className="space-y-3">
-                <p className="font-sans text-tierra/65 text-xs tracking-wide">
+                <p className="font-sans text-tierra/65 text-[13px] tracking-wide">
                   No tenés acceso a este curso todavía.
                 </p>
                 <Link
                   href="/cursos"
-                  className="inline-block font-sans font-semibold text-xs px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+                  className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
                 >
                   Inscribirme — ${course.price}
                 </Link>
               </div>
             ) : (
               <div className="space-y-3">
-                <p className="font-sans text-tierra/65 text-xs tracking-wide">
+                <p className="font-sans text-tierra/65 text-[13px] tracking-wide">
                   Iniciá sesión para ver si tenés acceso.
                 </p>
                 <Link
                   href="/login"
-                  className="inline-block font-sans font-semibold text-xs px-8 py-4 bg-morado text-crema border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
+                  className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-morado text-crema border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
                 >
                   Iniciar sesión
                 </Link>
@@ -85,7 +85,7 @@ export default async function CourseViewerPage({ params }: Props) {
           <div className="max-w-4xl mx-auto">
             <Link
               href="/cursos"
-              className="font-sans text-xs text-crema/40 hover:text-crema transition-colors tracking-widest uppercase mb-6 inline-block"
+              className="font-sans text-[13px] text-crema/40 hover:text-crema transition-colors tracking-widest uppercase mb-6 inline-block"
             >
               ← Volver a cursos
             </Link>
@@ -115,7 +115,7 @@ export default async function CourseViewerPage({ params }: Props) {
                     <h2 className="font-sans font-bold text-base text-tierra-dark tracking-wide">
                       {mod.title}
                     </h2>
-                    <p className="font-sans text-xs text-tierra/65 tracking-widest uppercase mt-0.5">
+                    <p className="font-sans text-[13px] text-tierra/65 tracking-widest uppercase mt-0.5">
                       {mod.lessons.length} lección{mod.lessons.length !== 1 ? "es" : ""}
                     </p>
                   </div>
@@ -135,7 +135,7 @@ export default async function CourseViewerPage({ params }: Props) {
                           </div>
                         )}
                         {lesson.content && (
-                          <p className="font-sans text-xs text-tierra/75 leading-relaxed mt-2">
+                          <p className="font-sans text-[13px] text-tierra/75 leading-relaxed mt-2">
                             {lesson.content}
                           </p>
                         )}

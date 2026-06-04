@@ -78,14 +78,14 @@ export default function CursosSection() {
                     />
                   ) : (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 border-b border-crema/10">
-                      <span className="text-crema/15 font-sans text-[0.6rem] tracking-[0.3em] uppercase">Portada del curso</span>
+                      <span className="text-crema/15 font-sans text-[0.8rem] tracking-[0.3em] uppercase">Portada del curso</span>
                       <div className="w-10 h-px bg-crema/10" />
                       <span className="text-crema/10 text-3xl">✦</span>
                     </div>
                   )}
                   {/* Nivel */}
                   <div className="absolute top-4 left-4">
-                    <span className="font-sans text-[0.6rem] text-crema/60 tracking-[0.3em] uppercase bg-morado-dark/60 px-2 py-1">
+                    <span className="font-sans text-[0.8rem] text-crema/60 tracking-[0.3em] uppercase bg-morado-dark/60 px-2 py-1">
                       {curso.level}
                     </span>
                   </div>
@@ -100,7 +100,7 @@ export default function CursosSection() {
                   <p className="font-sans text-crema/45 text-sm leading-relaxed mb-5 flex-1 tracking-wide">
                     {curso.desc}
                   </p>
-                  <div className="flex gap-5 font-sans text-xs text-crema/30 mb-6 tracking-wide">
+                  <div className="flex gap-5 font-sans text-[13px] text-crema/30 mb-6 tracking-wide">
                     <span className="flex items-center gap-1.5">
                       <Clock size={12} strokeWidth={1.5} />
                       {curso.duration}
@@ -112,7 +112,7 @@ export default function CursosSection() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="font-sans font-bold text-3xl text-dorado">{curso.price}</span>
-                    <a href="/cursos" className="bg-dorado text-tierra-dark font-sans text-xs px-5 py-2.5 border-2 border-morado-dark hover:bg-dorado-light transition-colors font-semibold tracking-widest uppercase block-shadow-sm">
+                    <a href="/cursos" className="bg-dorado text-tierra-dark font-sans text-[13px] px-5 py-2.5 border-2 border-morado-dark hover:bg-dorado-light transition-colors font-semibold tracking-widest uppercase block-shadow-sm">
                       Inscribirme
                     </a>
                   </div>
@@ -124,7 +124,7 @@ export default function CursosSection() {
 
         <RevealOnScroll direction="up" delay={200}>
           <div className="text-center mt-12">
-            <a href="/cursos" className="font-sans text-xs text-crema/35 hover:text-crema transition-colors tracking-widest uppercase">
+            <a href="/cursos" className="font-sans text-[13px] text-crema/35 hover:text-crema transition-colors tracking-widest uppercase">
               Ver todos los cursos →
             </a>
           </div>

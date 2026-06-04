@@ -27,7 +27,7 @@ export default function HeroSection() {
         {/* Separador */}
         <div className="flex items-center gap-5 mb-8 w-full max-w-sm">
           <div className="flex-1 h-px bg-morado/30" />
-          <span className="font-display text-morado/40 text-xs">✦</span>
+          <span className="font-display text-morado/40 text-[13px]">✦</span>
           <div className="flex-1 h-px bg-morado/30" />
         </div>
 
@@ -43,13 +43,13 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-3">
           <a
             href="/tienda"
-            className="whitespace-nowrap bg-dorado text-tierra-dark font-sans font-semibold text-xs px-8 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+            className="whitespace-nowrap bg-dorado text-tierra-dark font-sans font-semibold text-[13px] px-8 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
           >
             Explorar tienda
           </a>
           <a
             href="/cursos"
-            className="whitespace-nowrap border-2 border-morado text-morado font-sans font-semibold text-xs px-8 py-4 hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
+            className="whitespace-nowrap border-2 border-morado text-morado font-sans font-semibold text-[13px] px-8 py-4 hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
           >
             Ver cursos
           </a>
@@ -58,7 +58,7 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="relative z-10 flex flex-col items-center gap-2 pb-8 text-morado/20 w-full overflow-hidden">
-        <span className="font-sans text-[0.5rem] tracking-[0.5em] uppercase pl-[0.5em]">Descubrí más</span>
+        <span className="font-sans text-[0.8rem] tracking-[0.5em] uppercase pl-[0.5em]">Descubrí más</span>
         <div className="w-px h-6 bg-gradient-to-b from-morado/20 to-transparent" />
       </div>
 

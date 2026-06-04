@@ -1,12 +1,12 @@
 export default function SobreMiSection() {
   return (
-    <section className="bg-crema py-16 sm:py-20 lg:py-28 px-5 sm:px-6 overflow-hidden">
+    <section className="bg-dorado-light py-16 sm:py-20 lg:py-28 px-5 sm:px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 sm:gap-14 lg:gap-20">
 
         {/* Imagen */}
         <div className="w-full max-w-[260px] sm:max-w-[300px] lg:max-w-sm lg:flex-shrink-0 lg:basis-2/5 relative">
           {/* Badge "Certificada" */}
-          <div className="absolute -top-3 left-2 z-10 bg-morado text-crema font-sans text-[0.55rem] sm:text-[0.6rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase">
+          <div className="absolute -top-3 left-2 z-10 bg-morado text-crema font-sans text-[0.75rem] sm:text-[0.8rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase">
             ✦ Certificada en Tarot
           </div>
 
@@ -16,7 +16,7 @@ export default function SobreMiSection() {
               <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-white/60 flex items-center justify-center border border-morado/20">
                 <span className="text-morado text-3xl sm:text-4xl">✦</span>
               </div>
-              <p className="font-sans text-tierra/65 text-xs tracking-wide">Tu foto acá</p>
+              <p className="font-sans text-tierra/65 text-[13px] tracking-wide">Tu foto acá</p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function SobreMiSection() {
           <div className="mt-8 sm:mt-10 flex justify-center lg:justify-start">
             <a
               href="/sobre-mi"
-              className="inline-flex items-center gap-2 bg-morado text-crema font-sans text-[0.7rem] sm:text-xs px-5 sm:px-7 py-3 sm:py-3.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
+              className="inline-flex items-center gap-2 bg-morado text-crema font-sans text-[0.8rem] sm:text-[13px] px-5 sm:px-7 py-3 sm:py-3.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
             >
               Leer mi historia completa
             </a>

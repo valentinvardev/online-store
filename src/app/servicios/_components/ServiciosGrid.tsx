@@ -427,10 +427,10 @@ export default function ServiciosGrid() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  <span className="font-sans text-[0.62rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
+                  <span className="font-sans text-[0.82rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
                     {s.duration}
                   </span>
-                  <span className="font-sans text-[0.62rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
+                  <span className="font-sans text-[0.82rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
                     {s.format}
                   </span>
                 </div>
@@ -438,8 +438,8 @@ export default function ServiciosGrid() {
                 {/* Incluye */}
                 <ul className="space-y-2 mb-7 border-t border-morado/10 pt-5">
                   {s.contenido.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 font-sans text-[0.7rem] text-tierra/80 tracking-wide">
-                      <span className={`${s.accentColor} text-[0.55rem] mt-[3px] shrink-0`}>✦</span>
+                    <li key={i} className="flex items-start gap-2 font-sans text-[0.8rem] text-tierra/80 tracking-wide">
+                      <span className={`${s.accentColor} text-[0.75rem] mt-[3px] shrink-0`}>✦</span>
                       {item}
                     </li>
                   ))}
@@ -450,14 +450,14 @@ export default function ServiciosGrid() {
                   <div>
                     <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
                     {s.badge && (
-                      <span className="block font-sans text-[0.58rem] text-dorado tracking-widest uppercase mt-0.5">
+                      <span className="block font-sans text-[0.78rem] text-dorado tracking-widest uppercase mt-0.5">
                         {s.badge}
                       </span>
                     )}
                   </div>
                   <Link
                     href={`/reservas?servicio=${s.slug}`}
-                    className="bg-morado text-crema font-sans font-semibold text-[0.65rem] px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
+                    className="bg-morado text-crema font-sans font-semibold text-[0.75rem] px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
                   >
                     Reservar
                   </Link>

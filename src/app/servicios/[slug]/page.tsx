@@ -38,7 +38,7 @@ export default async function ServicioDetailPage({ params }: Props) {
         {/* Breadcrumb */}
         <div className="border-b-2 border-morado/8 px-6 py-4">
           <div className="max-w-6xl mx-auto">
-            <nav className="flex items-center gap-2 font-sans text-[0.62rem] text-tierra/60 tracking-widest uppercase">
+            <nav className="flex items-center gap-2 font-sans text-[0.82rem] text-tierra/60 tracking-widest uppercase">
               <Link href="/servicios" className="hover:text-tierra transition-colors">Sesiones</Link>
               <span>›</span>
               <span className="text-tierra/60">{service.name}</span>
@@ -68,7 +68,7 @@ export default async function ServicioDetailPage({ params }: Props) {
 
               {/* Título */}
               <div>
-                <p className="font-sans text-[0.6rem] text-morado tracking-[0.35em] uppercase mb-2">Sesión personal</p>
+                <p className="font-sans text-[0.8rem] text-morado tracking-[0.35em] uppercase mb-2">Sesión personal</p>
                 <h1 className="font-sans font-bold text-3xl text-tierra-dark leading-tight tracking-wide">
                   {service.name}
                 </h1>
@@ -84,10 +84,10 @@ export default async function ServicioDetailPage({ params }: Props) {
 
               {/* Detalles rápidos */}
               <div className="flex flex-wrap gap-3">
-                <span className="font-sans text-[0.62rem] bg-white border-2 border-morado/15 text-tierra/60 px-4 py-2 tracking-wide">
+                <span className="font-sans text-[0.82rem] bg-white border-2 border-morado/15 text-tierra/60 px-4 py-2 tracking-wide">
                   ⏱ {formatDuration(service.duration)}
                 </span>
-                <span className="font-sans text-[0.62rem] bg-white border-2 border-morado/15 text-tierra/60 px-4 py-2 tracking-wide">
+                <span className="font-sans text-[0.82rem] bg-white border-2 border-morado/15 text-tierra/60 px-4 py-2 tracking-wide">
                   {service.format}
                 </span>
               </div>
@@ -103,13 +103,13 @@ export default async function ServicioDetailPage({ params }: Props) {
               <div className="space-y-3 pt-2">
                 <a
                   href="#reservar"
-                  className="flex items-center justify-center gap-2 w-full font-sans font-semibold text-[0.65rem] py-4 px-8 bg-morado-dark text-crema border-2 border-morado-dark hover:bg-morado transition-colors tracking-widest uppercase block-shadow"
+                  className="flex items-center justify-center gap-2 w-full font-sans font-semibold text-[0.75rem] py-4 px-8 bg-morado-dark text-crema border-2 border-morado-dark hover:bg-morado transition-colors tracking-widest uppercase block-shadow"
                 >
                   ✦ Reservar sesión
                 </a>
                 <Link
                   href="/servicios"
-                  className="block w-full text-center font-sans text-[0.62rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/70 hover:border-morado/50 hover:text-tierra transition-colors"
+                  className="block w-full text-center font-sans text-[0.82rem] py-3 tracking-widest uppercase border-2 border-morado/20 text-tierra/70 hover:border-morado/50 hover:text-tierra transition-colors"
                 >
                   Ver todas las sesiones
                 </Link>

@@ -49,7 +49,7 @@ export default function ProductDetailClient({ images, videoUrl }: Props) {
                 <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 border-2 border-morado/20 flex items-center justify-center hover:bg-white hover:border-morado/40 transition-colors">
                   <ChevronRight size={16} className="text-tierra-dark" />
                 </button>
-                <span className="absolute bottom-3 right-3 font-sans text-[0.55rem] text-white/70 bg-black/30 px-2 py-1 tracking-widest">
+                <span className="absolute bottom-3 right-3 font-sans text-[0.75rem] text-white/70 bg-black/30 px-2 py-1 tracking-widest">
                   {activeIdx + 1} / {images.length}
                 </span>
               </>

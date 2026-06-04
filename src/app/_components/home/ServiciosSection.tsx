@@ -71,14 +71,14 @@ export default function ServiciosSection() {
                 </p>
                 <div className="flex flex-wrap gap-2 mb-7">
                   {s.tags.map((tag) => (
-                    <span key={tag} className="font-sans text-[0.65rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
+                    <span key={tag} className="font-sans text-[0.75rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
                       {tag}
                     </span>
                   ))}
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
-                  <a href="/servicios" className="bg-morado text-crema font-sans text-xs px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm">
+                  <a href="/servicios" className="bg-morado text-crema font-sans text-[13px] px-5 py-2.5 border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm">
                     Reservar
                   </a>
                 </div>

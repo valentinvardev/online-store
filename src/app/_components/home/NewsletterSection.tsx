@@ -57,12 +57,12 @@ export default function NewsletterSection() {
                 />
                 <button
                   type="submit"
-                  className="bg-dorado text-tierra-dark font-sans font-semibold text-xs px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm"
+                  className="bg-dorado text-tierra-dark font-sans font-semibold text-[13px] px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm"
                 >
                   Suscribirme
                 </button>
               </form>
-              <p className="font-sans text-[0.65rem] text-crema/35 mt-4 tracking-wide">
+              <p className="font-sans text-[0.75rem] text-crema/35 mt-4 tracking-wide">
                 Sin spam. Solo magia. Podés darte de baja cuando quieras.
               </p>
             </>

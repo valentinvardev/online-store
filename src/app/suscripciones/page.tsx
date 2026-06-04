@@ -145,7 +145,7 @@ export default function SuscripcionesPage() {
           <span className="absolute bottom-0 left-8 font-display text-crema/3 text-[8rem] leading-none">◉</span>
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 text-center">
-          <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase block mb-5">
+          <span className="font-sans text-[0.8rem] text-dorado tracking-[0.4em] uppercase block mb-5">
             Membresía · Comunidad · Crecimiento
           </span>
           <h1 className="font-display uppercase text-[clamp(3rem,8vw,6rem)] text-crema leading-none tracking-wide mb-5">
@@ -164,7 +164,7 @@ export default function SuscripcionesPage() {
         <div className="max-w-4xl mx-auto">
           <RevealOnScroll>
             <div className="text-center mb-10">
-              <span className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Antes de suscribirte</span>
+              <span className="font-sans text-[0.8rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Antes de suscribirte</span>
               <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 Mirá cómo funciona
               </h2>
@@ -187,7 +187,7 @@ export default function SuscripcionesPage() {
                 title="Cómo funciona la membresía — La Reina de Bastos"
               />
             </div>
-            <p className="font-sans text-xs text-tierra/30 tracking-wide mt-3 text-center">
+            <p className="font-sans text-[13px] text-tierra/30 tracking-wide mt-3 text-center">
               Duración: 3 minutos · Actualizamos este video cada temporada
             </p>
           </RevealOnScroll>
@@ -199,7 +199,7 @@ export default function SuscripcionesPage() {
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll>
             <div className="text-center mb-14">
-              <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase block mb-4">Lo que te llevás</span>
+              <span className="font-sans text-[0.8rem] text-dorado tracking-[0.4em] uppercase block mb-4">Lo que te llevás</span>
               <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
                 Qué se despierta<br />en vos
               </h2>
@@ -214,7 +214,7 @@ export default function SuscripcionesPage() {
                     {v.icon}
                   </span>
                   <h3 className="font-sans font-bold text-crema text-sm tracking-wide mb-2">{v.titulo}</h3>
-                  <p className="font-sans text-crema/40 text-xs leading-relaxed tracking-wide">{v.desc}</p>
+                  <p className="font-sans text-crema/40 text-[13px] leading-relaxed tracking-wide">{v.desc}</p>
                 </div>
               </RevealOnScroll>
             ))}
@@ -227,7 +227,7 @@ export default function SuscripcionesPage() {
         <div className="max-w-7xl mx-auto">
           <RevealOnScroll>
             <div className="mb-14">
-              <span className="font-sans text-[0.6rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Cada mes recibís</span>
+              <span className="font-sans text-[0.8rem] text-tierra/35 tracking-[0.4em] uppercase block mb-4">Cada mes recibís</span>
               <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 El contenido de<br />la membresía
               </h2>
@@ -248,7 +248,7 @@ export default function SuscripcionesPage() {
                     <p className="font-sans text-tierra/60 text-sm leading-relaxed tracking-wide mb-5">{m.desc}</p>
                     <ul className="space-y-2">
                       {m.items.map((item, j) => (
-                        <li key={j} className="flex items-center gap-2.5 font-sans text-xs text-tierra/65 tracking-wide">
+                        <li key={j} className="flex items-center gap-2.5 font-sans text-[13px] text-tierra/65 tracking-wide">
                           <Check size={12} className="text-verde shrink-0" strokeWidth={2.5} />
                           {item}
                         </li>
@@ -265,7 +265,7 @@ export default function SuscripcionesPage() {
       {/* ── TOGGLE BILLING ── */}
       <div className="bg-crema border-y border-morado/8 sticky top-0 z-10" id="planes">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-center gap-4">
-          <span className={`font-sans text-xs tracking-widest uppercase transition-colors ${billing === "mensual" ? "text-tierra-dark font-semibold" : "text-tierra/35"}`}>
+          <span className={`font-sans text-[13px] tracking-widest uppercase transition-colors ${billing === "mensual" ? "text-tierra-dark font-semibold" : "text-tierra/35"}`}>
             Mensual
           </span>
           <button
@@ -274,9 +274,9 @@ export default function SuscripcionesPage() {
           >
             <span className={`absolute top-0.5 w-5 h-5 bg-dorado transition-all duration-300 ${billing === "anual" ? "left-7" : "left-0.5"}`} />
           </button>
-          <span className={`font-sans text-xs tracking-widest uppercase transition-colors flex items-center gap-2 ${billing === "anual" ? "text-tierra-dark font-semibold" : "text-tierra/35"}`}>
+          <span className={`font-sans text-[13px] tracking-widest uppercase transition-colors flex items-center gap-2 ${billing === "anual" ? "text-tierra-dark font-semibold" : "text-tierra/35"}`}>
             Anual
-            <span className="bg-verde text-crema font-sans text-[0.55rem] px-2 py-0.5 tracking-widest uppercase">2 meses gratis</span>
+            <span className="bg-verde text-crema font-sans text-[0.75rem] px-2 py-0.5 tracking-widest uppercase">2 meses gratis</span>
           </span>
         </div>
       </div>
@@ -297,7 +297,7 @@ export default function SuscripcionesPage() {
               <RevealOnScroll key={plan.id} delay={i * 100}>
                 <div className={`relative border-2 flex flex-col bg-crema ${plan.destacado ? `${plan.colorActivo} block-shadow` : `${plan.color} hover:${plan.colorActivo} transition-colors`}`}>
                   {plan.destacado && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-dorado text-tierra-dark font-sans font-bold text-[0.58rem] px-4 py-1 tracking-widest uppercase border-2 border-morado-dark whitespace-nowrap">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-dorado text-tierra-dark font-sans font-bold text-[0.78rem] px-4 py-1 tracking-widest uppercase border-2 border-morado-dark whitespace-nowrap">
                       ✦ Más popular
                     </div>
                   )}
@@ -306,16 +306,16 @@ export default function SuscripcionesPage() {
                     <div className={`w-12 h-12 flex items-center justify-center mb-4 ${plan.bgIcono}`}>{plan.icon}</div>
                     <h3 className={`font-display text-3xl tracking-wide uppercase ${plan.acento} mb-1`}>{plan.nombre}</h3>
                     <p className="font-sans italic text-tierra/45 text-sm mb-3">{plan.subtitulo}</p>
-                    <p className="font-sans text-tierra/50 text-xs leading-relaxed tracking-wide">{plan.desc}</p>
+                    <p className="font-sans text-tierra/50 text-[13px] leading-relaxed tracking-wide">{plan.desc}</p>
                   </div>
 
                   <div className="px-7 py-5 border-b border-morado/10">
                     <div className="flex items-baseline gap-2">
                       <span className="font-display text-5xl text-tierra-dark">{plan.precio[billing]}</span>
-                      <span className="font-sans text-xs text-tierra/35 tracking-wide">/{billing === "mensual" ? "mes" : "año"}</span>
+                      <span className="font-sans text-[13px] text-tierra/35 tracking-wide">/{billing === "mensual" ? "mes" : "año"}</span>
                     </div>
                     {billing === "anual" && (
-                      <p className="font-sans text-[0.6rem] text-verde tracking-wide mt-1">✦ Ahorrás 2 meses</p>
+                      <p className="font-sans text-[0.8rem] text-verde tracking-wide mt-1">✦ Ahorrás 2 meses</p>
                     )}
                   </div>
 
@@ -327,7 +327,7 @@ export default function SuscripcionesPage() {
                             ? <Check size={14} className="text-verde shrink-0 mt-0.5" strokeWidth={2.5} />
                             : <X size={14} className="text-tierra/20 shrink-0 mt-0.5" strokeWidth={2} />
                           }
-                          <span className={`font-sans text-xs tracking-wide leading-snug ${b.incluido ? "text-tierra/70" : "text-tierra/25 line-through"}`}>
+                          <span className={`font-sans text-[13px] tracking-wide leading-snug ${b.incluido ? "text-tierra/70" : "text-tierra/25 line-through"}`}>
                             {b.texto}
                           </span>
                         </li>
@@ -336,7 +336,7 @@ export default function SuscripcionesPage() {
                   </div>
 
                   <div className="px-7 pb-7">
-                    <button className={`w-full font-sans font-semibold text-[0.65rem] py-3.5 tracking-widest uppercase transition-colors block-shadow-sm ${plan.ctaClass}`}>
+                    <button className={`w-full font-sans font-semibold text-[0.75rem] py-3.5 tracking-widest uppercase transition-colors block-shadow-sm ${plan.ctaClass}`}>
                       ✦ Suscribirme — {plan.nombre}
                     </button>
                   </div>
@@ -393,11 +393,11 @@ export default function SuscripcionesPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <button
                 onClick={() => document.getElementById("planes")?.scrollIntoView({ behavior: "smooth" })}
-                className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.7rem] px-8 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors"
+                className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-8 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors"
               >
                 ✦ Ver planes
               </button>
-              <Link href="/servicios" className="border-2 border-crema/15 text-crema/40 font-sans text-[0.7rem] px-8 py-4 tracking-widest uppercase hover:border-crema/35 hover:text-crema/60 transition-colors">
+              <Link href="/servicios" className="border-2 border-crema/15 text-crema/40 font-sans text-[0.8rem] px-8 py-4 tracking-widest uppercase hover:border-crema/35 hover:text-crema/60 transition-colors">
                 Ver servicios
               </Link>
             </div>

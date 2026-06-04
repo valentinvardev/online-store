@@ -55,7 +55,7 @@ export default async function CursoInfoPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-6 py-6 relative z-10">
           <Link
             href="/cursos"
-            className="inline-flex items-center gap-2 font-sans text-[0.62rem] text-crema/35 hover:text-dorado tracking-widest uppercase transition-colors"
+            className="inline-flex items-center gap-2 font-sans text-[0.82rem] text-crema/35 hover:text-dorado tracking-widest uppercase transition-colors"
           >
             ← Volver a cursos
           </Link>
@@ -68,11 +68,11 @@ export default async function CursoInfoPage({ params }: Props) {
             <div className="space-y-6">
               {/* Chips */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className={`font-sans text-[0.6rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
+                <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
                   {curso.level}
                 </span>
                 {curso.badge && (
-                  <span className={`font-sans text-[0.6rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
+                  <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
                     {curso.badge}
                   </span>
                 )}
@@ -94,7 +94,7 @@ export default async function CursoInfoPage({ params }: Props) {
               </p>
 
               {/* Stats */}
-              <div className="flex flex-wrap gap-6 font-sans text-xs text-crema/40 tracking-wide pt-2">
+              <div className="flex flex-wrap gap-6 font-sans text-[13px] text-crema/40 tracking-wide pt-2">
                 <span className="flex items-center gap-2">
                   <Clock size={13} strokeWidth={1.5} />
                   {curso.duration}
@@ -127,25 +127,25 @@ export default async function CursoInfoPage({ params }: Props) {
                 </div>
 
                 {/* CTA */}
-                <button className="w-full bg-dorado text-tierra-dark font-sans font-semibold text-[0.7rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
+                <button className="w-full bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
                   ✦ Inscribirme ahora
                 </button>
-                <button className="w-full border-2 border-morado/25 text-tierra font-sans text-[0.65rem] py-3 tracking-widest uppercase hover:border-morado/50 transition-colors">
+                <button className="w-full border-2 border-morado/25 text-tierra font-sans text-[0.75rem] py-3 tracking-widest uppercase hover:border-morado/50 transition-colors">
                   Ver programa completo ↓
                 </button>
 
                 {/* Garantía */}
-                <p className="font-sans text-[0.6rem] text-tierra/65 text-center tracking-wide">
+                <p className="font-sans text-[0.8rem] text-tierra/65 text-center tracking-wide">
                   ✦ 7 días de garantía de devolución
                 </p>
 
                 {/* Incluye */}
                 <div className="border-t border-morado/10 pt-5 space-y-2.5">
-                  <p className="font-sans text-[0.58rem] text-tierra/60 tracking-[0.3em] uppercase mb-3">Este curso incluye</p>
+                  <p className="font-sans text-[0.78rem] text-tierra/60 tracking-[0.3em] uppercase mb-3">Este curso incluye</p>
                   {curso.includes.map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">
                       <Check size={12} className="text-verde shrink-0" strokeWidth={2.5} />
-                      <span className="font-sans text-xs text-tierra/60 tracking-wide">{item}</span>
+                      <span className="font-sans text-[13px] text-tierra/60 tracking-wide">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -241,17 +241,17 @@ export default async function CursoInfoPage({ params }: Props) {
                       <span className="font-sans text-[15px] text-tierra/60 line-through">{curso.priceOld}</span>
                     )}
                   </div>
-                  <button className="w-full bg-morado-dark text-crema font-sans font-semibold text-[0.7rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
+                  <button className="w-full bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
                     ✦ Inscribirme ahora
                   </button>
-                  <p className="font-sans text-[0.6rem] text-tierra/60 text-center tracking-wide">
+                  <p className="font-sans text-[0.8rem] text-tierra/60 text-center tracking-wide">
                     ✦ 7 días de garantía de devolución
                   </p>
                   <div className="border-t border-morado/10 pt-4 space-y-2.5">
                     {curso.includes.map((item, i) => (
                       <div key={i} className="flex items-center gap-2.5">
                         <Check size={12} className="text-verde shrink-0" strokeWidth={2.5} />
-                        <span className="font-sans text-xs text-tierra/80 tracking-wide">{item}</span>
+                        <span className="font-sans text-[13px] text-tierra/80 tracking-wide">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -259,17 +259,17 @@ export default async function CursoInfoPage({ params }: Props) {
 
                 {/* Detalles del curso */}
                 <div className="bg-crema border border-morado/15 p-6 space-y-4">
-                  <p className="font-sans text-[0.58rem] text-tierra/30 tracking-[0.3em] uppercase">Detalles</p>
+                  <p className="font-sans text-[0.78rem] text-tierra/30 tracking-[0.3em] uppercase">Detalles</p>
                   {[
                     { icon: <Clock size={13} strokeWidth={1.5} />, label: "Duración", val: curso.duration },
                     { icon: <BookOpen size={13} strokeWidth={1.5} />, label: "Clases", val: `${totalLessons} clases` },
                     { icon: <Users size={13} strokeWidth={1.5} />, label: "Alumnas", val: curso.students },
                   ].map(({ icon, label, val }) => (
                     <div key={label} className="flex items-center justify-between">
-                      <span className="flex items-center gap-2 font-sans text-xs text-tierra/70 tracking-wide">
+                      <span className="flex items-center gap-2 font-sans text-[13px] text-tierra/70 tracking-wide">
                         {icon} {label}
                       </span>
-                      <span className="font-sans text-xs font-semibold text-tierra-dark">{val}</span>
+                      <span className="font-sans text-[13px] font-semibold text-tierra-dark">{val}</span>
                     </div>
                   ))}
                 </div>
@@ -291,12 +291,12 @@ export default async function CursoInfoPage({ params }: Props) {
             Unite a {curso.students} que ya transitaron este camino.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.7rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
+            <button className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
               ✦ Inscribirme a {curso.title}
             </button>
             <Link
               href="/cursos"
-              className="border-2 border-crema/15 text-crema/40 font-sans text-[0.7rem] px-8 py-4 tracking-widest uppercase hover:border-crema/35 hover:text-crema/60 transition-colors"
+              className="border-2 border-crema/15 text-crema/40 font-sans text-[0.8rem] px-8 py-4 tracking-widest uppercase hover:border-crema/35 hover:text-crema/60 transition-colors"
             >
               Ver otros cursos
             </Link>
