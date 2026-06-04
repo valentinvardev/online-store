@@ -161,6 +161,7 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   name: 'name',
   description: 'description',
   price: 'price',
@@ -169,6 +170,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   badge: 'badge',
   imageUrl: 'imageUrl',
   images: 'images',
+  videoUrl: 'videoUrl',
   fileUrl: 'fileUrl',
   stock: 'stock',
   active: 'active',
@@ -188,6 +190,8 @@ exports.Prisma.CourseScalarFieldEnum = {
   durationWeeks: 'durationWeeks',
   lessonsCount: 'lessonsCount',
   imageUrl: 'imageUrl',
+  images: 'images',
+  videoUrl: 'videoUrl',
   active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -197,7 +201,8 @@ exports.Prisma.CourseModuleScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
   title: 'title',
-  order: 'order'
+  order: 'order',
+  attachments: 'attachments'
 };
 
 exports.Prisma.CourseLessonScalarFieldEnum = {
@@ -213,12 +218,17 @@ exports.Prisma.CourseLessonScalarFieldEnum = {
 
 exports.Prisma.ServiceScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   name: 'name',
   subtitle: 'subtitle',
   description: 'description',
   price: 'price',
   duration: 'duration',
   format: 'format',
+  imageUrl: 'imageUrl',
+  images: 'images',
+  videoUrl: 'videoUrl',
+  attachments: 'attachments',
   active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

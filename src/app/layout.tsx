@@ -9,9 +9,15 @@ import CartProviders from "./_components/cart/CartProviders";
 import PageTransition from "./_components/PageTransition";
 import MagicCursor from "./_components/MagicCursor";
 
+const retroMother = localFont({
+  src: "../fonts/RetroMother-Regular.otf",
+  variable: "--font-tropi",
+  display: "swap",
+});
+
 const lostar = localFont({
   src: "../fonts/lostar.ttf",
-  variable: "--font-tropi",
+  variable: "--font-lostar",
   display: "swap",
 });
 
@@ -31,7 +37,10 @@ export const metadata: Metadata = {
   title: "La Reina de Bastos",
   description:
     "Espiritualidad que sabe a tierra. Tienda, cursos y servicios personalizados de tarot, rituales y espiritualidad práctica.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon",             url: "/logo-rdb.png", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/logo-rdb.png" },
+  ],
 };
 
 export default function RootLayout({
@@ -40,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${lostar.variable} ${chevrola.variable} ${jost.variable}`}
+      className={`${retroMother.variable} ${lostar.variable} ${chevrola.variable} ${jost.variable}`}
     >
       <body className="bg-crema font-sans text-tierra antialiased overflow-x-hidden">
         <TRPCReactProvider>
