@@ -102,7 +102,7 @@ export default function SobreMiPage() {
           </span>
           <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6">
             Sobre<br />
-            <span className="text-dorado">mí</span>
+            <span className="text-crema">mí</span>
           </h1>
           <p className="font-sans italic text-crema/85 text-base sm:text-lg max-w-lg leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Una mujer, un mazo de tarot y la convicción de que la magia es para todas.
