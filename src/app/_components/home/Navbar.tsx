@@ -115,16 +115,16 @@ export default function Navbar() {
         </div>
 
         {/* Acciones Mobile (siempre visibles) */}
-        <div className="md:hidden flex items-center gap-3">
+        <div className="md:hidden flex items-center gap-4">
           {/* Carrito */}
           <button
             onClick={openCart}
-            className="relative flex items-center justify-center w-9 h-9 hover:bg-morado/5 transition-all"
+            className="relative flex items-center justify-center w-12 h-12 hover:bg-morado/5 transition-all"
             aria-label="Abrir carrito"
           >
-            <ShoppingBag size={18} strokeWidth={1.5} className="text-morado" />
+            <ShoppingBag size={26} strokeWidth={1.8} className="text-morado" />
             {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-dorado text-tierra-dark font-sans font-bold text-[0.8rem] w-4 h-4 flex items-center justify-center">
+              <span className="absolute top-0 right-0 bg-dorado text-tierra-dark font-sans font-bold text-[0.65rem] w-5 h-5 flex items-center justify-center rounded-full">
                 {count}
               </span>
             )}
@@ -132,13 +132,13 @@ export default function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="flex flex-col gap-1.5 p-2"
+            className="flex flex-col gap-[7px] p-2"
             onClick={() => setOpen(!open)}
             aria-label="Abrir menú"
           >
-            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-verde-light transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span className={`block h-[3px] w-8 bg-verde-light transition-all duration-300 ${open ? "rotate-45 translate-y-[10px]" : ""}`} />
+            <span className={`block h-[3px] w-8 bg-verde-light transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block h-[3px] w-8 bg-verde-light transition-all duration-300 ${open ? "-rotate-45 -translate-y-[10px]" : ""}`} />
           </button>
         </div>
       </nav>
