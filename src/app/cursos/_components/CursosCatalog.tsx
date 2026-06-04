@@ -16,11 +16,6 @@ const levels: { value: Level; label: string; icon: string; color: string; active
   { value: "Todos los niveles", label: "Todos los niveles",  icon: "◉", color: "text-dorado/70 border-dorado/20 hover:border-dorado/50 hover:text-dorado-dark",     activeColor: "bg-dorado text-tierra-dark border-dorado shadow-lg" },
 ];
 
-const levelColors: Record<string, string> = {
-  "Principiante":      "text-verde bg-verde/10 border-verde/25",
-  "Intermedio":        "text-celeste bg-celeste/10 border-celeste/25",
-  "Todos los niveles": "text-dorado bg-dorado/10 border-dorado/25",
-};
 
 
 export default function CursosCatalog() {
@@ -143,11 +138,6 @@ export default function CursosCatalog() {
                     <span className="text-crema/10 text-3xl">✦</span>
                   </div>
                 )}
-
-                {/* Nivel */}
-                <span className={`absolute top-3 left-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
-                  {curso.level}
-                </span>
 
                 {/* Badge */}
                 {curso.badge && (

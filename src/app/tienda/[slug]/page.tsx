@@ -3,24 +3,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { use } from "react";
-import { ShoppingBag, Check, ArrowLeft, Package, Zap, Sparkles } from "lucide-react";
+import { ShoppingBag, Check, ArrowLeft } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { productos } from "../_data/productos";
 import { useCart } from "~/app/_components/cart/CartContext";
 import Badge from "~/app/_components/Badge";
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  "Físico":        <Package size={13} strokeWidth={1.5} />,
-  "Digital":       <Zap size={13} strokeWidth={1.5} />,
-  "Personalizado": <Sparkles size={13} strokeWidth={1.5} />,
-};
-
-const categoryColors: Record<string, string> = {
-  "Físico":        "text-verde bg-verde/10 border-verde/25",
-  "Digital":       "text-celeste bg-celeste/10 border-celeste/25",
-  "Personalizado": "text-rosa bg-rosa/8 border-rosa/20",
-};
 
 export default function ProductoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -64,13 +53,10 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   <span className="font-display text-white/10 text-[12rem] leading-none select-none">✦</span>
                 </div>
                 {/* Ícono central */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-20 h-20 bg-white/20 border-2 border-white/40 flex items-center justify-center backdrop-blur-sm">
                     <span className="text-white text-3xl">✦</span>
                   </div>
-                  <p className="font-sans text-[0.75rem] text-white/40 tracking-[0.35em] uppercase">
-                    {producto.category}
-                  </p>
                 </div>
                 {/* Badge */}
                 {producto.badge && (
@@ -92,16 +78,12 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
 
             {/* Info */}
             <div className="space-y-6">
-              {/* Chips */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className={`flex items-center gap-1.5 font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${categoryColors[producto.category]}`}>
-                  {categoryIcons[producto.category]}
-                  {producto.category}
-                </span>
-                {producto.badge && producto.badge !== "Agotado" && (
+              {/* Badge */}
+              {producto.badge && producto.badge !== "Agotado" && (
+                <div className="flex">
                   <Badge label={producto.badge} />
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Nombre */}
               <div>

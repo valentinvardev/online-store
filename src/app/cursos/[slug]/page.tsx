@@ -7,11 +7,6 @@ import { cursos } from "../_data/cursos";
 import CursoAccordion from "./_components/CursoAccordion";
 import Badge from "../../_components/Badge";
 
-const levelColors: Record<string, string> = {
-  "Principiante":      "text-verde bg-verde/15 border-verde/30",
-  "Intermedio":        "text-celeste bg-celeste/15 border-celeste/30",
-  "Todos los niveles": "text-dorado-dark bg-dorado/15 border-dorado/30",
-};
 
 
 type Props = { params: Promise<{ slug: string }> };
@@ -62,13 +57,12 @@ export default async function CursoInfoPage({ params }: Props) {
 
             {/* Columna izquierda — info */}
             <div className="space-y-6">
-              {/* Chips */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
-                  {curso.level}
-                </span>
-                {curso.badge && <Badge label={curso.badge} />}
-              </div>
+              {/* Badge */}
+              {curso.badge && (
+                <div className="flex">
+                  <Badge label={curso.badge} />
+                </div>
+              )}
 
               {/* Título */}
               <div>

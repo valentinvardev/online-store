@@ -129,9 +129,6 @@ export default function ProductCatalog() {
                 {product.badge && (
                   <Badge label={product.badge} className="absolute top-3 left-3" />
                 )}
-                <span className="absolute top-3 right-3 font-sans text-[0.75rem] text-white/50 tracking-[0.3em] uppercase bg-black/20 px-2 py-1">
-                  {product.category}
-                </span>
               </div>
 
               {/* Info */}
