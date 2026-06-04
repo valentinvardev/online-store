@@ -156,64 +156,83 @@ export default function Navbar() {
 
       </header>
 
-      {/* Mobile menu fullscreen overlay — render condicional para evitar issues de stacking */}
-      {open && (
-      <div className="md:hidden fixed inset-0 z-[100] bg-verde flex flex-col">
-        {/* Cerrar */}
-        <button
+      {/* ── Drawer lateral mobile — se desliza desde la derecha ── */}
+      <div
+        className={`md:hidden fixed inset-0 z-[100] ${open ? "" : "pointer-events-none"}`}
+        aria-hidden={!open}
+      >
+        {/* Backdrop oscuro */}
+        <div
           onClick={() => setOpen(false)}
-          aria-label="Cerrar menú"
-          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-crema hover:text-dorado transition-colors z-20"
-        >
-          <X size={32} strokeWidth={1.8} />
-        </button>
+          className={`absolute inset-0 bg-tierra-dark/70 backdrop-blur-sm transition-opacity duration-300 ${
+            open ? "opacity-100" : "opacity-0"
+          }`}
+        />
 
-        {/* Contenido */}
-        <div className="h-full flex flex-col px-8 pt-20 pb-10">
-          {/* Nav links grandes */}
-          <nav className="flex-1 flex flex-col justify-center gap-5">
+        {/* Panel */}
+        <aside
+          className={`absolute top-0 right-0 h-full w-[84%] max-w-[340px] bg-verde flex flex-col shadow-[-8px_0_40px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-out ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Decoración sutil de fondo */}
+          <span className="absolute -top-6 -right-4 font-display text-crema/10 text-[9rem] leading-none select-none pointer-events-none">✦</span>
+
+          {/* Header del drawer */}
+          <div className="flex items-center justify-between px-6 h-20 border-b border-crema/15 shrink-0 relative z-10">
+            <span className="font-display text-crema text-2xl tracking-wider uppercase">Menú</span>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Cerrar menú"
+              className="w-11 h-11 flex items-center justify-center border-2 border-crema/50 text-crema hover:bg-crema hover:text-verde transition-colors"
+            >
+              <X size={24} strokeWidth={2} />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav className="flex-1 flex flex-col gap-1 px-6 py-8 relative z-10 overflow-y-auto">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-crema hover:text-dorado tracking-wide leading-none flex items-center gap-3 group transition-colors"
+                className="group flex items-center gap-3 py-3 border-b border-crema/10 font-display uppercase text-3xl text-crema hover:text-dorado tracking-wide leading-none transition-colors"
               >
-                <span className="font-display text-dorado/80 group-hover:text-dorado text-2xl transition-colors">✦</span>
+                <span className="text-dorado text-base group-hover:translate-x-1 transition-transform">✦</span>
                 {link.label}
               </Link>
             ))}
           </nav>
 
           {/* Acciones abajo */}
-          <div className="pt-8 border-t-2 border-crema/20 shrink-0 space-y-3">
+          <div className="px-6 pb-8 pt-4 border-t border-crema/15 shrink-0 space-y-3 relative z-10">
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/40 hover:border-dorado/60"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/50"
               >
-                <LogOut size={16} strokeWidth={1.8} /> Cerrar sesión
+                <LogOut size={15} strokeWidth={1.8} /> Cerrar sesión
               </button>
             ) : (
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-crema hover:text-dorado transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/40 hover:border-dorado/60"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/50"
               >
-                <LogIn size={16} strokeWidth={1.8} /> Entrar
+                <LogIn size={15} strokeWidth={1.8} /> Entrar
               </Link>
             )}
             <Link
               href="/reservas"
               onClick={() => setOpen(false)}
-              className="w-full block text-center bg-dorado text-tierra-dark font-sans font-semibold text-sm py-4 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors block-shadow-sm"
+              className="w-full block text-center bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors block-shadow-sm"
             >
-              ✦ Reservar
+              ✦ Reservar consulta
             </Link>
           </div>
-        </div>
+        </aside>
       </div>
-      )}
     </>
   );
 }
