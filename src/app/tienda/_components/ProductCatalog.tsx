@@ -89,7 +89,7 @@ export default function ProductCatalog() {
   return (
     <div>
       {/* Filtros sticky */}
-      <div className="bg-crema/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado/8">
+      <div className="bg-dorado-light/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado-dark/15">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
           <p className="font-sans text-[0.8rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por categoría

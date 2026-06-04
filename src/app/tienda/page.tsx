@@ -15,18 +15,18 @@ export default function TiendaPage() {
       <PromoBanner />
 
       {/* Encabezado de sección */}
-      <div className="bg-crema border-b-2 border-morado/10 py-10 sm:py-12 lg:py-14 px-5 sm:px-6">
+      <div className="bg-dorado-light border-b-2 border-morado-dark/20 py-10 sm:py-12 lg:py-14 px-5 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="font-display uppercase text-[clamp(3rem,12vw,7.5rem)] text-tierra-dark leading-[0.88] tracking-tight">
             Del altar<br />a tu vida
           </h1>
-          <p className="font-sans italic text-tierra/80 text-sm sm:text-base mt-3 sm:mt-4 max-w-md leading-relaxed">
+          <p className="font-sans italic text-tierra-dark/85 text-base sm:text-lg mt-3 sm:mt-4 max-w-md leading-relaxed">
             Cada pieza lleva el cuidado de una práctica real. No es decoración — es herramienta.
           </p>
         </div>
       </div>
 
-      <div className="bg-crema min-h-screen">
+      <div className="bg-dorado-light min-h-screen">
         <ProductCatalog />
       </div>
 
