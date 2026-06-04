@@ -29,7 +29,7 @@ export default function NewsletterSection() {
           <h2 className="font-display uppercase text-[clamp(2.75rem,7vw,4rem)] text-crema leading-none tracking-wide mb-4">
             Un ritual<br />en tu correo
           </h2>
-          <p className="font-sans italic text-crema/60 text-xl mb-10 leading-snug">
+          <p className="font-sans italic text-crema/90 text-xl sm:text-2xl mb-10 leading-snug">
             Cada semana: una lectura, una práctica, un recordatorio de que sos más de lo que creés.
           </p>
         </RevealOnScroll>
@@ -53,16 +53,16 @@ export default function NewsletterSection() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
                   required
-                  className="flex-1 bg-white/10 border-2 border-white/25 text-crema placeholder:text-crema/35 font-sans text-sm px-5 py-4 focus:outline-none focus:border-dorado focus:bg-white/15 transition-colors tracking-wide"
+                  className="flex-1 bg-white/15 border-2 border-white/40 text-crema placeholder:text-crema/60 font-sans text-base px-5 py-4 focus:outline-none focus:border-dorado focus:bg-white/25 transition-colors tracking-wide"
                 />
                 <button
                   type="submit"
-                  className="bg-dorado text-tierra-dark font-sans font-semibold text-[13px] px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm"
+                  className="bg-dorado text-tierra-dark font-sans font-semibold text-[14px] px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm"
                 >
                   Suscribirme
                 </button>
               </form>
-              <p className="font-sans text-[0.75rem] text-crema/35 mt-4 tracking-wide">
+              <p className="font-sans text-[0.95rem] text-crema/75 mt-4 tracking-wide">
                 Sin spam. Solo magia. Podés darte de baja cuando quieras.
               </p>
             </>

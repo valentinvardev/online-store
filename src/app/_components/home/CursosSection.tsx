@@ -96,17 +96,17 @@ export default function CursosSection() {
                   <h3 className="font-sans font-bold uppercase text-xl text-crema leading-tight tracking-wide mb-1">
                     {curso.title}
                   </h3>
-                  <p className="font-sans italic text-crema/50 text-sm mb-4">{curso.subtitle}</p>
-                  <p className="font-sans text-crema/45 text-sm leading-relaxed mb-5 flex-1 tracking-wide">
+                  <p className="font-sans italic text-crema/80 text-base mb-4">{curso.subtitle}</p>
+                  <p className="font-sans text-crema/85 text-[16px] leading-relaxed mb-5 flex-1 tracking-wide">
                     {curso.desc}
                   </p>
-                  <div className="flex gap-5 font-sans text-[13px] text-crema/30 mb-6 tracking-wide">
+                  <div className="flex gap-5 font-sans text-[14px] text-crema/75 mb-6 tracking-wide font-medium">
                     <span className="flex items-center gap-1.5">
-                      <Clock size={12} strokeWidth={1.5} />
+                      <Clock size={14} strokeWidth={1.8} />
                       {curso.duration}
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <BookOpen size={12} strokeWidth={1.5} />
+                      <BookOpen size={14} strokeWidth={1.8} />
                       {curso.lessons}
                     </span>
                   </div>

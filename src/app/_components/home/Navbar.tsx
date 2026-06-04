@@ -158,21 +158,24 @@ export default function Navbar() {
 
       {/* Mobile menu fullscreen overlay — fuera del header para evitar stacking context */}
       <div
-        className={`md:hidden fixed inset-0 z-[100] bg-verde transition-opacity duration-300 ${
+        className={`md:hidden fixed inset-0 z-[100] transition-opacity duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
+        {/* Capa de fondo */}
+        <div className="absolute inset-0 bg-verde" />
+
         {/* Cerrar */}
         <button
           onClick={() => setOpen(false)}
           aria-label="Cerrar menú"
-          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-crema hover:text-dorado transition-colors z-10"
+          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-crema hover:text-dorado transition-colors z-20"
         >
           <X size={32} strokeWidth={1.8} />
         </button>
 
         {/* Contenido */}
-        <div className="h-full flex flex-col px-8 pt-20 pb-10">
+        <div className="relative z-10 h-full flex flex-col px-8 pt-20 pb-10">
           {/* Nav links grandes */}
           <nav className="flex-1 flex flex-col justify-center gap-5">
             {links.map((link, i) => (
