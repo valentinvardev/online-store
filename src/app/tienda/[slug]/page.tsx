@@ -8,13 +8,7 @@ import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { productos } from "../_data/productos";
 import { useCart } from "~/app/_components/cart/CartContext";
-
-const badgeStyles: Record<string, string> = {
-  "Nuevo":       "bg-celeste/20 text-celeste border-celeste/30",
-  "Oferta":      "bg-rosa/15 text-rosa border-rosa/30",
-  "Más vendido": "bg-dorado/20 text-tierra-dark border-dorado/40",
-  "Agotado":     "bg-tierra/10 text-tierra/60 border-tierra/20",
-};
+import Badge from "~/app/_components/Badge";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   "Físico":        <Package size={13} strokeWidth={1.5} />,
@@ -80,9 +74,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                 </div>
                 {/* Badge */}
                 {producto.badge && (
-                  <span className={`absolute top-4 left-4 font-sans text-[0.8rem] px-3 py-1.5 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
-                    {producto.badge}
-                  </span>
+                  <Badge label={producto.badge} className="absolute top-4 left-4" />
                 )}
               </div>
 
@@ -107,9 +99,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   {producto.category}
                 </span>
                 {producto.badge && producto.badge !== "Agotado" && (
-                  <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[producto.badge]}`}>
-                    {producto.badge}
-                  </span>
+                  <Badge label={producto.badge} />
                 )}
               </div>
 
@@ -254,9 +244,7 @@ export default function ProductoPage({ params }: { params: Promise<{ slug: strin
                   <div className={`h-40 bg-gradient-to-br ${p.gradient} flex items-center justify-center relative`}>
                     <span className="text-white/40 text-3xl">✦</span>
                     {p.badge && (
-                      <span className={`absolute top-3 left-3 font-sans text-[0.75rem] px-2 py-1 border tracking-widest uppercase ${badgeStyles[p.badge]}`}>
-                        {p.badge}
-                      </span>
+                      <Badge label={p.badge} size="sm" className="absolute top-3 left-3" />
                     )}
                   </div>
                   <div className="p-5 flex flex-col flex-1">

@@ -5,6 +5,7 @@ import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { cursos } from "../_data/cursos";
 import CursoAccordion from "./_components/CursoAccordion";
+import Badge from "../../_components/Badge";
 
 const levelColors: Record<string, string> = {
   "Principiante":      "text-verde bg-verde/15 border-verde/30",
@@ -12,11 +13,6 @@ const levelColors: Record<string, string> = {
   "Todos los niveles": "text-dorado-dark bg-dorado/15 border-dorado/30",
 };
 
-const badgeColors: Record<string, string> = {
-  "Más vendido":     "bg-dorado/20 text-tierra-dark border-dorado/40",
-  "Nuevo":           "bg-celeste/20 text-celeste border-celeste/30",
-  "Últimos lugares": "bg-rosa/15 text-rosa border-rosa/25",
-};
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -71,11 +67,7 @@ export default async function CursoInfoPage({ params }: Props) {
                 <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${levelColors[curso.level]}`}>
                   {curso.level}
                 </span>
-                {curso.badge && (
-                  <span className={`font-sans text-[0.8rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
-                    {curso.badge}
-                  </span>
-                )}
+                {curso.badge && <Badge label={curso.badge} />}
               </div>
 
               {/* Título */}

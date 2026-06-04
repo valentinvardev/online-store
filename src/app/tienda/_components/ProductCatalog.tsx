@@ -6,15 +6,9 @@ import { ChevronDown } from "lucide-react";
 import { useCart } from "../../_components/cart/CartContext";
 import { productos } from "../_data/productos";
 import type { Category } from "../_data/productos";
+import Badge from "../../_components/Badge";
 
 type Filter = "Todos" | Category;
-
-const badgeStyles: Record<string, string> = {
-  "Nuevo":       "bg-celeste/20 text-celeste border-celeste/30",
-  "Oferta":      "bg-rosa/15 text-rosa border-rosa/30",
-  "Más vendido": "bg-dorado/20 text-tierra-dark border-dorado/40",
-  "Agotado":     "bg-tierra/10 text-tierra/60 border-tierra/20",
-};
 
 const categories: { value: Filter; label: string; icon: string; color: string; activeColor: string }[] = [
   { value: "Todos",         label: "Todos",        icon: "✦", color: "text-morado/50 border-morado/15 hover:border-morado/40 hover:text-morado",    activeColor: "bg-morado-dark text-crema border-morado-dark shadow-lg" },
@@ -133,9 +127,7 @@ export default function ProductCatalog() {
                   <span className="text-white text-xl">✦</span>
                 </div>
                 {product.badge && (
-                  <span className={`absolute top-3 left-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${badgeStyles[product.badge]}`}>
-                    {product.badge}
-                  </span>
+                  <Badge label={product.badge} className="absolute top-3 left-3" />
                 )}
                 <span className="absolute top-3 right-3 font-sans text-[0.75rem] text-white/50 tracking-[0.3em] uppercase bg-black/20 px-2 py-1">
                   {product.category}

@@ -5,6 +5,7 @@ import { Clock, BookOpen, Users, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { cursos } from "../_data/cursos";
 import type { Nivel } from "../_data/cursos";
+import Badge from "../../_components/Badge";
 
 type Level = "Todos" | Nivel;
 
@@ -21,11 +22,6 @@ const levelColors: Record<string, string> = {
   "Todos los niveles": "text-dorado bg-dorado/10 border-dorado/25",
 };
 
-const badgeColors: Record<string, string> = {
-  "Más vendido":     "bg-dorado/20 text-tierra-dark border-dorado/40",
-  "Nuevo":           "bg-celeste/20 text-celeste border-celeste/30",
-  "Últimos lugares": "bg-rosa/15 text-rosa border-rosa/30",
-};
 
 export default function CursosCatalog() {
   const [active, setActive] = useState<Level>("Todos");
@@ -155,9 +151,7 @@ export default function CursosCatalog() {
 
                 {/* Badge */}
                 {curso.badge && (
-                  <span className={`absolute top-3 right-3 font-sans text-[0.78rem] px-2.5 py-1 border tracking-widest uppercase ${badgeColors[curso.badge]}`}>
-                    {curso.badge}
-                  </span>
+                  <Badge label={curso.badge} className="absolute top-3 right-3" />
                 )}
               </div>
 
