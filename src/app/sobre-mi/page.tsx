@@ -114,13 +114,8 @@ export default function SobreMiPage() {
       </section>
 
       {/* ── Presentación principal ── */}
-      <section
-        className="relative py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden bg-crema bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/fondo-sobre-mi.png')" }}
-      >
-        {/* Velo para legibilidad */}
-        <div className="absolute inset-0 bg-crema/55 pointer-events-none" />
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start">
 
             {/* Foto */}
