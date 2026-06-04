@@ -64,23 +64,23 @@ export default function ProductCatalog() {
         onClick={opts?.onClick ?? (() => setActive(value))}
         className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
           opts?.isTrigger
-            ? "bg-morado/8 text-morado border-2 border-morado/20"
+            ? "bg-white/60 text-tierra-dark border-2 border-tierra-dark/30"
             : isActive
-              ? "bg-morado/8 text-morado"
-              : "text-tierra-dark hover:bg-morado/5"
+              ? "bg-tierra-dark/10 text-tierra-dark"
+              : "text-tierra-dark hover:bg-tierra-dark/5"
         }`}
       >
-        <span className="text-[0.75rem]">{icon}</span>
-        <span className="font-sans text-[0.8rem] tracking-widest uppercase font-semibold flex-1">
+        <span className="text-[0.85rem]">{icon}</span>
+        <span className="font-sans text-[0.85rem] tracking-widest uppercase font-bold flex-1">
           {label}
         </span>
-        <span className={`font-sans text-[0.75rem] font-bold px-1.5 py-0.5 rounded-full ${
-          opts?.isTrigger || isActive ? "bg-morado/15 text-morado" : "bg-morado/10 text-tierra/60"
+        <span className={`font-sans text-[0.75rem] font-bold px-2 py-0.5 rounded-full ${
+          opts?.isTrigger || isActive ? "bg-tierra-dark/20 text-tierra-dark" : "bg-tierra-dark/10 text-tierra-dark/85"
         }`}>
           {count}
         </span>
         {opts?.withChevron && (
-          <ChevronDown size={14} className={`shrink-0 transition-transform ${opts.isOpen ? "rotate-180" : ""}`} />
+          <ChevronDown size={16} className={`shrink-0 transition-transform ${opts.isOpen ? "rotate-180" : ""}`} strokeWidth={2.2} />
         )}
       </button>
     );
@@ -91,7 +91,7 @@ export default function ProductCatalog() {
       {/* Filtros sticky */}
       <div className="bg-dorado-light/95 backdrop-blur-sm sticky top-0 z-10 border-b-2 border-morado-dark/15">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-5 sm:py-6">
-          <p className="font-sans text-[0.8rem] text-tierra/30 tracking-[0.25em] uppercase mb-3 sm:mb-4">
+          <p className="font-sans font-semibold text-[0.85rem] text-tierra-dark tracking-[0.25em] uppercase mb-3 sm:mb-4">
             Filtrar por categoría
           </p>
 
@@ -104,9 +104,9 @@ export default function ProductCatalog() {
               isTrigger: true,
             })}
             {dropdownOpen && (
-              <ul className="absolute left-0 right-0 mt-2 bg-crema border-2 border-morado-dark block-shadow-sm z-20 overflow-hidden">
+              <ul className="absolute left-0 right-0 mt-2 bg-crema border-2 border-tierra-dark block-shadow-sm z-20 overflow-hidden">
                 {categories.map((cat) => (
-                  <li key={cat.value} className="border-b border-morado/8 last:border-0">
+                  <li key={cat.value} className="border-b border-tierra-dark/15 last:border-0">
                     {renderListItem(cat, {
                       onClick: () => { setActive(cat.value); setDropdownOpen(false); },
                     })}
