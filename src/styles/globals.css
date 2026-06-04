@@ -44,6 +44,23 @@
   --animate-swing:     swing 4s ease-in-out infinite;
 }
 
+/* ── Decoración flotante — íconos psicodélicos de fondo ── */
+@keyframes decor-float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-18px) rotate(calc(var(--rot, 0deg) + 6deg)); }
+}
+@keyframes decor-float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-10px) rotate(calc(var(--rot, 0deg) - 5deg)); }
+}
+@keyframes decor-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.decor-float      { animation: decor-float 7s ease-in-out infinite; }
+.decor-float-slow { animation: decor-float-slow 10s ease-in-out infinite; }
+.decor-spin       { animation: decor-spin 40s linear infinite; }
+
 /* ── Cursor mágico — destellos ── */
 @keyframes sparkle-fade {
   0%   { opacity: 1;   transform: translate(-50%, -50%) scale(1); }

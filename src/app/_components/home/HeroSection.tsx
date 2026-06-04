@@ -1,6 +1,11 @@
+import DecorIcons from "../DecorIcons";
+
 export default function HeroSection() {
   return (
     <section className="relative bg-crema flex flex-col overflow-hidden">
+
+      {/* Decoración psicodélica de fondo */}
+      <DecorIcons preset="festivo" />
 
       {/* Marco decorativo */}
       <div className="absolute inset-4 border border-morado/12 pointer-events-none z-10" />

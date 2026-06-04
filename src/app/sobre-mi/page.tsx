@@ -2,6 +2,7 @@ import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import RevealOnScroll from "../_components/home/RevealOnScroll";
 import ShaderBackground from "../_components/ShaderBackground";
+import DecorIcons from "../_components/DecorIcons";
 
 export const metadata = {
   title: "Sobre Mí — La Reina de Bastos",
@@ -236,8 +237,9 @@ export default function SobreMiPage() {
       </section>
 
       {/* ── Filosofía ── */}
-      <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+        <DecorIcons preset="festivo" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center lg:text-left">
               <span className="font-sans text-[0.8rem] text-tierra/80 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">En qué creo</span>

@@ -7,6 +7,7 @@ import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import RevealOnScroll from "~/app/_components/home/RevealOnScroll";
 import ShaderBackground from "~/app/_components/ShaderBackground";
+import DecorIcons from "~/app/_components/DecorIcons";
 
 /* ── Planes ── */
 const planes = [
@@ -288,8 +289,9 @@ export default function SuscripcionesPage() {
       </div>
 
       {/* ── PLANES ── */}
-      <section className="bg-crema-dark py-16 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-crema-dark py-16 px-6 relative overflow-hidden">
+        <DecorIcons preset="festivo" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-12">
               <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
