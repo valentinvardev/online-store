@@ -2,6 +2,7 @@ import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import PromoBanner from "./_components/PromoBanner";
 import ProductCatalog from "./_components/ProductCatalog";
+import DecorIcons from "../_components/DecorIcons";
 
 export const metadata = {
   title: "Tienda — La Reina de Bastos",
@@ -15,8 +16,9 @@ export default function TiendaPage() {
       <PromoBanner />
 
       {/* Encabezado de sección */}
-      <div className="bg-dorado-light border-b-2 border-morado-dark/20 py-10 sm:py-12 lg:py-14 px-5 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-dorado-light border-b-2 border-morado-dark/20 py-10 sm:py-12 lg:py-14 px-5 sm:px-6 relative overflow-hidden">
+        <DecorIcons preset="suave" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <h1 className="font-display uppercase text-[clamp(3rem,12vw,7.5rem)] text-tierra-dark leading-[0.88] tracking-tight">
             Del altar<br />a tu vida
           </h1>
