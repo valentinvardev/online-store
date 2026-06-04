@@ -1,6 +1,7 @@
 import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import RevealOnScroll from "../_components/home/RevealOnScroll";
+import ShaderBackground from "../_components/ShaderBackground";
 
 export const metadata = {
   title: "Sobre Mí — La Reina de Bastos",
@@ -74,13 +75,11 @@ export default function SobreMiPage() {
         <span className="absolute top-6 left-6 sm:top-8 sm:left-8 font-display text-dorado/50 text-xl sm:text-2xl select-none z-10">✦</span>
         <span className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 font-display text-dorado/40 text-base sm:text-lg select-none z-10">◎</span>
 
-        {/* Degradado de verdes claros con shimmer */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
-          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
-          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
-          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+        {/* Fondo psicodélico Warp verde (Paper Shaders) */}
+        <ShaderBackground palette="verde" effect="warp" speed={0.22} swirl={0.75} distortion={0.35} opacity={1} />
 
+        {/* Estrellitas y ornamentos encima */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Estrellitas dispersas por todo el banner */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
           <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
