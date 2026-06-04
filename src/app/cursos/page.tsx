@@ -2,6 +2,7 @@ import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import CursosBanner from "./_components/CursosBanner";
 import CursosCatalog from "./_components/CursosCatalog";
+import ShaderBackground from "../_components/ShaderBackground";
 
 export const metadata = {
   title: "Cursos — La Reina de Bastos",
@@ -15,15 +16,14 @@ export default function CursosPage() {
       <CursosBanner />
 
       {/* Encabezado */}
-      <div className="bg-verde-light relative py-14 px-6 overflow-hidden">
-        {/* Degradado de verdes claros con shimmer */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
-          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
-          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
-          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+      <div className="bg-verde relative py-14 px-6 overflow-hidden">
+        {/* Fondo psicodélico Mesh verde (Paper Shaders) */}
+        <ShaderBackground palette="bosque" effect="mesh" speed={0.28} distortion={0.85} swirl={0.7} grain={0.2} opacity={0.95} />
+        {/* Velo para legibilidad */}
+        <div className="absolute inset-0 bg-[#14362a]/30 pointer-events-none" />
 
-          {/* Estrellitas dispersas */}
+        {/* Estrellitas dispersas */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
           <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
           <span className="absolute top-[38%] right-[18%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>

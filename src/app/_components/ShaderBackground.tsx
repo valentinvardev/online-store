@@ -12,6 +12,8 @@ const palettes = {
   selva: ["#1a3a2e", "#3D7A47", "#6BAE75", "#7EC8E3"],
   // Verde claro — tonos del hero verde (groovy y luminoso)
   verde: ["#4e9a5c", "#6BAE75", "#8fd4a0", "#bdeccb"],
+  // Bosque — verdes profundos para heros con texto claro encima
+  bosque: ["#14362a", "#236046", "#3D7A47", "#6BAE75"],
   // Aurora — morado, celeste, rosa (etéreo)
   aurora: ["#1e0a3c", "#7B5EA7", "#7EC8E3", "#F07DC0"],
   // Crema — tonos suaves sobre fondo claro (sutil, para secciones claras)

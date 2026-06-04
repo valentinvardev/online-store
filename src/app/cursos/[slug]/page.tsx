@@ -89,7 +89,7 @@ export default async function CursoInfoPage({ params }: Props) {
               </div>
 
               {/* Descripción corta */}
-              <p className="font-sans text-crema/60 text-sm leading-relaxed tracking-wide max-w-xl">
+              <p className="font-sans text-crema/85 text-[15px] sm:text-base leading-relaxed tracking-wide max-w-xl">
                 {curso.desc}
               </p>
 
@@ -201,7 +201,7 @@ export default async function CursoInfoPage({ params }: Props) {
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 bg-white border border-morado/10 p-4">
                       <span className="text-dorado text-sm shrink-0 mt-0.5">✦</span>
-                      <p className="font-sans text-sm text-tierra/65 tracking-wide leading-snug">{item}</p>
+                      <p className="font-sans text-[15px] text-tierra-dark/80 tracking-wide leading-snug">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -213,7 +213,7 @@ export default async function CursoInfoPage({ params }: Props) {
                   Sobre este curso
                 </h2>
                 <div className="bg-white border-2 border-morado/10 p-8">
-                  <p className="font-sans text-tierra/65 text-sm leading-relaxed tracking-wide">
+                  <p className="font-sans text-tierra-dark/80 text-[15px] sm:text-base leading-relaxed tracking-wide">
                     {curso.descLong}
                   </p>
                 </div>
@@ -287,7 +287,7 @@ export default async function CursoInfoPage({ params }: Props) {
           <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
             ¿Lista para empezar?
           </h2>
-          <p className="font-sans text-crema/40 text-sm tracking-wide max-w-sm mx-auto leading-relaxed">
+          <p className="font-sans text-crema/70 text-[15px] tracking-wide max-w-sm mx-auto leading-relaxed">
             Unite a {curso.students} que ya transitaron este camino.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

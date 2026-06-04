@@ -76,8 +76,10 @@ export default function SobreMiPage() {
         <span className="absolute top-6 left-6 sm:top-8 sm:left-8 font-display text-dorado/50 text-xl sm:text-2xl select-none z-10">✦</span>
         <span className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 font-display text-dorado/40 text-base sm:text-lg select-none z-10">◎</span>
 
-        {/* Fondo psicodélico Warp verde (Paper Shaders) */}
-        <ShaderBackground palette="verde" effect="warp" speed={0.22} swirl={0.75} distortion={0.35} opacity={1} />
+        {/* Fondo psicodélico Mesh verde (Paper Shaders) — igual que suscripciones */}
+        <ShaderBackground palette="bosque" effect="mesh" speed={0.28} distortion={0.85} swirl={0.7} grain={0.2} opacity={0.95} />
+        {/* Velo para legibilidad del texto */}
+        <div className="absolute inset-0 bg-[#14362a]/30 pointer-events-none" />
 
         {/* Estrellitas y ornamentos encima */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -104,7 +106,7 @@ export default function SobreMiPage() {
             Sobre<br />
             <span className="text-crema">mí</span>
           </h1>
-          <p className="font-sans italic text-crema/85 text-base sm:text-lg max-w-lg leading-relaxed">
+          <p className="font-sans italic text-crema text-lg sm:text-xl max-w-lg leading-relaxed drop-shadow-[0_1px_8px_rgba(20,54,42,0.5)]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Una mujer, un mazo de tarot y la convicción de que la magia es para todas.
           </p>
         </div>
@@ -158,7 +160,7 @@ export default function SobreMiPage() {
                   <h2 className="font-display uppercase text-[clamp(3rem,7vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-6">
                     Hola,<br />soy la Reina
                   </h2>
-                  <div className="space-y-4 sm:space-y-5 font-sans text-tierra/65 leading-relaxed tracking-wide text-sm sm:text-[15px] max-w-prose mx-auto lg:mx-0">
+                  <div className="space-y-4 sm:space-y-5 font-sans text-tierra-dark/85 leading-relaxed tracking-wide text-[15px] sm:text-[17px] max-w-prose mx-auto lg:mx-0">
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
@@ -226,7 +228,7 @@ export default function SobreMiPage() {
                     <div className="bg-crema/10 border border-crema/25 p-5 sm:p-6 flex-1 hover:border-dorado/60 transition-colors min-w-0">
                       <span className="font-display text-dorado text-sm tracking-widest lg:hidden block mb-2">{hito.año}</span>
                       <h3 className="font-sans font-semibold text-crema tracking-wide mb-2">{hito.titulo}</h3>
-                      <p className="font-sans text-crema/80 text-sm leading-relaxed tracking-wide">{hito.desc}</p>
+                      <p className="font-sans text-crema/95 text-[15px] leading-relaxed tracking-wide">{hito.desc}</p>
                     </div>
                   </div>
                 </RevealOnScroll>
@@ -255,7 +257,7 @@ export default function SobreMiPage() {
                 <div className={`bg-white border-2 block-shadow p-6 sm:p-8 transition-colors h-full ${v.color}`}>
                   <span className={`text-2xl sm:text-3xl block mb-4 sm:mb-5 ${v.accent}`}>{v.icon}</span>
                   <h3 className="font-sans font-bold text-tierra-dark tracking-wide mb-3">{v.title}</h3>
-                  <p className="font-sans text-tierra/65 text-sm leading-relaxed tracking-wide">{v.desc}</p>
+                  <p className="font-sans text-tierra-dark/80 text-[15px] leading-relaxed tracking-wide">{v.desc}</p>
                 </div>
               </RevealOnScroll>
             ))}
