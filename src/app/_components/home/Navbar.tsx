@@ -31,6 +31,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-rosa/10 shadow-sm shadow-rosa/5">
       <nav className="max-w-7xl mx-auto px-8 h-28 flex items-center justify-between gap-8">
 
@@ -153,9 +154,11 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu fullscreen overlay */}
+      </header>
+
+      {/* Mobile menu fullscreen overlay — fuera del header para evitar stacking context */}
       <div
-        className={`md:hidden fixed inset-0 z-[60] bg-morado-dark transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 z-[100] bg-morado-dark transition-all duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -230,6 +233,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
