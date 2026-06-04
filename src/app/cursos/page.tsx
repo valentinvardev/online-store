@@ -16,11 +16,17 @@ export default function CursosPage() {
 
       {/* Encabezado */}
       <div className="bg-verde relative py-14 px-6 overflow-hidden">
-        {/* Gradient flow — ondas de verde que se mueven lento */}
+        {/* SVG waves flowing — ondas orgánicas de verde */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 animate-gradient-flow" style={{ background: "linear-gradient(135deg, #1a4d2e 0%, #3d7a47 22%, #2d6a3e 44%, #0f3d24 66%, #3d7a47 88%, #1a4d2e 100%)" }} />
-          <div className="absolute inset-0 opacity-60 mix-blend-overlay animate-gradient-flow-vertical" style={{ background: "linear-gradient(180deg, rgba(15,61,36,0.5) 0%, transparent 35%, rgba(61,122,71,0.4) 70%, transparent 100%)" }} />
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(15,61,36,0.5) 100%)" }} />
+          <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[75%] animate-wave-slow">
+            <path d="M0,200 C300,140 600,260 900,200 C1200,140 1500,260 1800,200 C2100,140 2400,260 2400,200 L2400,400 L0,400 Z" fill="#0f3d24" />
+          </svg>
+          <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[55%] animate-wave-medium">
+            <path d="M0,150 C400,80 800,220 1200,150 C1600,80 2000,220 2400,150 L2400,400 L0,400 Z" fill="#1a4d2e" />
+          </svg>
+          <svg viewBox="0 0 2400 400" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-[200%] h-[35%] animate-wave-fast">
+            <path d="M0,100 C500,50 1000,150 1500,100 C2000,50 2400,150 2400,100 L2400,400 L0,400 Z" fill="#2d6a3e" />
+          </svg>
 
           {/* Estrellitas dispersas */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>

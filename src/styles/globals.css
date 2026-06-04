@@ -110,26 +110,34 @@
   50%       { transform: rotate(9deg); }
 }
 
-/* ── Gradient flow — ondas de verde que se mueven lento ── */
-@keyframes gradient-flow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ── SVG waves flowing — ondas orgánicas que flotan lento ── */
+@keyframes wave-slide-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-@keyframes gradient-flow-vertical {
-  0%   { background-position: 50% 0%; }
-  50%  { background-position: 50% 100%; }
-  100% { background-position: 50% 0%; }
+@keyframes wave-slide-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
-.animate-gradient-flow {
-  background-size: 250% 250%;
-  animation: gradient-flow 22s ease-in-out infinite;
-  will-change: background-position;
+@keyframes wave-float {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50%       { transform: translateX(-25%) translateY(-8px); }
 }
-.animate-gradient-flow-vertical {
-  background-size: 200% 300%;
-  animation: gradient-flow-vertical 28s ease-in-out infinite;
-  will-change: background-position;
+.animate-wave-slow {
+  animation: wave-slide-left 45s linear infinite;
+  will-change: transform;
+}
+.animate-wave-medium {
+  animation: wave-slide-right 32s linear infinite;
+  will-change: transform;
+}
+.animate-wave-fast {
+  animation: wave-slide-left 22s linear infinite;
+  will-change: transform;
+}
+.animate-wave-float {
+  animation: wave-float 38s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Péndulo — pivota desde el top center del elemento */
