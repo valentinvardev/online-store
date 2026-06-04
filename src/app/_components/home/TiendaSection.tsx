@@ -1,7 +1,4 @@
-"use client";
-
 import RevealOnScroll from "./RevealOnScroll";
-import { useCart } from "../cart/CartContext";
 
 type Product = {
   id: number;
@@ -48,7 +45,6 @@ const products: Product[] = [
 ];
 
 export default function TiendaSection() {
-  const { addItem } = useCart();
   return (
     <section className="bg-dorado-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -73,30 +69,18 @@ export default function TiendaSection() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="font-sans text-[0.8rem] text-tierra/65 tracking-widest uppercase mb-1">{product.category}</p>
                   <h3 className="font-sans font-semibold text-lg text-tierra-dark mb-2 group-hover:text-morado transition-colors leading-snug">
                     {product.name}
                   </h3>
                   <p className="font-sans text-[0.82rem] text-tierra/75 mb-4 leading-relaxed tracking-wide">
                     {product.desc}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <span className="font-sans font-bold text-2xl text-morado">{product.price}</span>
-                    <button
-                      onClick={() => addItem({
-                        id: product.id,
-                        name: product.name,
-                        category: product.category,
-                        itemType: "product",
-                        price: Number(product.price.replace(/[^0-9.]/g, "")),
-                        priceLabel: product.price,
-                        gradient: product.gradient,
-                      })}
-                      className="font-sans text-[0.8rem] px-4 py-2 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
-                    >
-                      Agregar
-                    </button>
-                  </div>
+                  <a
+                    href="/tienda"
+                    className="block w-full text-center font-sans text-[0.8rem] px-4 py-2 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm"
+                  >
+                    Ver más →
+                  </a>
                 </div>
               </article>
             </RevealOnScroll>

@@ -22,16 +22,16 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-rosa/10 shadow-sm shadow-rosa/5">
-      <nav className="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between gap-8">
+      <nav className="max-w-7xl mx-auto px-8 h-28 flex items-center justify-between gap-8">
 
         {/* Logo */}
         <Link href="/" className="group shrink-0">
           <Image
             src="/logo-rdb.png"
             alt="La Reina de Bastos"
-            width={160}
-            height={160}
-            className="h-16 w-auto transition-opacity duration-300 group-hover:opacity-75"
+            width={200}
+            height={200}
+            className="h-20 w-auto transition-opacity duration-300 group-hover:opacity-75"
             priority
           />
         </Link>
