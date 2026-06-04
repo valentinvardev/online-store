@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ShoppingBag } from "lucide-react";
 import { useCart } from "../../_components/cart/CartContext";
 import { productos } from "../_data/productos";
 import type { Category } from "../_data/productos";
@@ -160,9 +160,16 @@ export default function ProductCatalog() {
                         gradient: product.gradient,
                       });
                     }}
-                    className="font-sans text-[0.75rem] px-4 py-2.5 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="flex items-center gap-1.5 font-sans text-[0.75rem] px-4 py-2.5 border-2 border-morado-dark text-morado hover:bg-morado hover:text-crema transition-colors tracking-widest uppercase block-shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    {product.badge === "Agotado" ? "Agotado" : "Agregar"}
+                    {product.badge === "Agotado" ? (
+                      "Agotado"
+                    ) : (
+                      <>
+                        <ShoppingBag size={13} strokeWidth={1.8} />
+                        Agregar
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
