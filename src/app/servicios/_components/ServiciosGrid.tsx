@@ -31,7 +31,7 @@ const servicios: Servicio[] = [
     duration: "60 minutos",
     format: "Zoom en vivo",
     accentColor: "text-morado",
-    bgColor: "bg-morado-pale",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-morado-dark via-morado-mid to-morado",
     contenido: [
       "Sesión en vivo por Zoom",
@@ -51,7 +51,7 @@ const servicios: Servicio[] = [
     duration: "90 minutos",
     format: "Zoom en vivo",
     accentColor: "text-celeste",
-    bgColor: "bg-celeste-pale",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-[#0f2744] via-[#1a3a6b] to-celeste",
     contenido: [
       "Sesión extendida por Zoom",
@@ -71,7 +71,7 @@ const servicios: Servicio[] = [
     duration: "Proceso de 7 días",
     format: "Asincrónico",
     accentColor: "text-rosa",
-    bgColor: "bg-rosa-pale",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-[#6b0f3a] via-rosa to-[#ff9a5c]",
     contenido: [
       "Cuestionario de intención previo",
@@ -91,7 +91,7 @@ const servicios: Servicio[] = [
     duration: "60 min + informe",
     format: "Zoom en vivo",
     accentColor: "text-tierra",
-    bgColor: "bg-dorado-pale",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-[#0a0015] via-morado-dark to-morado-mid",
     contenido: [
       "Análisis completo de carta natal",
@@ -112,7 +112,7 @@ const servicios: Servicio[] = [
     duration: "60 min + 7 días",
     format: "Zoom + guía escrita",
     accentColor: "text-dorado",
-    bgColor: "bg-crema-dark",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-tierra-dark via-[#6b2d00] to-dorado",
     contenido: [
       "Lectura de tarot 60 minutos",
@@ -132,7 +132,7 @@ const servicios: Servicio[] = [
     duration: "75 minutos",
     format: "Zoom en vivo",
     accentColor: "text-morado-light",
-    bgColor: "bg-morado-pale",
+    bgColor: "bg-dorado-light",
     coverGradient: "from-morado-dark via-[#3b0764] to-rosa",
     contenido: [
       "Sesión de integración y cierre",
@@ -419,27 +419,27 @@ export default function ServiciosGrid() {
                 <h3 className="font-sans font-bold uppercase text-xl text-tierra-dark leading-tight tracking-wide">
                   {s.title}
                 </h3>
-                <p className="font-sans italic text-tierra/75 text-sm mt-1 mb-4">{s.subtitle}</p>
+                <p className="font-sans italic text-tierra-dark/85 text-base mt-1 mb-4">{s.subtitle}</p>
 
-                <p className="font-sans text-tierra/60 text-[15px] leading-relaxed mb-5 tracking-wide flex-1">
+                <p className="font-sans text-tierra-dark/85 text-[16px] leading-relaxed mb-5 tracking-wide flex-1">
                   {s.desc}
                 </p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  <span className="font-sans text-[0.82rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
+                  <span className="font-sans text-[0.85rem] bg-white/70 border border-tierra-dark/30 text-tierra-dark px-3 py-1 tracking-wide font-medium">
                     {s.duration}
                   </span>
-                  <span className="font-sans text-[0.82rem] bg-white/60 border border-morado/20 text-tierra px-3 py-1 tracking-wide">
+                  <span className="font-sans text-[0.85rem] bg-white/70 border border-tierra-dark/30 text-tierra-dark px-3 py-1 tracking-wide font-medium">
                     {s.format}
                   </span>
                 </div>
 
                 {/* Incluye */}
-                <ul className="space-y-2 mb-7 border-t border-morado/10 pt-5">
+                <ul className="space-y-2 mb-7 border-t border-tierra-dark/20 pt-5">
                   {s.contenido.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 font-sans text-[0.8rem] text-tierra/80 tracking-wide">
-                      <span className={`${s.accentColor} text-[0.75rem] mt-[3px] shrink-0`}>✦</span>
+                    <li key={i} className="flex items-start gap-2 font-sans text-[0.9rem] text-tierra-dark/90 tracking-wide">
+                      <span className="text-morado-dark text-[0.85rem] mt-[3px] shrink-0">✦</span>
                       {item}
                     </li>
                   ))}
@@ -450,7 +450,7 @@ export default function ServiciosGrid() {
                   <div>
                     <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
                     {s.badge && (
-                      <span className="block font-sans text-[0.78rem] text-dorado tracking-widest uppercase mt-0.5">
+                      <span className="block font-sans text-[0.8rem] font-semibold text-rosa tracking-widest uppercase mt-0.5">
                         {s.badge}
                       </span>
                     )}
