@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, LogIn, LogOut, User } from "lucide-react";
+import { ShoppingBag, LogIn, LogOut, User, X } from "lucide-react";
 import { useCart } from "../cart/CartContext";
 import { useSession, signOut } from "next-auth/react";
 
@@ -19,6 +19,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { count, openCart } = useCart();
   const { data: session } = useSession();
+
+  // Body scroll lock cuando el menú fullscreen está abierto
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-rosa/10 shadow-sm shadow-rosa/5">
@@ -143,44 +153,76 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
-        <div className="bg-crema border-t border-rosa/10 px-8 py-6">
-          <ul className="space-y-1 mb-6">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="flex items-center gap-2 font-sans font-extrabold text-morado/55 hover:text-morado transition-colors text-[13px] tracking-[0.2em] uppercase py-2.5 border-b border-morado/6 last:border-0"
-                  onClick={() => setOpen(false)}
-                >
-                  <span className="text-dorado/40 text-[0.8rem]">✦</span>
-                  {link.label}
-                </Link>
-              </li>
+      {/* Mobile menu fullscreen overlay */}
+      <div
+        className={`md:hidden fixed inset-0 z-[60] bg-crema transition-all duration-300 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Cerrar */}
+        <button
+          onClick={() => setOpen(false)}
+          aria-label="Cerrar menú"
+          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-morado-dark hover:text-morado transition-colors z-10"
+        >
+          <X size={32} strokeWidth={1.8} />
+        </button>
+
+        {/* Contenido */}
+        <div className="h-full flex flex-col px-8 pt-10 pb-10">
+          {/* Logo */}
+          <Link href="/" onClick={() => setOpen(false)} className="block mb-12 shrink-0">
+            <Image
+              src="/logo-rdb.png"
+              alt="La Reina de Bastos"
+              width={140}
+              height={140}
+              className="h-16 w-auto"
+            />
+          </Link>
+
+          {/* Nav links grandes */}
+          <nav className="flex-1 flex flex-col justify-center gap-5">
+            {links.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="font-display uppercase text-[clamp(2.5rem,11vw,4.5rem)] text-morado-dark hover:text-morado transition-all duration-300 tracking-wide leading-none flex items-center gap-3 group"
+                style={{
+                  transitionDelay: open ? `${100 + i * 70}ms` : "0ms",
+                  transform: open ? "translateX(0)" : "translateX(2rem)",
+                  opacity: open ? 1 : 0,
+                }}
+              >
+                <span className="font-display text-dorado/60 group-hover:text-dorado text-2xl transition-colors">✦</span>
+                {link.label}
+              </Link>
             ))}
-          </ul>
-          <div className="flex items-center gap-3 pt-2">
+          </nav>
+
+          {/* Acciones abajo */}
+          <div className="pt-8 border-t-2 border-morado/15 shrink-0 space-y-3">
             {session ? (
               <button
                 onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-morado-dark hover:text-morado transition-colors tracking-widest uppercase py-3.5 border-2 border-morado/30"
               >
-                <LogOut size={13} strokeWidth={1.5} className="text-verde-light" /> Salir
+                <LogOut size={16} strokeWidth={1.8} /> Cerrar sesión
               </button>
             ) : (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 font-sans font-semibold text-[0.75rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase px-3 py-2 border border-morado/15"
                 onClick={() => setOpen(false)}
+                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-sm text-morado-dark hover:text-morado transition-colors tracking-widest uppercase py-3.5 border-2 border-morado/30"
               >
-                <LogIn size={13} strokeWidth={1.8} className="text-morado" /> Entrar
+                <LogIn size={16} strokeWidth={1.8} /> Entrar
               </Link>
             )}
             <Link
               href="/reservas"
-              className="flex-1 text-center bg-morado text-crema font-sans font-semibold text-[0.75rem] py-2.5 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors"
               onClick={() => setOpen(false)}
+              className="w-full block text-center bg-morado text-crema font-sans font-semibold text-sm py-4 tracking-widest uppercase border-2 border-morado hover:bg-morado-light transition-colors block-shadow-sm"
             >
               ✦ Reservar
             </Link>
