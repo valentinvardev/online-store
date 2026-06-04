@@ -6,6 +6,7 @@ import { Check, X, Moon, Star, Sparkles } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import RevealOnScroll from "~/app/_components/home/RevealOnScroll";
+import ShaderBackground from "~/app/_components/ShaderBackground";
 
 /* ── Planes ── */
 const planes = [
@@ -140,9 +141,14 @@ export default function SuscripcionesPage() {
 
       {/* ── HERO ── */}
       <section className="bg-morado-dark relative overflow-hidden">
+        {/* Fondo psicodélico animado (Paper Shaders) */}
+        <ShaderBackground palette="mistico" speed={0.28} distortion={0.85} swirl={0.7} grain={0.22} opacity={0.9} />
+        {/* Oscurecedor para legibilidad del texto */}
+        <div className="absolute inset-0 bg-morado-dark/35 pointer-events-none" />
+
         <div className="absolute inset-0 pointer-events-none select-none">
-          <span className="absolute top-6 right-12 font-display text-dorado/6 text-[10rem] leading-none">✦</span>
-          <span className="absolute bottom-0 left-8 font-display text-crema/3 text-[8rem] leading-none">◉</span>
+          <span className="absolute top-6 right-12 font-display text-dorado/10 text-[10rem] leading-none">✦</span>
+          <span className="absolute bottom-0 left-8 font-display text-crema/5 text-[8rem] leading-none">◉</span>
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 text-center">
           <span className="font-sans text-[0.8rem] text-dorado tracking-[0.4em] uppercase block mb-5">
