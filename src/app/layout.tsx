@@ -36,7 +36,7 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: "La Reina de Bastos",
   description:
-    "Espiritualidad que sabe a tierra. Tienda, cursos y servicios personalizados de tarot, rituales y espiritualidad práctica.",
+    "Magia para la vida cotidiana. Tienda, cursos y servicios personalizados de tarot, rituales y espiritualidad práctica.",
   icons: [
     { rel: "icon",             url: "/logo-rdb.png", type: "image/png" },
     { rel: "apple-touch-icon", url: "/logo-rdb.png" },

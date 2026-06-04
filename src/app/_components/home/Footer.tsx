@@ -87,7 +87,7 @@ export default function Footer() {
               />
             </div>
             <p className="font-sans italic text-crema/95 text-sm leading-relaxed max-w-xs">
-              Espiritualidad que sabe a tierra. Para las que quieren ser sagradas y humanas al mismo tiempo.
+              Magia para la vida cotidiana. Para las que quieren ser sagradas y humanas al mismo tiempo.
             </p>
             {/* Redes */}
             <div>
