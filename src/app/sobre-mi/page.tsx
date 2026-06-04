@@ -74,24 +74,16 @@ export default function SobreMiPage() {
         <span className="absolute top-6 left-6 sm:top-8 sm:left-8 font-display text-dorado/40 text-xl sm:text-2xl select-none z-10">✦</span>
         <span className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 font-display text-dorado/30 text-base sm:text-lg select-none z-10">◎</span>
 
-        {/* Conic spin — caleidoscopio circular de verdes que rota */}
+        {/* Degradado vertical con shimmer descendente */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Capa principal — conic gradient rotando */}
-          <div
-            className="absolute top-1/2 left-1/2 w-[200vmax] h-[200vmax] animate-conic-spin"
-            style={{
-              background: "conic-gradient(from 0deg at 50% 50%, #0f3d24 0deg, #3d7a47 60deg, #1a4d2e 120deg, #2d6a3e 180deg, #3d7a47 240deg, #0f3d24 300deg, #1a4d2e 360deg)",
-            }}
-          />
-          {/* Capa contraria más sutil — para profundidad */}
-          <div
-            className="absolute top-1/2 left-1/2 w-[180vmax] h-[180vmax] opacity-40 mix-blend-overlay animate-conic-spin-reverse"
-            style={{
-              background: "conic-gradient(from 45deg at 50% 50%, #1a4d2e 0deg, transparent 90deg, #2d6a3e 180deg, transparent 270deg, #1a4d2e 360deg)",
-            }}
-          />
-          {/* Vignette para suavizar bordes y ayudar legibilidad */}
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 35%, rgba(15,61,36,0.55) 100%)" }} />
+          {/* Base — degradado dark top → light bottom */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #0f3d24 0%, #1a4d2e 25%, #3d7a47 55%, #5fa569 80%, #6bae75 100%)" }} />
+          {/* Capa de pulso sutil — varía el degradado lentamente */}
+          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 30%, #5fa569 65%, #6bae75 90%, #7bc888 100%)" }} />
+          {/* Shimmer 1 — rayo de luz que cae */}
+          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)" }} />
+          {/* Shimmer 2 — más sutil, más lento, desfasado */}
+          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(123,200,136,0.18) 50%, transparent 100%)" }} />
 
           {/* Estrellitas dispersas por todo el banner */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>

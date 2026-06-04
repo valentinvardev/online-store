@@ -16,21 +16,12 @@ export default function CursosPage() {
 
       {/* Encabezado */}
       <div className="bg-verde relative py-14 px-6 overflow-hidden">
-        {/* Conic spin — caleidoscopio circular de verdes que rota */}
+        {/* Degradado vertical con shimmer descendente */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute top-1/2 left-1/2 w-[200vmax] h-[200vmax] animate-conic-spin"
-            style={{
-              background: "conic-gradient(from 0deg at 50% 50%, #0f3d24 0deg, #3d7a47 60deg, #1a4d2e 120deg, #2d6a3e 180deg, #3d7a47 240deg, #0f3d24 300deg, #1a4d2e 360deg)",
-            }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 w-[180vmax] h-[180vmax] opacity-40 mix-blend-overlay animate-conic-spin-reverse"
-            style={{
-              background: "conic-gradient(from 45deg at 50% 50%, #1a4d2e 0deg, transparent 90deg, #2d6a3e 180deg, transparent 270deg, #1a4d2e 360deg)",
-            }}
-          />
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 35%, rgba(15,61,36,0.55) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #0f3d24 0%, #1a4d2e 25%, #3d7a47 55%, #5fa569 80%, #6bae75 100%)" }} />
+          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 30%, #5fa569 65%, #6bae75 90%, #7bc888 100%)" }} />
+          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)" }} />
+          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(123,200,136,0.18) 50%, transparent 100%)" }} />
 
           {/* Estrellitas dispersas */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>

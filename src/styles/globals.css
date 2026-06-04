@@ -110,22 +110,27 @@
   50%       { transform: rotate(9deg); }
 }
 
-/* ── Conic spin — caleidoscopio circular de verdes que rota ── */
-@keyframes conic-rotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+/* ── Vertical gradient flow — degradado verde con shimmer descendente ── */
+@keyframes shimmer-fall {
+  0%   { transform: translateY(-110%); }
+  100% { transform: translateY(110%); }
 }
-@keyframes conic-rotate-reverse {
-  from { transform: translate(-50%, -50%) rotate(360deg); }
-  to   { transform: translate(-50%, -50%) rotate(0deg); }
+@keyframes gradient-breathe {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 0.5; }
 }
-.animate-conic-spin {
-  animation: conic-rotate 55s linear infinite;
+.animate-shimmer-fall {
+  animation: shimmer-fall 14s linear infinite;
   will-change: transform;
 }
-.animate-conic-spin-reverse {
-  animation: conic-rotate-reverse 75s linear infinite;
+.animate-shimmer-fall-slow {
+  animation: shimmer-fall 22s linear infinite;
+  animation-delay: 7s;
   will-change: transform;
+}
+.animate-gradient-breathe {
+  animation: gradient-breathe 12s ease-in-out infinite;
+  will-change: opacity;
 }
 
 /* Péndulo — pivota desde el top center del elemento */
