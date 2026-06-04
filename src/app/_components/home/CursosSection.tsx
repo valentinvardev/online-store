@@ -110,8 +110,7 @@ export default function CursosSection() {
                       {curso.lessons}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-sans font-bold text-3xl text-dorado">{curso.price}</span>
+                  <div className="flex justify-end">
                     <a href="/cursos" className="bg-dorado text-tierra-dark font-sans text-[13px] px-5 py-2.5 border-2 border-morado-dark hover:bg-dorado-light transition-colors font-semibold tracking-widest uppercase block-shadow-sm">
                       Inscribirme
                     </a>

@@ -15,13 +15,13 @@ export default function CursosPage() {
       <CursosBanner />
 
       {/* Encabezado */}
-      <div className="bg-verde relative py-14 px-6 overflow-hidden">
-        {/* Degradado vertical con shimmer descendente */}
+      <div className="bg-verde-light relative py-14 px-6 overflow-hidden">
+        {/* Degradado de verdes claros con shimmer */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #0f3d24 0%, #1a4d2e 25%, #3d7a47 55%, #5fa569 80%, #6bae75 100%)" }} />
-          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 30%, #5fa569 65%, #6bae75 90%, #7bc888 100%)" }} />
-          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)" }} />
-          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(123,200,136,0.18) 50%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
+          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
+          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
+          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
 
           {/* Estrellitas dispersas */}
           <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
@@ -44,7 +44,7 @@ export default function CursosPage() {
               Aprendé a tu ritmo
             </span>
           </div>
-          <h1 className="font-display uppercase text-[clamp(2rem,8vw,5rem)] text-crema leading-none tracking-wide">
+          <h1 className="font-display uppercase text-[clamp(2rem,8vw,5rem)] text-crema leading-none tracking-wide" style={{ textShadow: "0 4px 16px rgba(15,61,36,0.5)" }}>
             Tu lenguaje<br />sagrado
           </h1>
           <p className="font-sans italic text-crema/85 text-base mt-4 max-w-md leading-relaxed">
