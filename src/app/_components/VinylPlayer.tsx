@@ -9,16 +9,15 @@ import { Volume2, VolumeX } from "lucide-react";
  * - Click sobre el vinilo togglea mute
  * - Loop infinito, volumen 0.35
  *
- * Para que suene: dropear un mp3 en /public/audio/ambient.mp3
- * (puede ser otra extension, ajustar TRACK_SRC) */
+ * Pista: ambient electronica via SoundHelix (CDN estable hace años).
+ * Para cambiar la cancion: reemplazar TRACK_SRC por otra URL o por '/audio/foo.mp3'. */
 
-const TRACK_SRC = "/audio/ambient.mp3";
+const TRACK_SRC = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3";
 const TRACK_TITLE = "Música del altar";
 
 export default function VinylPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [muted, setMuted] = useState(true);
-  const [ready, setReady] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
 
   // Intento de autoplay muted
@@ -28,15 +27,7 @@ export default function VinylPlayer() {
     audio.loop = true;
     audio.volume = 0.35;
     audio.muted = true;
-    const onCanPlay = () => setReady(true);
-    const onError = () => setReady(false);
-    audio.addEventListener("canplaythrough", onCanPlay);
-    audio.addEventListener("error", onError);
     audio.play().catch(() => {});
-    return () => {
-      audio.removeEventListener("canplaythrough", onCanPlay);
-      audio.removeEventListener("error", onError);
-    };
   }, []);
 
   // Primera interacción del usuario → desmutea
@@ -78,10 +69,6 @@ export default function VinylPlayer() {
     }
     setUnlocked(true);
   };
-
-  if (!ready) {
-    return <audio ref={audioRef} src={TRACK_SRC} preload="auto" />;
-  }
 
   const spinning = !muted;
 
