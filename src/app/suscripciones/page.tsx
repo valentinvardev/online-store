@@ -260,20 +260,13 @@ export default function SuscripcionesPage() {
       </section>
 
       {/* ── POR QUÉ SUMARTE ── */}
-      <section className="bg-verde-light py-16 sm:py-20 px-6 relative overflow-hidden">
-        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
-          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
-          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
-          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
-          <Stickers preset="bosque" blend="soft-light" />
-        </div>
+      <section className="bg-dorado-light py-16 sm:py-20 px-6 relative overflow-hidden">
+        <Stickers preset="solar" blend="multiply" />
         <div className="max-w-6xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-12">
-              <span className="font-sans text-[0.6rem] text-dorado tracking-[0.4em] uppercase block mb-4">Lo que se despierta en vos</span>
-              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
+              <span className="font-sans font-semibold text-[0.85rem] text-tierra-dark tracking-[0.4em] uppercase block mb-4">Lo que se despierta en vos</span>
+              <h2 className="font-display uppercase text-[clamp(2rem,5vw,3.5rem)] text-tierra-dark leading-none tracking-wide">
                 Por qué sumarte
               </h2>
             </div>
@@ -281,10 +274,10 @@ export default function SuscripcionesPage() {
           <div className="grid sm:grid-cols-3 gap-5">
             {virtudes.map((v, i) => (
               <RevealOnScroll key={i} delay={i * 100}>
-                <div className="bg-crema/10 border border-crema/20 p-7 hover:bg-crema/15 hover:border-dorado/40 transition-all group h-full text-center sm:text-left">
-                  <span className="font-display text-dorado text-3xl block mb-4 group-hover:scale-110 transition-transform">{v.icon}</span>
-                  <h3 className="font-sans font-bold text-crema text-base tracking-wide mb-2">{v.titulo}</h3>
-                  <p className="font-sans text-crema/85 text-[15px] leading-relaxed tracking-wide">{v.desc}</p>
+                <div className="bg-crema border-2 border-morado-dark block-shadow p-7 hover:translate-y-[-2px] transition-transform group h-full text-center sm:text-left">
+                  <span className="font-display text-morado-dark text-3xl block mb-4 group-hover:scale-110 transition-transform">{v.icon}</span>
+                  <h3 className="font-sans font-bold text-tierra-dark text-lg tracking-wide mb-2">{v.titulo}</h3>
+                  <p className="font-sans text-tierra-dark/85 text-[15px] leading-relaxed tracking-wide">{v.desc}</p>
                 </div>
               </RevealOnScroll>
             ))}
