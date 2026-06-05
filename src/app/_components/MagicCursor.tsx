@@ -79,11 +79,11 @@ export default function MagicCursor() {
           pointerEvents: "none",
           zIndex: 9999,
           // Offset: pone la punta de la estrella en la posición exacta del cursor
-          transform: "translate(-5px, -5px)",
+          transform: "translate(-7px, -7px)",
           willChange: "left, top",
         }}
       >
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="48" height="48" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           {/* Cuerpo de la varita — de la punta (7,7) al mango (30,30) */}
           <line x1="10" y1="10" x2="30" y2="30" stroke="#1e0a3c" strokeWidth="4"   strokeLinecap="round" />
           <line x1="10" y1="10" x2="30" y2="30" stroke="#8B5E3C" strokeWidth="2"   strokeLinecap="round" />
