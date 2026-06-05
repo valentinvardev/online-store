@@ -71,12 +71,12 @@ export default function SobreMiPage() {
 
       {/* ── Hero ── */}
       <section className="bg-dorado-light relative overflow-hidden">
-        {/* Stickers decorativos — tamaños bumpeados para desktop, especialmente sticker-22 (florcita sonriendo) +50% */}
+        {/* Stickers — mobile: 2 esquinas opuestas (florcita TR + cristal BL). Desktop: 4 dispersos */}
         <Stickers blend="multiply" items={[
-          { id: "sticker-15", top: "10%",  right: "6%",   size: 210, opacity: 0.4,  rotate: 12,  anim: "spin" },
-          { id: "sticker-04", bottom: "8%", left: "5%",   size: 235, opacity: 0.34, rotate: -10, anim: "float-slow", delay: 1.5 },
+          { id: "sticker-22", top: "6%",   right: "5%",   size: 170, opacity: 0.42, rotate: 8,   anim: "float-slow", delay: 2 },
+          { id: "sticker-04", bottom: "6%", left: "5%",   size: 180, opacity: 0.36, rotate: -10, anim: "float-slow", delay: 1.5 },
+          { id: "sticker-15", bottom: "10%", right: "6%", size: 180, opacity: 0.38, rotate: 12,  anim: "spin", hideOnMobile: true },
           { id: "sticker-09", top: "55%",  right: "10%",  size: 160, opacity: 0.36, rotate: 0,   anim: "float", delay: 0.5, hideOnMobile: true },
-          { id: "sticker-22", top: "20%",  left: "8%",    size: 210, opacity: 0.4,  rotate: 8,   anim: "float-slow", delay: 2 },
         ]} />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-14 sm:py-16 lg:py-20 relative z-10">
@@ -185,11 +185,12 @@ export default function SobreMiPage() {
           <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
           <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
           <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+          {/* Mobile: mariposa TR + corazon arcoiris BL. Desktop: 5 dispersos */}
           <Stickers blend="soft-light" items={[
-            { id: "sticker-13", top: "10%",  left: "5%",    size: 210, opacity: 0.5,  rotate: -10, anim: "float-slow" },
-            { id: "sticker-17", top: "18%",  right: "8%",   size: 185, opacity: 0.44, rotate: 8,   anim: "float", delay: 1 },
-            { id: "sticker-04", bottom: "12%", left: "10%", size: 240, opacity: 0.47, rotate: 14,  anim: "float-slow", delay: 2, hideOnMobile: true },
-            { id: "sticker-19", bottom: "15%", right: "18%", size: 150, opacity: 0.44, rotate: -8, anim: "spin", delay: 0.5 },
+            { id: "sticker-17", top: "8%",   right: "5%",   size: 160, opacity: 0.46, rotate: 8,   anim: "float", delay: 1 },
+            { id: "sticker-19", bottom: "8%", left: "5%",   size: 150, opacity: 0.46, rotate: -8,  anim: "spin", delay: 0.5 },
+            { id: "sticker-13", top: "12%",  left: "5%",    size: 200, opacity: 0.5,  rotate: -10, anim: "float-slow", hideOnMobile: true },
+            { id: "sticker-04", bottom: "12%", right: "8%", size: 220, opacity: 0.45, rotate: 14,  anim: "float-slow", delay: 2, hideOnMobile: true },
             { id: "sticker-08", top: "50%",  left: "42%",   size: 135, opacity: 0.4,  rotate: 0,   anim: "float", delay: 1.5, hideOnMobile: true },
           ]} />
         </div>
@@ -235,12 +236,13 @@ export default function SobreMiPage() {
 
       {/* ── Filosofía ── */}
       <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+        {/* Mobile: arcoiris TR + honguito BL. Desktop: 6 dispersos */}
         <Stickers blend="multiply" items={[
-          { id: "sticker-07", top: "10%",  left: "6%",    size: 120, opacity: 0.4,  rotate: 0,   anim: "spin" },
+          { id: "sticker-16", top: "8%",   right: "5%",   size: 140, opacity: 0.4,  rotate: 12,  anim: "float-slow", delay: 1.4 },
+          { id: "sticker-18", bottom: "8%", left: "5%",   size: 150, opacity: 0.4,  rotate: 0,   anim: "float", delay: 0.4 },
+          { id: "sticker-07", top: "10%",  left: "6%",    size: 120, opacity: 0.4,  rotate: 0,   anim: "spin", hideOnMobile: true },
           { id: "sticker-10", top: "65%",  left: "14%",   size: 145, opacity: 0.34, rotate: -8,  anim: "float", delay: 0.8, hideOnMobile: true },
-          { id: "sticker-16", top: "18%",  right: "10%",  size: 135, opacity: 0.37, rotate: 12,  anim: "float-slow", delay: 1.4 },
-          { id: "sticker-18", bottom: "12%", right: "8%", size: 160, opacity: 0.37, rotate: 0,   anim: "float", delay: 0.4, hideOnMobile: true },
-          { id: "sticker-21", bottom: "18%", left: "40%", size: 105, opacity: 0.34, rotate: -6,  anim: "float-slow", delay: 2 },
+          { id: "sticker-21", bottom: "18%", right: "12%", size: 105, opacity: 0.34, rotate: -6, anim: "float-slow", delay: 2, hideOnMobile: true },
           { id: "sticker-02", top: "45%",  left: "50%",   size: 95,  opacity: 0.3,  rotate: 10,  anim: "spin", delay: 3, hideOnMobile: true },
         ]} />
         <div className="max-w-7xl mx-auto relative z-10">

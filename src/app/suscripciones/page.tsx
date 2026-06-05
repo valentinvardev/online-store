@@ -132,7 +132,13 @@ export default function SuscripcionesPage() {
 
       {/* ── HERO con oferta ── */}
       <section className="bg-dorado-light relative overflow-hidden">
-        <Stickers preset="solar" blend="multiply" />
+        {/* Mobile: florcita TR + cristal BL. Desktop: 4 dispersos */}
+        <Stickers blend="multiply" items={[
+          { id: "sticker-22", top: "6%",    right: "5%",  size: 145, opacity: 0.4,  rotate: 8,   anim: "float-slow", delay: 2 },
+          { id: "sticker-04", bottom: "6%", left: "5%",   size: 140, opacity: 0.34, rotate: -10, anim: "float-slow", delay: 1.5 },
+          { id: "sticker-15", top: "10%",   right: "6%",  size: 160, opacity: 0.4,  rotate: 12,  anim: "spin", hideOnMobile: true },
+          { id: "sticker-09", top: "55%",   right: "10%", size: 130, opacity: 0.36, rotate: 0,   anim: "float", delay: 0.5, hideOnMobile: true },
+        ]} />
 
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 relative z-10">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
@@ -198,7 +204,13 @@ export default function SuscripcionesPage() {
 
       {/* ── CÓMO FUNCIONA: VIDEO ── */}
       <section className="bg-crema-dark py-16 sm:py-20 px-6 relative overflow-hidden">
-        <Stickers preset="suave" blend="multiply" />
+        {/* Mobile: 2 esquinas opuestas. Desktop: 4 dispersos */}
+        <Stickers blend="multiply" items={[
+          { id: "sticker-03", top: "6%",    right: "5%",  size: 130, opacity: 0.34, rotate: 14,  anim: "float-slow" },
+          { id: "sticker-05", bottom: "6%", left: "5%",   size: 125, opacity: 0.32, rotate: -8,  anim: "float", delay: 1.2 },
+          { id: "sticker-14", top: "50%",   right: "12%", size: 110, opacity: 0.32, rotate: 8,   anim: "spin", delay: 0.5, hideOnMobile: true },
+          { id: "sticker-20", top: "45%",   left: "10%",  size: 100, opacity: 0.3,  rotate: 0,   anim: "float-slow", delay: 2, hideOnMobile: true },
+        ]} />
         <div className="max-w-4xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-10">
@@ -261,7 +273,13 @@ export default function SuscripcionesPage() {
 
       {/* ── POR QUÉ SUMARTE ── */}
       <section className="bg-dorado-light py-16 sm:py-20 px-6 relative overflow-hidden">
-        <Stickers preset="solar" blend="multiply" />
+        {/* Mobile: cristal TR + florcita BL (titulo centrado arriba). Desktop: 4 dispersos */}
+        <Stickers blend="multiply" items={[
+          { id: "sticker-04", top: "5%",    right: "5%",  size: 130, opacity: 0.34, rotate: -10, anim: "float-slow", delay: 1.5 },
+          { id: "sticker-22", bottom: "5%", left: "5%",   size: 135, opacity: 0.4,  rotate: 8,   anim: "float-slow", delay: 2 },
+          { id: "sticker-15", top: "8%",    left: "5%",   size: 130, opacity: 0.36, rotate: 12,  anim: "spin", hideOnMobile: true },
+          { id: "sticker-09", bottom: "8%", right: "5%",  size: 120, opacity: 0.34, rotate: 0,   anim: "float", delay: 0.5, hideOnMobile: true },
+        ]} />
         <div className="max-w-6xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-12">
@@ -316,7 +334,13 @@ export default function SuscripcionesPage() {
 
       {/* ── CTA FINAL (amarillo) con la card ── */}
       <section className="bg-dorado-light py-16 sm:py-20 px-6 relative overflow-hidden border-t-4 border-morado-dark">
-        <Stickers preset="solar" blend="multiply" />
+        {/* Mobile: 2 esquinas. Titulo a la izquierda en lg, centrado en mobile. PrecioCard ocupa el centro */}
+        <Stickers blend="multiply" items={[
+          { id: "sticker-09", top: "6%",    right: "5%",  size: 125, opacity: 0.34, rotate: 6,   anim: "float-slow" },
+          { id: "sticker-15", bottom: "6%", left: "5%",   size: 130, opacity: 0.36, rotate: 12,  anim: "spin", delay: 1.2 },
+          { id: "sticker-22", top: "8%",    left: "5%",   size: 125, opacity: 0.4,  rotate: 8,   anim: "float", delay: 2, hideOnMobile: true },
+          { id: "sticker-04", bottom: "8%", right: "5%",  size: 135, opacity: 0.34, rotate: -10, anim: "float-slow", delay: 1.5, hideOnMobile: true },
+        ]} />
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <RevealOnScroll>
