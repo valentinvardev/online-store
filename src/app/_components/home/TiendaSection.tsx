@@ -49,10 +49,10 @@ export default function TiendaSection() {
   return (
     <section className="bg-dorado-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
       <Stickers blend="multiply" items={[
-        { id: "sticker-09", top: "-3%",  left: "-3%",  size: 240, opacity: 0.42, rotate: -12, anim: "float-slow" },
-        { id: "sticker-15", top: "-2%",  right: "-2%", size: 220, opacity: 0.4,  rotate: 10,  anim: "spin", delay: 0.6 },
-        { id: "sticker-22", bottom: "-3%", right: "-3%", size: 260, opacity: 0.4, rotate: -8, anim: "float", delay: 1.2 },
-        { id: "sticker-04", bottom: "-2%", left: "-2%",  size: 240, opacity: 0.42, rotate: 14, anim: "float-slow", delay: 1.8 },
+        { id: "sticker-09", top: "-3%",  left: "-3%",  size: 95, opacity: 0.42, rotate: -12, anim: "float-slow" },
+        { id: "sticker-15", top: "-2%",  right: "-2%", size: 90, opacity: 0.4,  rotate: 10,  anim: "spin", delay: 0.6 },
+        { id: "sticker-22", bottom: "-3%", right: "-3%", size: 105, opacity: 0.4, rotate: -8, anim: "float", delay: 1.2 },
+        { id: "sticker-04", bottom: "-2%", left: "-2%",  size: 95, opacity: 0.42, rotate: 14, anim: "float-slow", delay: 1.8 },
       ]} />
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>

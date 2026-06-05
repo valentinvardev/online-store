@@ -4,9 +4,9 @@ export default function SobreMiSection() {
   return (
     <section className="bg-dorado-light py-16 sm:py-20 lg:py-28 px-5 sm:px-6 overflow-hidden relative">
       <Stickers blend="multiply" items={[
-        { id: "sticker-13", top: "-4%",   right: "-4%", size: 280, opacity: 0.4,  rotate: 8,   anim: "float-slow" },
-        { id: "sticker-08", bottom: "-4%", left: "-4%", size: 320, opacity: 0.42, rotate: -10, anim: "float", delay: 1.2 },
-        { id: "sticker-19", top: "45%",   right: "-5%", size: 180, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+        { id: "sticker-13", top: "-4%",   right: "-4%", size: 110, opacity: 0.4,  rotate: 8,   anim: "float-slow" },
+        { id: "sticker-08", bottom: "-4%", left: "-4%", size: 130, opacity: 0.42, rotate: -10, anim: "float", delay: 1.2 },
+        { id: "sticker-19", top: "45%",   right: "-5%", size: 72, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 sm:gap-14 lg:gap-20">
 
