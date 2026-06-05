@@ -181,9 +181,6 @@ export default function Navbar() {
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Decoración sutil de fondo */}
-          <span className="absolute -top-6 -right-4 font-display text-crema/10 text-[9rem] leading-none select-none pointer-events-none">✦</span>
-
           {/* Header del drawer */}
           <div className="flex items-center justify-between px-6 h-20 border-b border-crema/15 shrink-0 relative z-10">
             <span className="font-display text-crema text-2xl tracking-wider uppercase">Menú</span>
@@ -203,9 +200,8 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="group flex items-center gap-3 py-3 border-b border-crema/10 font-display uppercase text-3xl text-crema hover:text-dorado tracking-wide leading-none transition-colors"
+                className="group flex items-center py-3 border-b border-crema/10 font-display uppercase text-3xl text-crema hover:text-dorado hover:translate-x-1 tracking-wide leading-none transition-all"
               >
-                <span className="text-dorado text-base group-hover:translate-x-1 transition-transform">✦</span>
                 {link.label}
               </Link>
             ))}

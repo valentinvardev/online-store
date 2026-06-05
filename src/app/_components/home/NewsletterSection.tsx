@@ -3,6 +3,7 @@
 import { useState } from "react";
 import RevealOnScroll from "./RevealOnScroll";
 import StarField from "./StarField";
+import Stickers from "../Stickers";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,11 @@ export default function NewsletterSection() {
 
   return (
     <section className="bg-morado py-24 px-6 relative overflow-hidden">
+      <Stickers blend="screen" items={[
+        { id: "sticker-15", top: "-3%",   right: "-3%", size: 260, opacity: 0.18, rotate: 12,  anim: "float-slow" },
+        { id: "sticker-09", bottom: "-3%", left: "-3%", size: 280, opacity: 0.2, rotate: -8, anim: "float", delay: 1.2 },
+        { id: "sticker-13", top: "40%",   left: "-5%",  size: 180, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+      ]} />
       <StarField />
       <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-dorado opacity-10 blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-rosa opacity-10 blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />

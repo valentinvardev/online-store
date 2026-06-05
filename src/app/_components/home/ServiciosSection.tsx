@@ -1,4 +1,5 @@
 import RevealOnScroll from "./RevealOnScroll";
+import Stickers from "../Stickers";
 
 type Servicio = {
   id: number;
@@ -46,7 +47,12 @@ const servicios: Servicio[] = [
 
 export default function ServiciosSection() {
   return (
-    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
+    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+      <Stickers blend="multiply" items={[
+        { id: "sticker-11", top: "-3%",   right: "-3%", size: 280, opacity: 0.38, rotate: 8,   anim: "float-slow" },
+        { id: "sticker-04", bottom: "-3%", left: "-3%", size: 320, opacity: 0.4,  rotate: -12, anim: "float", delay: 1.2 },
+        { id: "sticker-22", top: "40%",   left: "-5%",  size: 170, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+      ]} />
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>
           <div className="mb-10 sm:mb-12 lg:mb-16 text-center lg:text-left">

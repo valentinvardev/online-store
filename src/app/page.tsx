@@ -6,6 +6,7 @@ import CursosSection from "~/app/_components/home/CursosSection";
 import ServiciosSection from "~/app/_components/home/ServiciosSection";
 import TestimoniosSection from "~/app/_components/home/TestimoniosSection";
 import SobreMiSection from "~/app/_components/home/SobreMiSection";
+import LandscapeSlider from "~/app/_components/home/LandscapeSlider";
 import NewsletterSection from "~/app/_components/home/NewsletterSection";
 import Footer from "~/app/_components/home/Footer";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
         <ServiciosSection />
         <TestimoniosSection />
         <SobreMiSection />
+        <LandscapeSlider />
         <NewsletterSection />
       </main>
       <Footer />

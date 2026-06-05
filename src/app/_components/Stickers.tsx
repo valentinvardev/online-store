@@ -76,8 +76,8 @@ const presets: Record<string, Sticker[]> = {
 interface Props {
   preset?: keyof typeof presets;
   items?: Sticker[];
-  /** Modo de mezcla CSS — multiply oscurece, soft-light fusiona, luminosity adopta el color del fondo */
-  blend?: "multiply" | "soft-light" | "luminosity" | "overlay" | "normal";
+  /** Modo de mezcla CSS — multiply oscurece, soft-light fusiona, screen aclara (para fondos oscuros), luminosity adopta el color del fondo */
+  blend?: "multiply" | "soft-light" | "luminosity" | "overlay" | "normal" | "screen";
   className?: string;
 }
 

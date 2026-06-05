@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
 import StarField from "./StarField";
+import Stickers from "../Stickers";
 
 type Testimonio = {
   id: number;
@@ -45,6 +46,11 @@ export default function TestimoniosSection() {
   return (
     <section className="bg-rosa py-24 px-6 relative overflow-hidden">
       <StarField color="#fff0f5" />
+      <Stickers blend="soft-light" items={[
+        { id: "sticker-15", top: "-3%",   left: "-3%", size: 280, opacity: 0.42, rotate: 8,  anim: "float-slow" },
+        { id: "sticker-09", bottom: "-3%", right: "-3%", size: 300, opacity: 0.4, rotate: -12, anim: "float", delay: 1.2 },
+        { id: "sticker-19", top: "45%",   left: "-5%", size: 170, opacity: 0.32, rotate: 0,  anim: "spin", delay: 0.6, hideOnMobile: true },
+      ]} />
       <div className="max-w-7xl mx-auto relative z-10">
         <RevealOnScroll direction="up" delay={0}>
           <div className="text-center mb-16">
