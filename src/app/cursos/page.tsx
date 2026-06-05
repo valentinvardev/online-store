@@ -17,11 +17,6 @@ export default function CursosPage() {
 
       {/* Encabezado */}
       <div className="bg-dorado-light relative py-14 px-6 overflow-hidden">
-        {/* Degradado de amarillos con shimmer */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #f5c842 0%, #ffe066 30%, #fdf3c5 60%, #ffe066 85%, #f5c842 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #ffe066 0%, #fdf3c5 35%, #fef7e0 65%, #fdf3c5 90%, #ffe066 100%)" }} />
-        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(253,243,197,0.4) 50%, transparent 100%)" }} />
         {/* Stickers decorativos */}
         <Stickers preset="solar" blend="multiply" />
 

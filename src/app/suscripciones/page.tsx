@@ -57,7 +57,7 @@ const modulos = [
 ];
 
 const virtudes = [
-  { icon: "✦", titulo: "Claridad interior",   desc: "Cada mes trabajás una intención concreta. Sin ruido. Sin acumulación. Solo lo que necesitás en ese momento." },
+  { icon: "◯", titulo: "Claridad interior",   desc: "Cada mes trabajás una intención concreta. Sin ruido. Sin acumulación. Solo lo que necesitás en ese momento." },
   { icon: "◎", titulo: "Práctica sostenida",  desc: "La magia no es un momento — es un hábito. La membresía te da estructura sin rigidez para sostener tu práctica." },
   { icon: "◈", titulo: "Comunidad real",      desc: "Mujeres que no te van a decir 'todo pasa por algo'. Te van a acompañar en lo que sea con honestidad y presencia." },
 ];
@@ -79,7 +79,6 @@ export default function SuscripcionesPage() {
     <div id={idAnchor} className="bg-crema border-4 border-morado-dark block-shadow overflow-hidden">
       {/* Header verde con corona */}
       <div className="bg-verde px-7 py-6 text-center relative overflow-hidden">
-        <span className="absolute -top-3 -right-2 font-display text-crema/10 text-[6rem] leading-none select-none pointer-events-none">✦</span>
         <div className="w-14 h-14 mx-auto mb-3 bg-dorado flex items-center justify-center border-2 border-morado-dark">
           <Crown size={28} strokeWidth={1.8} className="text-tierra-dark" />
         </div>
@@ -110,7 +109,7 @@ export default function SuscripcionesPage() {
           <span className="font-sans text-sm text-tierra/45 tracking-wide">/{billing === "mensual" ? "mes" : "año"}</span>
         </div>
         {billing === "anual"
-          ? <p className="font-sans text-[0.7rem] text-verde font-semibold tracking-widest uppercase mt-1.5">✦ Te regalás 2 meses</p>
+          ? <p className="font-sans text-[0.7rem] text-verde font-semibold tracking-widest uppercase mt-1.5">Te regalás 2 meses</p>
           : <p className="font-sans text-[0.7rem] text-tierra/40 tracking-widest uppercase mt-1.5">Anual: 2 meses gratis</p>
         }
       </div>
@@ -118,7 +117,7 @@ export default function SuscripcionesPage() {
       {/* CTA */}
       <div className="px-7 pb-7">
         <button className="w-full bg-dorado text-tierra-dark font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
-          ✦ Suscribirme ahora
+          Suscribirme ahora
         </button>
         <p className="font-sans text-[0.68rem] text-tierra/45 text-center tracking-wide mt-3">
           Cancelás cuando quieras · Sin compromisos
@@ -133,16 +132,7 @@ export default function SuscripcionesPage() {
 
       {/* ── HERO con oferta ── */}
       <section className="bg-dorado-light relative overflow-hidden">
-        {/* Degradado de amarillos con shimmer */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #f5c842 0%, #ffe066 30%, #fdf3c5 60%, #ffe066 85%, #f5c842 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #ffe066 0%, #fdf3c5 35%, #fef7e0 65%, #fdf3c5 90%, #ffe066 100%)" }} />
-        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(253,243,197,0.4) 50%, transparent 100%)" }} />
         <Stickers preset="solar" blend="multiply" />
-        <div className="absolute inset-0 pointer-events-none select-none">
-          <span className="absolute top-8 right-[8%] font-display text-tierra-dark/10 text-[9rem] leading-none">✦</span>
-          <span className="absolute bottom-2 left-6 font-display text-tierra-dark/8 text-[7rem] leading-none">◉</span>
-        </div>
 
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 relative z-10">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
@@ -338,7 +328,6 @@ export default function SuscripcionesPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <RevealOnScroll>
               <div className="text-center lg:text-left">
-                <span className="font-display text-tierra-dark/15 text-6xl block mb-2">✦</span>
                 <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-tierra-dark leading-none tracking-wide mb-5">
                   <span className="inline-block rotate-180 leading-none">?</span>Te sumás?
                 </h2>

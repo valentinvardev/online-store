@@ -4,16 +4,16 @@ export default function HeroSection() {
   return (
     <section className="relative bg-crema flex flex-col overflow-hidden">
 
-      {/* Decoración de fondo — stickers grandes en las esquinas */}
+      {/* Decoración de fondo — stickers en las esquinas (un poco más adentro) */}
       <Stickers
         blend="multiply"
         items={[
-          { id: "sticker-04", top: "-3%",   left: "-4%",  size: 135, opacity: 0.5,  rotate: -8,  anim: "float-slow" },
-          { id: "sticker-13", top: "-4%",   right: "-3%", size: 130, opacity: 0.48, rotate: 12,  anim: "float",      delay: 0.8 },
-          { id: "sticker-08", bottom: "-4%", left: "-4%", size: 145, opacity: 0.5,  rotate: 6,   anim: "float-slow", delay: 1.6 },
-          { id: "sticker-19", bottom: "-3%", right: "-3%", size: 130, opacity: 0.48, rotate: -10, anim: "spin",      delay: 0.4 },
-          { id: "sticker-15", top: "44%",   left: "-6%",  size: 72, opacity: 0.32, rotate: 0,   anim: "spin",      delay: 2,   hideOnMobile: true },
-          { id: "sticker-22", top: "40%",   right: "-6%", size: 80, opacity: 0.34, rotate: 14,  anim: "float",     delay: 1.2, hideOnMobile: true },
+          { id: "sticker-04", top: "4%",   left: "3%",   size: 135, opacity: 0.5,  rotate: -8,  anim: "float-slow" },
+          { id: "sticker-13", top: "3%",   right: "4%",  size: 130, opacity: 0.48, rotate: 12,  anim: "float",      delay: 0.8 },
+          { id: "sticker-08", bottom: "4%", left: "3%",  size: 145, opacity: 0.5,  rotate: 6,   anim: "float-slow", delay: 1.6 },
+          { id: "sticker-19", bottom: "3%", right: "4%", size: 130, opacity: 0.48, rotate: -10, anim: "spin",      delay: 0.4 },
+          { id: "sticker-15", top: "44%",  left: "2%",   size: 72,  opacity: 0.32, rotate: 0,   anim: "spin",      delay: 2,   hideOnMobile: true },
+          { id: "sticker-22", top: "40%",  right: "2%",  size: 80,  opacity: 0.34, rotate: 14,  anim: "float",     delay: 1.2, hideOnMobile: true },
         ]}
       />
 

@@ -70,45 +70,19 @@ export default function SobreMiPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="bg-verde-light relative overflow-hidden">
-        {/* Ornamentos */}
-        <span className="absolute top-6 left-6 sm:top-8 sm:left-8 font-display text-dorado/50 text-xl sm:text-2xl select-none z-10">✦</span>
-        <span className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 font-display text-dorado/40 text-base sm:text-lg select-none z-10">◎</span>
-
-        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
-        <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+      <section className="bg-dorado-light relative overflow-hidden">
         {/* Stickers decorativos */}
-        <Stickers preset="bosque" blend="soft-light" />
-
-        {/* Estrellitas y ornamentos encima */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Estrellitas dispersas por todo el banner */}
-          <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
-          <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
-          <span className="absolute top-[38%] right-[18%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-          <span className="absolute top-[52%] left-[35%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
-          <span className="absolute top-[68%] right-[8%] font-display text-crema/90 text-[0.8rem] select-none">⋆</span>
-          <span className="absolute top-[78%] left-[60%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-          <span className="absolute top-[18%] left-[42%] font-display text-crema/75 text-[0.75rem] select-none">·</span>
-          <span className="absolute top-[44%] right-[45%] font-display text-crema/70 text-[0.8rem] select-none">·</span>
-          <span className="absolute top-[60%] right-[55%] font-display text-crema/80 text-[13px] select-none">⋆</span>
-          <span className="absolute top-[85%] right-[25%] font-display text-crema/65 text-[0.75rem] select-none">·</span>
-          <span className="absolute top-[30%] left-[5%] font-display text-crema/85 text-[0.8rem] select-none">⋆</span>
-          <span className="absolute top-[88%] left-[8%] font-display text-crema text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.7)]">✦</span>
-        </div>
+        <Stickers preset="solar" blend="multiply" />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-14 sm:py-16 lg:py-20 relative z-10">
-          <span className="font-sans text-[0.8rem] text-crema/85 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
+          <span className="font-sans font-semibold text-[0.85rem] text-tierra-dark tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4 sm:mb-5">
             La historia detrás
           </span>
-          <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-crema leading-[0.95] tracking-wide mb-5 sm:mb-6">
+          <h1 className="font-display uppercase text-[clamp(3rem,10vw,7rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5 sm:mb-6">
             Sobre<br />
-            <span className="text-crema">mí</span>
+            <span className="text-morado-dark">mí</span>
           </h1>
-          <p className="font-sans italic text-crema text-lg sm:text-xl max-w-lg leading-relaxed drop-shadow-[0_1px_8px_rgba(20,54,42,0.5)]">
+          <p className="font-sans italic text-tierra-dark/90 text-lg sm:text-xl max-w-lg leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Una mujer, un mazo de tarot y la convicción de que la magia es para todas.
           </p>
         </div>
@@ -228,17 +202,17 @@ export default function SobreMiPage() {
                   <div className="flex gap-4 lg:gap-8 items-start">
                     {/* Año en desktop */}
                     <div className="shrink-0 w-20 text-right hidden lg:block pt-1">
-                      <span className="font-display text-dorado text-lg tracking-wide">{hito.año}</span>
+                      <span className="font-display text-crema text-lg tracking-wide">{hito.año}</span>
                     </div>
                     {/* Punto en desktop */}
-                    <div className="shrink-0 hidden lg:flex items-center justify-center w-6 h-6 rounded-full border-2 border-dorado bg-verde mt-1">
-                      <div className="w-2 h-2 bg-dorado rounded-full" />
+                    <div className="shrink-0 hidden lg:flex items-center justify-center w-6 h-6 rounded-full border-2 border-morado-dark bg-dorado-light mt-1">
+                      <div className="w-2 h-2 bg-morado-dark rounded-full" />
                     </div>
                     {/* Contenido */}
-                    <div className="bg-crema/10 border border-crema/25 p-5 sm:p-6 flex-1 hover:border-dorado/60 transition-colors min-w-0">
-                      <span className="font-display text-dorado text-sm tracking-widest lg:hidden block mb-2">{hito.año}</span>
-                      <h3 className="font-sans font-semibold text-crema tracking-wide mb-2">{hito.titulo}</h3>
-                      <p className="font-sans text-crema/95 text-[15px] leading-relaxed tracking-wide">{hito.desc}</p>
+                    <div className="bg-dorado-light border-2 border-morado-dark block-shadow-sm p-5 sm:p-6 flex-1 hover:translate-y-[-2px] transition-transform min-w-0">
+                      <span className="font-display text-morado-dark text-sm tracking-widest lg:hidden block mb-2 font-bold">{hito.año}</span>
+                      <h3 className="font-sans font-bold text-tierra-dark tracking-wide mb-2 text-lg">{hito.titulo}</h3>
+                      <p className="font-sans text-tierra-dark/85 text-[15px] leading-relaxed tracking-wide">{hito.desc}</p>
                     </div>
                   </div>
                 </RevealOnScroll>
