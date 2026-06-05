@@ -2,7 +2,7 @@ import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
 import CursosBanner from "./_components/CursosBanner";
 import CursosCatalog from "./_components/CursosCatalog";
-import ShaderBackground from "../_components/ShaderBackground";
+import Stickers from "../_components/Stickers";
 
 export const metadata = {
   title: "Cursos — La Reina de Bastos",
@@ -17,10 +17,15 @@ export default function CursosPage() {
 
       {/* Encabezado */}
       <div className="bg-verde relative py-14 px-6 overflow-hidden">
-        {/* Fondo psicodélico Mesh verde (Paper Shaders) */}
-        <ShaderBackground palette="bosque" effect="mesh" speed={0.28} distortion={0.85} swirl={0.7} grain={0.2} opacity={0.95} />
+        {/* Fondo verde con animación CSS liviana */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 35%, #3d7a47 70%, #2d6a3e 100%)" }} />
+        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #2d6a3e 0%, #3d7a47 35%, #5fa569 70%, #3d7a47 100%)" }} />
+        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.18) 50%, transparent 100%)" }} />
+        {/* Stickers decorativos */}
+        <Stickers preset="bosque" blend="soft-light" />
         {/* Velo para legibilidad */}
-        <div className="absolute inset-0 bg-[#14362a]/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-[#14362a]/25 pointer-events-none" />
 
         {/* Estrellitas dispersas */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">

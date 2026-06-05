@@ -6,7 +6,7 @@ import { Check, Crown } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import RevealOnScroll from "~/app/_components/home/RevealOnScroll";
-import ShaderBackground from "~/app/_components/ShaderBackground";
+import Stickers from "~/app/_components/Stickers";
 import DecorIcons from "~/app/_components/DecorIcons";
 
 /* ── La membresía (única) ── */
@@ -134,8 +134,12 @@ export default function SuscripcionesPage() {
 
       {/* ── HERO con oferta ── */}
       <section className="bg-verde relative overflow-hidden">
-        <ShaderBackground palette="bosque" effect="mesh" speed={0.26} distortion={0.85} swirl={0.7} grain={0.2} opacity={0.95} />
-        <div className="absolute inset-0 bg-[#14362a]/35 pointer-events-none" />
+        {/* Fondo verde con animación CSS liviana */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 35%, #3d7a47 70%, #2d6a3e 100%)" }} />
+        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #2d6a3e 0%, #3d7a47 35%, #5fa569 70%, #3d7a47 100%)" }} />
+        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)" }} />
+        <Stickers preset="bosque" blend="soft-light" />
+        <div className="absolute inset-0 bg-[#14362a]/30 pointer-events-none" />
         <div className="absolute inset-0 pointer-events-none select-none">
           <span className="absolute top-8 right-[8%] font-display text-crema/10 text-[9rem] leading-none">✦</span>
           <span className="absolute bottom-2 left-6 font-display text-crema/5 text-[7rem] leading-none">◉</span>

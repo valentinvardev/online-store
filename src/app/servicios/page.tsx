@@ -1,6 +1,6 @@
 import Navbar from "../_components/home/Navbar";
 import Footer from "../_components/home/Footer";
-import DecorIcons from "../_components/DecorIcons";
+import Stickers from "../_components/Stickers";
 import ServiciosBanner from "./_components/ServiciosBanner";
 import ServiciosGrid from "./_components/ServiciosGrid";
 import ComoFunciona from "./_components/ComoFunciona";
@@ -20,7 +20,7 @@ export default function ServiciosPage() {
 
       {/* Encabezado */}
       <div className="bg-crema border-b-2 border-morado/10 py-14 px-6 relative overflow-hidden">
-        <DecorIcons preset="festivo" />
+        <Stickers preset="festivo" blend="multiply" />
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10">
           <div>
             <div className="flex items-center gap-4 mb-5">
