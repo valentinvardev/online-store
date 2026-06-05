@@ -8,6 +8,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import CartProviders from "./_components/cart/CartProviders";
 import PageTransition from "./_components/PageTransition";
 import MagicCursor from "./_components/MagicCursor";
+import VinylPlayer from "./_components/VinylPlayer";
 
 const retroMother = localFont({
   src: "../fonts/RetroMother-Regular.otf",
@@ -57,6 +58,7 @@ export default function RootLayout({
           <CartProviders>
             <PageTransition>{children}</PageTransition>
           </CartProviders>
+          <VinylPlayer />
         </TRPCReactProvider>
       </body>
     </html>
