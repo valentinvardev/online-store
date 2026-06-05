@@ -17,7 +17,7 @@ export default function NewsletterSection() {
   return (
     <section className="bg-morado py-24 px-6 relative overflow-hidden">
       <Stickers blend="screen" items={[
-        { id: "sticker-22", top: "5%",   right: "3%", size: 105, opacity: 0.18, rotate: 12,  anim: "float-slow" },
+        { id: "sticker-22", top: "5%",   right: "3%", size: 150, opacity: 0.22, rotate: 12,  anim: "float-slow" },
         { id: "sticker-04", bottom: "5%", left: "3%", size: 110, opacity: 0.2, rotate: -8, anim: "float", delay: 1.2 },
         { id: "sticker-19", top: "40%",   left: "3%",  size: 94, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />

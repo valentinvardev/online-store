@@ -11,7 +11,7 @@ export default function HeroSection() {
           { id: "sticker-01", top: "4%",   left: "3%",   size: 135, opacity: 0.5,  rotate: -8,  anim: "float-slow" },
           { id: "sticker-03", top: "3%",   right: "4%",  size: 130, opacity: 0.48, rotate: 12,  anim: "float",      delay: 0.8 },
           { id: "sticker-12", bottom: "4%", left: "3%",  size: 145, opacity: 0.5,  rotate: 6,   anim: "float-slow", delay: 1.6 },
-          { id: "sticker-14", bottom: "3%", right: "4%", size: 130, opacity: 0.48, rotate: -10, anim: "spin",      delay: 0.4 },
+          { id: "sticker-14", bottom: "3%", right: "4%", size: 185, opacity: 0.52, rotate: -10, anim: "spin",      delay: 0.4 },
           { id: "sticker-20", top: "44%",  left: "2%",   size: 94,  opacity: 0.32, rotate: 0,   anim: "spin",      delay: 2,   hideOnMobile: true },
           { id: "sticker-21", top: "40%",  right: "2%",  size: 104,  opacity: 0.34, rotate: 14,  anim: "float",     delay: 1.2, hideOnMobile: true },
         ]}
