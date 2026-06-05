@@ -3,17 +3,17 @@ export default function ReservarCTA() {
     <section id="reservar" className="bg-rosa py-20 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="h-px w-8 bg-crema/40" />
-          <span className="font-sans text-[0.8rem] text-crema/50 tracking-[0.4em] uppercase">
+          <div className="h-px w-8 bg-crema/80" />
+          <span className="font-sans font-semibold text-[0.85rem] text-crema tracking-[0.4em] uppercase">
             Reservas
           </span>
-          <div className="h-px w-8 bg-crema/40" />
+          <div className="h-px w-8 bg-crema/80" />
         </div>
 
-        <h2 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
+        <h2 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide mb-5">
           <span className="inline-block rotate-180 leading-none">?</span>Cuándo<br />empezamos?
         </h2>
-        <p className="font-sans italic text-crema/65 text-lg leading-snug mb-10 max-w-sm mx-auto">
+        <p className="font-sans font-medium text-crema text-lg leading-relaxed mb-10 max-w-md mx-auto">
           Escribime por Instagram o por mail y coordinamos. Sin formularios eternos.
         </p>
 
@@ -28,14 +28,14 @@ export default function ReservarCTA() {
           </a>
           <a
             href="mailto:hola@lareinadebastos.com"
-            className="whitespace-nowrap border-2 border-crema/50 text-crema font-sans font-semibold text-[13px] px-8 py-4 hover:bg-crema/10 transition-colors tracking-widest uppercase"
+            className="whitespace-nowrap border-2 border-crema text-crema font-sans font-semibold text-[13px] px-8 py-4 hover:bg-crema/15 transition-colors tracking-widest uppercase"
           >
             Enviar un mail
           </a>
         </div>
 
-        <p className="font-sans text-[0.75rem] text-crema/35 mt-8 tracking-wide">
-          Respondо dentro de las 24hs en días hábiles.
+        <p className="font-sans font-medium text-[0.85rem] text-crema/90 mt-8 tracking-wide">
+          Respondo dentro de las 24hs en días hábiles.
         </p>
       </div>
     </section>
