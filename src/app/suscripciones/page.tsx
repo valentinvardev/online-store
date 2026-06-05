@@ -315,7 +315,7 @@ export default function SuscripcionesPage() {
       </section>
 
       {/* ── CTA FINAL (amarillo) con la card ── */}
-      <section className="bg-dorado py-16 sm:py-20 px-6 relative overflow-hidden border-t-4 border-morado-dark">
+      <section className="bg-dorado-light py-16 sm:py-20 px-6 relative overflow-hidden border-t-4 border-morado-dark">
         <Stickers preset="solar" blend="multiply" />
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
