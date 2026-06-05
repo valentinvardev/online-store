@@ -88,6 +88,7 @@ model Product {
     slug        String      @unique
     name        String
     description String
+    descLong    String?     @db.Text
     price       Float
     priceOld    Float?
     type        ProductType
@@ -97,6 +98,9 @@ model Product {
     videoUrl    String?
     fileUrl     String?
     stock       Int?
+    features    String[]
+    details     Json?
+    gradient    String?
     active      Boolean     @default(true)
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
@@ -109,11 +113,17 @@ model Course {
     name          String
     subtitle      String?
     description   String
+    descLong      String?        @db.Text
     price         Float
+    priceOld      Float?
     badge         String?
     level         String         @default("Todos los niveles")
     durationWeeks Int?
+    duration      String?
     lessonsCount  Int?
+    lessonsLabel  String?
+    studentsLabel String?
+    includes      String[]
     imageUrl      String?
     images        String[]
     videoUrl      String?
@@ -148,23 +158,31 @@ model CourseLesson {
 }
 
 model Service {
-    id          String      @id @default(cuid())
-    slug        String      @unique
-    name        String
-    subtitle    String?
-    description String
-    price       Float
-    duration    Int
-    format      String      @default("Zoom")
-    imageUrl    String?
-    images      String[]
-    videoUrl    String?
-    attachments String[]
-    active      Boolean     @default(true)
-    createdAt   DateTime    @default(now())
-    updatedAt   DateTime    @updatedAt
-    bookings    Booking[]
-    orderItems  OrderItem[]
+    id            String      @id @default(cuid())
+    slug          String      @unique
+    name          String
+    subtitle      String?
+    description   String      @db.Text
+    price         Float
+    priceLabel    String?
+    badge         String?
+    duration      Int
+    durationLabel String?
+    format        String      @default("Zoom")
+    numero        String?
+    contenido     String[]
+    accentColor   String?
+    bgColor       String?
+    coverGradient String?
+    imageUrl      String?
+    images        String[]
+    videoUrl      String?
+    attachments   String[]
+    active        Boolean     @default(true)
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
+    bookings      Booking[]
+    orderItems    OrderItem[]
 }
 
 // ─── Órdenes ─────────────────────────────────────────────────────────────────
