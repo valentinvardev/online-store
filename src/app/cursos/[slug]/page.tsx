@@ -3,31 +3,44 @@ import Link from "next/link";
 import { Clock, BookOpen, Users, Check, Star } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
-import { cursos } from "../_data/cursos";
 import CursoAccordion from "./_components/CursoAccordion";
 import Badge from "../../_components/Badge";
-
-
+import { api } from "~/trpc/server";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return cursos.map((c) => ({ slug: c.slug }));
-}
+const formatPrice = (n: number) => `$${n}`;
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const curso = cursos.find((c) => c.slug === slug);
+  const curso = await api.courses.bySlug({ slug });
   return {
-    title: curso ? `${curso.title} — La Reina de Bastos` : "Curso",
-    description: curso?.desc,
+    title: curso ? `${curso.name} — La Reina de Bastos` : "Curso",
+    description: curso?.description,
   };
 }
 
 export default async function CursoInfoPage({ params }: Props) {
   const { slug } = await params;
-  const curso = cursos.find((c) => c.slug === slug);
-  if (!curso) notFound();
+  const cursoDb = await api.courses.bySlug({ slug });
+  if (!cursoDb) notFound();
+
+  // Adapter al shape que el render espera
+  const curso = {
+    ...cursoDb,
+    title: cursoDb.name,
+    desc: cursoDb.description,
+    descLong: cursoDb.descLong ?? cursoDb.description,
+    price: formatPrice(cursoDb.price),
+    priceOld: cursoDb.priceOld ? formatPrice(cursoDb.priceOld) : undefined,
+    duration: cursoDb.duration ?? "",
+    students: cursoDb.studentsLabel ?? "",
+    videoId: cursoDb.videoUrl?.match(/(\d+)$/)?.[1],
+    modules: cursoDb.modules.map((m) => ({
+      title: m.title,
+      lessons: m.lessons.map((l) => l.title),
+    })),
+  };
 
   const totalLessons = curso.modules.reduce((acc, m) => acc + m.lessons.length, 0);
 

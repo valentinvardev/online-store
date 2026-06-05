@@ -4,11 +4,20 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, ShoppingBag } from "lucide-react";
 import { useCart } from "../../_components/cart/CartContext";
-import { productos } from "../_data/productos";
-import type { Category } from "../_data/productos";
 import Badge from "../../_components/Badge";
+import { api } from "~/trpc/react";
 
+type Category = "Físico" | "Digital" | "Personalizado";
 type Filter = "Todos" | Category;
+
+// Mapea el enum de DB a la etiqueta visible
+const typeToCategory: Record<string, Category> = {
+  FISICO: "Físico",
+  DIGITAL: "Digital",
+  PERSONALIZADO: "Personalizado",
+};
+
+const formatPrice = (n: number) => `$${n}`;
 
 const categories: { value: Filter; label: string; icon: string; color: string; activeColor: string }[] = [
   { value: "Todos",         label: "Todos",        icon: "✦", color: "text-morado/50 border-morado/15 hover:border-morado/40 hover:text-morado",    activeColor: "bg-morado-dark text-crema border-morado-dark shadow-lg" },
@@ -23,12 +32,25 @@ export default function ProductCatalog() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { addItem } = useCart();
 
+  const { data: productos = [], isLoading } = api.products.list.useQuery();
+
+  // Adapta la shape de DB a la vista
+  const display = productos.map((p) => ({
+    ...p,
+    category: typeToCategory[p.type] ?? "Físico",
+    desc: p.description,
+    price: formatPrice(p.price),
+    priceNum: p.price,
+    priceOld: p.priceOld ? formatPrice(p.priceOld) : undefined,
+    gradient: p.gradient ?? "from-morado to-rosa",
+  }));
+
   const filtered = active === "Todos"
-    ? productos
-    : productos.filter((p) => p.category === active);
+    ? display
+    : display.filter((p) => p.category === active);
 
   const countFor = (cat: Filter) =>
-    cat === "Todos" ? productos.length : productos.filter((p) => p.category === cat).length;
+    cat === "Todos" ? display.length : display.filter((p) => p.category === cat).length;
 
   // Cerrar dropdown al click afuera
   useEffect(() => {

@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Clock, BookOpen, Users, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { cursos } from "../_data/cursos";
-import type { Nivel } from "../_data/cursos";
 import Badge from "../../_components/Badge";
+import { api } from "~/trpc/react";
 
+type Nivel = "Principiante" | "Intermedio" | "Todos los niveles";
 type Level = "Todos" | Nivel;
+
+const formatPrice = (n: number) => `$${n}`;
 
 const levels: { value: Level; label: string; icon: string; color: string; activeColor: string }[] = [
   { value: "Todos",              label: "Todos",              icon: "✦", color: "text-morado/50 border-morado/15 hover:border-morado/40 hover:text-morado",          activeColor: "bg-morado-dark text-crema border-morado-dark shadow-lg" },
@@ -23,12 +25,26 @@ export default function CursosCatalog() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const { data: cursos = [] } = api.courses.list.useQuery();
+
+  // Adapta a la shape que el render espera
+  const display = cursos.map((c) => ({
+    ...c,
+    title: c.name,
+    desc: c.description,
+    price: formatPrice(c.price),
+    priceOld: c.priceOld ? formatPrice(c.priceOld) : undefined,
+    duration: c.duration ?? "",
+    lessons: c.lessonsLabel ?? "",
+    students: c.studentsLabel ?? "",
+  }));
+
   const filtered = active === "Todos"
-    ? cursos
-    : cursos.filter((c) => c.level === active);
+    ? display
+    : display.filter((c) => (c.level as Nivel) === active);
 
   const countFor = (lvl: Level) =>
-    lvl === "Todos" ? cursos.length : cursos.filter((c) => c.level === lvl).length;
+    lvl === "Todos" ? display.length : display.filter((c) => (c.level as Nivel) === lvl).length;
 
   // Cerrar dropdown al click afuera
   useEffect(() => {

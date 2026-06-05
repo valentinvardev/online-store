@@ -6,21 +6,60 @@ import { use } from "react";
 import { ShoppingBag, Check, ArrowLeft } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
-import { productos } from "../_data/productos";
 import { useCart } from "~/app/_components/cart/CartContext";
 import Badge from "~/app/_components/Badge";
+import { api } from "~/trpc/react";
 
+const typeToCategory: Record<string, string> = {
+  FISICO: "Físico",
+  DIGITAL: "Digital",
+  PERSONALIZADO: "Personalizado",
+};
+const formatPrice = (n: number) => `$${n}`;
 
 export default function ProductoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const { addItem } = useCart();
 
-  const producto = productos.find((p) => p.slug === slug);
-  if (!producto) notFound();
+  const { data: productoDb, isLoading } = api.products.bySlug.useQuery({ slug });
+  const { data: allProducts = [] } = api.products.list.useQuery();
 
-  const relacionados = productos
-    .filter((p) => p.category === producto.category && p.id !== producto.id)
-    .slice(0, 3);
+  if (isLoading) {
+    return (
+      <>
+        <Navbar />
+        <div className="bg-crema min-h-[60vh] flex items-center justify-center">
+          <span className="font-sans text-[0.8rem] text-tierra/40 tracking-[0.4em] uppercase">Cargando…</span>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!productoDb) notFound();
+
+  // Adapta la shape de DB al shape de render
+  const producto = {
+    ...productoDb,
+    category: typeToCategory[productoDb.type] ?? "Físico",
+    desc: productoDb.description,
+    descLong: productoDb.descLong ?? productoDb.description,
+    price: formatPrice(productoDb.price),
+    priceNum: productoDb.price,
+    priceOld: productoDb.priceOld ? formatPrice(productoDb.priceOld) : undefined,
+    gradient: productoDb.gradient ?? "from-morado to-rosa",
+    details: (productoDb.details as { label: string; value: string }[]) ?? [],
+  };
+
+  const relacionados = allProducts
+    .filter((p) => p.type === productoDb.type && p.id !== productoDb.id)
+    .slice(0, 3)
+    .map((p) => ({
+      ...p,
+      desc: p.description,
+      price: formatPrice(p.price),
+      gradient: p.gradient ?? "from-morado to-rosa",
+    }));
 
   const isAgotado = producto.badge === "Agotado";
 

@@ -1,147 +1,5 @@
 import Link from "next/link";
-
-type Servicio = {
-  id: number;
-  slug: string;
-  numero: string;
-  title: string;
-  subtitle: string;
-  desc: string;
-  precio: string;
-  badge?: string;
-  duration: string;
-  format: string;
-  contenido: string[];
-  accentColor: string;
-  bgColor: string;
-  coverGradient: string;
-  imageUrl?: string;
-};
-
-const servicios: Servicio[] = [
-  {
-    id: 1,
-    slug: "tarot",
-    numero: "01",
-    title: "Lectura de Tarot",
-    subtitle: "Para lo que estás viviendo ahora",
-    desc: "Una hora de lectura personalizada donde las cartas hablan directo a lo que necesitás ver. Sin vaguedades, sin evasivas — claridad real para tu momento actual.",
-    precio: "desde $45",
-    badge: "La más solicitada",
-    duration: "60 minutos",
-    format: "Zoom en vivo",
-    accentColor: "text-morado",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-morado-dark via-morado-mid to-morado",
-    contenido: [
-      "Sesión en vivo por Zoom",
-      "Grabación completa incluida",
-      "Resumen escrito post-sesión",
-      "Tiempo para tus preguntas",
-    ],
-  },
-  {
-    id: 2,
-    slug: "lectura-extendida",
-    numero: "02",
-    title: "Lectura Extendida",
-    subtitle: "Con más profundidad y tiempo",
-    desc: "90 minutos para ir a fondo. Ideal si tenés múltiples áreas que trabajar o querés una lectura de carta astral integrada con el tarot.",
-    precio: "desde $70",
-    duration: "90 minutos",
-    format: "Zoom en vivo",
-    accentColor: "text-celeste",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-[#0f2744] via-[#1a3a6b] to-celeste",
-    contenido: [
-      "Sesión extendida por Zoom",
-      "Grabación completa incluida",
-      "Informe PDF detallado",
-      "Opcional: integración astrológica",
-    ],
-  },
-  {
-    id: 3,
-    slug: "ritual",
-    numero: "03",
-    title: "Ritual Personalizado",
-    subtitle: "Diseñado solo para vos",
-    desc: "Creo un ritual específico para lo que estás atravesando: para soltar, para atraer, para sanar. Cada elemento tiene sentido. Cada paso tiene intención.",
-    precio: "desde $65",
-    duration: "Proceso de 7 días",
-    format: "Asincrónico",
-    accentColor: "text-rosa",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-[#6b0f3a] via-rosa to-[#ff9a5c]",
-    contenido: [
-      "Cuestionario de intención previo",
-      "Guía escrita paso a paso",
-      "Lista de elementos y dónde conseguirlos",
-      "Seguimiento durante 7 días",
-    ],
-  },
-  {
-    id: 4,
-    slug: "astrologia",
-    numero: "04",
-    title: "Consulta Astrológica",
-    subtitle: "Tu carta natal como mapa de vida",
-    desc: "Analizamos tu carta natal completa: motivaciones profundas, dones naturales, desafíos kármicos y tránsitos actuales. Para tomar decisiones con claridad.",
-    precio: "desde $80",
-    duration: "60 min + informe",
-    format: "Zoom en vivo",
-    accentColor: "text-tierra",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-[#0a0015] via-morado-dark to-morado-mid",
-    contenido: [
-      "Análisis completo de carta natal",
-      "Sesión en vivo por Zoom",
-      "Informe PDF para releer",
-      "Tránsitos del año en curso",
-    ],
-  },
-  {
-    id: 5,
-    slug: "bundle",
-    numero: "05",
-    title: "Bundle: Tarot + Ritual",
-    subtitle: "La combinación más completa",
-    desc: "Primero leemos las cartas para entender dónde estás. Después diseñamos el ritual para moverte hacia donde querés ir. El proceso completo.",
-    precio: "$100",
-    badge: "Ahorrás $10",
-    duration: "60 min + 7 días",
-    format: "Zoom + guía escrita",
-    accentColor: "text-dorado",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-tierra-dark via-[#6b2d00] to-dorado",
-    contenido: [
-      "Lectura de tarot 60 minutos",
-      "Ritual personalizado post-lectura",
-      "Grabación + guía + seguimiento",
-      "Descuento respecto a contratarlos por separado",
-    ],
-  },
-  {
-    id: 6,
-    slug: "cierre",
-    numero: "06",
-    title: "Sesión de Cierre",
-    subtitle: "Para terminar un ciclo con conciencia",
-    desc: "Al final de un año, una relación, una etapa. Hacemos un repaso simbólico, ritual de cierre y apertura intencional al siguiente ciclo.",
-    precio: "desde $55",
-    duration: "75 minutos",
-    format: "Zoom en vivo",
-    accentColor: "text-morado-light",
-    bgColor: "bg-dorado-light",
-    coverGradient: "from-morado-dark via-[#3b0764] to-rosa",
-    contenido: [
-      "Sesión de integración y cierre",
-      "Ritual simbólico guiado",
-      "Carta de intención para el nuevo ciclo",
-      "Grabación incluida",
-    ],
-  },
-];
+import { api } from "~/trpc/server";
 
 /* ── Ilustraciones SVG por sesión ── */
 function TarotCover() {
@@ -382,16 +240,20 @@ function CierreCover() {
   );
 }
 
-const coverIllustrations: Record<number, React.ReactNode> = {
-  1: <TarotCover />,
-  2: <LecturaExtendidaCover />,
-  3: <RitualCover />,
-  4: <AstrologiaCover />,
-  5: <BundleCover />,
-  6: <CierreCover />,
+/* Ilustraciones de portada keyeadas por slug del servicio.
+ * Si en DB el servicio tiene imageUrl, se usa esa; si no, cae el SVG por slug. */
+const coverIllustrations: Record<string, React.ReactNode> = {
+  tarot: <TarotCover />,
+  "lectura-extendida": <LecturaExtendidaCover />,
+  ritual: <RitualCover />,
+  astrologia: <AstrologiaCover />,
+  bundle: <BundleCover />,
+  cierre: <CierreCover />,
 };
 
-export default function ServiciosGrid() {
+export default async function ServiciosGrid() {
+  const servicios = await api.services.list();
+
   return (
     <section className="bg-crema py-16 px-6">
       <div className="max-w-7xl mx-auto">
@@ -399,37 +261,44 @@ export default function ServiciosGrid() {
           {servicios.map((s) => (
             <article
               key={s.id}
-              className={`border-2 border-morado-dark ${s.bgColor} block-shadow flex flex-col overflow-hidden`}
+              className={`border-2 border-morado-dark ${s.bgColor ?? "bg-dorado-light"} block-shadow flex flex-col overflow-hidden`}
             >
               {/* ── Portada ── */}
-              <div className={`relative h-52 bg-gradient-to-br ${s.coverGradient} overflow-hidden shrink-0`}>
+              <div className={`relative h-52 bg-gradient-to-br ${s.coverGradient ?? "from-morado-dark to-morado"} overflow-hidden shrink-0`}>
                 {s.imageUrl ? (
-                  <img src={s.imageUrl} alt={s.title} className="w-full h-full object-cover" />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={s.imageUrl} alt={s.name} className="w-full h-full object-cover" />
                 ) : (
-                  coverIllustrations[s.id]
+                  coverIllustrations[s.slug]
                 )}
                 {/* Número flotante */}
-                <div className="absolute bottom-3 right-4 font-display text-4xl text-white/10 leading-none select-none tracking-wide">
-                  {s.numero}
-                </div>
+                {s.numero && (
+                  <div className="absolute bottom-3 right-4 font-display text-4xl text-white/10 leading-none select-none tracking-wide">
+                    {s.numero}
+                  </div>
+                )}
               </div>
 
               {/* ── Contenido ── */}
               <div className="p-7 flex flex-col flex-1">
                 <h3 className="font-sans font-bold uppercase text-xl text-tierra-dark leading-tight tracking-wide">
-                  {s.title}
+                  {s.name}
                 </h3>
-                <p className="font-sans italic text-tierra-dark/85 text-base mt-1 mb-4">{s.subtitle}</p>
+                {s.subtitle && (
+                  <p className="font-sans italic text-tierra-dark/85 text-base mt-1 mb-4">{s.subtitle}</p>
+                )}
 
                 <p className="font-sans text-tierra-dark/85 text-[16px] leading-relaxed mb-5 tracking-wide flex-1">
-                  {s.desc}
+                  {s.description}
                 </p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  <span className="font-sans text-[0.85rem] bg-white/70 border border-tierra-dark/30 text-tierra-dark px-3 py-1 tracking-wide font-medium">
-                    {s.duration}
-                  </span>
+                  {s.durationLabel && (
+                    <span className="font-sans text-[0.85rem] bg-white/70 border border-tierra-dark/30 text-tierra-dark px-3 py-1 tracking-wide font-medium">
+                      {s.durationLabel}
+                    </span>
+                  )}
                   <span className="font-sans text-[0.85rem] bg-white/70 border border-tierra-dark/30 text-tierra-dark px-3 py-1 tracking-wide font-medium">
                     {s.format}
                   </span>
@@ -448,7 +317,7 @@ export default function ServiciosGrid() {
                 {/* Precio + CTA */}
                 <div className="flex items-center justify-between mt-auto">
                   <div>
-                    <span className="font-sans font-bold text-3xl text-tierra-dark">{s.precio}</span>
+                    <span className="font-sans font-bold text-3xl text-tierra-dark">{s.priceLabel ?? `$${s.price}`}</span>
                     {s.badge && (
                       <span className="block font-sans text-[0.8rem] font-semibold text-rosa tracking-widest uppercase mt-0.5">
                         {s.badge}

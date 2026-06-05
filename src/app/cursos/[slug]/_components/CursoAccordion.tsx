@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown, Lock, Play } from "lucide-react";
-import type { Modulo } from "../../_data/cursos";
+
+type Modulo = { title: string; lessons: string[] };
 
 export default function CursoAccordion({ modules }: { modules: Modulo[] }) {
   const [open, setOpen] = useState<number | null>(0);
