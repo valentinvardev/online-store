@@ -334,7 +334,7 @@ export default function SuscripcionesPage() {
               <div className="text-center lg:text-left">
                 <span className="font-display text-tierra-dark/15 text-6xl block mb-2">✦</span>
                 <h2 className="font-display uppercase text-[clamp(2.2rem,6vw,4rem)] text-tierra-dark leading-none tracking-wide mb-5">
-                  ¿Te sumás?
+                  <span className="inline-block rotate-180 leading-none">?</span>Te sumás?
                 </h2>
                 <p className="font-sans text-tierra-dark/80 text-base sm:text-lg tracking-wide leading-relaxed max-w-md mx-auto lg:mx-0 mb-7">
                   Empezá tu práctica sostenida hoy. Cancelás cuando quieras, sin compromisos — solo magia mensual garantizada.

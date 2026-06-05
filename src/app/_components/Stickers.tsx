@@ -95,7 +95,8 @@ export default function Stickers({ preset = "suave", items, blend = "soft-light"
           className={`absolute ${s.anim && s.anim !== "none" ? animClass[s.anim] : ""} ${s.hideOnMobile ? "hidden sm:block" : ""}`}
           style={{
             top: s.top, left: s.left, right: s.right, bottom: s.bottom,
-            width: s.size, height: s.size,
+            width: s.size,
+            height: "auto",
             opacity: s.opacity ?? 0.18,
             mixBlendMode: blend,
             ["--rot" as string]: `${s.rotate ?? 0}deg`,

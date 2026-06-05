@@ -276,7 +276,7 @@ export default function SobreMiPage() {
           <RevealOnScroll>
             <span className="font-display text-5xl sm:text-6xl text-dorado block mb-5 sm:mb-6">✦</span>
             <h2 className="font-display uppercase text-[clamp(3rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide mb-4 sm:mb-5">
-              ¿Trabajamos juntas?
+              <span className="inline-block rotate-180 leading-none">?</span>Trabajamos juntas?
             </h2>
             <p className="font-sans text-crema/80 text-sm leading-relaxed tracking-wide max-w-xl mx-auto mb-8 sm:mb-10">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si algo de lo que leíste resonó, el próximo paso es tuyo.

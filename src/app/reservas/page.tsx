@@ -228,7 +228,7 @@ function ReservasContent() {
           ) : step === 0 ? (
             <div>
               <h2 className="font-display uppercase text-3xl text-tierra-dark tracking-wide mb-2">
-                ¿Qué sesión querés reservar?
+                <span className="inline-block rotate-180 leading-none">?</span>Qué sesión querés reservar?
               </h2>
               <p className="font-sans text-tierra/65 text-sm tracking-wide mb-8">
                 Hacé clic en la sesión que te interesa.

@@ -11,7 +11,7 @@ export default function ReservarCTA() {
         </div>
 
         <h2 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide mb-4">
-          ¿Cuándo<br />empezamos?
+          <span className="inline-block rotate-180 leading-none">?</span>Cuándo<br />empezamos?
         </h2>
         <p className="font-sans italic text-crema/65 text-lg leading-snug mb-10 max-w-sm mx-auto">
           Escribime por Instagram o por mail y coordinamos. Sin formularios eternos.

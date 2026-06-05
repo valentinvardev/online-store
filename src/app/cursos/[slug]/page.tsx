@@ -176,7 +176,7 @@ export default async function CursoInfoPage({ params }: Props) {
               {/* ¿Para quién es? */}
               <section>
                 <h2 className="font-display uppercase text-[clamp(2.75rem,4vw,2.8rem)] text-tierra-dark leading-none tracking-wide mb-6">
-                  ¿Para quién es?
+                  <span className="inline-block rotate-180 leading-none">?</span>Para quién es?
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
@@ -271,7 +271,7 @@ export default async function CursoInfoPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-6">
           <span className="font-display text-dorado text-6xl block">✦</span>
           <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
-            ¿Lista para empezar?
+            <span className="inline-block rotate-180 leading-none">?</span>Lista para empezar?
           </h2>
           <p className="font-sans text-crema/70 text-[15px] tracking-wide max-w-sm mx-auto leading-relaxed">
             Unite a {curso.students} que ya transitaron este camino.
