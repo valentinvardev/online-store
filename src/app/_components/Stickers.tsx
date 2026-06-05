@@ -30,24 +30,24 @@ const animClass: Record<NonNullable<Sticker["anim"]>, string> = {
 const presets: Record<string, Sticker[]> = {
   // Pocos stickers grandes tipo marca de agua
   suave: [
-    { id: "sticker-04", top: "8%",   right: "5%",   size: 180, opacity: 0.32, rotate: 14,  anim: "float-slow" },
-    { id: "sticker-13", bottom: "8%", left: "4%",   size: 140, opacity: 0.3,  rotate: -12, anim: "float", delay: 1.2, hideOnMobile: true },
-    { id: "sticker-09", top: "55%",  right: "12%",  size: 110, opacity: 0.32, rotate: 8,   anim: "spin", delay: 0.5 },
-    { id: "sticker-17", top: "20%",  left: "10%",   size: 100, opacity: 0.28, rotate: -8,  anim: "float-slow", delay: 2, hideOnMobile: true },
+    { id: "sticker-03", top: "8%",   right: "5%",   size: 180, opacity: 0.32, rotate: 14,  anim: "float-slow" },
+    { id: "sticker-14", bottom: "8%", left: "4%",   size: 140, opacity: 0.3,  rotate: -12, anim: "float", delay: 1.2, hideOnMobile: true },
+    { id: "sticker-20", top: "55%",  right: "12%",  size: 110, opacity: 0.32, rotate: 8,   anim: "spin", delay: 0.5 },
+    { id: "sticker-05", top: "20%",  left: "10%",   size: 100, opacity: 0.28, rotate: -8,  anim: "float-slow", delay: 2, hideOnMobile: true },
   ],
   // Varios stickers chicos esparcidos
   festivo: [
-    { id: "sticker-15", top: "10%",  left: "6%",    size: 90,  opacity: 0.38, rotate: 0,   anim: "spin" },
-    { id: "sticker-08", top: "65%",  left: "14%",   size: 110, opacity: 0.32, rotate: -8,  anim: "float", delay: 0.8, hideOnMobile: true },
-    { id: "sticker-11", top: "18%",  right: "10%",  size: 100, opacity: 0.35, rotate: 12,  anim: "float-slow", delay: 1.4 },
-    { id: "sticker-06", bottom: "12%", right: "8%", size: 120, opacity: 0.35, rotate: 0,   anim: "float", delay: 0.4, hideOnMobile: true },
-    { id: "sticker-19", bottom: "18%", left: "40%", size: 80,  opacity: 0.32, rotate: -6,  anim: "float-slow", delay: 2 },
-    { id: "sticker-22", top: "45%",  left: "50%",   size: 70,  opacity: 0.28, rotate: 10,  anim: "spin", delay: 3, hideOnMobile: true },
+    { id: "sticker-07", top: "10%",  left: "6%",    size: 90,  opacity: 0.38, rotate: 0,   anim: "spin" },
+    { id: "sticker-10", top: "65%",  left: "14%",   size: 110, opacity: 0.32, rotate: -8,  anim: "float", delay: 0.8, hideOnMobile: true },
+    { id: "sticker-16", top: "18%",  right: "10%",  size: 100, opacity: 0.35, rotate: 12,  anim: "float-slow", delay: 1.4 },
+    { id: "sticker-18", bottom: "12%", right: "8%", size: 120, opacity: 0.35, rotate: 0,   anim: "float", delay: 0.4, hideOnMobile: true },
+    { id: "sticker-21", bottom: "18%", left: "40%", size: 80,  opacity: 0.32, rotate: -6,  anim: "float-slow", delay: 2 },
+    { id: "sticker-02", top: "45%",  left: "50%",   size: 70,  opacity: 0.28, rotate: 10,  anim: "spin", delay: 3, hideOnMobile: true },
   ],
   // Marca de agua enorme tenue
   watermark: [
-    { id: "sticker-01", top: "-8%",  right: "-6%",  size: 380, opacity: 0.2,  rotate: 0,  anim: "float-slow" },
-    { id: "sticker-12", bottom: "-10%", left: "-6%", size: 320, opacity: 0.18, rotate: 0, anim: "spin", hideOnMobile: true },
+    { id: "sticker-01", top: "8%",   right: "5%",   size: 380, opacity: 0.2,  rotate: 0,  anim: "float-slow" },
+    { id: "sticker-12", bottom: "8%", left: "5%",   size: 320, opacity: 0.18, rotate: 0, anim: "spin", hideOnMobile: true },
   ],
   // Para banner verde — tonalidades que blendean con verde claro
   bosque: [
