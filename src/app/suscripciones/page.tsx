@@ -7,7 +7,6 @@ import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import RevealOnScroll from "~/app/_components/home/RevealOnScroll";
 import Stickers from "~/app/_components/Stickers";
-import DecorIcons from "~/app/_components/DecorIcons";
 
 /* ── La membresía (única) ── */
 const membresia = {
@@ -209,7 +208,7 @@ export default function SuscripcionesPage() {
 
       {/* ── CÓMO FUNCIONA: VIDEO ── */}
       <section className="bg-crema-dark py-16 sm:py-20 px-6 relative overflow-hidden">
-        <DecorIcons preset="suave" />
+        <Stickers preset="suave" blend="multiply" />
         <div className="max-w-4xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-10">
@@ -272,7 +271,7 @@ export default function SuscripcionesPage() {
 
       {/* ── POR QUÉ SUMARTE ── */}
       <section className="bg-verde py-16 sm:py-20 px-6 relative overflow-hidden">
-        <DecorIcons preset="festivo" />
+        <Stickers preset="bosque" blend="soft-light" />
         <div className="max-w-6xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-12">
@@ -327,7 +326,7 @@ export default function SuscripcionesPage() {
 
       {/* ── CTA FINAL (amarillo) con la card ── */}
       <section className="bg-dorado py-16 sm:py-20 px-6 relative overflow-hidden border-t-4 border-morado-dark">
-        <DecorIcons preset="festivo" />
+        <Stickers preset="solar" blend="multiply" />
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <RevealOnScroll>
