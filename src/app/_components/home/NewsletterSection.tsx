@@ -17,9 +17,9 @@ export default function NewsletterSection() {
   return (
     <section className="bg-morado py-24 px-6 relative overflow-hidden">
       <Stickers blend="screen" items={[
-        { id: "sticker-15", top: "-3%",   right: "-3%", size: 105, opacity: 0.18, rotate: 12,  anim: "float-slow" },
-        { id: "sticker-09", bottom: "-3%", left: "-3%", size: 110, opacity: 0.2, rotate: -8, anim: "float", delay: 1.2 },
-        { id: "sticker-13", top: "40%",   left: "-5%",  size: 72, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+        { id: "sticker-15", top: "5%",   right: "3%", size: 105, opacity: 0.18, rotate: 12,  anim: "float-slow" },
+        { id: "sticker-09", bottom: "5%", left: "3%", size: 110, opacity: 0.2, rotate: -8, anim: "float", delay: 1.2 },
+        { id: "sticker-13", top: "40%",   left: "3%",  size: 72, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />
       <StarField />
       <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-dorado opacity-10 blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
