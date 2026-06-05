@@ -75,15 +75,13 @@ export default function SobreMiPage() {
         <span className="absolute top-6 left-6 sm:top-8 sm:left-8 font-display text-dorado/50 text-xl sm:text-2xl select-none z-10">✦</span>
         <span className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 font-display text-dorado/40 text-base sm:text-lg select-none z-10">◎</span>
 
-        {/* Fondo verde con animación CSS liviana (reemplazo del WebGL shader) */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 35%, #3d7a47 70%, #2d6a3e 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #2d6a3e 0%, #3d7a47 35%, #5fa569 70%, #3d7a47 100%)" }} />
-        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.18) 50%, transparent 100%)" }} />
+        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
+        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
+        <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
         {/* Stickers decorativos */}
         <Stickers preset="bosque" blend="soft-light" />
-        {/* Velo para legibilidad del texto */}
-        <div className="absolute inset-0 bg-[#14362a]/25 pointer-events-none" />
 
         {/* Estrellitas y ornamentos encima */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -201,8 +199,16 @@ export default function SobreMiPage() {
       </section>
 
       {/* ── Mi historia — Timeline ── */}
-      <section className="bg-verde py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
-        <div className="max-w-4xl mx-auto">
+      <section className="bg-verde-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
+          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
+          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
+          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+          <Stickers preset="bosque" blend="soft-light" />
+        </div>
+        <div className="max-w-4xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="mb-10 sm:mb-12 lg:mb-14 text-center">
               <span className="font-sans text-[0.8rem] text-crema/70 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">El camino</span>

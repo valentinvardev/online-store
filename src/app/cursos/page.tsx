@@ -16,43 +16,25 @@ export default function CursosPage() {
       <CursosBanner />
 
       {/* Encabezado */}
-      <div className="bg-verde relative py-14 px-6 overflow-hidden">
-        {/* Fondo verde con animación CSS liviana */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 35%, #3d7a47 70%, #2d6a3e 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #2d6a3e 0%, #3d7a47 35%, #5fa569 70%, #3d7a47 100%)" }} />
-        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.18) 50%, transparent 100%)" }} />
+      <div className="bg-dorado-light relative py-14 px-6 overflow-hidden">
+        {/* Degradado de amarillos con shimmer */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #f5c842 0%, #ffe066 30%, #fdf3c5 60%, #ffe066 85%, #f5c842 100%)" }} />
+        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #ffe066 0%, #fdf3c5 35%, #fef7e0 65%, #fdf3c5 90%, #ffe066 100%)" }} />
+        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(253,243,197,0.4) 50%, transparent 100%)" }} />
         {/* Stickers decorativos */}
-        <Stickers preset="bosque" blend="soft-light" />
-        {/* Velo para legibilidad */}
-        <div className="absolute inset-0 bg-[#14362a]/25 pointer-events-none" />
-
-        {/* Estrellitas dispersas */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute top-[12%] right-[12%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
-          <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
-          <span className="absolute top-[38%] right-[18%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-          <span className="absolute top-[52%] left-[35%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
-          <span className="absolute top-[68%] right-[8%] font-display text-crema/90 text-[0.8rem] select-none">⋆</span>
-          <span className="absolute top-[78%] left-[60%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-          <span className="absolute top-[18%] left-[42%] font-display text-crema/75 text-[0.75rem] select-none">·</span>
-          <span className="absolute top-[44%] right-[45%] font-display text-crema/70 text-[0.8rem] select-none">·</span>
-          <span className="absolute top-[60%] right-[55%] font-display text-crema/80 text-[13px] select-none">⋆</span>
-          <span className="absolute top-[85%] right-[25%] font-display text-crema/65 text-[0.75rem] select-none">·</span>
-          <span className="absolute top-[30%] left-[5%] font-display text-crema/85 text-[0.8rem] select-none">⋆</span>
-          <span className="absolute top-[88%] left-[8%] font-display text-crema text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.7)]">✦</span>
-        </div>
+        <Stickers preset="solar" blend="multiply" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-5">
-            <span className="font-sans text-[0.8rem] text-crema/85 tracking-[0.4em] uppercase">
+            <span className="font-sans font-semibold text-[0.85rem] text-tierra-dark tracking-[0.4em] uppercase">
               Aprendé a tu ritmo
             </span>
           </div>
-          <h1 className="font-display uppercase text-[clamp(3rem,8vw,5rem)] text-crema leading-none tracking-wide">
+          <h1 className="font-display uppercase text-[clamp(3rem,8vw,5rem)] text-tierra-dark leading-none tracking-wide">
             Tu lenguaje<br />sagrado
           </h1>
-          <p className="font-sans italic text-crema/85 text-base mt-4 max-w-md leading-relaxed">
+          <p className="font-sans italic text-tierra-dark/85 text-base sm:text-lg mt-4 max-w-md leading-relaxed">
             Tarot, astrología, rituales, chakras. Sin dogmas ni memorización — aprendés desde adentro.
           </p>
         </div>

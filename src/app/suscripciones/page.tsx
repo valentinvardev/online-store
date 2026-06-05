@@ -132,16 +132,16 @@ export default function SuscripcionesPage() {
       <Navbar />
 
       {/* ── HERO con oferta ── */}
-      <section className="bg-verde relative overflow-hidden">
-        {/* Fondo verde con animación CSS liviana */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #1a4d2e 0%, #2d6a3e 35%, #3d7a47 70%, #2d6a3e 100%)" }} />
-        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #2d6a3e 0%, #3d7a47 35%, #5fa569 70%, #3d7a47 100%)" }} />
-        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)" }} />
-        <Stickers preset="bosque" blend="soft-light" />
-        <div className="absolute inset-0 bg-[#14362a]/30 pointer-events-none" />
+      <section className="bg-dorado-light relative overflow-hidden">
+        {/* Degradado de amarillos con shimmer */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #f5c842 0%, #ffe066 30%, #fdf3c5 60%, #ffe066 85%, #f5c842 100%)" }} />
+        <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #ffe066 0%, #fdf3c5 35%, #fef7e0 65%, #fdf3c5 90%, #ffe066 100%)" }} />
+        <div className="absolute inset-x-0 h-[40%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(253,243,197,0.4) 50%, transparent 100%)" }} />
+        <Stickers preset="solar" blend="multiply" />
         <div className="absolute inset-0 pointer-events-none select-none">
-          <span className="absolute top-8 right-[8%] font-display text-crema/10 text-[9rem] leading-none">✦</span>
-          <span className="absolute bottom-2 left-6 font-display text-crema/5 text-[7rem] leading-none">◉</span>
+          <span className="absolute top-8 right-[8%] font-display text-tierra-dark/10 text-[9rem] leading-none">✦</span>
+          <span className="absolute bottom-2 left-6 font-display text-tierra-dark/8 text-[7rem] leading-none">◉</span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 relative z-10">
@@ -149,20 +149,20 @@ export default function SuscripcionesPage() {
 
             {/* Texto */}
             <div className="text-center lg:text-left">
-              <span className="inline-block font-sans text-[0.62rem] text-tierra-dark bg-dorado px-3 py-1.5 border-2 border-morado-dark tracking-[0.3em] uppercase mb-6">
+              <span className="inline-block font-sans text-[0.7rem] font-semibold text-tierra-dark bg-white/70 px-3 py-1.5 border-2 border-morado-dark tracking-[0.3em] uppercase mb-6">
                 Membresía mensual
               </span>
-              <h1 className="font-display uppercase text-[clamp(2.8rem,8vw,5.5rem)] text-crema leading-[0.95] tracking-wide mb-5">
-                Sumate al<br /><span className="text-dorado">Círculo</span>
+              <h1 className="font-display uppercase text-[clamp(2.8rem,8vw,5.5rem)] text-tierra-dark leading-[0.95] tracking-wide mb-5">
+                Sumate al<br /><span className="text-morado-dark">Círculo</span>
               </h1>
-              <p className="font-sans italic text-crema text-lg sm:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed drop-shadow-[0_1px_8px_rgba(20,54,42,0.5)] mb-7">
+              <p className="font-sans italic text-tierra-dark/90 text-lg sm:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed mb-7">
                 {membresia.subtitulo}. Rituales, contenidos exclusivos y comunidad — todos los meses, directo a vos.
               </p>
               {/* Highlights rápidos */}
               <ul className="inline-flex flex-col gap-2.5 text-left">
                 {membresia.beneficios.slice(0, 4).map((b, i) => (
-                  <li key={i} className="flex items-center gap-2.5 font-sans text-[15px] text-crema tracking-wide">
-                    <Check size={15} className="text-dorado shrink-0" strokeWidth={2.5} />
+                  <li key={i} className="flex items-center gap-2.5 font-sans text-[15px] text-tierra-dark/90 tracking-wide font-medium">
+                    <Check size={15} className="text-morado-dark shrink-0" strokeWidth={2.5} />
                     {b}
                   </li>
                 ))}
@@ -270,8 +270,15 @@ export default function SuscripcionesPage() {
       </section>
 
       {/* ── POR QUÉ SUMARTE ── */}
-      <section className="bg-verde py-16 sm:py-20 px-6 relative overflow-hidden">
-        <Stickers preset="bosque" blend="soft-light" />
+      <section className="bg-verde-light py-16 sm:py-20 px-6 relative overflow-hidden">
+        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
+          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
+          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
+          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
+          <Stickers preset="bosque" blend="soft-light" />
+        </div>
         <div className="max-w-6xl mx-auto relative z-10">
           <RevealOnScroll>
             <div className="text-center mb-12">
