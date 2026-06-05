@@ -54,7 +54,7 @@ export default function CursosSection() {
       <Stickers blend="screen" items={[
         { id: "sticker-15", top: "5%",   left: "3%", size: 110, opacity: 0.18, rotate: -10, anim: "float-slow" },
         { id: "sticker-13", bottom: "5%", right: "3%", size: 120, opacity: 0.2, rotate: 12, anim: "float", delay: 1.2 },
-        { id: "sticker-11", top: "45%",   right: "3%", size: 72, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+        { id: "sticker-11", top: "45%",   right: "3%", size: 94, opacity: 0.16, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />
       <StarField />
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-morado opacity-20 blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />

@@ -6,7 +6,7 @@ export default function SobreMiSection() {
       <Stickers blend="multiply" items={[
         { id: "sticker-10", top: "5%",   right: "3%", size: 110, opacity: 0.4,  rotate: 8,   anim: "float-slow" },
         { id: "sticker-06", bottom: "5%", left: "3%", size: 130, opacity: 0.42, rotate: -10, anim: "float", delay: 1.2 },
-        { id: "sticker-02", top: "45%",   right: "3%", size: 72, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+        { id: "sticker-02", top: "45%",   right: "3%", size: 94, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 sm:gap-14 lg:gap-20">
 

@@ -51,7 +51,7 @@ export default function ServiciosSection() {
       <Stickers blend="multiply" items={[
         { id: "sticker-17", top: "5%",   right: "3%", size: 110, opacity: 0.38, rotate: 8,   anim: "float-slow" },
         { id: "sticker-09", bottom: "5%", left: "3%", size: 130, opacity: 0.4,  rotate: -12, anim: "float", delay: 1.2 },
-        { id: "sticker-08", top: "40%",   left: "3%",  size: 70, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
+        { id: "sticker-08", top: "40%",   left: "3%",  size: 91, opacity: 0.32, rotate: 0,   anim: "spin", delay: 0.6, hideOnMobile: true },
       ]} />
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll direction="up" delay={0}>
