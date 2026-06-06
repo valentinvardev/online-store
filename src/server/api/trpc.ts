@@ -131,3 +131,33 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Admin procedure — requires authenticated user with isAdmin: true.
+ * En dev sin credenciales de auth configuradas, deja pasar para no bloquear
+ * el desarrollo local (mismo comportamiento que el middleware en /admin).
+ */
+const isDev = process.env.NODE_ENV === "development";
+const hasAuthCredentials = !!(
+  process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET
+);
+
+export const adminProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    // Escape hatch para dev sin auth configurada todavia
+    if (isDev && !hasAuthCredentials) {
+      return next({ ctx });
+    }
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    if (!ctx.session.user.isAdmin) {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Solo administradores" });
+    }
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });

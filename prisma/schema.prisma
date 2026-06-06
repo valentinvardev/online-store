@@ -241,3 +241,14 @@ model Booking {
     notes     String?
     createdAt DateTime @default(now())
 }
+
+// ─── Newsletter ──────────────────────────────────────────────────────────────
+
+model Subscriber {
+    id           String    @id @default(cuid())
+    email        String    @unique
+    active       Boolean   @default(true)
+    source       String?
+    createdAt    DateTime  @default(now())
+    unsubscribed DateTime?
+}

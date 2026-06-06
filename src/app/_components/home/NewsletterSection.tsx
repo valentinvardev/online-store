@@ -4,14 +4,26 @@ import { useState } from "react";
 import RevealOnScroll from "./RevealOnScroll";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
+import { api } from "~/trpc/react";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const subscribe = api.newsletter.subscribe.useMutation({
+    onSuccess: () => {
+      setSent(true);
+      setError(null);
+    },
+    onError: (err) => setError(err.message),
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) setSent(true);
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    subscribe.mutate({ email: trimmed, source: "homepage" });
   };
 
   return (
@@ -59,15 +71,22 @@ export default function NewsletterSection() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
                   required
-                  className="flex-1 bg-white/15 border-2 border-white/40 text-crema placeholder:text-crema/60 font-sans text-base px-5 py-4 focus:outline-none focus:border-dorado focus:bg-white/25 transition-colors tracking-wide"
+                  disabled={subscribe.isPending}
+                  className="flex-1 bg-white/15 border-2 border-white/40 text-crema placeholder:text-crema/60 font-sans text-base px-5 py-4 focus:outline-none focus:border-dorado focus:bg-white/25 transition-colors tracking-wide disabled:opacity-50"
                 />
                 <button
                   type="submit"
-                  className="bg-dorado text-tierra-dark font-sans font-semibold text-[14px] px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm"
+                  disabled={subscribe.isPending}
+                  className="bg-dorado text-tierra-dark font-sans font-semibold text-[14px] px-7 py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors whitespace-nowrap tracking-widest uppercase block-shadow-sm disabled:opacity-60 disabled:cursor-wait"
                 >
-                  Suscribirme
+                  {subscribe.isPending ? "Enviando…" : "Suscribirme"}
                 </button>
               </form>
+              {error && (
+                <p className="font-sans text-[0.85rem] text-dorado mt-3 tracking-wide">
+                  {error}
+                </p>
+              )}
               <p className="font-sans text-[0.95rem] text-crema/75 mt-4 tracking-wide">
                 Sin spam. Solo magia. Podés darte de baja cuando quieras.
               </p>
