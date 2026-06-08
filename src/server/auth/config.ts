@@ -46,6 +46,9 @@ export const authConfig = {
   /* JWT (no DB) — necesario para que el middleware Edge no importe
    * el motor wasm de Prisma al verificar la sesión en cada request. */
   session: { strategy: "jwt" },
+  /* En produccion fuera de Vercel hay que confiar el host explicitamente
+   * o NextAuth tira UntrustedHost (ver authjs.dev#untrustedhost). */
+  trustHost: true,
   pages: {
     signIn: "/login",
   },
