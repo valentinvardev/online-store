@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { X, Plus, Minus, ShoppingBag, Trash2, ArrowLeft, User, Mail, Phone } from "lucide-react";
 import { useCart, type BuyerInfo, type LastOrder } from "./CartContext";
+import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-3 py-2.5 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
 const labelClass = "block font-sans text-[0.78rem] text-tierra/70 tracking-widest uppercase mb-1";
@@ -16,7 +17,10 @@ export default function CartDrawer() {
   const [step, setStep] = useState<Step>("cart");
   const [buyer, setBuyer] = useState<BuyerInfo>({ name: "", apellido: "", email: "", phone: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const set = (k: keyof BuyerInfo, v: string) => setBuyer((b) => ({ ...b, [k]: v }));
+
+  const createOrder = api.orders.create.useMutation();
 
   function handleClose() {
     closeCart();
@@ -27,11 +31,37 @@ export default function CartDrawer() {
   async function handleConfirm(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
 
     const order: LastOrder = { buyer, items, total };
     try {
       localStorage.setItem("rdb_last_order", JSON.stringify(order));
     } catch {}
+
+    try {
+      const res = await createOrder.mutateAsync({
+        buyer: {
+          name: buyer.name,
+          apellido: buyer.apellido || undefined,
+          email: buyer.email,
+          phone: buyer.phone || undefined,
+        },
+        items: items.map((it) => ({
+          id: it.id,
+          name: it.name,
+          price: it.price,
+          quantity: it.quantity,
+          itemType: it.itemType,
+        })),
+      });
+      try {
+        localStorage.setItem("rdb_last_order_id", res.orderId);
+      } catch {}
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No pudimos registrar tu orden");
+      setSubmitting(false);
+      return;
+    }
 
     clearCart();
     handleClose();
@@ -224,6 +254,11 @@ export default function CartDrawer() {
 
             {/* Submit */}
             <div className="border-t-2 border-morado/10 px-6 py-6 space-y-3 shrink-0">
+              {error && (
+                <p className="font-sans text-[0.8rem] text-rosa bg-rosa/10 border border-rosa/30 px-3 py-2 tracking-wide">
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
                 disabled={submitting}

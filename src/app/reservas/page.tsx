@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight, Check, Clock, Video, Bell, BellOff } from "lucid
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import CalendarioReserva from "./_components/CalendarioReserva";
+import { api } from "~/trpc/react";
 
 /* ── Datos de servicios ── */
 const servicios = [
@@ -111,6 +112,11 @@ function ReservasContent() {
     fecha: "", hora: "", mensaje: "",
   });
   const [recordatorio, setRecordatorio] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  /* Trae los servicios reales de DB para resolver slug → id en el booking */
+  const { data: dbServices = [] } = api.services.list.useQuery();
 
   useEffect(() => {
     const s = searchParams.get("servicio");
@@ -126,7 +132,47 @@ function ReservasContent() {
     ? !!form.nombre && !!form.email
     : !!form.fecha && !!form.hora;
 
-  const handleSubmit = () => setDone(true);
+  async function handleSubmit() {
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const dbService = dbServices.find((s) => s.slug === servicioId);
+    if (!dbService) {
+      setSubmitError("Servicio no encontrado en la base de datos");
+      setSubmitting(false);
+      return;
+    }
+
+    const fullDate = new Date(`${form.fecha}T${form.hora.padStart(5, "0")}:00`);
+    const notes = [
+      form.whatsapp ? `WhatsApp: ${form.whatsapp}` : null,
+      form.pais ? `País: ${form.pais}` : null,
+      form.mensaje ? `Mensaje: ${form.mensaje}` : null,
+      recordatorio ? "Quiere recordatorio el día previo" : null,
+    ].filter(Boolean).join("\n");
+
+    try {
+      const res = await fetch("/api/bookings/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          serviceId: dbService.id,
+          email: form.email,
+          date: fullDate.toISOString(),
+          notes: notes || undefined,
+        }),
+      });
+      const data = await res.json() as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error ?? "No pudimos guardar tu reserva");
+      }
+      setDone(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Error al enviar la reserva");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <>
@@ -468,13 +514,20 @@ function ReservasContent() {
                   Siguiente <ArrowRight size={14} />
                 </button>
               ) : (
-                <button
-                  onClick={handleSubmit}
-                  disabled={!canNext}
-                  className="flex items-center gap-2 bg-dorado text-tierra-dark font-sans font-semibold text-[0.75rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  ✦ Confirmar reserva <Check size={14} />
-                </button>
+                <div className="flex flex-col items-end gap-2">
+                  {submitError && (
+                    <p className="font-sans text-[0.8rem] text-rosa bg-rosa/10 border border-rosa/30 px-3 py-2 tracking-wide">
+                      {submitError}
+                    </p>
+                  )}
+                  <button
+                    onClick={() => void handleSubmit()}
+                    disabled={!canNext || submitting}
+                    className="flex items-center gap-2 bg-dorado text-tierra-dark font-sans font-semibold text-[0.75rem] px-8 py-3.5 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? "Enviando…" : (<>✦ Confirmar reserva <Check size={14} /></>)}
+                  </button>
+                </div>
               )}
             </div>
           )}
