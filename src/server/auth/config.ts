@@ -43,19 +43,30 @@ export const authConfig = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   adapter: PrismaAdapter(db) as any,
   providers,
-  session: { strategy: "database" },
+  /* JWT (no DB) — necesario para que el middleware Edge no importe
+   * el motor wasm de Prisma al verificar la sesión en cada request. */
+  session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
   },
   callbacks: {
-    session: ({ session, user }) => ({
+    /* Al firmar el JWT (login inicial o refresh), guardamos isAdmin
+     * en el token para no consultar la DB en cada session(). */
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.sub = user.id;
+        token.isAdmin =
+          (user as { isAdmin?: boolean }).isAdmin ??
+          ADMIN_EMAILS.includes((user.email ?? "").toLowerCase());
+      }
+      return token;
+    },
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
-        isAdmin:
-          (user as { isAdmin?: boolean }).isAdmin ??
-          ADMIN_EMAILS.includes((user.email ?? "").toLowerCase()),
+        id: token.sub ?? "",
+        isAdmin: (token as { isAdmin?: boolean }).isAdmin ?? false,
       },
     }),
   },

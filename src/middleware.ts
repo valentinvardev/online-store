@@ -1,8 +1,14 @@
-import { auth } from "~/server/auth";
+import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
 
+import { authEdgeConfig } from "~/server/auth/edge-config";
+
+const { auth } = NextAuth(authEdgeConfig);
+
 const isDev = process.env.NODE_ENV === "development";
-const hasCredentials = !!(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET);
+const hasCredentials = !!(
+  process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET
+);
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -15,10 +21,7 @@ export default auth((req) => {
       return NextResponse.redirect(new URL("/login", req.url));
     }
 
-    const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim()).filter(Boolean);
-    const userEmail = req.auth.user?.email ?? "";
-
-    if (!adminEmails.includes(userEmail)) {
+    if (!req.auth.user?.isAdmin) {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }
