@@ -4,6 +4,7 @@
 import { PrismaClient, ProductType } from "../generated/prisma";
 import { productos } from "../src/app/tienda/_data/productos";
 import { cursos } from "../src/app/cursos/_data/cursos";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -306,12 +307,75 @@ async function seedMembershipTiers() {
   console.log("  ✓ Círculo de la Reina");
 }
 
+async function seedTestUsers() {
+  console.log("\n→ Test users...");
+  const tier = await prisma.membershipTier.findUnique({ where: { slug: "circulo-reina" } });
+  if (!tier) {
+    console.log("  ✗ Tier 'circulo-reina' no existe — saltando users");
+    return;
+  }
+
+  /* Admin de prueba */
+  const adminHash = await bcrypt.hash("Admin1234!", 12);
+  await prisma.user.upsert({
+    where: { email: "admin@test.lareina.com" },
+    create: {
+      email: "admin@test.lareina.com",
+      name: "Belén (test admin)",
+      passwordHash: adminHash,
+      isAdmin: true,
+    },
+    update: { passwordHash: adminHash, isAdmin: true },
+  });
+  console.log("  ✓ admin@test.lareina.com / Admin1234!  (isAdmin)");
+
+  /* Miembro con suscripción activa */
+  const memberHash = await bcrypt.hash("Miembra1234!", 12);
+  const member = await prisma.user.upsert({
+    where: { email: "miembra@test.lareina.com" },
+    create: {
+      email: "miembra@test.lareina.com",
+      name: "María (test miembra)",
+      passwordHash: memberHash,
+      isAdmin: false,
+    },
+    update: { passwordHash: memberHash },
+  });
+  await prisma.membership.upsert({
+    where: { userId_tierId: { userId: member.id, tierId: tier.id } },
+    create: {
+      userId: member.id,
+      tierId: tier.id,
+      status: "ACTIVE",
+      startedAt: new Date(),
+      nextBillingAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    },
+    update: { status: "ACTIVE", cancelledAt: null },
+  });
+  console.log("  ✓ miembra@test.lareina.com / Miembra1234!  (membership ACTIVE → Círculo de la Reina)");
+
+  /* Usuario sin membresía — para probar gating */
+  const visitorHash = await bcrypt.hash("Visita1234!", 12);
+  await prisma.user.upsert({
+    where: { email: "visita@test.lareina.com" },
+    create: {
+      email: "visita@test.lareina.com",
+      name: "Lucía (test visitante)",
+      passwordHash: visitorHash,
+      isAdmin: false,
+    },
+    update: { passwordHash: visitorHash },
+  });
+  console.log("  ✓ visita@test.lareina.com / Visita1234!  (sin membresía — para testear paywalls)");
+}
+
 async function main() {
   console.log("🌱 Seed iniciado");
   await seedProducts();
   await seedCourses();
   await seedServices();
   await seedMembershipTiers();
+  await seedTestUsers();
   console.log("\n✅ Seed completo\n");
 }
 
