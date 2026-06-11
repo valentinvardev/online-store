@@ -5,11 +5,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
-  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock,
+  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles,
 } from "lucide-react";
 
 const nav = [
   { label: "Dashboard",      href: "/admin",                icon: LayoutDashboard },
+  { label: "Círculo",        href: "/admin/circulo",        icon: Sparkles },
   { label: "Cursos",         href: "/admin/cursos",         icon: BookOpen },
   { label: "Productos",      href: "/admin/productos",      icon: ShoppingBag },
   { label: "Servicios",      href: "/admin/servicios",      icon: Wrench },

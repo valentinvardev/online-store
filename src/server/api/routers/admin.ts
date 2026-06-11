@@ -70,6 +70,21 @@ const servicioInput = z.object({
   active: z.boolean().default(true),
 });
 
+const postInput = z.object({
+  title: z.string().min(1, "Necesitamos un título"),
+  slug: z.string().optional(),
+  excerpt: z.string().optional(),
+  content: z.string().min(1, "El contenido no puede estar vacío"),
+  contentType: z.enum(["TEXT", "VIDEO", "AUDIO", "GALLERY"]).default("TEXT"),
+  coverImageUrl: z.string().optional(),
+  videoUrl: z.string().optional(),
+  audioUrl: z.string().optional(),
+  images: z.array(z.string()).default([]),
+  attachments: z.array(z.string()).default([]),
+  requiredTierId: z.string().nullable().optional(),
+  published: z.boolean().default(false),
+});
+
 // ─── Router ──────────────────────────────────────────────────────────────────
 
 export const adminRouter = createTRPCRouter({
@@ -382,5 +397,79 @@ export const adminRouter = createTRPCRouter({
         take: 50,
       });
     }),
+  }),
+
+  // ── Posts del círculo ────────────────────────────────────────────────────
+  posts: createTRPCRouter({
+    list: adminProcedure.query(({ ctx }) => {
+      requireAdmin(ctx.session?.user?.email);
+      return ctx.db.post.findMany({
+        orderBy: [{ published: "asc" }, { createdAt: "desc" }],
+        include: { requiredTier: { select: { name: true, slug: true, color: true } } },
+      });
+    }),
+
+    getById: adminProcedure.input(z.string()).query(({ ctx, input }) => {
+      requireAdmin(ctx.session?.user?.email);
+      return ctx.db.post.findUnique({
+        where: { id: input },
+        include: { requiredTier: true },
+      });
+    }),
+
+    tiers: adminProcedure.query(({ ctx }) => {
+      requireAdmin(ctx.session?.user?.email);
+      return ctx.db.membershipTier.findMany({
+        where: { active: true },
+        orderBy: { sortOrder: "asc" },
+        select: { id: true, slug: true, name: true, color: true },
+      });
+    }),
+
+    create: adminProcedure.input(postInput).mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.session?.user?.email);
+      const slug = (input.slug?.trim() || slugify(input.title));
+      const publishedAt = input.published ? new Date() : null;
+      return ctx.db.post.create({
+        data: { ...input, slug, publishedAt },
+      });
+    }),
+
+    update: adminProcedure
+      .input(z.object({ id: z.string(), data: postInput.partial() }))
+      .mutation(async ({ ctx, input }) => {
+        requireAdmin(ctx.session?.user?.email);
+        const existing = await ctx.db.post.findUnique({
+          where: { id: input.id },
+          select: { published: true },
+        });
+        const data: Record<string, unknown> = { ...input.data };
+        // Si pasa de unpublished → published, setea publishedAt
+        if (input.data.published === true && existing && !existing.published) {
+          data.publishedAt = new Date();
+        }
+        if (input.data.title && !input.data.slug) {
+          data.slug = slugify(input.data.title);
+        }
+        return ctx.db.post.update({ where: { id: input.id }, data });
+      }),
+
+    delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
+      requireAdmin(ctx.session?.user?.email);
+      return ctx.db.post.delete({ where: { id: input } });
+    }),
+
+    togglePublished: adminProcedure
+      .input(z.object({ id: z.string(), published: z.boolean() }))
+      .mutation(({ ctx, input }) => {
+        requireAdmin(ctx.session?.user?.email);
+        return ctx.db.post.update({
+          where: { id: input.id },
+          data: {
+            published: input.published,
+            publishedAt: input.published ? new Date() : null,
+          },
+        });
+      }),
   }),
 });
