@@ -41,7 +41,15 @@ export default function RegistroPage() {
         router.push("/login");
         return;
       }
-      router.push("/mi-cuenta");
+
+      /* Rutear segun si quedo flageada como admin (caso: email en ADMIN_EMAILS). */
+      try {
+        const sessionRes = await fetch("/api/auth/session", { cache: "no-store" });
+        const session = (await sessionRes.json()) as { user?: { isAdmin?: boolean } } | null;
+        router.push(session?.user?.isAdmin ? "/admin" : "/mi-cuenta");
+      } catch {
+        router.push("/mi-cuenta");
+      }
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error inesperado");

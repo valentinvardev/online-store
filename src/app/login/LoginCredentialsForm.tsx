@@ -29,7 +29,15 @@ export default function LoginCredentialsForm() {
       return;
     }
 
-    router.push("/mi-cuenta");
+    /* Recién logueada — pregunto la sesión para saber si es admin y rutear. */
+    try {
+      const sessionRes = await fetch("/api/auth/session", { cache: "no-store" });
+      const session = (await sessionRes.json()) as { user?: { isAdmin?: boolean } } | null;
+      const isAdmin = !!session?.user?.isAdmin;
+      router.push(isAdmin ? "/admin" : "/mi-cuenta");
+    } catch {
+      router.push("/mi-cuenta");
+    }
     router.refresh();
   }
 
