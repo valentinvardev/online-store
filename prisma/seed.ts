@@ -274,11 +274,44 @@ async function seedServices() {
   }
 }
 
+async function seedMembershipTiers() {
+  console.log("\n→ Membership tiers...");
+  await prisma.membershipTier.upsert({
+    where: { slug: "circulo-reina" },
+    create: {
+      slug: "circulo-reina",
+      name: "Círculo de la Reina",
+      subtitle: "Tu práctica espiritual, sostenida mes a mes",
+      description: "Rituales, contenidos exclusivos y comunidad — todos los meses, directo a vos.",
+      price: 19,
+      priceYearly: 159,
+      currency: "USD",
+      interval: "month",
+      color: "morado",
+      perks: [
+        "Newsletter premium semanal",
+        "Ritual del mes en PDF",
+        "Meditación guiada mensual",
+        "Sesión grupal en vivo cada mes",
+        "Acceso a la comunidad privada",
+        "Descuentos en cursos y servicios (20%)",
+        "Acceso anticipado a lanzamientos",
+        "Consulta 1 a 1 mensual (30 min)",
+      ],
+      sortOrder: 0,
+      active: true,
+    },
+    update: {},
+  });
+  console.log("  ✓ Círculo de la Reina");
+}
+
 async function main() {
   console.log("🌱 Seed iniciado");
   await seedProducts();
   await seedCourses();
   await seedServices();
+  await seedMembershipTiers();
   console.log("\n✅ Seed completo\n");
 }
 

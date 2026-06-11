@@ -2,6 +2,9 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
+import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
 
 import { db } from "~/server/db";
 
@@ -33,6 +36,43 @@ if (process.env.AUTH_RESEND_KEY) {
     }),
   );
 }
+
+/* Login con contraseña — siempre activo (no depende de env vars externas). */
+const credentialsSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+providers.push(
+  Credentials({
+    name: "credentials",
+    credentials: {
+      email: { label: "Email", type: "email" },
+      password: { label: "Contraseña", type: "password" },
+    },
+    authorize: async (raw) => {
+      const parsed = credentialsSchema.safeParse(raw);
+      if (!parsed.success) return null;
+      const { email, password } = parsed.data;
+
+      const user = await db.user.findUnique({
+        where: { email: email.toLowerCase() },
+      });
+      if (!user?.passwordHash) return null;
+
+      const ok = await bcrypt.compare(password, user.passwordHash);
+      if (!ok) return null;
+
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        image: user.image,
+        isAdmin: user.isAdmin,
+      };
+    },
+  }),
+);
 
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "")
   .split(",")
