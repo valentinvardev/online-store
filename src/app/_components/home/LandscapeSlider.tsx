@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 /* Fotos reales de tarot al aire libre (public/landscape/).
@@ -24,7 +25,11 @@ export default function LandscapeSlider() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // El portal necesita document.body — solo disponible tras montar en cliente.
+  useEffect(() => setMounted(true), []);
 
   const goTo = (i: number) => setCurrent((i + slides.length) % slides.length);
 
@@ -117,8 +122,10 @@ export default function LandscapeSlider() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxOpen && (
+      {/* Lightbox — via portal a document.body para escapar el containing block
+          que crea el transform de .page-transition (sino fixed se ancla a la
+          pagina entera y el contenido queda fuera del viewport). */}
+      {lightboxOpen && mounted && createPortal(
         <div
           className="fixed inset-0 z-[100] bg-morado-dark/95 backdrop-blur-sm flex flex-col items-center justify-center gap-5 p-4 sm:p-10 cursor-zoom-out"
           onClick={() => setLightboxOpen(false)}
@@ -152,7 +159,8 @@ export default function LandscapeSlider() {
               />
             ))}
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
