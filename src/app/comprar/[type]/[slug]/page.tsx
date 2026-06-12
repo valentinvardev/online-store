@@ -1,9 +1,10 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { db } from "~/server/db";
+import { CIRCULO_CHECKOUT } from "~/lib/access";
 import CheckoutForm from "./_CheckoutForm";
 
 type Props = {
@@ -70,6 +71,10 @@ async function fetchItem(type: string, slug: string) {
 export default async function ComprarPage({ params }: Props) {
   const { type, slug } = await params;
   if (!["curso", "servicio", "membresia"].includes(type)) notFound();
+
+  // Modelo de membresía única: los cursos no se compran sueltos.
+  // Cualquier intento de comprar un curso redirige al checkout de la membresía.
+  if (type === "curso") redirect(CIRCULO_CHECKOUT);
 
   const item = await fetchItem(type, slug);
   if (!item) notFound();

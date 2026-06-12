@@ -1,7 +1,8 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
+import { hasCourseAccess, CIRCULO_CHECKOUT } from "~/lib/access";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 
@@ -24,12 +25,9 @@ export default async function CourseViewerPage({ params }: Props) {
 
   const session = await auth();
 
-  // Check enrollment
-  const hasAccess = session?.user?.id
-    ? !!(await db.enrollment.findUnique({
-        where: { userId_courseId: { userId: session.user.id, courseId: course.id } },
-      }))
-    : false;
+  // Con membresía única: el acceso al curso lo da la membresía activa
+  // (o un Enrollment viejo, para backward-compat).
+  const hasAccess = await hasCourseAccess(session?.user?.id, course.id);
 
   if (!hasAccess) {
     return (
@@ -38,35 +36,37 @@ export default async function CourseViewerPage({ params }: Props) {
         <main className="min-h-[70vh] bg-crema flex items-center justify-center px-6 py-20">
           <div className="max-w-md w-full text-center">
             <span className="font-display text-6xl text-morado/15 block mb-8">✦</span>
+            <span className="font-sans text-[0.65rem] text-morado/70 tracking-[0.4em] uppercase block mb-4">
+              Contenido del Círculo
+            </span>
             <h1 className="font-display uppercase text-[clamp(2.75rem,5vw,3rem)] text-tierra-dark leading-none tracking-wide mb-4">
               {course.name}
             </h1>
             <p className="font-sans text-tierra/75 text-sm leading-relaxed mb-8">
-              {course.description}
+              Este curso está incluido en la membresía del Círculo. Sumate y accedé a
+              todos los cursos, rituales y contenidos — todos los meses.
             </p>
             {session ? (
-              <div className="space-y-3">
-                <p className="font-sans text-tierra/65 text-[13px] tracking-wide">
-                  No tenés acceso a este curso todavía.
-                </p>
-                <Link
-                  href="/cursos"
-                  className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
-                >
-                  Inscribirme — ${course.price}
-                </Link>
-              </div>
+              <Link
+                href={CIRCULO_CHECKOUT}
+                className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
+              >
+                ✦ Sumate al Círculo
+              </Link>
             ) : (
               <div className="space-y-3">
-                <p className="font-sans text-tierra/65 text-[13px] tracking-wide">
-                  Iniciá sesión para ver si tenés acceso.
-                </p>
                 <Link
-                  href="/login"
-                  className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-morado text-crema border-2 border-morado-dark hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow"
+                  href={CIRCULO_CHECKOUT}
+                  className="inline-block font-sans font-semibold text-[13px] px-8 py-4 bg-dorado text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow"
                 >
-                  Iniciar sesión
+                  ✦ Sumate al Círculo
                 </Link>
+                <p className="font-sans text-tierra/55 text-[12px] tracking-wide">
+                  ¿Ya sos miembra?{" "}
+                  <Link href="/login" className="text-morado hover:text-morado-dark font-semibold">
+                    Iniciá sesión
+                  </Link>
+                </p>
               </div>
             )}
           </div>

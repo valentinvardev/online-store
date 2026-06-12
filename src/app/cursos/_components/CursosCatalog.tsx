@@ -197,13 +197,13 @@ export default function CursosCatalog() {
                   </span>
                 </div>
 
-                {/* Precio + CTA */}
+                {/* Acceso + CTA */}
                 <div className="flex items-center justify-between mt-auto">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-sans font-bold text-3xl text-morado">{curso.price}</span>
-                    {curso.priceOld && (
-                      <span className="font-sans text-[13px] text-tierra/60 line-through">{curso.priceOld}</span>
-                    )}
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-morado">✦</span>
+                    <span className="font-sans font-semibold text-[0.7rem] text-morado tracking-widest uppercase leading-tight">
+                      Incluido en<br />el Círculo
+                    </span>
                   </div>
                   <span className="font-sans font-semibold text-[0.75rem] px-5 py-2.5 bg-dorado text-tierra-dark border-2 border-morado-dark group-hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap">
                     Ver curso →

@@ -6,6 +6,7 @@ import Footer from "~/app/_components/home/Footer";
 import CursoAccordion from "./_components/CursoAccordion";
 import Badge from "../../_components/Badge";
 import { api } from "~/trpc/server";
+import { CIRCULO_CHECKOUT } from "~/lib/access";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -117,25 +118,27 @@ export default async function CursoInfoPage({ params }: Props) {
             {/* Columna derecha — card de inscripción */}
             <div>
               <div className="bg-crema border-4 border-dorado block-shadow p-7 space-y-5">
-                {/* Precio */}
-                <div className="flex items-baseline gap-3">
-                  <span className="font-display text-5xl text-morado">{curso.price}</span>
-                  {curso.priceOld && (
-                    <span className="font-sans text-[15px] text-tierra/60 line-through">{curso.priceOld}</span>
-                  )}
+                {/* Acceso por membresía */}
+                <div>
+                  <span className="font-sans text-[0.6rem] text-morado/70 tracking-[0.3em] uppercase block mb-1">
+                    Incluido en el Círculo
+                  </span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-4xl text-morado">Membresía</span>
+                  </div>
+                  <p className="font-sans text-[0.8rem] text-tierra/65 tracking-wide mt-1">
+                    Una suscripción · todos los cursos
+                  </p>
                 </div>
 
                 {/* CTA */}
-                <button className="w-full bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
-                  ✦ Inscribirme ahora
-                </button>
-                <button className="w-full border-2 border-morado/25 text-tierra font-sans text-[0.75rem] py-3 tracking-widest uppercase hover:border-morado/50 transition-colors">
-                  Ver programa completo ↓
-                </button>
+                <Link href={CIRCULO_CHECKOUT} className="block w-full text-center bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
+                  ✦ Sumate al Círculo
+                </Link>
 
                 {/* Garantía */}
                 <p className="font-sans text-[0.8rem] text-tierra/65 text-center tracking-wide">
-                  ✦ 7 días de garantía de devolución
+                  ✦ Cancelás cuando quieras
                 </p>
 
                 {/* Incluye */}
@@ -232,19 +235,22 @@ export default async function CursoInfoPage({ params }: Props) {
             <aside>
               <div className="sticky top-6 space-y-5">
 
-                {/* Card de precio (desktop) */}
+                {/* Card de acceso (desktop) */}
                 <div className="bg-crema border-2 border-morado-dark block-shadow p-7 space-y-5">
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-display text-5xl text-morado">{curso.price}</span>
-                    {curso.priceOld && (
-                      <span className="font-sans text-[15px] text-tierra/60 line-through">{curso.priceOld}</span>
-                    )}
+                  <div>
+                    <span className="font-sans text-[0.6rem] text-morado/70 tracking-[0.3em] uppercase block mb-1">
+                      Incluido en el Círculo
+                    </span>
+                    <span className="font-display text-4xl text-morado">Membresía</span>
+                    <p className="font-sans text-[0.8rem] text-tierra/65 tracking-wide mt-1">
+                      Una suscripción · todos los cursos
+                    </p>
                   </div>
-                  <button className="w-full bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
-                    ✦ Inscribirme ahora
-                  </button>
+                  <Link href={CIRCULO_CHECKOUT} className="block w-full text-center bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
+                    ✦ Sumate al Círculo
+                  </Link>
                   <p className="font-sans text-[0.8rem] text-tierra/60 text-center tracking-wide">
-                    ✦ 7 días de garantía de devolución
+                    ✦ Cancelás cuando quieras
                   </p>
                   <div className="border-t border-morado/10 pt-4 space-y-2.5">
                     {curso.includes.map((item, i) => (
@@ -290,9 +296,9 @@ export default async function CursoInfoPage({ params }: Props) {
             Unite a {curso.students} que ya transitaron este camino.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
-              ✦ Inscribirme a {curso.title}
-            </button>
+            <Link href={CIRCULO_CHECKOUT} className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
+              ✦ Sumate al Círculo
+            </Link>
             <Link
               href="/cursos"
               className="border-2 border-crema/15 text-crema/40 font-sans text-[0.8rem] px-8 py-4 tracking-widest uppercase hover:border-crema/35 hover:text-crema/60 transition-colors"
