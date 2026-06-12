@@ -5,6 +5,7 @@ import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { auth, signOut } from "~/server/auth";
 import { api } from "~/trpc/server";
+import MembershipCard from "./_MembershipCard";
 
 const fmt = new Intl.DateTimeFormat("es-AR", {
   day: "numeric",
@@ -23,11 +24,12 @@ export default async function MiCuentaPage() {
   const session = await auth();
   if (!session?.user) redirect("/login");
 
-  const [me, orders, enrollments, bookings] = await Promise.all([
+  const [me, orders, enrollments, bookings, membership] = await Promise.all([
     api.account.me(),
     api.account.orders(),
     api.account.enrollments(),
     api.account.bookings(),
+    api.account.membership(),
   ]);
 
   return (
@@ -70,6 +72,11 @@ export default async function MiCuentaPage() {
         </section>
 
         <div className="max-w-5xl mx-auto px-6 py-12 space-y-12">
+          {/* Membresía */}
+          <section id="suscripcion" className="scroll-mt-24">
+            <MembershipCard membership={membership} />
+          </section>
+
           {/* Cursos comprados */}
           <Section id="cursos" title="Mis cursos" icon={<BookOpen size={16} />} empty={enrollments.length === 0} emptyText="Todavía no te inscribiste a ningún curso." emptyCta={{ href: "/cursos", label: "Ver cursos" }}>
             <div className="grid sm:grid-cols-2 gap-4">

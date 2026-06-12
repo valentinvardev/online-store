@@ -307,6 +307,66 @@ async function seedMembershipTiers() {
   console.log("  ✓ Círculo de la Reina");
 }
 
+async function seedCirculoPosts() {
+  console.log("\n→ Posts del Círculo...");
+  const tier = await prisma.membershipTier.findUnique({ where: { slug: "circulo-reina" } });
+
+  const posts = [
+    {
+      slug: "bienvenida-al-circulo",
+      title: "Bienvenida al Círculo",
+      excerpt: "Lo que vas a encontrar acá, y cómo aprovecharlo mes a mes.",
+      contentType: "TEXT" as const,
+      content:
+        "# Bienvenida\n\nQué alegría tenerte acá. El **Círculo** es un espacio para sostener tu práctica espiritual durante todo el año.\n\n## Qué vas a encontrar\n\n- Un **ritual del mes** en PDF\n- Una **meditación guiada** nueva cada mes\n- **Lecturas** y reflexiones sin positividad tóxica\n- Acceso a **todos los cursos**\n\n> La magia más poderosa es la que se vive en lo cotidiano.\n\nNos vemos adentro. ✦",
+      requiredTierId: null, // libre — visible para todas
+      published: true,
+    },
+    {
+      slug: "ritual-de-luna-nueva-del-mes",
+      title: "Ritual de Luna Nueva del mes",
+      excerpt: "Un ritual completo para plantar intenciones en este ciclo.",
+      contentType: "TEXT" as const,
+      content:
+        "# Ritual de Luna Nueva\n\nLa luna nueva es el momento de **plantar intenciones**.\n\n## Vas a necesitar\n\n- Una vela blanca\n- Papel y lápiz\n- Un cristal de cuarzo (opcional)\n\n## Los pasos\n\n1. Encendé la vela en un espacio tranquilo.\n2. Escribí tres intenciones para este ciclo.\n3. Leelas en voz alta, sintiéndolas ya cumplidas.\n4. Guardá el papel bajo el cristal hasta la luna llena.\n\nQue así sea. ✦",
+      requiredTierId: tier?.id ?? null, // solo miembras
+      published: true,
+    },
+    {
+      slug: "meditacion-de-arraigo",
+      title: "Meditación de arraigo (10 min)",
+      excerpt: "Una práctica corta para volver al cuerpo y a la tierra.",
+      contentType: "AUDIO" as const,
+      content:
+        "Una meditación breve para los días en que la cabeza no para. Buscá un lugar cómodo, ponete los auriculares y dejá que la voz te guíe de vuelta al cuerpo.",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      requiredTierId: tier?.id ?? null, // solo miembras
+      published: true,
+    },
+  ];
+
+  for (const p of posts) {
+    await prisma.post.upsert({
+      where: { slug: p.slug },
+      create: {
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        contentType: p.contentType,
+        content: p.content,
+        audioUrl: "audioUrl" in p ? p.audioUrl : null,
+        requiredTierId: p.requiredTierId,
+        published: p.published,
+        publishedAt: new Date(),
+        images: [],
+        attachments: [],
+      },
+      update: {},
+    });
+    console.log(`  ✓ ${p.title}${p.requiredTierId ? " (miembras)" : " (libre)"}`);
+  }
+}
+
 async function seedTestUsers() {
   console.log("\n→ Test users...");
   const tier = await prisma.membershipTier.findUnique({ where: { slug: "circulo-reina" } });
@@ -375,6 +435,7 @@ async function main() {
   await seedCourses();
   await seedServices();
   await seedMembershipTiers();
+  await seedCirculoPosts();
   await seedTestUsers();
   console.log("\n✅ Seed completo\n");
 }

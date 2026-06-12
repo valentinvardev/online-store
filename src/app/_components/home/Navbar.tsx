@@ -20,10 +20,10 @@ const links = [
 ];
 
 const accountLinks = [
-  { label: "Mi cuenta",      href: "/mi-cuenta",          icon: User },
-  { label: "Mis cursos",     href: "/mi-cuenta#cursos",   icon: BookOpen },
-  { label: "Mis sesiones",   href: "/mi-cuenta#sesiones", icon: Calendar },
-  { label: "Mi suscripción", href: "/suscripciones",      icon: Sparkles },
+  { label: "Mi cuenta",    href: "/mi-cuenta",          icon: User },
+  { label: "El Círculo",   href: "/circulo",            icon: Sparkles },
+  { label: "Mis cursos",   href: "/mi-cuenta#cursos",   icon: BookOpen },
+  { label: "Mis sesiones", href: "/mi-cuenta#sesiones", icon: Calendar },
 ];
 
 export default function Navbar() {
@@ -307,7 +307,7 @@ export default function Navbar() {
                     </Link>
                   ) : (
                     <Link
-                      href="/suscripciones"
+                      href="/circulo"
                       onClick={() => setOpen(false)}
                       className="flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/50"
                     >

@@ -116,9 +116,12 @@ export default function SuscripcionesPage() {
 
       {/* CTA */}
       <div className="px-7 pb-7">
-        <button className="w-full bg-dorado text-tierra-dark font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
+        <Link
+          href="/comprar/membresia/circulo-reina"
+          className="block w-full text-center bg-dorado text-tierra-dark font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors"
+        >
           Suscribirme ahora
-        </button>
+        </Link>
         <p className="font-sans text-[0.68rem] text-tierra/45 text-center tracking-wide mt-3">
           Cancelás cuando quieras · Sin compromisos
         </p>
