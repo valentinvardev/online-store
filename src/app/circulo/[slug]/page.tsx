@@ -6,6 +6,7 @@ import Footer from "~/app/_components/home/Footer";
 import { api } from "~/trpc/server";
 import { CIRCULO_CHECKOUT } from "~/lib/access";
 import PostBody from "../_components/PostBody";
+import CommentThread from "../_components/CommentThread";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -114,7 +115,10 @@ export default async function PostPage({ params }: Props) {
               </p>
             </div>
           ) : (
-            <PostBody post={post} />
+            <>
+              <PostBody post={post} />
+              <CommentThread postId={post.id} />
+            </>
           )}
         </article>
       </main>
