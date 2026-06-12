@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 /* Fotos reales de tarot al aire libre (public/landscape/).
@@ -42,11 +43,13 @@ export default function LandscapeSlider() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, paused, lightboxOpen]);
 
-  // ESC cierra lightbox
+  // ESC cierra, flechas navegan
   useEffect(() => {
     if (!lightboxOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxOpen(false);
+      if (e.key === "ArrowRight") goTo(current + 1);
+      if (e.key === "ArrowLeft") goTo(current - 1);
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -54,7 +57,8 @@ export default function LandscapeSlider() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [lightboxOpen]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightboxOpen, current]);
 
   const currentSlide = slides[current]!;
 
@@ -133,9 +137,27 @@ export default function LandscapeSlider() {
           <button
             onClick={(e) => { e.stopPropagation(); setLightboxOpen(false); }}
             aria-label="Cerrar"
-            className="absolute top-5 right-5 w-11 h-11 flex items-center justify-center bg-crema text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors font-display text-xl z-10 block-shadow-sm"
+            className="absolute top-5 right-5 w-11 h-11 flex items-center justify-center bg-crema text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors font-display text-xl z-20 block-shadow-sm"
           >
             ✕
+          </button>
+
+          {/* Chevron anterior */}
+          <button
+            onClick={(e) => { e.stopPropagation(); goTo(current - 1); }}
+            aria-label="Imagen anterior"
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center bg-crema text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors z-20 block-shadow-sm"
+          >
+            <ChevronLeft size={22} strokeWidth={2.2} />
+          </button>
+
+          {/* Chevron siguiente */}
+          <button
+            onClick={(e) => { e.stopPropagation(); goTo(current + 1); }}
+            aria-label="Imagen siguiente"
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center bg-crema text-tierra-dark border-2 border-morado-dark hover:bg-dorado-light transition-colors z-20 block-shadow-sm"
+          >
+            <ChevronRight size={22} strokeWidth={2.2} />
           </button>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
