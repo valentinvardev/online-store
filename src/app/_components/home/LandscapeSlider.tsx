@@ -120,7 +120,7 @@ export default function LandscapeSlider() {
       {/* Lightbox */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-morado-dark/95 backdrop-blur-sm flex items-center justify-center p-4 sm:p-10 cursor-zoom-out"
+          className="fixed inset-0 z-[100] bg-morado-dark/95 backdrop-blur-sm flex flex-col items-center justify-center gap-5 p-4 sm:p-10 cursor-zoom-out"
           onClick={() => setLightboxOpen(false)}
         >
           <button
@@ -130,32 +130,27 @@ export default function LandscapeSlider() {
           >
             ✕
           </button>
-          <div
-            className="relative w-full h-full max-w-3xl max-h-[85vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={currentSlide.src}
-              alt={currentSlide.alt}
-              fill
-              sizes="100vw"
-              quality={90}
-              className="object-contain"
-            />
 
-            {/* Dots dentro del lightbox tambien */}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={(e) => { e.stopPropagation(); goTo(i); }}
-                  aria-label={`Ir a imagen ${i + 1}`}
-                  className={`h-2 transition-all border border-crema/70 ${
-                    i === current ? "w-10 bg-crema" : "w-2 bg-crema/30 hover:bg-crema/60"
-                  }`}
-                />
-              ))}
-            </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={currentSlide.src}
+            alt={currentSlide.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[78vh] w-auto max-w-full object-contain border-4 border-crema block-shadow cursor-default"
+          />
+
+          {/* Dots dentro del lightbox */}
+          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); goTo(i); }}
+                aria-label={`Ir a imagen ${i + 1}`}
+                className={`h-2 transition-all border border-crema/70 ${
+                  i === current ? "w-10 bg-crema" : "w-2 bg-crema/30 hover:bg-crema/60"
+                }`}
+              />
+            ))}
           </div>
         </div>
       )}
