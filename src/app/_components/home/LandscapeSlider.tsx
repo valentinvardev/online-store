@@ -1,14 +1,21 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
-/* Imágenes landscape — reemplazar src cuando estén los assets.
- * Por ahora uso gradientes como placeholder para que el slider funcione. */
+/* Fotos reales de tarot al aire libre (public/landscape/).
+ * Son verticales — el slider usa backdrop borroso + imagen contenida
+ * para mostrarlas completas sin recorte. */
 const slides = [
-  { src: "", alt: "Imagen 1", gradient: "from-morado via-rosa to-dorado" },
-  { src: "", alt: "Imagen 2", gradient: "from-verde via-celeste to-morado-light" },
-  { src: "", alt: "Imagen 3", gradient: "from-dorado via-naranja to-rosa" },
-  { src: "", alt: "Imagen 4", gradient: "from-rosa via-morado to-morado-dark" },
+  { src: "/landscape/landscape-01.jpg", alt: "Caballero de Copas sobre un campo de lavanda al atardecer" },
+  { src: "/landscape/landscape-02.jpg", alt: "Tres cartas estrelladas frente a una pileta al amanecer" },
+  { src: "/landscape/landscape-03.jpg", alt: "Tres cartas con rosas rojas bajo un cielo azul" },
+  { src: "/landscape/landscape-04.jpg", alt: "Tres cartas doradas con brújulas a contraluz dorada" },
+  { src: "/landscape/landscape-05.jpg", alt: "Tres cartas florales verdes entre lavandas al atardecer" },
+  { src: "/landscape/landscape-06.jpg", alt: "La carta del Sol sobre una terraza al atardecer" },
+  { src: "/landscape/landscape-07.jpg", alt: "Un mazo de tarot desplegado sobre una roca en el bosque" },
+  { src: "/landscape/landscape-08.jpg", alt: "La carta de La Estrella apoyada sobre una piedra" },
+  { src: "/landscape/landscape-09.jpg", alt: "Seis de Bastos sobre un fondo verde desenfocado" },
 ];
 
 const AUTOPLAY_MS = 5000;
@@ -49,28 +56,51 @@ export default function LandscapeSlider() {
   return (
     <>
       <section
-        className="relative w-full aspect-[16/9] sm:aspect-[21/9] overflow-hidden bg-morado-dark cursor-zoom-in group"
+        className="relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[21/9] overflow-hidden bg-morado-dark cursor-zoom-in group select-none"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onClick={() => setLightboxOpen(true)}
         role="button"
         aria-label="Ampliar imagen"
       >
-        {slides.map((s, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              i === current ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            {s.src ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={s.src} alt={s.alt} className="w-full h-full object-cover" />
-            ) : (
-              <div className={`w-full h-full bg-gradient-to-br ${s.gradient}`} />
-            )}
-          </div>
-        ))}
+        {slides.map((s, i) => {
+          const active = i === current;
+          return (
+            <div
+              key={s.src}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                active ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              {/* Backdrop borroso (rellena la banda) */}
+              <Image
+                src={s.src}
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="100vw"
+                quality={40}
+                className="object-cover scale-110 blur-2xl brightness-75"
+                priority={i === 0}
+              />
+              {/* Imagen contenida (la foto completa, sin recorte) */}
+              <Image
+                src={s.src}
+                alt={s.alt}
+                fill
+                sizes="100vw"
+                quality={75}
+                className="object-contain"
+                priority={i === 0}
+              />
+            </div>
+          );
+        })}
+
+        {/* Hint de zoom (aparece en hover desktop) */}
+        <div className="absolute top-4 right-4 z-10 bg-morado-dark/50 backdrop-blur-sm text-crema/90 font-sans text-[0.6rem] tracking-[0.3em] uppercase px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+          Click para ampliar
+        </div>
 
         {/* Dots dentro de la imagen */}
         <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
@@ -101,18 +131,20 @@ export default function LandscapeSlider() {
             ✕
           </button>
           <div
-            className="relative w-full max-w-6xl aspect-[16/9] border-4 border-crema block-shadow"
+            className="relative w-full h-full max-w-3xl max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {currentSlide.src ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={currentSlide.src} alt={currentSlide.alt} className="w-full h-full object-contain bg-morado-dark" />
-            ) : (
-              <div className={`w-full h-full bg-gradient-to-br ${currentSlide.gradient}`} />
-            )}
+            <Image
+              src={currentSlide.src}
+              alt={currentSlide.alt}
+              fill
+              sizes="100vw"
+              quality={90}
+              className="object-contain"
+            />
 
             {/* Dots dentro del lightbox tambien */}
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2">
               {slides.map((_, i) => (
                 <button
                   key={i}
