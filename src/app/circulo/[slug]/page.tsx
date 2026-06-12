@@ -95,7 +95,7 @@ export default async function PostPage({ params }: Props) {
                 <Lock size={26} className="text-dorado" strokeWidth={1.8} />
               </div>
               <h2 className="font-display uppercase text-2xl sm:text-3xl text-tierra-dark tracking-wide leading-none mb-3">
-                Contenido para miembras
+                Contenido para socias
               </h2>
               <p className="font-sans text-tierra-dark/80 text-[15px] leading-relaxed max-w-md mx-auto mb-7">
                 Este contenido es parte del Círculo. Sumate y accedé a todos los rituales,
@@ -108,7 +108,7 @@ export default async function PostPage({ params }: Props) {
                 <Sparkles size={14} /> Sumate al Círculo
               </Link>
               <p className="font-sans text-[0.7rem] text-tierra-dark/55 tracking-wide mt-4">
-                ¿Ya sos miembra?{" "}
+                ¿Ya sos socia?{" "}
                 <Link href="/login" className="text-morado-dark font-semibold underline underline-offset-2">
                   Iniciá sesión
                 </Link>

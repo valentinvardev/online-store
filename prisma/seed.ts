@@ -337,7 +337,7 @@ async function seedCirculoPosts() {
       contentType: "TEXT" as const,
       content:
         "# Ritual de Luna Nueva\n\nLa luna nueva es el momento de **plantar intenciones**.\n\n## Vas a necesitar\n\n- Una vela blanca\n- Papel y lápiz\n- Un cristal de cuarzo (opcional)\n\n## Los pasos\n\n1. Encendé la vela en un espacio tranquilo.\n2. Escribí tres intenciones para este ciclo.\n3. Leelas en voz alta, sintiéndolas ya cumplidas.\n4. Guardá el papel bajo el cristal hasta la luna llena.\n\nQue así sea. ✦",
-      requiredTierId: tier?.id ?? null, // solo miembras
+      requiredTierId: tier?.id ?? null, // solo socias
       published: true,
     },
     {
@@ -348,7 +348,7 @@ async function seedCirculoPosts() {
       content:
         "Una meditación breve para los días en que la cabeza no para. Buscá un lugar cómodo, ponete los auriculares y dejá que la voz te guíe de vuelta al cuerpo.",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-      requiredTierId: tier?.id ?? null, // solo miembras
+      requiredTierId: tier?.id ?? null, // solo socias
       published: true,
     },
   ];
@@ -371,7 +371,7 @@ async function seedCirculoPosts() {
       },
       update: {},
     });
-    console.log(`  ✓ ${p.title}${p.requiredTierId ? " (miembras)" : " (libre)"}`);
+    console.log(`  ✓ ${p.title}${p.requiredTierId ? " (socias)" : " (libre)"}`);
   }
 }
 
@@ -397,17 +397,17 @@ async function seedTestUsers() {
   });
   console.log("  ✓ admin@test.lareina.com / Admin1234!  (isAdmin)");
 
-  /* Miembro con suscripción activa */
+  /* Socia con suscripción activa */
   const memberHash = await bcrypt.hash("Miembra1234!", 12);
   const member = await prisma.user.upsert({
     where: { email: "miembra@test.lareina.com" },
     create: {
       email: "miembra@test.lareina.com",
-      name: "María (test miembra)",
+      name: "María (socia de prueba)",
       passwordHash: memberHash,
       isAdmin: false,
     },
-    update: { passwordHash: memberHash },
+    update: { passwordHash: memberHash, name: "María (socia de prueba)" },
   });
   await prisma.membership.upsert({
     where: { userId_tierId: { userId: member.id, tierId: tier.id } },

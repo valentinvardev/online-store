@@ -3,7 +3,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { hasActiveMembership } from "~/lib/access";
 
 /* Feed del Círculo — posts publicados. El contenido gateado (requiredTierId)
- * solo se entrega completo a miembras activas; al resto se les manda un teaser
+ * solo se entrega completo a socias activas; al resto se les manda un teaser
  * (sin content/media) para que no se filtre el contenido pago. */
 
 export const circuloRouter = createTRPCRouter({

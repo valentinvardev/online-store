@@ -35,7 +35,7 @@ export default async function CirculoPage() {
           <span className="absolute top-8 right-10 font-display text-dorado/10 text-[7rem] leading-none select-none pointer-events-none">✦</span>
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <span className="font-sans text-[0.7rem] text-dorado tracking-[0.45em] uppercase block mb-4">
-              {isMember ? "Tu espacio de miembra" : "Membresía mensual"}
+              {isMember ? "Tu espacio de socia" : "Membresía mensual"}
             </span>
             <h1 className="font-display uppercase text-[clamp(3rem,9vw,6rem)] text-crema leading-none tracking-wide">
               El Círculo
@@ -46,7 +46,7 @@ export default async function CirculoPage() {
           </div>
         </section>
 
-        {/* Banner de conversión (solo si no es miembra) */}
+        {/* Banner de conversión (solo si no es socia) */}
         {!isMember && (
           <section className="bg-dorado-light border-b-4 border-morado-dark px-6 py-8">
             <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
@@ -112,7 +112,7 @@ export default async function CirculoPage() {
                           </span>
                           {p.locked && (
                             <span className="inline-flex items-center gap-1 font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase">
-                              <Lock size={9} /> Miembras
+                              <Lock size={9} /> Socias
                             </span>
                           )}
                           {p.publishedAt && (

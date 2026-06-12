@@ -63,7 +63,7 @@ export default async function CourseViewerPage({ params }: Props) {
                   ✦ Sumate al Círculo
                 </Link>
                 <p className="font-sans text-tierra/55 text-[12px] tracking-wide">
-                  ¿Ya sos miembra?{" "}
+                  ¿Ya sos socia?{" "}
                   <Link href="/login" className="text-morado hover:text-morado-dark font-semibold">
                     Iniciá sesión
                   </Link>

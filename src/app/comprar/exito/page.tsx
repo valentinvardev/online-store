@@ -180,7 +180,7 @@ function getConfig(type?: string) {
       {
         icon: <Sparkles size={15} />,
         title: "Entrá al feed del Círculo",
-        desc: "Acá vas a encontrar los rituales, meditaciones, lecturas y todo el contenido exclusivo de miembros.",
+        desc: "Acá vas a encontrar los rituales, meditaciones, lecturas y todo el contenido exclusivo de socias.",
       },
       {
         icon: <Calendar size={15} />,

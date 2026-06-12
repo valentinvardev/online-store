@@ -227,7 +227,7 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
               )}
             </div>
             <p className="font-sans text-xs text-tierra/50 mt-1.5 tracking-wide">
-              Vacío = disponible ya para las miembras. Con fecha futura, la clase se libera ese día.
+              Vacío = disponible ya para las socias. Con fecha futura, la clase se libera ese día.
             </p>
           </div>
 
