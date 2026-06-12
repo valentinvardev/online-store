@@ -12,11 +12,11 @@ import { useCart } from "../cart/CartContext";
 import { useSession, signOut } from "next-auth/react";
 
 const links = [
-  { label: "Tienda",          href: "/tienda" },
-  { label: "Cursos",          href: "/cursos" },
-  { label: "Servicios",       href: "/servicios" },
-  { label: "Suscripciones",   href: "/suscripciones" },
-  { label: "Sobre mí",        href: "/sobre-mi" },
+  { label: "Tienda",        href: "/tienda" },
+  { label: "Cursos",        href: "/cursos" },
+  { label: "Servicios",     href: "/servicios" },
+  { label: "El Círculo",    href: "/circulo" },
+  { label: "Sobre mí",      href: "/sobre-mi" },
 ];
 
 const accountLinks = [

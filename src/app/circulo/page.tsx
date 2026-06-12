@@ -58,12 +58,20 @@ export default async function CirculoPage() {
                   Desbloqueá todo el contenido + todos los cursos. Cancelás cuando quieras.
                 </p>
               </div>
-              <Link
-                href={CIRCULO_CHECKOUT}
-                className="shrink-0 inline-flex items-center gap-2 bg-morado-dark text-crema font-sans font-semibold text-[0.75rem] px-7 py-4 border-2 border-morado-dark hover:bg-morado transition-colors tracking-widest uppercase block-shadow"
-              >
-                <Sparkles size={14} /> Quiero entrar
-              </Link>
+              <div className="shrink-0 flex flex-col items-center sm:items-end gap-2">
+                <Link
+                  href={CIRCULO_CHECKOUT}
+                  className="inline-flex items-center gap-2 bg-morado-dark text-crema font-sans font-semibold text-[0.75rem] px-7 py-4 border-2 border-morado-dark hover:bg-morado transition-colors tracking-widest uppercase block-shadow"
+                >
+                  <Sparkles size={14} /> Quiero entrar
+                </Link>
+                <Link
+                  href="/suscripciones"
+                  className="font-sans text-[0.7rem] text-tierra-dark/70 hover:text-morado-dark underline underline-offset-2 tracking-wide transition-colors"
+                >
+                  Ver todo lo que incluye →
+                </Link>
+              </div>
             </div>
           </section>
         )}
