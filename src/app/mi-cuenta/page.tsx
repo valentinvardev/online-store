@@ -71,7 +71,7 @@ export default async function MiCuentaPage() {
 
         <div className="max-w-5xl mx-auto px-6 py-12 space-y-12">
           {/* Cursos comprados */}
-          <Section title="Mis cursos" icon={<BookOpen size={16} />} empty={enrollments.length === 0} emptyText="Todavía no te inscribiste a ningún curso." emptyCta={{ href: "/cursos", label: "Ver cursos" }}>
+          <Section id="cursos" title="Mis cursos" icon={<BookOpen size={16} />} empty={enrollments.length === 0} emptyText="Todavía no te inscribiste a ningún curso." emptyCta={{ href: "/cursos", label: "Ver cursos" }}>
             <div className="grid sm:grid-cols-2 gap-4">
               {enrollments.map((e) => (
                 <Link
@@ -92,7 +92,7 @@ export default async function MiCuentaPage() {
           </Section>
 
           {/* Bookings */}
-          <Section title="Mis sesiones" icon={<Calendar size={16} />} empty={bookings.length === 0} emptyText="Todavía no reservaste ninguna sesión." emptyCta={{ href: "/servicios", label: "Ver servicios" }}>
+          <Section id="sesiones" title="Mis sesiones" icon={<Calendar size={16} />} empty={bookings.length === 0} emptyText="Todavía no reservaste ninguna sesión." emptyCta={{ href: "/servicios", label: "Ver servicios" }}>
             <div className="space-y-3">
               {bookings.map((b) => (
                 <div key={b.id} className="bg-white border-2 border-morado-dark block-shadow-sm p-5 flex items-center gap-5">
@@ -168,6 +168,7 @@ function Section({
   emptyText,
   emptyCta,
   children,
+  id,
 }: {
   title: string;
   icon: React.ReactNode;
@@ -175,9 +176,10 @@ function Section({
   emptyText: string;
   emptyCta: { href: string; label: string };
   children: React.ReactNode;
+  id?: string;
 }) {
   return (
-    <section>
+    <section id={id} className="scroll-mt-24">
       <div className="flex items-center gap-3 mb-5">
         <span className="text-morado-dark">{icon}</span>
         <h2 className="font-display uppercase text-[clamp(1.4rem,3vw,1.8rem)] text-tierra-dark leading-none tracking-wide">

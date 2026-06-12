@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, LogIn, LogOut, User, X } from "lucide-react";
+import {
+  ShoppingBag, LogIn, LogOut, User, X, ChevronDown,
+  BookOpen, Calendar, Sparkles, LayoutDashboard,
+} from "lucide-react";
 import { useCart } from "../cart/CartContext";
 import { useSession, signOut } from "next-auth/react";
 
@@ -16,9 +19,18 @@ const links = [
   { label: "Sobre mí",        href: "/sobre-mi" },
 ];
 
+const accountLinks = [
+  { label: "Mi cuenta",      href: "/mi-cuenta",          icon: User },
+  { label: "Mis cursos",     href: "/mi-cuenta#cursos",   icon: BookOpen },
+  { label: "Mis sesiones",   href: "/mi-cuenta#sesiones", icon: Calendar },
+  { label: "Mi suscripción", href: "/suscripciones",      icon: Sparkles },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
   const { count, openCart } = useCart();
   const { data: session } = useSession();
 
@@ -34,6 +46,20 @@ export default function Navbar() {
     }
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  // Cerrar el menú de perfil al click afuera
+  useEffect(() => {
+    if (!profileOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [profileOpen]);
+
+  const firstName = session?.user?.name?.split(" ")[0] ?? "Cuenta";
 
   return (
     <>
@@ -85,35 +111,87 @@ export default function Navbar() {
 
           {/* Auth */}
           {session ? (
-            <div className="flex items-center gap-3">
-              {session.user?.image ? (
-                <Image
-                  src={session.user.image}
-                  alt={session.user.name ?? ""}
-                  width={30}
-                  height={30}
-                  className="rounded-full border-2 border-morado/20"
-                />
-              ) : (
-                <div className="w-8 h-8 bg-morado/8 border border-morado/20 flex items-center justify-center">
-                  <User size={14} className="text-verde-light" />
+            <div ref={profileRef} className="relative">
+              <button
+                onClick={() => setProfileOpen((v) => !v)}
+                aria-haspopup="menu"
+                aria-expanded={profileOpen}
+                className="flex items-center gap-2 bg-crema text-morado font-sans font-semibold text-[0.72rem] pl-2.5 pr-3 py-2.5 border-2 border-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
+              >
+                {session.user?.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <span className="w-5 h-5 bg-morado/10 flex items-center justify-center">
+                    <User size={13} strokeWidth={2} />
+                  </span>
+                )}
+                <span className="max-w-[7rem] truncate">{firstName}</span>
+                <ChevronDown size={13} strokeWidth={2.5} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {profileOpen && (
+                <div className="absolute right-0 top-full mt-3 w-60 bg-crema border-2 border-morado-dark block-shadow z-50">
+                  {/* Header del menú */}
+                  <div className="px-4 py-3 border-b-2 border-morado/10">
+                    <p className="font-sans font-bold text-tierra-dark text-sm truncate">
+                      {session.user?.name ?? "Mi cuenta"}
+                    </p>
+                    {session.user?.email && (
+                      <p className="font-sans text-[0.7rem] text-tierra/55 truncate">{session.user.email}</p>
+                    )}
+                  </div>
+
+                  {/* Links de cuenta */}
+                  <nav className="py-1.5">
+                    {accountLinks.map(({ label, href, icon: Icon }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2.5 font-sans font-semibold text-[0.72rem] tracking-widest uppercase text-tierra-dark hover:bg-dorado/15 transition-colors"
+                      >
+                        <Icon size={14} className="text-morado shrink-0" strokeWidth={1.8} />
+                        {label}
+                      </Link>
+                    ))}
+
+                    {session.user?.isAdmin && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2.5 font-sans font-bold text-[0.72rem] tracking-widest uppercase text-morado-dark bg-dorado/10 hover:bg-dorado/25 transition-colors"
+                      >
+                        <LayoutDashboard size={14} className="shrink-0" strokeWidth={2} />
+                        Panel de admin
+                      </Link>
+                    )}
+                  </nav>
+
+                  {/* Salir */}
+                  <div className="border-t-2 border-morado/10 py-1.5">
+                    <button
+                      onClick={() => { setProfileOpen(false); void signOut({ callbackUrl: "/" }); }}
+                      className="w-full flex items-center gap-2.5 px-4 py-2.5 font-sans font-semibold text-[0.72rem] tracking-widest uppercase text-rosa hover:bg-rosa/10 transition-colors"
+                    >
+                      <LogOut size={14} className="shrink-0" strokeWidth={1.8} />
+                      Cerrar sesión
+                    </button>
+                  </div>
                 </div>
               )}
-              <button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center gap-1.5 font-sans text-[0.75rem] text-tierra/65 hover:text-morado transition-colors tracking-widest uppercase"
-                aria-label="Cerrar sesión"
-              >
-                <LogOut size={13} strokeWidth={1.5} className="text-verde-light" />
-                Salir
-              </button>
             </div>
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-2 font-sans font-semibold text-[0.75rem] text-morado/80 hover:text-morado transition-colors tracking-widest uppercase"
+              className="flex items-center gap-2 bg-crema text-morado font-sans font-semibold text-[0.72rem] px-4 py-2.5 border-2 border-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
             >
-              <LogIn size={14} strokeWidth={1.8} className="text-morado" />
+              <LogIn size={14} strokeWidth={1.8} />
               Entrar
             </Link>
           )}
@@ -210,12 +288,40 @@ export default function Navbar() {
           {/* Acciones abajo */}
           <div className="px-6 pb-8 pt-4 border-t border-crema/15 shrink-0 space-y-3 relative z-10">
             {session ? (
-              <button
-                onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
-                className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3.5 border-2 border-crema/50"
-              >
-                <LogOut size={15} strokeWidth={1.8} /> Cerrar sesión
-              </button>
+              <>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/mi-cuenta"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/50"
+                  >
+                    <User size={14} strokeWidth={1.8} /> Mi cuenta
+                  </Link>
+                  {session.user?.isAdmin ? (
+                    <Link
+                      href="/admin"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-center gap-2 font-sans font-bold text-xs text-tierra-dark bg-dorado hover:bg-dorado-light transition-colors tracking-widest uppercase py-3 border-2 border-dorado"
+                    >
+                      <LayoutDashboard size={14} strokeWidth={2} /> Admin
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/suscripciones"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/50"
+                    >
+                      <Sparkles size={14} strokeWidth={1.8} /> Círculo
+                    </Link>
+                  )}
+                </div>
+                <button
+                  onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
+                  className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema/80 hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/30"
+                >
+                  <LogOut size={15} strokeWidth={1.8} /> Cerrar sesión
+                </button>
+              </>
             ) : (
               <Link
                 href="/login"
