@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import {
   ArrowLeft, BookOpen, Loader2, Plus, ChevronDown, ChevronRight,
   Pencil, Trash2, Video, AlertCircle, Eye, EyeOff, Check, X, Save,
-  ExternalLink, FileText, Paperclip,
+  ExternalLink, FileText, Paperclip, Clock,
 } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
@@ -79,12 +79,21 @@ function InlineEdit({ value, onSave, className }: {
 type Lesson = {
   id: string; title: string; content: string | null;
   videoUrl: string | null; freePreview: boolean; order: number; attachments: string[];
+  publishedAt?: Date | null;
 };
 
 type LessonUpdate = {
   title?: string; content?: string; videoUrl?: string;
-  freePreview?: boolean; attachments?: string[];
+  freePreview?: boolean; attachments?: string[]; publishedAt?: Date | null;
 };
+
+// Date → valor de <input type="datetime-local"> en hora local
+function toLocalInput(d: Date | null | undefined): string {
+  if (!d) return "";
+  const date = new Date(d);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
 
 function LessonRow({ lesson, onUpdate, onDelete }: {
   lesson: Lesson;
@@ -92,12 +101,21 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
   onDelete: () => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState({ title: lesson.title, content: lesson.content ?? "", videoUrl: lesson.videoUrl ?? "" });
+  const [draft, setDraft] = useState({
+    title: lesson.title,
+    content: lesson.content ?? "",
+    videoUrl: lesson.videoUrl ?? "",
+    publishedAt: toLocalInput(lesson.publishedAt),
+  });
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
   const vimeoEmbed = parseVimeo(draft.videoUrl);
   const hasVideo = !!lesson.videoUrl;
+
+  // Estado de drip
+  const scheduled = lesson.publishedAt ? new Date(lesson.publishedAt) : null;
+  const isUpcoming = !!scheduled && scheduled.getTime() > Date.now();
 
   const save = async () => {
     if (draft.videoUrl && !vimeoEmbed) { toast("Link de Vimeo inválido", "error"); return; }
@@ -106,6 +124,7 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
       title: draft.title,
       content: draft.content || undefined,
       videoUrl: vimeoEmbed ?? undefined,
+      publishedAt: draft.publishedAt ? new Date(draft.publishedAt) : null,
     });
     setSaving(false);
     setOpen(false);
@@ -127,6 +146,15 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
         />
         <div className="flex items-center gap-1.5 shrink-0 ml-auto">
           {hasVideo && <Video size={12} className="text-morado/40" />}
+          {isUpcoming && scheduled && (
+            <span
+              title={`Se libera el ${scheduled.toLocaleString("es-AR")}`}
+              className="flex items-center gap-1 font-sans text-[0.55rem] tracking-widest uppercase px-2 py-1 border bg-dorado/15 text-tierra-dark border-dorado/40"
+            >
+              <Clock size={10} />
+              {scheduled.toLocaleDateString("es-AR", { day: "numeric", month: "short" })}
+            </span>
+          )}
           <button type="button"
             onClick={() => void onUpdate({ freePreview: !lesson.freePreview })}
             title={lesson.freePreview ? "Preview gratuita activa" : "Sin preview gratuita"}
@@ -178,6 +206,29 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
               value={draft.content}
               onChange={(e) => setDraft((d) => ({ ...d, content: e.target.value }))}
             />
+          </div>
+
+          {/* Drip: fecha de liberación */}
+          <div>
+            <label className={labelClass}>Liberar el (drip)</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="datetime-local"
+                className={`${inputClass} max-w-xs`}
+                value={draft.publishedAt}
+                onChange={(e) => setDraft((d) => ({ ...d, publishedAt: e.target.value }))}
+              />
+              {draft.publishedAt && (
+                <button type="button"
+                  onClick={() => setDraft((d) => ({ ...d, publishedAt: "" }))}
+                  className="font-sans text-[0.6rem] text-tierra/50 hover:text-rosa tracking-widest uppercase transition-colors">
+                  Quitar
+                </button>
+              )}
+            </div>
+            <p className="font-sans text-xs text-tierra/50 mt-1.5 tracking-wide">
+              Vacío = disponible ya para las miembras. Con fecha futura, la clase se libera ese día.
+            </p>
           </div>
 
           <div className="flex justify-end gap-2">
@@ -400,7 +451,10 @@ export default function GestionCursoPage() {
 
   const { data: curso, isLoading } = api.admin.cursos.getById.useQuery(id, { enabled: !!id });
 
-  // Todo el estado es local — las acciones son demostrativas, no persisten en DB
+  // Las lecciones que ya existen en DB persisten sus cambios; las creadas en la
+  // sesión (ids temporales 'les-'/'mod-') siguen siendo locales por ahora.
+  const updateLessonMut = api.admin.cursos.updateLesson.useMutation();
+
   const [meta, setMeta] = useState<CourseMeta | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
   const initialized = useRef(false);
@@ -471,7 +525,7 @@ export default function GestionCursoPage() {
       return { ...m, lessons: [...m.lessons, {
         id: `les-${Date.now()}`, moduleId, title,
         content: null, videoUrl: null, freePreview: false,
-        order: m.lessons.length + 1, attachments: [],
+        order: m.lessons.length + 1, attachments: [], publishedAt: null,
       }] };
     }));
   };
@@ -480,6 +534,14 @@ export default function GestionCursoPage() {
     setModules((prev) => prev.map((m) => ({
       ...m, lessons: m.lessons.map((l) => l.id === lessonId ? { ...l, ...data } : l),
     })));
+    // Persistir si es una lección real de DB (no creada en esta sesión)
+    if (!lessonId.startsWith("les-")) {
+      try {
+        await updateLessonMut.mutateAsync({ id: lessonId, data });
+      } catch {
+        toast("No se pudo guardar el cambio", "error");
+      }
+    }
   };
 
   const handleConfirmDelete = () => {

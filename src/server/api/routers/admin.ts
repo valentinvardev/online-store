@@ -256,6 +256,7 @@ export const adminRouter = createTRPCRouter({
         content: z.string().optional(),
         videoUrl: z.string().optional(),
         freePreview: z.boolean().default(false),
+        publishedAt: z.coerce.date().nullable().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
         requireAdmin(ctx.session?.user?.email);
@@ -277,6 +278,7 @@ export const adminRouter = createTRPCRouter({
           videoUrl: z.string().optional(),
           freePreview: z.boolean().optional(),
           attachments: z.array(z.string()).optional(),
+          publishedAt: z.coerce.date().nullable().optional(),
         }),
       }))
       .mutation(async ({ ctx, input }) => {

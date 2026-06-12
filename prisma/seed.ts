@@ -222,6 +222,13 @@ async function seedCourses() {
     for (let mi = 0; mi < c.modules.length; mi++) {
       const m = c.modules[mi];
       if (!m) continue;
+      // Drip de demo: en "Tarot desde Cero", los módulos 3+ se liberan
+      // escalonados a futuro (semana a semana) para mostrar el mecanismo.
+      const dripDate =
+        c.slug === "tarot-desde-cero" && mi >= 2
+          ? new Date(Date.now() + (mi - 1) * 7 * 24 * 60 * 60 * 1000)
+          : null;
+
       await prisma.courseModule.create({
         data: {
           courseId: course.id,
@@ -234,6 +241,7 @@ async function seedCourses() {
               order: li,
               attachments: [],
               freePreview: li === 0 && mi === 0,
+              publishedAt: dripDate,
             })),
           },
         },

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Lock } from "lucide-react";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { hasCourseAccess, CIRCULO_CHECKOUT } from "~/lib/access";
@@ -120,27 +121,45 @@ export default async function CourseViewerPage({ params }: Props) {
                     </p>
                   </div>
                   <ul className="divide-y-2 divide-morado/5">
-                    {mod.lessons.map((lesson) => (
-                      <li key={lesson.id} className="px-6 py-4 hover:bg-morado/3 transition-colors">
-                        <h3 className="font-sans font-semibold text-sm text-tierra-dark mb-1">
-                          {lesson.title}
-                        </h3>
-                        {lesson.videoUrl && (
-                          <div className="mt-3 aspect-video bg-morado-dark/5 border border-morado/10">
-                            <iframe
-                              src={lesson.videoUrl}
-                              className="w-full h-full"
-                              allowFullScreen
-                            />
-                          </div>
-                        )}
-                        {lesson.content && (
-                          <p className="font-sans text-[13px] text-tierra/75 leading-relaxed mt-2">
-                            {lesson.content}
-                          </p>
-                        )}
-                      </li>
-                    ))}
+                    {mod.lessons.map((lesson) => {
+                      const upcoming = !!lesson.publishedAt && new Date(lesson.publishedAt) > new Date();
+                      if (upcoming) {
+                        return (
+                          <li key={lesson.id} className="px-6 py-4 bg-crema/40">
+                            <div className="flex items-center gap-2">
+                              <Lock size={13} className="text-tierra/35 shrink-0" />
+                              <h3 className="font-sans font-semibold text-sm text-tierra/45">
+                                {lesson.title}
+                              </h3>
+                            </div>
+                            <p className="font-sans text-[12px] text-dorado-dark tracking-wide mt-1 ml-[1.4rem]">
+                              Se libera el {new Date(lesson.publishedAt!).toLocaleDateString("es-AR", { day: "numeric", month: "long" })}
+                            </p>
+                          </li>
+                        );
+                      }
+                      return (
+                        <li key={lesson.id} className="px-6 py-4 hover:bg-morado/3 transition-colors">
+                          <h3 className="font-sans font-semibold text-sm text-tierra-dark mb-1">
+                            {lesson.title}
+                          </h3>
+                          {lesson.videoUrl && (
+                            <div className="mt-3 aspect-video bg-morado-dark/5 border border-morado/10">
+                              <iframe
+                                src={lesson.videoUrl}
+                                className="w-full h-full"
+                                allowFullScreen
+                              />
+                            </div>
+                          )}
+                          {lesson.content && (
+                            <p className="font-sans text-[13px] text-tierra/75 leading-relaxed mt-2">
+                              {lesson.content}
+                            </p>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}

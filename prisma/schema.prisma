@@ -172,6 +172,8 @@ model CourseLesson {
     attachments String[]
     order       Int
     freePreview Boolean      @default(false)
+    // Drip: null = disponible ya para miembras; fecha futura = se libera ese día
+    publishedAt DateTime?
 }
 
 model Service {
