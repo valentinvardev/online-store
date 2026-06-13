@@ -430,12 +430,38 @@ export const adminRouter = createTRPCRouter({
 
     create: adminProcedure.input(postInput).mutation(async ({ ctx, input }) => {
       requireAdmin(ctx.session?.user?.email);
-      const slug = (input.slug?.trim() || slugify(input.title));
+      const slug = (input.slug?.trim() || slugify(input.title ?? "post"));
       const publishedAt = input.published ? new Date() : null;
       return ctx.db.post.create({
         data: { ...input, slug, publishedAt },
       });
     }),
+
+    /* Mensaje rápido — estilo feed/estado. Sin título, TEXT, publicado al toque. */
+    quickPost: adminProcedure
+      .input(z.object({
+        content: z.string().min(1, "Escribí algo"),
+        requiredTierId: z.string().nullable().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        requireAdmin(ctx.session?.user?.email);
+        const body = input.content.trim();
+        const excerpt = body.length > 180 ? body.slice(0, 177).trimEnd() + "…" : body;
+        return ctx.db.post.create({
+          data: {
+            slug: `mensaje-${Date.now().toString(36)}`,
+            title: null,
+            excerpt,
+            content: body,
+            contentType: "TEXT",
+            requiredTierId: input.requiredTierId ?? null,
+            published: true,
+            publishedAt: new Date(),
+            images: [],
+            attachments: [],
+          },
+        });
+      }),
 
     update: adminProcedure
       .input(z.object({ id: z.string(), data: postInput.partial() }))

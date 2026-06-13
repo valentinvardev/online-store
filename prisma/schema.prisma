@@ -303,7 +303,7 @@ model Membership {
 model Post {
     id             String          @id @default(cuid())
     slug           String          @unique
-    title          String
+    title          String?         // null = mensaje rápido (estilo estado), sin título
     excerpt        String?
     content        String          @db.Text
     contentType    PostType        @default(TEXT)

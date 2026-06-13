@@ -7,6 +7,7 @@ import AdminHeader from "../_components/AdminHeader";
 import ConfirmModal from "../_components/ConfirmModal";
 import { useToast } from "../_components/AdminToast";
 import { api } from "~/trpc/react";
+import QuickComposer from "./_components/QuickComposer";
 
 const fmt = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "short", year: "numeric" });
 
@@ -54,10 +55,13 @@ export default function AdminCirculo() {
             href="/admin/circulo/nuevo"
             className="flex items-center gap-2 bg-morado-dark text-crema font-sans text-[0.65rem] px-5 py-3 tracking-widest uppercase font-semibold border-2 border-morado-dark block-shadow hover:bg-morado transition-colors"
           >
-            <Plus size={13} /> Nuevo post
+            <Plus size={13} /> Post completo
           </Link>
         }
       />
+
+      {/* Compositor rápido tipo feed */}
+      <QuickComposer />
 
       <div className="bg-crema border-2 border-morado-dark block-shadow overflow-hidden">
         {isLoading ? (
@@ -93,9 +97,18 @@ export default function AdminCirculo() {
               {posts.map((p) => (
                 <tr key={p.id} className="hover:bg-dorado/5 transition-colors group">
                   <td className="px-6 py-4">
-                    <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{p.title}</p>
-                    {p.excerpt && (
-                      <p className="font-sans text-xs text-tierra/60 line-clamp-1 mt-0.5">{p.excerpt}</p>
+                    {p.title ? (
+                      <>
+                        <p className="font-sans font-semibold text-sm text-tierra-dark tracking-wide">{p.title}</p>
+                        {p.excerpt && (
+                          <p className="font-sans text-xs text-tierra/60 line-clamp-1 mt-0.5">{p.excerpt}</p>
+                        )}
+                      </>
+                    ) : (
+                      <div className="flex items-start gap-2">
+                        <span className="font-sans text-[0.55rem] text-morado bg-morado/10 border border-morado/20 px-1.5 py-0.5 tracking-widest uppercase shrink-0 mt-0.5">Mensaje</span>
+                        <p className="font-sans text-sm text-tierra-dark/85 line-clamp-1 tracking-wide">{p.excerpt}</p>
+                      </div>
                     )}
                   </td>
                   <td className="px-4 py-4">

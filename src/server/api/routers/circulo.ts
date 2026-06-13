@@ -26,10 +26,13 @@ export const circuloRouter = createTRPCRouter({
     });
     return {
       isMember,
-      posts: posts.map((p) => ({
-        ...p,
-        locked: !!p.requiredTierId && !isMember,
-      })),
+      posts: posts.map((p) => {
+        const locked = !!p.requiredTierId && !isMember;
+        // En articulos el excerpt es un teaser deliberado (se puede mostrar).
+        // En mensajes (sin titulo) el excerpt ES el cuerpo → ocultarlo si esta gateado.
+        const excerpt = locked && !p.title ? null : p.excerpt;
+        return { ...p, excerpt, locked };
+      }),
     };
   }),
 

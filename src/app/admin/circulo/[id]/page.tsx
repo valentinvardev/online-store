@@ -31,7 +31,7 @@ export default function EditPostPage({ params }: Props) {
     <PostForm
       initial={{
         id: post.id,
-        title: post.title,
+        title: post.title ?? undefined,
         slug: post.slug,
         excerpt: post.excerpt,
         content: post.content,

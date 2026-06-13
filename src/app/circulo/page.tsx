@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lock, FileText, Video, Headphones, Image as ImageIcon, Sparkles, ArrowRight } from "lucide-react";
+import { Lock, FileText, Video, Headphones, Image as ImageIcon, Sparkles, ArrowRight, MessageSquare } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { api } from "~/trpc/server";
@@ -88,7 +88,51 @@ export default async function CirculoPage() {
               </div>
             ) : (
               <div className="space-y-6">
-                {posts.map((p) => (
+                {posts.map((p) => {
+                  const isMessage = !p.title;
+
+                  // ── Card de MENSAJE (sin título, estilo estado) ──
+                  if (isMessage) {
+                    return (
+                      <Link
+                        key={p.id}
+                        href={`/circulo/${p.slug}`}
+                        className="group block bg-white border-2 border-morado-dark block-shadow p-5 sm:p-6 hover:translate-y-[-2px] transition-transform"
+                      >
+                        <div className="flex items-center gap-3 mb-2.5">
+                          <span className="inline-flex items-center gap-1.5 font-sans text-[0.6rem] text-morado tracking-widest uppercase font-bold">
+                            <MessageSquare size={12} /> Mensaje
+                          </span>
+                          {p.locked && (
+                            <span className="inline-flex items-center gap-1 font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase">
+                              <Lock size={9} /> Socias
+                            </span>
+                          )}
+                          {p.publishedAt && (
+                            <span className="font-sans text-[0.65rem] text-tierra/45 tracking-wide ml-auto">
+                              {fmt.format(p.publishedAt)}
+                            </span>
+                          )}
+                        </div>
+                        {p.locked ? (
+                          <p className="font-sans italic text-tierra/55 text-[15px] tracking-wide">
+                            Mensaje para socias. Sumate para leerlo.
+                          </p>
+                        ) : (
+                          <p className="font-sans text-tierra-dark/90 text-[15px] sm:text-base leading-relaxed tracking-wide whitespace-pre-wrap line-clamp-4">
+                            {p.excerpt}
+                          </p>
+                        )}
+                        <span className="mt-4 inline-flex items-center gap-1.5 font-sans font-semibold text-[0.7rem] text-morado tracking-widest uppercase">
+                          {p.locked ? "Desbloquear" : "Ver y comentar"}
+                          <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </Link>
+                    );
+                  }
+
+                  // ── Card de POST con título (artículo) ──
+                  return (
                   <Link
                     key={p.id}
                     href={`/circulo/${p.slug}`}
@@ -144,7 +188,8 @@ export default async function CirculoPage() {
                       </div>
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

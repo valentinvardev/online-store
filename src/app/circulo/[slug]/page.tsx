@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Lock, Sparkles, FileText, Video, Headphones, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Lock, Sparkles, FileText, Video, Headphones, Image as ImageIcon, MessageSquare } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { api } from "~/trpc/server";
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const post = await api.circulo.bySlug({ slug });
   return {
-    title: post ? `${post.title} — El Círculo` : "El Círculo",
+    title: post?.title ? `${post.title} — El Círculo` : "El Círculo",
     description: post?.excerpt ?? undefined,
   };
 }
@@ -55,10 +55,14 @@ export default async function PostPage({ params }: Props) {
 
         <article className="max-w-3xl mx-auto px-6 py-10">
           {/* Encabezado */}
-          <header className="mb-8">
+          <header className={post.title ? "mb-8" : "mb-6"}>
             <div className="flex items-center gap-3 mb-4">
               <span className="inline-flex items-center gap-1.5 font-sans text-[0.62rem] text-morado tracking-widest uppercase font-bold">
-                {typeIcon[post.contentType]} {typeLabel[post.contentType]}
+                {post.title ? (
+                  <>{typeIcon[post.contentType]} {typeLabel[post.contentType]}</>
+                ) : (
+                  <><MessageSquare size={12} /> Mensaje</>
+                )}
               </span>
               {post.publishedAt && (
                 <span className="font-sans text-[0.7rem] text-tierra/45 tracking-wide">
@@ -66,13 +70,17 @@ export default async function PostPage({ params }: Props) {
                 </span>
               )}
             </div>
-            <h1 className="font-display uppercase text-[clamp(2.25rem,6vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide">
-              {post.title}
-            </h1>
-            {post.excerpt && (
-              <p className="font-sans italic text-tierra-dark/75 text-lg mt-4 leading-relaxed">
-                {post.excerpt}
-              </p>
+            {post.title && (
+              <>
+                <h1 className="font-display uppercase text-[clamp(2.25rem,6vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide">
+                  {post.title}
+                </h1>
+                {post.excerpt && (
+                  <p className="font-sans italic text-tierra-dark/75 text-lg mt-4 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                )}
+              </>
             )}
           </header>
 
