@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { FileText, Download } from "lucide-react";
 import { toEmbedUrl } from "~/lib/embed";
+import AudioPlayer from "./AudioPlayer";
 
 type Post = {
   contentType: "TEXT" | "VIDEO" | "AUDIO" | "GALLERY";
@@ -58,11 +59,7 @@ export default function PostBody({ post }: { post: Post }) {
 
       {/* Audio */}
       {post.contentType === "AUDIO" && post.audioUrl && (
-        <div className="bg-morado-dark border-2 border-morado-dark block-shadow p-5">
-          <audio controls preload="metadata" className="w-full" src={post.audioUrl}>
-            Tu navegador no soporta audio.
-          </audio>
-        </div>
+        <AudioPlayer src={post.audioUrl} />
       )}
 
       {/* Galería */}
