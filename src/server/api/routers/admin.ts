@@ -15,11 +15,14 @@ function slugify(str: string) {
     .replace(/^-|-$/g, "");
 }
 
-function requireAdmin(email: string | null | undefined) {
+function requireAdmin(user: { isAdmin?: boolean; email?: string | null } | null | undefined) {
   // En dev sin credenciales, acceso libre al admin
   if (isDev && !hasCredentials) return;
-  const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim());
-  if (!email || !adminEmails.includes(email)) {
+  // Fuente de verdad: el flag isAdmin (lo setea el JWT desde la DB / ADMIN_EMAILS)
+  if (user?.isAdmin) return;
+  // Fallback por email para el admin principal
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean);
+  if (!user?.email || !adminEmails.includes(user.email.toLowerCase())) {
     throw new TRPCError({ code: "FORBIDDEN", message: "No tenés permisos de administrador" });
   }
 }
@@ -91,7 +94,7 @@ export const adminRouter = createTRPCRouter({
 
   // ── Dashboard stats ──────────────────────────────────────────────────────
   stats: adminProcedure.query(async ({ ctx }) => {
-    requireAdmin(ctx.session?.user?.email);
+    requireAdmin(ctx.session?.user);
     if (!dbReady) return { cursos: 0, productos: 0, servicios: 0, usuarios: 0, ingresos: 0 };
     const [cursos, productos, servicios, usuarios, ordenesPagadas] = await Promise.all([
       ctx.db.course.count({ where: { active: true } }),
@@ -107,7 +110,7 @@ export const adminRouter = createTRPCRouter({
   // ── Cursos ───────────────────────────────────────────────────────────────
   cursos: createTRPCRouter({
     list: adminProcedure.query(async ({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return [
         {
           id: "demo-curso-1",
@@ -136,7 +139,7 @@ export const adminRouter = createTRPCRouter({
     }),
 
     getById: adminProcedure.input(z.string()).query(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return input === "demo-curso-1" ? {
         id: "demo-curso-1",
         slug: "tarot-desde-cero",
@@ -190,7 +193,7 @@ export const adminRouter = createTRPCRouter({
     }),
 
     create: adminProcedure.input(cursoInput).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       const slug = slugify(input.name);
       return ctx.db.course.create({ data: { ...input, slug } });
     }),
@@ -198,21 +201,21 @@ export const adminRouter = createTRPCRouter({
     update: adminProcedure
       .input(z.object({ id: z.string(), data: cursoInput.partial() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const data: Record<string, unknown> = { ...input.data };
         if (input.data.name) data.slug = slugify(input.data.name);
         return ctx.db.course.update({ where: { id: input.id }, data });
       }),
 
     delete: adminProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.course.delete({ where: { id: input } });
     }),
 
     toggleActive: adminProcedure
       .input(z.object({ id: z.string(), active: z.boolean() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         return ctx.db.course.update({ where: { id: input.id }, data: { active: input.active } });
       }),
 
@@ -220,7 +223,7 @@ export const adminRouter = createTRPCRouter({
     createModule: adminProcedure
       .input(z.object({ courseId: z.string(), title: z.string().min(1) }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const last = await ctx.db.courseModule.findFirst({
           where: { courseId: input.courseId },
           orderBy: { order: "desc" },
@@ -238,13 +241,13 @@ export const adminRouter = createTRPCRouter({
         attachments: z.array(z.string()).optional(),
       }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const { id, ...data } = input;
         return ctx.db.courseModule.update({ where: { id }, data });
       }),
 
     deleteModule: adminProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.courseModule.delete({ where: { id: input } });
     }),
 
@@ -259,7 +262,7 @@ export const adminRouter = createTRPCRouter({
         publishedAt: z.coerce.date().nullable().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const last = await ctx.db.courseLesson.findFirst({
           where: { moduleId: input.moduleId },
           orderBy: { order: "desc" },
@@ -282,12 +285,12 @@ export const adminRouter = createTRPCRouter({
         }),
       }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         return ctx.db.courseLesson.update({ where: { id: input.id }, data: input.data });
       }),
 
     deleteLesson: adminProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.courseLesson.delete({ where: { id: input } });
     }),
   }),
@@ -295,19 +298,19 @@ export const adminRouter = createTRPCRouter({
   // ── Productos ────────────────────────────────────────────────────────────
   productos: createTRPCRouter({
     list: adminProcedure.query(async ({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return [];
       return ctx.db.product.findMany({ orderBy: { createdAt: "desc" } });
     }),
 
     getById: adminProcedure.input(z.string()).query(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return null;
       return ctx.db.product.findUnique({ where: { id: input } });
     }),
 
     create: adminProcedure.input(productoInput).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       const slug = slugify(input.name);
       return ctx.db.product.create({ data: { ...input, slug } });
     }),
@@ -315,21 +318,21 @@ export const adminRouter = createTRPCRouter({
     update: adminProcedure
       .input(z.object({ id: z.string(), data: productoInput.partial() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const data: Record<string, unknown> = { ...input.data };
         if (input.data.name) data.slug = slugify(input.data.name);
         return ctx.db.product.update({ where: { id: input.id }, data });
       }),
 
     delete: adminProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.product.delete({ where: { id: input } });
     }),
 
     toggleActive: adminProcedure
       .input(z.object({ id: z.string(), active: z.boolean() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         return ctx.db.product.update({ where: { id: input.id }, data: { active: input.active } });
       }),
   }),
@@ -337,19 +340,19 @@ export const adminRouter = createTRPCRouter({
   // ── Servicios ────────────────────────────────────────────────────────────
   servicios: createTRPCRouter({
     list: adminProcedure.query(async ({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return [];
       return ctx.db.service.findMany({ orderBy: { createdAt: "desc" } });
     }),
 
     getById: adminProcedure.input(z.string()).query(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return null;
       return ctx.db.service.findUnique({ where: { id: input } });
     }),
 
     create: adminProcedure.input(servicioInput).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       const slug = slugify(input.name);
       return ctx.db.service.create({ data: { ...input, slug } });
     }),
@@ -357,21 +360,21 @@ export const adminRouter = createTRPCRouter({
     update: adminProcedure
       .input(z.object({ id: z.string(), data: servicioInput.partial() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const data: Record<string, unknown> = { ...input.data };
         if (input.data.name) data.slug = slugify(input.data.name);
         return ctx.db.service.update({ where: { id: input.id }, data });
       }),
 
     delete: adminProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.service.delete({ where: { id: input } });
     }),
 
     toggleActive: adminProcedure
       .input(z.object({ id: z.string(), active: z.boolean() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         return ctx.db.service.update({ where: { id: input.id }, data: { active: input.active } });
       }),
   }),
@@ -379,7 +382,7 @@ export const adminRouter = createTRPCRouter({
   // ── Usuarios ─────────────────────────────────────────────────────────────
   usuarios: createTRPCRouter({
     list: adminProcedure.query(async ({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return [];
       return ctx.db.user.findMany({
         orderBy: { emailVerified: "desc" },
@@ -391,7 +394,7 @@ export const adminRouter = createTRPCRouter({
   // ── Órdenes ──────────────────────────────────────────────────────────────
   ordenes: createTRPCRouter({
     list: adminProcedure.query(async ({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       if (!dbReady) return [];
       return ctx.db.order.findMany({
         orderBy: { createdAt: "desc" },
@@ -404,7 +407,7 @@ export const adminRouter = createTRPCRouter({
   // ── Posts del círculo ────────────────────────────────────────────────────
   posts: createTRPCRouter({
     list: adminProcedure.query(({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.post.findMany({
         orderBy: [{ published: "asc" }, { createdAt: "desc" }],
         include: { requiredTier: { select: { name: true, slug: true, color: true } } },
@@ -412,7 +415,7 @@ export const adminRouter = createTRPCRouter({
     }),
 
     getById: adminProcedure.input(z.string()).query(({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.post.findUnique({
         where: { id: input },
         include: { requiredTier: true },
@@ -420,7 +423,7 @@ export const adminRouter = createTRPCRouter({
     }),
 
     tiers: adminProcedure.query(({ ctx }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.membershipTier.findMany({
         where: { active: true },
         orderBy: { sortOrder: "asc" },
@@ -429,7 +432,7 @@ export const adminRouter = createTRPCRouter({
     }),
 
     create: adminProcedure.input(postInput).mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       const slug = (input.slug?.trim() || slugify(input.title ?? "post"));
       const publishedAt = input.published ? new Date() : null;
       return ctx.db.post.create({
@@ -444,7 +447,7 @@ export const adminRouter = createTRPCRouter({
         requiredTierId: z.string().nullable().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const body = input.content.trim();
         const excerpt = body.length > 180 ? body.slice(0, 177).trimEnd() + "…" : body;
         return ctx.db.post.create({
@@ -466,7 +469,7 @@ export const adminRouter = createTRPCRouter({
     update: adminProcedure
       .input(z.object({ id: z.string(), data: postInput.partial() }))
       .mutation(async ({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         const existing = await ctx.db.post.findUnique({
           where: { id: input.id },
           select: { published: true },
@@ -483,14 +486,14 @@ export const adminRouter = createTRPCRouter({
       }),
 
     delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
-      requireAdmin(ctx.session?.user?.email);
+      requireAdmin(ctx.session?.user);
       return ctx.db.post.delete({ where: { id: input } });
     }),
 
     togglePublished: adminProcedure
       .input(z.object({ id: z.string(), published: z.boolean() }))
       .mutation(({ ctx, input }) => {
-        requireAdmin(ctx.session?.user?.email);
+        requireAdmin(ctx.session?.user);
         return ctx.db.post.update({
           where: { id: input.id },
           data: {
