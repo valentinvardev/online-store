@@ -6,7 +6,8 @@ import Footer from "~/app/_components/home/Footer";
 import CursoAccordion from "./_components/CursoAccordion";
 import Badge from "../../_components/Badge";
 import { api } from "~/trpc/server";
-import { CIRCULO_CHECKOUT } from "~/lib/access";
+import { auth } from "~/server/auth";
+import { CIRCULO_CHECKOUT, hasCourseAccess } from "~/lib/access";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,6 +45,11 @@ export default async function CursoInfoPage({ params }: Props) {
   };
 
   const totalLessons = curso.modules.reduce((acc, m) => acc + m.lessons.length, 0);
+
+  // ¿La persona ya tiene acceso (membresía activa o inscripción vieja)?
+  const session = await auth();
+  const hasAccess = await hasCourseAccess(session?.user?.id, cursoDb.id);
+  const verHref = `/cursos/${slug}/ver`;
 
   return (
     <>
@@ -121,24 +127,30 @@ export default async function CursoInfoPage({ params }: Props) {
                 {/* Acceso por membresía */}
                 <div>
                   <span className="font-sans text-[0.6rem] text-morado/70 tracking-[0.3em] uppercase block mb-1">
-                    Incluido en el Círculo
+                    {hasAccess ? "Ya tenés acceso ✦" : "Incluido en el Círculo"}
                   </span>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-display text-4xl text-morado">Membresía</span>
+                    <span className="font-display text-4xl text-morado">{hasAccess ? "Tu curso" : "Membresía"}</span>
                   </div>
                   <p className="font-sans text-[0.8rem] text-tierra/65 tracking-wide mt-1">
-                    Una suscripción · todos los cursos
+                    {hasAccess ? "Empezá cuando quieras" : "Una suscripción · todos los cursos"}
                   </p>
                 </div>
 
                 {/* CTA */}
-                <Link href={CIRCULO_CHECKOUT} className="block w-full text-center bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
-                  ✦ Sumate al Círculo
-                </Link>
+                {hasAccess ? (
+                  <Link href={verHref} className="block w-full text-center bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
+                    ✦ Entrar al curso
+                  </Link>
+                ) : (
+                  <Link href={CIRCULO_CHECKOUT} className="block w-full text-center bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors">
+                    ✦ Sumate al Círculo
+                  </Link>
+                )}
 
                 {/* Garantía */}
                 <p className="font-sans text-[0.8rem] text-tierra/65 text-center tracking-wide">
-                  ✦ Cancelás cuando quieras
+                  {hasAccess ? "✦ Acceso completo, sin límite" : "✦ Cancelás cuando quieras"}
                 </p>
 
                 {/* Incluye */}
@@ -239,18 +251,18 @@ export default async function CursoInfoPage({ params }: Props) {
                 <div className="bg-crema border-2 border-morado-dark block-shadow p-7 space-y-5">
                   <div>
                     <span className="font-sans text-[0.6rem] text-morado/70 tracking-[0.3em] uppercase block mb-1">
-                      Incluido en el Círculo
+                      {hasAccess ? "Ya tenés acceso ✦" : "Incluido en el Círculo"}
                     </span>
-                    <span className="font-display text-4xl text-morado">Membresía</span>
+                    <span className="font-display text-4xl text-morado">{hasAccess ? "Tu curso" : "Membresía"}</span>
                     <p className="font-sans text-[0.8rem] text-tierra/65 tracking-wide mt-1">
-                      Una suscripción · todos los cursos
+                      {hasAccess ? "Empezá cuando quieras" : "Una suscripción · todos los cursos"}
                     </p>
                   </div>
-                  <Link href={CIRCULO_CHECKOUT} className="block w-full text-center bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
-                    ✦ Sumate al Círculo
+                  <Link href={hasAccess ? verHref : CIRCULO_CHECKOUT} className="block w-full text-center bg-morado-dark text-crema font-sans font-semibold text-[0.8rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors">
+                    {hasAccess ? "✦ Entrar al curso" : "✦ Sumate al Círculo"}
                   </Link>
                   <p className="font-sans text-[0.8rem] text-tierra/60 text-center tracking-wide">
-                    ✦ Cancelás cuando quieras
+                    {hasAccess ? "✦ Acceso completo" : "✦ Cancelás cuando quieras"}
                   </p>
                   <div className="border-t border-morado/10 pt-4 space-y-2.5">
                     {curso.includes.map((item, i) => (
@@ -290,14 +302,14 @@ export default async function CursoInfoPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-6">
           <span className="font-display text-dorado text-6xl block">✦</span>
           <h2 className="font-display uppercase text-[clamp(3rem,5vw,3.5rem)] text-crema leading-none tracking-wide">
-            <span className="inline-block rotate-180 leading-none">?</span>Lista para empezar?
+            <span className="inline-block rotate-180 leading-none">?</span>{hasAccess ? "Lista para entrar?" : "Lista para empezar?"}
           </h2>
           <p className="font-sans text-crema/70 text-[15px] tracking-wide max-w-sm mx-auto leading-relaxed">
-            Unite a {curso.students} que ya transitaron este camino.
+            {hasAccess ? "Tu curso te espera. Empezá cuando quieras." : `Unite a ${curso.students} que ya transitaron este camino.`}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href={CIRCULO_CHECKOUT} className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
-              ✦ Sumate al Círculo
+            <Link href={hasAccess ? verHref : CIRCULO_CHECKOUT} className="bg-dorado text-tierra-dark font-sans font-semibold text-[0.8rem] px-10 py-4 tracking-widest uppercase border-2 border-crema/20 block-shadow hover:bg-dorado-light transition-colors">
+              {hasAccess ? "✦ Entrar al curso" : "✦ Sumate al Círculo"}
             </Link>
             <Link
               href="/cursos"

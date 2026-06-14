@@ -4,7 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { db } from "~/server/db";
-import { CIRCULO_CHECKOUT } from "~/lib/access";
+import { auth } from "~/server/auth";
+import { CIRCULO_CHECKOUT, hasActiveMembership } from "~/lib/access";
 import CheckoutForm from "./_CheckoutForm";
 
 type Props = {
@@ -75,6 +76,12 @@ export default async function ComprarPage({ params }: Props) {
   // Modelo de membresía única: los cursos no se compran sueltos.
   // Cualquier intento de comprar un curso redirige al checkout de la membresía.
   if (type === "curso") redirect(CIRCULO_CHECKOUT);
+
+  // Si ya es socia activa y entra a comprar la membresía, la mandamos al Círculo.
+  if (type === "membresia") {
+    const session = await auth();
+    if (await hasActiveMembership(session?.user?.id)) redirect("/circulo");
+  }
 
   const item = await fetchItem(type, slug);
   if (!item) notFound();

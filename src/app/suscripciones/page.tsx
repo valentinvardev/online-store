@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Crown } from "lucide-react";
+import { Check, Crown, Sparkles, ArrowRight } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import RevealOnScroll from "~/app/_components/home/RevealOnScroll";
 import Stickers from "~/app/_components/Stickers";
+import { api } from "~/trpc/react";
 
 /* ── La membresía (única) ── */
 const membresia = {
@@ -73,6 +75,9 @@ const faqs = [
 export default function SuscripcionesPage() {
   const [billing, setBilling] = useState<"mensual" | "anual">("mensual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { data: session } = useSession();
+  const { data: membership } = api.account.membership.useQuery(undefined, { enabled: !!session });
+  const isMember = membership?.status === "ACTIVE";
 
   /* Card de precio reutilizable (hero + sección final) */
   const PrecioCard = ({ idAnchor }: { idAnchor?: string }) => (
@@ -116,15 +121,35 @@ export default function SuscripcionesPage() {
 
       {/* CTA */}
       <div className="px-7 pb-7">
-        <Link
-          href="/comprar/membresia/circulo-reina"
-          className="block w-full text-center bg-dorado text-tierra-dark font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors"
-        >
-          Suscribirme ahora
-        </Link>
-        <p className="font-sans text-[0.68rem] text-tierra/45 text-center tracking-wide mt-3">
-          Cancelás cuando quieras · Sin compromisos
-        </p>
+        {isMember ? (
+          <>
+            <div className="flex items-center justify-center gap-2 bg-verde/12 border-2 border-verde/40 py-3 mb-3">
+              <Sparkles size={14} className="text-verde" />
+              <span className="font-sans font-bold text-[0.72rem] text-verde tracking-widest uppercase">Ya sos socia</span>
+            </div>
+            <Link
+              href="/circulo"
+              className="flex items-center justify-center gap-2 w-full text-center bg-morado-dark text-crema font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-morado transition-colors"
+            >
+              Entrar al Círculo <ArrowRight size={13} />
+            </Link>
+            <p className="font-sans text-[0.68rem] text-tierra/45 text-center tracking-wide mt-3">
+              Gestioná tu membresía desde <Link href="/mi-cuenta" className="text-morado font-semibold">Mi cuenta</Link>
+            </p>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/comprar/membresia/circulo-reina"
+              className="block w-full text-center bg-dorado text-tierra-dark font-sans font-bold text-[0.72rem] py-4 tracking-widest uppercase border-2 border-morado-dark block-shadow hover:bg-dorado-light transition-colors"
+            >
+              Suscribirme ahora
+            </Link>
+            <p className="font-sans text-[0.68rem] text-tierra/45 text-center tracking-wide mt-3">
+              Cancelás cuando quieras · Sin compromisos
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
