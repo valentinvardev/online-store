@@ -398,11 +398,13 @@ async function seedTestUsers() {
   console.log("  ✓ admin@test.lareina.com / Admin1234!  (isAdmin)");
 
   /* Socia con suscripción activa */
-  const memberHash = await bcrypt.hash("Miembra1234!", 12);
+  // Limpieza del usuario de test viejo (cuando se llamaba 'miembra')
+  await prisma.user.deleteMany({ where: { email: "miembra@test.lareina.com" } });
+  const memberHash = await bcrypt.hash("Socia1234!", 12);
   const member = await prisma.user.upsert({
-    where: { email: "miembra@test.lareina.com" },
+    where: { email: "socia@test.lareina.com" },
     create: {
-      email: "miembra@test.lareina.com",
+      email: "socia@test.lareina.com",
       name: "María (socia de prueba)",
       passwordHash: memberHash,
       isAdmin: false,
@@ -420,7 +422,7 @@ async function seedTestUsers() {
     },
     update: { status: "ACTIVE", cancelledAt: null },
   });
-  console.log("  ✓ miembra@test.lareina.com / Miembra1234!  (membership ACTIVE → Círculo de la Reina)");
+  console.log("  ✓ socia@test.lareina.com / Socia1234!  (membership ACTIVE → Círculo de la Reina)");
 
   /* Usuario sin membresía — para probar gating */
   const visitorHash = await bcrypt.hash("Visita1234!", 12);

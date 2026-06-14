@@ -102,7 +102,7 @@ export default async function PostPage({ params }: Props) {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-morado-dark border-2 border-morado-dark mb-5">
                 <Lock size={26} className="text-dorado" strokeWidth={1.8} />
               </div>
-              <h2 className="font-display uppercase text-2xl sm:text-3xl text-tierra-dark tracking-wide leading-none mb-3">
+              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-tierra-dark tracking-wide leading-tight mb-3">
                 Contenido para socias
               </h2>
               <p className="font-sans text-tierra-dark/80 text-[15px] leading-relaxed max-w-md mx-auto mb-7">

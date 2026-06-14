@@ -141,7 +141,7 @@ function LockedTeaser({ post }: { post: FeedPostData }) {
       )}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
         <Lock size={24} className="text-dorado mb-3" strokeWidth={1.8} />
-        <p className="font-display uppercase text-lg sm:text-xl text-crema tracking-wide leading-none mb-3">
+        <p className="font-sans font-bold text-lg sm:text-xl text-crema tracking-wide leading-tight mb-3">
           Contenido para socias
         </p>
         <Link
