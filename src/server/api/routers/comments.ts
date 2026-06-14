@@ -8,25 +8,31 @@ import {
 import { hasActiveMembership } from "~/lib/access";
 
 export const commentsRouter = createTRPCRouter({
-  /* Comentarios de un post — público (cualquiera puede leerlos). */
+  /* Comentarios de un post — público. Devuelve los de primer nivel con sus
+   * respuestas anidadas (un nivel de hilo). */
   list: publicProcedure
     .input(z.object({ postId: z.string() }))
     .query(({ ctx, input }) =>
       ctx.db.comment.findMany({
-        where: { postId: input.postId },
+        where: { postId: input.postId, parentId: null },
         orderBy: { createdAt: "desc" },
         include: {
           user: { select: { id: true, name: true, image: true } },
+          replies: {
+            orderBy: { createdAt: "asc" },
+            include: { user: { select: { id: true, name: true, image: true } } },
+          },
         },
       }),
     ),
 
-  /* Crear comentario — requiere sesión + acceso al post (membresía si es gateado). */
+  /* Crear comentario o respuesta — requiere sesión + acceso al post. */
   create: protectedProcedure
     .input(
       z.object({
         postId: z.string(),
         body: z.string().min(1, "Escribí algo").max(2000),
+        parentId: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -46,11 +52,25 @@ export const commentsRouter = createTRPCRouter({
           });
         }
       }
+      // Si es respuesta, validar que el padre exista y sea del mismo post.
+      // Aplana a un solo nivel: si el padre ya es respuesta, cuelga del raíz.
+      let parentId: string | undefined;
+      if (input.parentId) {
+        const parent = await ctx.db.comment.findUnique({
+          where: { id: input.parentId },
+          select: { postId: true, parentId: true, id: true },
+        });
+        if (!parent || parent.postId !== input.postId) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Comentario inválido" });
+        }
+        parentId = parent.parentId ?? parent.id;
+      }
       return ctx.db.comment.create({
         data: {
           body: input.body.trim(),
           postId: input.postId,
           userId: ctx.session.user.id,
+          parentId,
         },
         include: { user: { select: { id: true, name: true, image: true } } },
       });

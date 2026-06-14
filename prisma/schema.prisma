@@ -325,15 +325,19 @@ model Post {
 }
 
 model Comment {
-    id        String   @id @default(cuid())
-    body      String   @db.Text
+    id        String    @id @default(cuid())
+    body      String    @db.Text
     userId    String
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     postId    String
-    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-    createdAt DateTime @default(now())
+    post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+    parentId  String?
+    parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+    replies   Comment[] @relation("CommentReplies")
+    createdAt DateTime  @default(now())
 
     @@index([postId, createdAt])
+    @@index([parentId])
 }
 
 // ─── Newsletter ──────────────────────────────────────────────────────────────
