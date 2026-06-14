@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { Mail, User as UserIcon, Phone, Lock, Eye, EyeOff, Loader2, Sparkles } from "lucide-react";
+import { Mail, User as UserIcon, Phone, Lock, Eye, EyeOff, Loader2, Sparkles, LogIn } from "lucide-react";
 
 const inputBase =
   "w-full bg-white border-2 border-morado/20 pl-11 pr-4 py-3.5 font-sans text-sm text-tierra-dark placeholder:text-tierra/30 focus:outline-none focus:border-morado/60 transition-colors";
@@ -80,8 +81,15 @@ export default function CheckoutForm({ type, slug, itemName, price }: Props) {
         </h1>
         <p className="font-sans text-tierra/75 text-sm mt-3 leading-relaxed">
           Con estos datos creamos tu cuenta. Con la contraseña vas a poder volver
-          a entrar cuando quieras desde <span className="text-morado font-semibold">/login</span>.
+          a entrar cuando quieras.
         </p>
+        <p className="font-sans text-tierra/60 text-[0.8rem] mt-3 mb-1">¿Ya tenés cuenta?</p>
+        <Link
+          href="/login"
+          className="inline-flex items-center gap-2 bg-crema text-morado font-sans font-semibold text-[0.72rem] px-4 py-2.5 border-2 border-morado hover:bg-morado/5 transition-colors tracking-widest uppercase block-shadow-sm"
+        >
+          <LogIn size={14} strokeWidth={1.8} /> Entrar
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">

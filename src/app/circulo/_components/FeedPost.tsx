@@ -76,7 +76,7 @@ export default function FeedPost({ post }: { post: FeedPostData }) {
       {/* ── Título (artículos) ── */}
       {post.title && (
         <Link href={`/circulo/${post.slug}`} className="block px-5 sm:px-6 group">
-          <h2 className="font-display uppercase text-[clamp(1.4rem,3.5vw,2rem)] text-tierra-dark leading-[1.05] tracking-wide group-hover:text-morado transition-colors">
+          <h2 className="font-sans font-bold text-[clamp(1.2rem,3vw,1.55rem)] text-tierra-dark leading-snug tracking-wide group-hover:text-morado transition-colors">
             {post.title}
           </h2>
         </Link>

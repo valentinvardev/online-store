@@ -72,7 +72,7 @@ export default async function PostPage({ params }: Props) {
             </div>
             {post.title && (
               <>
-                <h1 className="font-display uppercase text-[clamp(2.25rem,6vw,3.5rem)] text-tierra-dark leading-[0.95] tracking-wide">
+                <h1 className="font-sans font-bold text-[clamp(1.6rem,4.5vw,2.4rem)] text-tierra-dark leading-tight tracking-wide">
                   {post.title}
                 </h1>
                 {post.excerpt && (

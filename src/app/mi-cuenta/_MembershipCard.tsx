@@ -36,7 +36,7 @@ export default function MembershipCard({ membership }: Props) {
           <Sparkles size={24} className="text-dorado" />
         </div>
         <div className="flex-1">
-          <h3 className="font-display uppercase text-2xl text-crema tracking-wide leading-none mb-1.5">
+          <h3 className="font-sans font-bold text-xl sm:text-2xl text-crema tracking-wide leading-tight mb-1.5">
             {membership?.status === "CANCELLED" ? "Tu membresía está cancelada" : "Sumate al Círculo"}
           </h3>
           <p className="font-sans text-crema/70 text-sm tracking-wide">

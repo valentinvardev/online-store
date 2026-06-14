@@ -40,7 +40,7 @@ export default async function CirculoPage() {
           <section className="bg-dorado-light border-b-4 border-morado-dark px-6 py-8">
             <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
               <div>
-                <h2 className="font-display uppercase text-2xl text-tierra-dark tracking-wide leading-none mb-1.5">
+                <h2 className="font-sans font-bold text-xl sm:text-2xl text-tierra-dark tracking-wide leading-tight mb-1.5">
                   Sumate al Círculo
                 </h2>
                 <p className="font-sans text-tierra-dark/80 text-sm tracking-wide">
