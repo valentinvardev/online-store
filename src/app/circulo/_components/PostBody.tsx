@@ -1,8 +1,8 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { FileText, Download } from "lucide-react";
 import { toEmbedUrl } from "~/lib/embed";
 import AudioPlayer from "./AudioPlayer";
+import MaterialLightbox from "./MaterialLightbox";
 
 type Post = {
   contentType: "TEXT" | "VIDEO" | "AUDIO" | "GALLERY";
@@ -62,16 +62,9 @@ export default function PostBody({ post }: { post: Post }) {
         <AudioPlayer src={post.audioUrl} />
       )}
 
-      {/* Galería */}
+      {/* Galería — con lightbox de imágenes */}
       {post.contentType === "GALLERY" && post.images.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {post.images.map((src, i) => (
-            <a key={i} href={src} target="_blank" rel="noopener noreferrer" className="block aspect-square border-2 border-morado/15 overflow-hidden hover:opacity-90 transition-opacity">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={`Imagen ${i + 1}`} className="w-full h-full object-cover" />
-            </a>
-          ))}
-        </div>
+        <MaterialLightbox images={post.images} />
       )}
 
       {/* Cuerpo markdown (texto, o descripción de video/audio/galería) */}
@@ -83,31 +76,9 @@ export default function PostBody({ post }: { post: Post }) {
         </div>
       )}
 
-      {/* Adjuntos PDF */}
+      {/* Adjuntos / documentos — con visor PDF + descarga */}
       {post.attachments.length > 0 && (
-        <div className="border-t-2 border-morado/10 pt-5">
-          <p className="font-sans text-[0.65rem] text-tierra/60 tracking-[0.3em] uppercase mb-3 font-bold">
-            Material descargable
-          </p>
-          <ul className="space-y-2">
-            {post.attachments.map((url, i) => (
-              <li key={i}>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white border-2 border-morado/15 px-4 py-3 hover:border-morado/40 transition-colors group"
-                >
-                  <FileText size={16} className="text-morado shrink-0" />
-                  <span className="flex-1 font-sans text-sm text-tierra-dark truncate">
-                    {decodeURIComponent(url.split("/").pop() ?? "archivo.pdf")}
-                  </span>
-                  <Download size={14} className="text-tierra/40 group-hover:text-morado transition-colors shrink-0" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <MaterialLightbox attachments={post.attachments} />
       )}
     </div>
   );
