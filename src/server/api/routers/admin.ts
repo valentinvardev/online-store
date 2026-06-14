@@ -385,8 +385,21 @@ export const adminRouter = createTRPCRouter({
       requireAdmin(ctx.session?.user);
       if (!dbReady) return [];
       return ctx.db.user.findMany({
-        orderBy: { emailVerified: "desc" },
-        include: { _count: { select: { enrollments: true, orders: true } } },
+        orderBy: { email: "asc" },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+          image: true,
+          isAdmin: true,
+          _count: { select: { enrollments: true, orders: true, bookings: true } },
+          memberships: {
+            select: { status: true },
+            orderBy: { startedAt: "desc" },
+            take: 1,
+          },
+        },
       });
     }),
   }),

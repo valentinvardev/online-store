@@ -82,6 +82,7 @@ export async function POST(req: Request) {
         data: {
           email,
           name: fullName,
+          phone: buyer.phone ?? null,
           passwordHash,
           isAdmin: ADMIN_EMAILS.includes(email),
         },
@@ -89,7 +90,7 @@ export async function POST(req: Request) {
     } else if (!user.passwordHash) {
       user = await db.user.update({
         where: { id: user.id },
-        data: { passwordHash, name: user.name ?? fullName },
+        data: { passwordHash, name: user.name ?? fullName, phone: buyer.phone ?? user.phone },
       });
     } else {
       // Existe con password — verificar que coincida; si no, error claro

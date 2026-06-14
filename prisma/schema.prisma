@@ -46,6 +46,7 @@ model User {
     image         String?
     isAdmin       Boolean      @default(false)
     passwordHash  String?      // null para usuarios de Google/Resend
+    phone         String?
     accounts      Account[]
     sessions      Session[]
     orders        Order[]
