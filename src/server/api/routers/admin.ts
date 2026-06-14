@@ -95,16 +95,35 @@ export const adminRouter = createTRPCRouter({
   // ── Dashboard stats ──────────────────────────────────────────────────────
   stats: adminProcedure.query(async ({ ctx }) => {
     requireAdmin(ctx.session?.user);
-    if (!dbReady) return { cursos: 0, productos: 0, servicios: 0, usuarios: 0, ingresos: 0 };
-    const [cursos, productos, servicios, usuarios, ordenesPagadas] = await Promise.all([
+    if (!dbReady) return { cursos: 0, productos: 0, servicios: 0, usuarios: 0, ingresos: 0, socias: 0, suscriptoras: 0, reservas: 0 };
+    const [cursos, productos, servicios, usuarios, ordenesPagadas, socias, suscriptoras, reservas] = await Promise.all([
       ctx.db.course.count({ where: { active: true } }),
       ctx.db.product.count({ where: { active: true } }),
       ctx.db.service.count({ where: { active: true } }),
       ctx.db.user.count(),
       ctx.db.order.findMany({ where: { status: "PAID" }, select: { total: true } }),
+      ctx.db.membership.count({ where: { status: "ACTIVE" } }),
+      ctx.db.subscriber.count({ where: { active: true } }),
+      ctx.db.booking.count({ where: { date: { gte: new Date() } } }),
     ]);
     const ingresos = ordenesPagadas.reduce((acc, o) => acc + o.total, 0);
-    return { cursos, productos, servicios, usuarios, ingresos };
+    return { cursos, productos, servicios, usuarios, ingresos, socias, suscriptoras, reservas };
+  }),
+
+  // ── Comentarios del círculo (moderación / notificaciones) ──────────────────
+  comentarios: createTRPCRouter({
+    recent: adminProcedure.query(({ ctx }) => {
+      requireAdmin(ctx.session?.user);
+      if (!dbReady) return [];
+      return ctx.db.comment.findMany({
+        orderBy: { createdAt: "desc" },
+        take: 60,
+        include: {
+          user: { select: { name: true, image: true } },
+          post: { select: { title: true, slug: true } },
+        },
+      });
+    }),
   }),
 
   // ── Cursos ───────────────────────────────────────────────────────────────

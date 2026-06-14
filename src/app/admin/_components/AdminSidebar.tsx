@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import NotificationsBell from "./NotificationsBell";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
   Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles, CalendarCheck, AtSign,
@@ -27,8 +28,8 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-60 h-screen sticky top-0 self-start overflow-y-auto bg-morado-dark flex flex-col shrink-0 border-r-4 border-dorado">
-      {/* Logo */}
-      <div className="flex justify-center px-6 pt-8 pb-6 border-b-2 border-white/10">
+      {/* Logo + notificaciones */}
+      <div className="relative flex justify-center px-6 pt-8 pb-6 border-b-2 border-white/10">
         <Link href="/admin">
           <Image
             src="/logo-rdb.png"
@@ -39,6 +40,9 @@ export default function AdminSidebar() {
             style={{ filter: "brightness(0) invert(1)" }}
           />
         </Link>
+        <div className="absolute top-6 right-5">
+          <NotificationsBell />
+        </div>
       </div>
 
       {/* Nav */}
