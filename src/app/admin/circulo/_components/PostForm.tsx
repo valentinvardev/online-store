@@ -11,6 +11,7 @@ import { useToast } from "../../_components/AdminToast";
 import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
 import { PdfGallery, usePdfGallery } from "../../_components/PdfGallery";
 import MarkdownHelpModal from "./MarkdownHelpModal";
+import AccessLockToggle from "./AccessLockToggle";
 import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
@@ -435,23 +436,17 @@ export default function PostForm({ initial }: { initial?: InitialData }) {
             />
           </div>
 
-          {/* Tier required */}
+          {/* Acceso: switch de candado */}
           <div>
             <label className={labelClass}>Acceso</label>
-            <select
-              value={requiredTierId}
-              onChange={(e) => setRequiredTierId(e.target.value)}
-              className={inputClass}
-            >
-              <option value="">Libre (sin tier)</option>
-              {tiers.map((t) => (
-                <option key={t.id} value={t.id}>
-                  Solo {t.name}
-                </option>
-              ))}
-            </select>
+            <div className="bg-white border-2 border-morado/15 px-4 py-3">
+              <AccessLockToggle
+                locked={!!requiredTierId}
+                onChange={(lock) => setRequiredTierId(lock ? (tiers[0]?.id ?? "") : "")}
+              />
+            </div>
             <p className={`${hintClass} mt-1.5`}>
-              Los posts libres se ven sin estar suscripta. Los de tier requieren membresía activa.
+              Libre = lo ve cualquiera. Solo socias = requiere membresía activa.
             </p>
           </div>
         </aside>

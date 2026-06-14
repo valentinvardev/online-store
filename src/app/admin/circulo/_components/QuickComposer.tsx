@@ -1,17 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Loader2, Globe, Lock } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useToast } from "../../_components/AdminToast";
 import { api } from "~/trpc/react";
+import AccessLockToggle from "./AccessLockToggle";
 
 export default function QuickComposer() {
   const { toast } = useToast();
   const utils = api.useUtils();
   const [body, setBody] = useState("");
-  const [tierId, setTierId] = useState<string>(""); // "" = libre
+  const [locked, setLocked] = useState(false); // false = libre, true = solo socias
 
   const { data: tiers = [] } = api.admin.posts.tiers.useQuery();
+  const mainTierId = tiers[0]?.id ?? null;
 
   const quick = api.admin.posts.quickPost.useMutation({
     onSuccess: () => {
@@ -24,7 +26,7 @@ export default function QuickComposer() {
 
   const submit = () => {
     if (!body.trim()) return;
-    quick.mutate({ content: body.trim(), requiredTierId: tierId || null });
+    quick.mutate({ content: body.trim(), requiredTierId: locked ? mainTierId : null });
   };
 
   return (
@@ -51,22 +53,8 @@ export default function QuickComposer() {
       />
 
       <div className="flex items-center justify-between gap-3 mt-3 flex-wrap">
-        {/* Selector de acceso */}
-        <div className="flex items-center gap-2">
-          <span className="text-tierra/45">
-            {tierId ? <Lock size={13} /> : <Globe size={13} />}
-          </span>
-          <select
-            value={tierId}
-            onChange={(e) => setTierId(e.target.value)}
-            className="bg-white border-2 border-morado/20 px-3 py-2 font-sans text-[0.7rem] text-tierra-dark tracking-wide focus:outline-none focus:border-morado/60 transition-colors"
-          >
-            <option value="">Para todas (libre)</option>
-            {tiers.map((t) => (
-              <option key={t.id} value={t.id}>Solo {t.name}</option>
-            ))}
-          </select>
-        </div>
+        {/* Acceso: switch de candado */}
+        <AccessLockToggle locked={locked} onChange={setLocked} />
 
         <button
           onClick={submit}
