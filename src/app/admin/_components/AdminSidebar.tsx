@@ -26,7 +26,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-60 min-h-screen bg-morado-dark flex flex-col shrink-0 border-r-4 border-dorado">
+    <aside className="w-60 h-screen sticky top-0 self-start overflow-y-auto bg-morado-dark flex flex-col shrink-0 border-r-4 border-dorado">
       {/* Logo */}
       <div className="flex justify-center px-6 pt-8 pb-6 border-b-2 border-white/10">
         <Link href="/admin">
