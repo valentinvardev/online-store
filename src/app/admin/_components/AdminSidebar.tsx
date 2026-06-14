@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
-  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles,
+  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles, CalendarCheck,
 } from "lucide-react";
 
 const nav = [
@@ -14,6 +14,7 @@ const nav = [
   { label: "Cursos",         href: "/admin/cursos",         icon: BookOpen },
   { label: "Productos",      href: "/admin/productos",      icon: ShoppingBag },
   { label: "Servicios",      href: "/admin/servicios",      icon: Wrench },
+  { label: "Reservas",       href: "/admin/reservas",       icon: CalendarCheck },
   { label: "Disponibilidad", href: "/admin/disponibilidad", icon: CalendarClock },
   { label: "Usuarios",       href: "/admin/usuarios",       icon: Users },
   { label: "Newsletter",     href: "/admin/newsletter",     icon: Mail },

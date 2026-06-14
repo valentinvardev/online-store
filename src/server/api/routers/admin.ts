@@ -417,6 +417,21 @@ export const adminRouter = createTRPCRouter({
     }),
   }),
 
+  // ── Reservas / sesiones ────────────────────────────────────────────────────
+  reservas: createTRPCRouter({
+    list: adminProcedure.query(async ({ ctx }) => {
+      requireAdmin(ctx.session?.user);
+      if (!dbReady) return [];
+      return ctx.db.booking.findMany({
+        orderBy: { date: "desc" },
+        include: {
+          service: { select: { name: true, durationLabel: true, format: true } },
+          user: { select: { name: true, phone: true, email: true } },
+        },
+      });
+    }),
+  }),
+
   // ── Posts del círculo ────────────────────────────────────────────────────
   posts: createTRPCRouter({
     list: adminProcedure.query(({ ctx }) => {
