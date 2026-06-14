@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { uploadToStorage } from "~/lib/upload";
 
 export const runtime = "nodejs";
 
@@ -15,15 +14,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Formato no soportado" }, { status: 400 });
   }
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-
-  const uploadDir = path.join(process.cwd(), "public/uploads/products");
-  await mkdir(uploadDir, { recursive: true });
-
-  const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-  const filename = `${Date.now()}-${safe}`;
-  await writeFile(path.join(uploadDir, filename), buffer);
-
-  return NextResponse.json({ url: `/uploads/products/${filename}` });
+  try {
+    const url = await uploadToStorage(file, "images");
+    return NextResponse.json({ url });
+  } catch (e) {
+    console.error("[upload] Error:", e);
+    return NextResponse.json({ error: "No se pudo subir la imagen" }, { status: 500 });
+  }
 }
