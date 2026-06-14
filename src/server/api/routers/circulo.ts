@@ -30,6 +30,7 @@ export const circuloRouter = createTRPCRouter({
           publishedAt: p.publishedAt,
           requiredTier: p.requiredTier,
           commentCount: p._count.comments,
+          attachmentCount: p.attachments.length,
         };
         if (locked) {
           // Teaser: sin contenido ni media. El excerpt de articulos se muestra;

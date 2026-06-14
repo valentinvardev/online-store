@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Lock, Sparkles, MessageCircle, ArrowRight,
-  FileText, Video, Headphones, Image as ImageIcon, MessageSquare,
+  FileText, Video, Headphones, Image as ImageIcon, MessageSquare, Paperclip,
 } from "lucide-react";
 import { CIRCULO_CHECKOUT } from "~/lib/access";
 import PostBody from "./PostBody";
@@ -30,6 +30,7 @@ type FeedPostData = {
   attachments: string[];
   publishedAt: Date | null;
   commentCount: number;
+  attachmentCount: number;
   locked: boolean;
 };
 
@@ -64,6 +65,12 @@ export default function FeedPost({ post }: { post: FeedPostData }) {
             <span className="inline-flex items-center gap-1 text-morado/80 font-semibold uppercase tracking-widest text-[0.6rem]">
               {meta.icon} {meta.label}
             </span>
+            {post.attachmentCount > 0 && (
+              <span className="inline-flex items-center gap-1 text-dorado-dark font-semibold uppercase tracking-widest text-[0.6rem]">
+                <Paperclip size={10} />
+                {post.attachmentCount} {post.attachmentCount === 1 ? "archivo" : "archivos"}
+              </span>
+            )}
           </div>
         </div>
         {post.locked && (
