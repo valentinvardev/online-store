@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { render } from "@react-email/render";
 import { Mail, Zap, User, Info } from "lucide-react";
 import AdminHeader from "../_components/AdminHeader";
@@ -6,8 +7,14 @@ import { emailRegistry } from "~/emails/templates";
 export const metadata = { title: "Emails — Admin" };
 
 export default async function AdminEmails() {
+  // Origin real del request (para que el logo cargue en local y en prod)
+  const h = await headers();
+  const host = h.get("host") ?? "localhost:3000";
+  const proto = h.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
+  const origin = `${proto}://${host}`;
+
   const rendered = await Promise.all(
-    emailRegistry.map(async (e) => ({ ...e, html: await render(e.element) })),
+    emailRegistry.map(async (e) => ({ ...e, html: await render(e.render(origin)) })),
   );
 
   return (
