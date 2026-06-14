@@ -1,25 +1,14 @@
 import Link from "next/link";
-import { Lock, FileText, Video, Headphones, Image as ImageIcon, Sparkles, ArrowRight, MessageSquare } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
 import { api } from "~/trpc/server";
 import { CIRCULO_CHECKOUT } from "~/lib/access";
+import FeedPost from "./_components/FeedPost";
 
 export const metadata = {
   title: "El Círculo — La Reina de Bastos",
   description: "Rituales, meditaciones, lecturas y comunidad. Todos los meses, directo a vos.",
-};
-
-const fmt = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", year: "numeric" });
-
-const typeIcon: Record<string, React.ReactNode> = {
-  TEXT: <FileText size={12} />,
-  VIDEO: <Video size={12} />,
-  AUDIO: <Headphones size={12} />,
-  GALLERY: <ImageIcon size={12} />,
-};
-const typeLabel: Record<string, string> = {
-  TEXT: "Lectura", VIDEO: "Video", AUDIO: "Audio", GALLERY: "Galería",
 };
 
 export default async function CirculoPage() {
@@ -77,8 +66,8 @@ export default async function CirculoPage() {
         )}
 
         {/* Feed */}
-        <section className="px-6 py-12">
-          <div className="max-w-4xl mx-auto">
+        <section className="px-5 sm:px-6 py-12">
+          <div className="max-w-2xl mx-auto">
             {posts.length === 0 ? (
               <div className="text-center py-20">
                 <span className="font-display text-5xl text-morado/15 block mb-4">✦</span>
@@ -87,109 +76,10 @@ export default async function CirculoPage() {
                 </p>
               </div>
             ) : (
-              <div className="space-y-6">
-                {posts.map((p) => {
-                  const isMessage = !p.title;
-
-                  // ── Card de MENSAJE (sin título, estilo estado) ──
-                  if (isMessage) {
-                    return (
-                      <Link
-                        key={p.id}
-                        href={`/circulo/${p.slug}`}
-                        className="group block bg-white border-2 border-morado-dark block-shadow p-5 sm:p-6 hover:translate-y-[-2px] transition-transform"
-                      >
-                        <div className="flex items-center gap-3 mb-2.5">
-                          <span className="inline-flex items-center gap-1.5 font-sans text-[0.6rem] text-morado tracking-widest uppercase font-bold">
-                            <MessageSquare size={12} /> Mensaje
-                          </span>
-                          {p.locked && (
-                            <span className="inline-flex items-center gap-1 font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase">
-                              <Lock size={9} /> Socias
-                            </span>
-                          )}
-                          {p.publishedAt && (
-                            <span className="font-sans text-[0.65rem] text-tierra/45 tracking-wide ml-auto">
-                              {fmt.format(p.publishedAt)}
-                            </span>
-                          )}
-                        </div>
-                        {p.locked ? (
-                          <p className="font-sans italic text-tierra/55 text-[15px] tracking-wide">
-                            Mensaje para socias. Sumate para leerlo.
-                          </p>
-                        ) : (
-                          <p className="font-sans text-tierra-dark/90 text-[15px] sm:text-base leading-relaxed tracking-wide whitespace-pre-wrap line-clamp-4">
-                            {p.excerpt}
-                          </p>
-                        )}
-                        <span className="mt-4 inline-flex items-center gap-1.5 font-sans font-semibold text-[0.7rem] text-morado tracking-widest uppercase">
-                          {p.locked ? "Desbloquear" : "Ver y comentar"}
-                          <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      </Link>
-                    );
-                  }
-
-                  // ── Card de POST con título (artículo) ──
-                  return (
-                  <Link
-                    key={p.id}
-                    href={`/circulo/${p.slug}`}
-                    className="group block bg-white border-2 border-morado-dark block-shadow overflow-hidden hover:translate-y-[-2px] transition-transform"
-                  >
-                    <div className="flex flex-col sm:flex-row">
-                      {/* Cover */}
-                      <div className="relative sm:w-56 shrink-0 aspect-[16/10] sm:aspect-auto bg-morado-mid overflow-hidden">
-                        {p.coverImageUrl ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={p.coverImageUrl} alt="" className={`w-full h-full object-cover ${p.locked ? "blur-sm scale-105" : ""}`} />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-morado via-morado-mid to-rosa flex items-center justify-center">
-                            <span className="font-display text-crema/20 text-5xl">✦</span>
-                          </div>
-                        )}
-                        {p.locked && (
-                          <div className="absolute inset-0 bg-morado-dark/55 flex items-center justify-center">
-                            <Lock size={26} className="text-crema/90" strokeWidth={1.8} />
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Texto */}
-                      <div className="flex-1 p-5 sm:p-6 flex flex-col">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="inline-flex items-center gap-1.5 font-sans text-[0.6rem] text-morado tracking-widest uppercase font-bold">
-                            {typeIcon[p.contentType]} {typeLabel[p.contentType]}
-                          </span>
-                          {p.locked && (
-                            <span className="inline-flex items-center gap-1 font-sans text-[0.6rem] text-tierra/50 tracking-widest uppercase">
-                              <Lock size={9} /> Socias
-                            </span>
-                          )}
-                          {p.publishedAt && (
-                            <span className="font-sans text-[0.65rem] text-tierra/45 tracking-wide ml-auto">
-                              {fmt.format(p.publishedAt)}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="font-sans font-bold text-lg sm:text-xl text-tierra-dark tracking-wide leading-snug mb-1.5 group-hover:text-morado transition-colors">
-                          {p.title}
-                        </h3>
-                        {p.excerpt && (
-                          <p className="font-sans text-tierra/70 text-[14px] leading-relaxed tracking-wide line-clamp-2">
-                            {p.excerpt}
-                          </p>
-                        )}
-                        <span className="mt-auto pt-4 inline-flex items-center gap-1.5 font-sans font-semibold text-[0.7rem] text-morado tracking-widest uppercase">
-                          {p.locked ? "Desbloquear" : "Leer"}
-                          <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                  );
-                })}
+              <div className="space-y-7">
+                {posts.map((p) => (
+                  <FeedPost key={p.id} post={p} />
+                ))}
               </div>
             )}
           </div>

@@ -12,26 +12,50 @@ export const circuloRouter = createTRPCRouter({
     const posts = await ctx.db.post.findMany({
       where: { published: true },
       orderBy: { publishedAt: "desc" },
-      select: {
-        id: true,
-        slug: true,
-        title: true,
-        excerpt: true,
-        contentType: true,
-        coverImageUrl: true,
-        publishedAt: true,
-        requiredTierId: true,
+      include: {
         requiredTier: { select: { name: true } },
+        _count: { select: { comments: true } },
       },
     });
     return {
       isMember,
       posts: posts.map((p) => {
         const locked = !!p.requiredTierId && !isMember;
-        // En articulos el excerpt es un teaser deliberado (se puede mostrar).
-        // En mensajes (sin titulo) el excerpt ES el cuerpo → ocultarlo si esta gateado.
-        const excerpt = locked && !p.title ? null : p.excerpt;
-        return { ...p, excerpt, locked };
+        const base = {
+          id: p.id,
+          slug: p.slug,
+          title: p.title,
+          contentType: p.contentType,
+          coverImageUrl: p.coverImageUrl,
+          publishedAt: p.publishedAt,
+          requiredTier: p.requiredTier,
+          commentCount: p._count.comments,
+        };
+        if (locked) {
+          // Teaser: sin contenido ni media. El excerpt de articulos se muestra;
+          // el de mensajes (= cuerpo) se oculta.
+          return {
+            ...base,
+            locked: true as const,
+            excerpt: p.title ? p.excerpt : null,
+            content: "",
+            videoUrl: null,
+            audioUrl: null,
+            images: [] as string[],
+            attachments: [] as string[],
+          };
+        }
+        // Desbloqueado: contenido completo para presentar inline en el feed
+        return {
+          ...base,
+          locked: false as const,
+          excerpt: p.excerpt,
+          content: p.content,
+          videoUrl: p.videoUrl,
+          audioUrl: p.audioUrl,
+          images: p.images,
+          attachments: p.attachments,
+        };
       }),
     };
   }),
