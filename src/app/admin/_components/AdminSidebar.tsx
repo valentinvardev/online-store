@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, BookOpen, ShoppingBag,
-  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles, CalendarCheck,
+  Users, Mail, Wrench, LogOut, ExternalLink, Settings, CalendarClock, Sparkles, CalendarCheck, AtSign,
 } from "lucide-react";
 
 const nav = [
@@ -18,6 +18,7 @@ const nav = [
   { label: "Disponibilidad", href: "/admin/disponibilidad", icon: CalendarClock },
   { label: "Usuarios",       href: "/admin/usuarios",       icon: Users },
   { label: "Newsletter",     href: "/admin/newsletter",     icon: Mail },
+  { label: "Emails",         href: "/admin/emails",         icon: AtSign },
   { label: "Configuración",  href: "/admin/configuracion",  icon: Settings },
 ];
 
