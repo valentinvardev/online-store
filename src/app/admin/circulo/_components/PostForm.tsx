@@ -10,6 +10,7 @@ import {
 import { useToast } from "../../_components/AdminToast";
 import { ImageGallery, useImageGallery } from "../../_components/ImageGallery";
 import { PdfGallery, usePdfGallery } from "../../_components/PdfGallery";
+import MarkdownHelpModal from "./MarkdownHelpModal";
 import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-4 py-3 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
@@ -371,8 +372,9 @@ export default function PostForm({ initial }: { initial?: InitialData }) {
               }
               className={`${inputClass} resize-y font-mono text-[13px] leading-relaxed`}
             />
-            <p className={`${hintClass} mt-1.5`}>
+            <p className={`${hintClass} mt-1.5 flex items-center gap-1.5`}>
               Soporta markdown básico: ** negrita **, * itálica *, # título, - lista, [link](url).
+              <MarkdownHelpModal />
             </p>
           </div>
 
