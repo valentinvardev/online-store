@@ -84,6 +84,7 @@ export default async function CourseViewerPage({ params }: Props) {
         courseId={course.id}
         courseSlug={course.slug}
         courseName={course.name}
+        courseDescription={course.description}
         modules={course.modules.map((m) => ({
           id: m.id,
           title: m.title,

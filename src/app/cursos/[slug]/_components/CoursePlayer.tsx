@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import {
-  Check, Play, Lock, ArrowLeft, ArrowRight, CircleCheck, Circle, BookOpen, PlayCircle,
+  Play, Lock, ArrowLeft, ArrowRight, CircleCheck, Circle, BookOpen, PlayCircle, LayoutList,
 } from "lucide-react";
 import { api } from "~/trpc/react";
 import { toEmbedUrl } from "~/lib/embed";
@@ -23,9 +23,9 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString("es-AR", { day: "num
 const isLocked = (l: Lesson) => !!l.publishedAt && new Date(l.publishedAt) > new Date();
 
 export default function CoursePlayer({
-  courseId, courseSlug, courseName, modules,
+  courseId, courseSlug, courseName, courseDescription, modules,
 }: {
-  courseId: string; courseSlug: string; courseName: string; modules: Module[];
+  courseId: string; courseSlug: string; courseName: string; courseDescription: string; modules: Module[];
 }) {
   const utils = api.useUtils();
   const { data: progress } = api.progress.forCourse.useQuery({ courseId });
@@ -37,29 +37,134 @@ export default function CoursePlayer({
   const flat = useMemo(() => modules.flatMap((m) => m.lessons), [modules]);
   const available = useMemo(() => flat.filter((l) => !isLocked(l)), [flat]);
 
+  const [mode, setMode] = useState<"cover" | "lesson">("cover");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  // Selección inicial una vez que carga el progreso: donde dejó, o la primera.
-  useEffect(() => {
-    if (selectedId || !progress) return;
-    const last = progress.lastLessonId && available.find((l) => l.id === progress.lastLessonId);
-    setSelectedId(last ? last.id : (available[0]?.id ?? null));
-  }, [progress, selectedId, available]);
-
-  const select = (id: string) => {
-    setSelectedId(id);
-    view.mutate({ courseId, lessonId: id });
-  };
-
-  const current = flat.find((l) => l.id === selectedId) ?? null;
   const completed = new Set(progress?.completed ?? []);
   const total = flat.length;
   const doneCount = flat.filter((l) => completed.has(l.id)).length;
   const pct = total ? Math.round((doneCount / total) * 100) : 0;
 
+  const select = (id: string) => {
+    setSelectedId(id);
+    setMode("lesson");
+    view.mutate({ courseId, lessonId: id });
+  };
+
+  // CTA principal de la portada: continuar donde dejó o empezar.
+  const startLessonId =
+    (progress?.lastLessonId && available.find((l) => l.id === progress.lastLessonId)?.id) ??
+    available[0]?.id ?? null;
+  const start = () => { if (startLessonId) select(startLessonId); };
+
+  /* ════════════ PORTADA ════════════ */
+  if (mode === "cover") {
+    return (
+      <div className="bg-crema min-h-screen">
+        {/* Hero */}
+        <section className="bg-morado-dark px-5 sm:px-8 py-12 sm:py-16">
+          <div className="max-w-3xl mx-auto">
+            <Link href={`/cursos/${courseSlug}`} className="inline-flex items-center gap-2 font-sans text-[0.72rem] text-crema/45 hover:text-dorado tracking-widest uppercase transition-colors mb-6">
+              <ArrowLeft size={12} /> Volver al curso
+            </Link>
+            <span className="font-sans text-[0.65rem] text-dorado tracking-[0.4em] uppercase block mb-3">
+              {progress?.hasStarted ? "Seguí aprendiendo" : "Tu curso te espera"}
+            </span>
+            <h1 className="font-sans font-bold text-[clamp(2rem,5vw,3rem)] text-crema leading-tight tracking-wide mb-4">
+              {courseName}
+            </h1>
+            <p className="font-sans text-crema/70 text-[15px] leading-relaxed max-w-xl mb-8">
+              {courseDescription}
+            </p>
+
+            {/* Progreso */}
+            {progress?.hasStarted && (
+              <div className="mb-8 max-w-md">
+                <div className="flex justify-between items-center mb-1.5">
+                  <span className="font-sans text-[0.65rem] text-crema/60 tracking-widest uppercase">Tu progreso</span>
+                  <span className="font-sans text-[0.65rem] text-dorado tracking-widest uppercase">{doneCount}/{total} · {pct}%</span>
+                </div>
+                <div className="h-2.5 bg-crema/15 border border-crema/10 overflow-hidden">
+                  <div className="h-full bg-dorado transition-all duration-500" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            )}
+
+            {/* CTA */}
+            {startLessonId ? (
+              <button
+                onClick={start}
+                className="inline-flex items-center gap-2.5 bg-dorado text-tierra-dark font-sans font-bold text-[0.78rem] px-8 py-4 border-2 border-dorado tracking-widest uppercase hover:bg-dorado-light transition-colors block-shadow"
+              >
+                <PlayCircle size={17} />
+                {progress?.hasStarted ? "Continuar donde dejaste" : "Comenzar curso"}
+              </button>
+            ) : (
+              <p className="font-sans italic text-crema/50 text-sm">El contenido estará disponible pronto.</p>
+            )}
+          </div>
+        </section>
+
+        {/* Temario */}
+        <section className="px-5 sm:px-8 py-10">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-2 mb-5">
+              <LayoutList size={16} className="text-morado" />
+              <h2 className="font-sans font-bold text-lg text-tierra-dark tracking-wide">Contenido del curso</h2>
+              <span className="font-sans text-[0.7rem] text-tierra/45 tracking-wide ml-1">{total} lecciones</span>
+            </div>
+
+            <div className="space-y-4">
+              {modules.map((m, mi) => (
+                <div key={m.id} className="bg-white border-2 border-morado-dark block-shadow overflow-hidden">
+                  <div className="bg-morado/8 border-b-2 border-morado/10 px-5 py-3">
+                    <h3 className="font-sans font-bold text-[0.85rem] text-tierra-dark tracking-wide">
+                      {String(mi + 1).padStart(2, "0")} · {m.title}
+                    </h3>
+                  </div>
+                  <ul className="divide-y divide-morado/8">
+                    {m.lessons.map((l) => {
+                      const locked = isLocked(l);
+                      const done = completed.has(l.id);
+                      return (
+                        <li key={l.id}>
+                          <button
+                            onClick={() => !locked && select(l.id)}
+                            disabled={locked}
+                            className={`w-full flex items-center gap-3 px-5 py-3 text-left transition-colors ${locked ? "opacity-55 cursor-default" : "hover:bg-dorado/5"}`}
+                          >
+                            <span className="shrink-0">
+                              {locked ? <Lock size={14} className="text-tierra/35" />
+                                : done ? <CircleCheck size={15} className="text-verde" />
+                                : <PlayCircle size={15} className="text-morado/60" />}
+                            </span>
+                            <span className="flex-1 min-w-0">
+                              <span className="font-sans text-sm text-tierra-dark/85 tracking-wide">{l.title}</span>
+                              {locked && l.publishedAt && (
+                                <span className="block font-sans text-[0.65rem] text-dorado-dark tracking-wide mt-0.5">
+                                  Se libera el {fmtDate(l.publishedAt)}
+                                </span>
+                              )}
+                            </span>
+                            {l.videoUrl && !locked && <Play size={11} className="text-tierra/25 shrink-0" />}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  /* ════════════ REPRODUCTOR ════════════ */
+  const current = flat.find((l) => l.id === selectedId) ?? null;
   const curIdx = available.findIndex((l) => l.id === selectedId);
   const next = curIdx >= 0 ? available[curIdx + 1] : undefined;
-
   const embed = current?.videoUrl ? toEmbedUrl(current.videoUrl) : null;
   const isDone = current ? completed.has(current.id) : false;
 
@@ -68,9 +173,9 @@ export default function CoursePlayer({
       {/* Barra superior con progreso */}
       <div className="bg-morado-dark px-5 sm:px-8 py-5">
         <div className="max-w-6xl mx-auto">
-          <Link href={`/cursos/${courseSlug}`} className="inline-flex items-center gap-2 font-sans text-[0.72rem] text-crema/45 hover:text-dorado tracking-widest uppercase transition-colors mb-3">
-            <ArrowLeft size={12} /> {courseName}
-          </Link>
+          <button onClick={() => setMode("cover")} className="inline-flex items-center gap-2 font-sans text-[0.72rem] text-crema/45 hover:text-dorado tracking-widest uppercase transition-colors mb-3">
+            <ArrowLeft size={12} /> Inicio del curso
+          </button>
           <div className="flex items-center gap-4">
             <div className="flex-1">
               <div className="h-2.5 bg-crema/15 border border-crema/10 overflow-hidden">
@@ -85,24 +190,12 @@ export default function CoursePlayer({
       </div>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 grid lg:grid-cols-[1fr_320px] gap-8 items-start">
-        {/* ── Contenido de la lección ── */}
+        {/* Contenido de la lección */}
         <main className="min-w-0 order-2 lg:order-1">
-          {/* Banner continuá / empezá */}
-          {progress && (
-            <div className="flex items-center gap-2.5 bg-dorado-light border-2 border-morado-dark block-shadow-sm px-4 py-2.5 mb-5">
-              <PlayCircle size={16} className="text-morado-dark shrink-0" />
-              <p className="font-sans text-[0.78rem] text-tierra-dark tracking-wide">
-                {progress.hasStarted
-                  ? <>Continuás donde dejaste{current ? <>: <strong>{current.title}</strong></> : ""}</>
-                  : <>Primera vez por acá — <strong>empezá el curso</strong> ✦</>}
-              </p>
-            </div>
-          )}
-
           {!current ? (
             <div className="bg-white border-2 border-morado/10 p-12 text-center">
               <BookOpen size={28} className="text-morado/20 mx-auto mb-3" />
-              <p className="font-sans text-tierra/60 text-sm">El contenido de este curso estará disponible pronto.</p>
+              <p className="font-sans text-tierra/60 text-sm">Elegí una lección del temario.</p>
             </div>
           ) : (
             <article className="space-y-5">
@@ -113,26 +206,20 @@ export default function CoursePlayer({
                 </h1>
               </div>
 
-              {/* Video */}
               {embed && (
                 <div className="relative border-4 border-morado-dark block-shadow overflow-hidden bg-morado-dark" style={{ paddingBottom: "56.25%" }}>
                   <iframe src={embed} className="absolute inset-0 w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title={current.title} />
                 </div>
               )}
 
-              {/* Texto */}
               {current.content?.trim() && (
                 <p className="font-sans text-tierra-dark/85 text-[15px] leading-relaxed tracking-wide whitespace-pre-wrap">
                   {current.content}
                 </p>
               )}
 
-              {/* Material adjunto */}
-              {current.attachments.length > 0 && (
-                <MaterialLightbox attachments={current.attachments} />
-              )}
+              {current.attachments.length > 0 && <MaterialLightbox attachments={current.attachments} />}
 
-              {/* Acciones */}
               <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t-2 border-morado/10">
                 <button
                   onClick={() => setCompleted.mutate({ courseId, lessonId: current.id, completed: !isDone })}
@@ -157,7 +244,7 @@ export default function CoursePlayer({
           )}
         </main>
 
-        {/* ── Sidebar de lecciones ── */}
+        {/* Sidebar de lecciones */}
         <aside className="order-1 lg:order-2 lg:sticky lg:top-6">
           <div className="bg-white border-2 border-morado-dark block-shadow overflow-hidden">
             <div className="bg-morado/8 border-b-2 border-morado/10 px-5 py-3">
