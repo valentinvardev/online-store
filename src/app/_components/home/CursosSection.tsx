@@ -91,7 +91,7 @@ export default function CursosSection() {
                   )}
                   {/* Nivel */}
                   <div className="absolute top-4 left-4">
-                    <span className="font-sans text-[0.8rem] text-crema/60 tracking-[0.3em] uppercase bg-morado-dark/60 px-2 py-1">
+                    <span className="font-sans font-bold text-[0.6rem] text-morado-dark tracking-[0.15em] uppercase bg-crema border-2 border-morado-dark px-2.5 py-1 leading-none">
                       {curso.level}
                     </span>
                   </div>
