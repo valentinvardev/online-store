@@ -258,52 +258,84 @@ export default function CoursePlayer({
         {/* Sidebar de lecciones */}
         <aside className="order-1 lg:order-2 lg:sticky lg:top-6">
           <div className="bg-white border-2 border-morado-dark block-shadow overflow-hidden">
-            <div className="bg-morado/8 border-b-2 border-morado/10 px-5 py-3">
-              <p className="font-sans font-bold text-[0.7rem] text-tierra-dark tracking-[0.2em] uppercase">Contenido del curso</p>
-            </div>
-            <div className="max-h-[70vh] overflow-y-auto divide-y divide-morado/8">
-              {modules.map((m, mi) => (
-                <div key={m.id}>
-                  <p className="px-5 pt-4 pb-2 font-sans font-bold text-[0.7rem] text-morado tracking-wide">
-                    {String(mi + 1).padStart(2, "0")} · {m.title}
-                  </p>
-                  <ul>
-                    {m.lessons.map((l) => {
-                      const locked = isLocked(l);
-                      const done = completed.has(l.id);
-                      const active = l.id === selectedId;
-                      return (
-                        <li key={l.id}>
-                          <button
-                            onClick={() => !locked && select(l.id)}
-                            disabled={locked}
-                            className={`w-full flex items-start gap-2.5 px-5 py-2.5 text-left transition-colors ${
-                              active ? "bg-dorado/15" : locked ? "opacity-55 cursor-default" : "hover:bg-morado/5"
-                            }`}
-                          >
-                            <span className="mt-0.5 shrink-0">
-                              {locked ? <Lock size={13} className="text-tierra/35" />
-                                : done ? <CircleCheck size={14} className="text-verde" />
-                                : active ? <Play size={13} className="text-morado fill-morado" />
-                                : <Circle size={13} className="text-tierra/25" />}
-                            </span>
-                            <span className="flex-1 min-w-0">
-                              <span className={`font-sans text-[0.8rem] leading-snug ${active ? "text-tierra-dark font-semibold" : "text-tierra/75"}`}>
-                                {l.title}
-                              </span>
-                              {locked && l.publishedAt && (
-                                <span className="block font-sans text-[0.65rem] text-dorado-dark tracking-wide mt-0.5">
-                                  Se libera el {fmtDate(l.publishedAt)}
-                                </span>
-                              )}
-                            </span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
+            {/* Header con progreso */}
+            <div className="bg-morado-dark px-5 py-4">
+              <div className="flex items-center gap-2 mb-2.5">
+                <LayoutList size={14} className="text-dorado" />
+                <p className="font-sans font-bold text-[0.68rem] text-crema tracking-[0.25em] uppercase">Contenido del curso</p>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <div className="flex-1 h-1.5 bg-crema/15 overflow-hidden">
+                  <div className="h-full bg-dorado transition-all duration-500" style={{ width: `${pct}%` }} />
                 </div>
-              ))}
+                <span className="font-sans text-[0.6rem] text-crema/70 tracking-widest uppercase whitespace-nowrap">{doneCount}/{total}</span>
+              </div>
+            </div>
+
+            <div className="max-h-[68vh] overflow-y-auto">
+              {modules.map((m, mi) => {
+                const modDone = m.lessons.filter((l) => completed.has(l.id)).length;
+                const modComplete = m.lessons.length > 0 && modDone === m.lessons.length;
+                return (
+                  <div key={m.id} className="border-b-2 border-morado/8 last:border-0">
+                    {/* Header del módulo */}
+                    <div className="flex items-center gap-2.5 px-4 py-3 bg-crema/60">
+                      <span className={`w-6 h-6 flex items-center justify-center font-sans font-bold text-[0.62rem] shrink-0 border-2 ${
+                        modComplete ? "bg-verde text-crema border-verde" : "bg-morado-dark text-crema border-morado-dark"
+                      }`}>
+                        {modComplete ? <CircleCheck size={13} /> : mi + 1}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-sans font-bold text-[0.78rem] text-tierra-dark leading-tight">{m.title}</p>
+                        <p className="font-sans text-[0.58rem] text-tierra/45 tracking-widest uppercase mt-0.5">{modDone}/{m.lessons.length} lecciones</p>
+                      </div>
+                    </div>
+                    {/* Lecciones */}
+                    <ul>
+                      {m.lessons.map((l) => {
+                        const locked = isLocked(l);
+                        const done = completed.has(l.id);
+                        const active = l.id === selectedId;
+                        return (
+                          <li key={l.id}>
+                            <button
+                              onClick={() => !locked && select(l.id)}
+                              disabled={locked}
+                              className={`group w-full flex items-start gap-2.5 pr-4 py-2.5 text-left border-l-[3px] transition-colors ${
+                                active ? "border-dorado bg-dorado/12" : "border-transparent hover:border-morado/30"
+                              } ${locked ? "opacity-55 cursor-default" : "hover:bg-morado/5"}`}
+                              style={{ paddingLeft: "0.85rem" }}
+                            >
+                              <span className="mt-0.5 shrink-0">
+                                {locked ? <Lock size={13} className="text-tierra/35" />
+                                  : done ? <CircleCheck size={15} className="text-verde" />
+                                  : active ? <PlayCircle size={15} className="text-morado" />
+                                  : <Circle size={13} className="text-tierra/25 group-hover:text-morado/50 transition-colors" />}
+                              </span>
+                              <span className="flex-1 min-w-0">
+                                <span className={`block font-sans text-[0.8rem] leading-snug ${
+                                  active ? "text-tierra-dark font-bold" : done ? "text-tierra/55" : "text-tierra/80"
+                                }`}>
+                                  {l.title}
+                                </span>
+                                {locked && l.publishedAt ? (
+                                  <span className="block font-sans text-[0.62rem] text-dorado-dark tracking-wide mt-0.5">
+                                    Se libera el {fmtDate(l.publishedAt)}
+                                  </span>
+                                ) : l.videoUrl ? (
+                                  <span className="inline-flex items-center gap-1 font-sans text-[0.6rem] text-tierra/40 tracking-wide mt-0.5">
+                                    <Play size={8} className="fill-tierra/40" /> Video
+                                  </span>
+                                ) : null}
+                              </span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </aside>
