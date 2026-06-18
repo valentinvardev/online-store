@@ -242,6 +242,11 @@ async function seedCourses() {
               attachments: [],
               freePreview: li === 0 && mi === 0,
               publishedAt: dripDate,
+              // Video de ejemplo en las primeras lecciones del primer curso (demo del player)
+              videoUrl:
+                c.slug === "tarot-desde-cero" && mi === 0 && li < 2
+                  ? "https://player.vimeo.com/video/76979871"
+                  : null,
             })),
           },
         },

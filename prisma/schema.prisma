@@ -54,6 +54,7 @@ model User {
     bookings      Booking[]
     memberships   Membership[]
     comments      Comment[]
+    lessonProgress LessonProgress[]
 }
 
 model VerificationToken {
@@ -175,6 +176,22 @@ model CourseLesson {
     freePreview Boolean      @default(false)
     // Drip: null = disponible ya para socias; fecha futura = se libera ese día
     publishedAt DateTime?
+    progress    LessonProgress[]
+}
+
+model LessonProgress {
+    id        String       @id @default(cuid())
+    userId    String
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    lessonId  String
+    lesson    CourseLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+    courseId  String
+    completed Boolean      @default(false)
+    createdAt DateTime     @default(now())
+    updatedAt DateTime     @updatedAt
+
+    @@unique([userId, lessonId])
+    @@index([userId, courseId])
 }
 
 model Service {

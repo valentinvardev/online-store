@@ -7,6 +7,7 @@ import { accountRouter } from "~/server/api/routers/account";
 import { ordersRouter } from "~/server/api/routers/orders";
 import { circuloRouter } from "~/server/api/routers/circulo";
 import { commentsRouter } from "~/server/api/routers/comments";
+import { progressRouter } from "~/server/api/routers/progress";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 export const appRouter = createTRPCRouter({
@@ -19,6 +20,7 @@ export const appRouter = createTRPCRouter({
   orders: ordersRouter,
   circulo: circuloRouter,
   comments: commentsRouter,
+  progress: progressRouter,
 });
 
 // export type definition of API

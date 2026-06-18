@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Lock } from "lucide-react";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { hasCourseAccess, CIRCULO_CHECKOUT } from "~/lib/access";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
+import CoursePlayer from "../_components/CoursePlayer";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -80,93 +80,23 @@ export default async function CourseViewerPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main className="bg-crema min-h-screen">
-        {/* Header */}
-        <div className="bg-morado-dark py-12 px-6">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href="/cursos"
-              className="font-sans text-[13px] text-crema/40 hover:text-crema transition-colors tracking-widest uppercase mb-6 inline-block"
-            >
-              ← Volver a cursos
-            </Link>
-            <h1 className="font-display uppercase text-[clamp(3rem,6vw,4rem)] text-crema leading-none tracking-wide">
-              {course.name}
-            </h1>
-            <p className="font-sans text-crema/50 text-sm mt-3 leading-relaxed max-w-xl">
-              {course.description}
-            </p>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          {course.modules.length === 0 ? (
-            <div className="text-center py-20">
-              <span className="font-display text-5xl text-morado/15 block mb-4">✦</span>
-              <p className="font-sans text-tierra/65 text-sm tracking-wide">
-                El contenido de este curso estará disponible pronto.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {course.modules.map((mod) => (
-                <div key={mod.id} className="bg-white border-2 border-morado/10 overflow-hidden">
-                  <div className="bg-morado/5 border-b-2 border-morado/10 px-6 py-4">
-                    <h2 className="font-sans font-bold text-base text-tierra-dark tracking-wide">
-                      {mod.title}
-                    </h2>
-                    <p className="font-sans text-[13px] text-tierra/65 tracking-widest uppercase mt-0.5">
-                      {mod.lessons.length} lección{mod.lessons.length !== 1 ? "es" : ""}
-                    </p>
-                  </div>
-                  <ul className="divide-y-2 divide-morado/5">
-                    {mod.lessons.map((lesson) => {
-                      const upcoming = !!lesson.publishedAt && new Date(lesson.publishedAt) > new Date();
-                      if (upcoming) {
-                        return (
-                          <li key={lesson.id} className="px-6 py-4 bg-crema/40">
-                            <div className="flex items-center gap-2">
-                              <Lock size={13} className="text-tierra/35 shrink-0" />
-                              <h3 className="font-sans font-semibold text-sm text-tierra/45">
-                                {lesson.title}
-                              </h3>
-                            </div>
-                            <p className="font-sans text-[12px] text-dorado-dark tracking-wide mt-1 ml-[1.4rem]">
-                              Se libera el {new Date(lesson.publishedAt!).toLocaleDateString("es-AR", { day: "numeric", month: "long" })}
-                            </p>
-                          </li>
-                        );
-                      }
-                      return (
-                        <li key={lesson.id} className="px-6 py-4 hover:bg-morado/3 transition-colors">
-                          <h3 className="font-sans font-semibold text-sm text-tierra-dark mb-1">
-                            {lesson.title}
-                          </h3>
-                          {lesson.videoUrl && (
-                            <div className="mt-3 aspect-video bg-morado-dark/5 border border-morado/10">
-                              <iframe
-                                src={lesson.videoUrl}
-                                className="w-full h-full"
-                                allowFullScreen
-                              />
-                            </div>
-                          )}
-                          {lesson.content && (
-                            <p className="font-sans text-[13px] text-tierra/75 leading-relaxed mt-2">
-                              {lesson.content}
-                            </p>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
+      <CoursePlayer
+        courseId={course.id}
+        courseSlug={course.slug}
+        courseName={course.name}
+        modules={course.modules.map((m) => ({
+          id: m.id,
+          title: m.title,
+          lessons: m.lessons.map((l) => ({
+            id: l.id,
+            title: l.title,
+            content: l.content,
+            videoUrl: l.videoUrl,
+            attachments: l.attachments,
+            publishedAt: l.publishedAt,
+          })),
+        }))}
+      />
       <Footer />
     </>
   );
