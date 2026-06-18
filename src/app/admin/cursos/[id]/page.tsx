@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { useToast } from "../../_components/AdminToast";
 import ConfirmModal from "../../_components/ConfirmModal";
+import { PdfGallery, usePdfGallery } from "../../_components/PdfGallery";
 import { api } from "~/trpc/react";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -110,6 +111,16 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
+  // Recursos (PDFs) de la lección
+  const pdfGallery = usePdfGallery();
+  const pdfInit = useRef(false);
+  useEffect(() => {
+    if (pdfInit.current) return;
+    pdfInit.current = true;
+    pdfGallery.setInitialPdfs((lesson.attachments ?? []).map((url) => ({ url, name: decodeURIComponent(url.split("/").pop()?.split("?")[0] ?? "archivo.pdf") })));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const vimeoEmbed = parseVimeo(draft.videoUrl);
   const hasVideo = !!lesson.videoUrl;
 
@@ -125,6 +136,7 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
       content: draft.content || undefined,
       videoUrl: vimeoEmbed ?? undefined,
       publishedAt: draft.publishedAt ? new Date(draft.publishedAt) : null,
+      attachments: pdfGallery.readyPdfs.map((p) => p.url),
     });
     setSaving(false);
     setOpen(false);
@@ -206,6 +218,12 @@ function LessonRow({ lesson, onUpdate, onDelete }: {
               value={draft.content}
               onChange={(e) => setDraft((d) => ({ ...d, content: e.target.value }))}
             />
+          </div>
+
+          {/* Recursos (PDFs) — aparecen bajo el video en el reproductor */}
+          <div>
+            <label className={labelClass}>Recursos descargables (PDF)</label>
+            <PdfGallery pdfs={pdfGallery.pdfs} uploadFiles={pdfGallery.uploadFiles} removePdf={pdfGallery.removePdf} />
           </div>
 
           {/* Drip: fecha de liberación */}

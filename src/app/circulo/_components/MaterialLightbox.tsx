@@ -19,9 +19,11 @@ function downloadUrl(url: string) {
 export default function MaterialLightbox({
   images = [],
   attachments = [],
+  attachmentsTitle = "Material descargable",
 }: {
   images?: string[];
   attachments?: string[];
+  attachmentsTitle?: string;
 }) {
   const [item, setItem] = useState<Item | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -70,10 +72,12 @@ export default function MaterialLightbox({
 
       {/* ── Documentos / PDFs ── */}
       {attachments.length > 0 && (
-        <div className="border-t-2 border-morado/10 pt-5">
-          <p className="font-sans text-[0.65rem] text-tierra/60 tracking-[0.3em] uppercase mb-3 font-bold">
-            Material descargable
-          </p>
+        <div className={attachmentsTitle ? "border-t-2 border-morado/10 pt-5" : ""}>
+          {attachmentsTitle && (
+            <p className="font-sans text-[0.65rem] text-tierra/60 tracking-[0.3em] uppercase mb-3 font-bold">
+              {attachmentsTitle}
+            </p>
+          )}
           <ul className="space-y-2">
             {attachments.map((url, i) => {
               const name = fileName(url);

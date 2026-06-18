@@ -239,7 +239,11 @@ async function seedCourses() {
             create: m.lessons.map((title, li) => ({
               title,
               order: li,
-              attachments: [],
+              // Recurso de ejemplo en la primera lección del primer curso
+              attachments:
+                c.slug === "tarot-desde-cero" && mi === 0 && li === 0
+                  ? ["https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"]
+                  : [],
               freePreview: li === 0 && mi === 0,
               publishedAt: dripDate,
               // Video de ejemplo en las primeras lecciones del primer curso (demo del player)

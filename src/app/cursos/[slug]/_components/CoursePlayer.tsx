@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import {
-  Play, Lock, ArrowLeft, ArrowRight, CircleCheck, Circle, BookOpen, PlayCircle, LayoutList,
+  Play, Lock, ArrowLeft, ArrowRight, CircleCheck, Circle, BookOpen, PlayCircle, LayoutList, Paperclip,
 } from "lucide-react";
 import { api } from "~/trpc/react";
 import { toEmbedUrl } from "~/lib/embed";
@@ -212,13 +212,24 @@ export default function CoursePlayer({
                 </div>
               )}
 
+              {/* Recursos de la lección (debajo del video) */}
+              <div className="bg-white border-2 border-morado/15 p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <Paperclip size={15} className="text-morado" />
+                  <h2 className="font-sans font-bold text-sm text-tierra-dark tracking-wide">Recursos de la lección</h2>
+                </div>
+                {current.attachments.length > 0 ? (
+                  <MaterialLightbox attachments={current.attachments} attachmentsTitle="" />
+                ) : (
+                  <p className="font-sans text-[0.82rem] text-tierra/50 italic">Esta lección no tiene recursos adicionales.</p>
+                )}
+              </div>
+
               {current.content?.trim() && (
                 <p className="font-sans text-tierra-dark/85 text-[15px] leading-relaxed tracking-wide whitespace-pre-wrap">
                   {current.content}
                 </p>
               )}
-
-              {current.attachments.length > 0 && <MaterialLightbox attachments={current.attachments} />}
 
               <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t-2 border-morado/10">
                 <button
