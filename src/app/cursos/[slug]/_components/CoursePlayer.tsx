@@ -272,7 +272,7 @@ export default function CoursePlayer({
               </div>
             </div>
 
-            <div className="max-h-[68vh] overflow-y-auto">
+            <div className="max-h-[68vh] overflow-y-auto scroll-brand">
               {modules.map((m, mi) => {
                 const modDone = m.lessons.filter((l) => completed.has(l.id)).length;
                 const modComplete = m.lessons.length > 0 && modDone === m.lessons.length;

@@ -109,6 +109,26 @@
   animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ── Scrollbar con la paleta de la marca ── */
+.scroll-brand {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-morado) transparent;
+}
+.scroll-brand::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-brand::-webkit-scrollbar-track {
+  background: var(--color-crema-dark);
+  border-left: 2px solid color-mix(in srgb, var(--color-morado) 12%, transparent);
+}
+.scroll-brand::-webkit-scrollbar-thumb {
+  background-color: var(--color-morado);
+  border: 2px solid var(--color-crema-dark);
+}
+.scroll-brand::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-morado-dark);
+}
+
 /* ── Keyframes ── */
 @keyframes blob {
   0%, 100% { transform: translate(0, 0) scale(1); }
