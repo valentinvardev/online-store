@@ -44,3 +44,7 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# prisma — binarios temporales del query engine (basura de 21MB)
+generated/prisma/*.tmp*
+generated/prisma/query_engine-*.node
