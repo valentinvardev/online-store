@@ -32,29 +32,6 @@ const valores = [
   },
 ];
 
-const hitos = [
-  {
-    año: "2016",
-    titulo: "El primer mazo",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Así empezó todo — con una baraja que no entendía y muchas preguntas sin respuesta.",
-  },
-  {
-    año: "2018",
-    titulo: "Formación formal",
-    desc: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Certificación en tarot, primeros pasos en astrología y el descubrimiento de que enseñar era el camino.",
-  },
-  {
-    año: "2020",
-    titulo: "Los primeros cursos",
-    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. La pandemia cerró el mundo y abrió una nueva forma de conectar. Las primeras 30 alumnas lo cambiaron todo.",
-  },
-  {
-    año: "Hoy",
-    titulo: "La Reina de Bastos",
-    desc: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Una comunidad de mujeres que aprenden a leer su propio código sagrado — sin rigidez, con goce.",
-  },
-];
-
 const formacion = [
   "Certificada en Tarot Rider-Waite",
   "Formación en Astrología Natal",
@@ -173,63 +150,6 @@ export default function SobreMiPage() {
                 </div>
               </div>
             </RevealOnScroll>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Mi historia — Timeline ── */}
-      <section className="bg-verde-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
-        {/* Degradado de verdes claros con shimmer (estilo PropuestaSection) */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
-          <div className="absolute inset-0 animate-gradient-breathe" style={{ background: "linear-gradient(180deg, #6bae75 0%, #7bc888 30%, #8fd4a0 65%, #7bc888 90%, #6bae75 100%)" }} />
-          <div className="absolute inset-x-0 h-[35%] animate-shimmer-fall" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)" }} />
-          <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
-          {/* Mobile: mariposa TR + corazon arcoiris BL. Desktop: 5 dispersos */}
-          <Stickers blend="soft-light" items={[
-            { id: "sticker-17", top: "8%",   right: "5%",   size: 160, opacity: 0.46, rotate: 8,   anim: "float", delay: 1 },
-            { id: "sticker-19", bottom: "8%", left: "5%",   size: 150, opacity: 0.46, rotate: -8,  anim: "spin", delay: 0.5 },
-            { id: "sticker-13", top: "12%",  left: "5%",    size: 200, opacity: 0.5,  rotate: -10, anim: "float-slow", hideOnMobile: true },
-            { id: "sticker-04", bottom: "12%", right: "8%", size: 220, opacity: 0.45, rotate: 14,  anim: "float-slow", delay: 2, hideOnMobile: true },
-            { id: "sticker-08", top: "50%",  left: "42%",   size: 135, opacity: 0.4,  rotate: 0,   anim: "float", delay: 1.5, hideOnMobile: true },
-          ]} />
-        </div>
-        <div className="max-w-4xl mx-auto relative z-10">
-          <RevealOnScroll>
-            <div className="mb-10 sm:mb-12 lg:mb-14 text-center">
-              <span className="font-sans text-[0.8rem] text-crema/70 tracking-[0.35em] sm:tracking-[0.4em] uppercase block mb-4">El camino</span>
-              <h2 className="font-display uppercase text-[clamp(3rem,7vw,4rem)] text-crema leading-[0.95] tracking-wide">
-                Mi historia
-              </h2>
-            </div>
-          </RevealOnScroll>
-
-          <div className="relative">
-            {/* Línea vertical solo en desktop */}
-            <div className="absolute left-[2.75rem] top-0 bottom-0 w-px bg-dorado/30 hidden lg:block" />
-
-            <div className="space-y-8 sm:space-y-10">
-              {hitos.map((hito, i) => (
-                <RevealOnScroll key={i} delay={i * 100}>
-                  <div className="flex gap-4 lg:gap-8 items-start">
-                    {/* Año en desktop */}
-                    <div className="shrink-0 w-20 text-right hidden lg:block pt-1">
-                      <span className="font-display text-crema text-lg tracking-wide">{hito.año}</span>
-                    </div>
-                    {/* Punto en desktop */}
-                    <div className="shrink-0 hidden lg:flex items-center justify-center w-6 h-6 rounded-full border-2 border-morado-dark bg-dorado-light mt-1">
-                      <div className="w-2 h-2 bg-morado-dark rounded-full" />
-                    </div>
-                    {/* Contenido */}
-                    <div className="bg-dorado-light border-2 border-morado-dark block-shadow-sm p-5 sm:p-6 flex-1 hover:translate-y-[-2px] transition-transform min-w-0">
-                      <span className="font-display text-morado-dark text-sm tracking-widest lg:hidden block mb-2 font-bold">{hito.año}</span>
-                      <h3 className="font-sans font-bold text-tierra-dark tracking-wide mb-2 text-lg">{hito.titulo}</h3>
-                      <p className="font-sans text-tierra-dark/85 text-[15px] leading-relaxed tracking-wide">{hito.desc}</p>
-                    </div>
-                  </div>
-                </RevealOnScroll>
-              ))}
-            </div>
           </div>
         </div>
       </section>

@@ -6,10 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ShoppingBag, LogIn, LogOut, User, X, ChevronDown,
-  BookOpen, Calendar, Sparkles, LayoutDashboard,
+  BookOpen, Calendar, Sparkles, LayoutDashboard, Palette,
 } from "lucide-react";
 import { useCart } from "../cart/CartContext";
 import { useSession, signOut } from "next-auth/react";
+import { useThemeEditor } from "../editor/ThemeEditorContext";
 
 const links = [
   { label: "Tienda",        href: "/tienda" },
@@ -33,6 +34,7 @@ export default function Navbar() {
   const profileRef = useRef<HTMLDivElement>(null);
   const { count, openCart } = useCart();
   const { data: session } = useSession();
+  const { setOpen: setEditorOpen } = useThemeEditor();
 
   // Portal solo en cliente
   useEffect(() => { setMounted(true); }, []);
@@ -64,16 +66,16 @@ export default function Navbar() {
   return (
     <>
     <header className="sticky top-0 z-50 bg-crema backdrop-blur-sm border-b border-rosa/10 shadow-sm shadow-rosa/5">
-      <nav className="max-w-7xl mx-auto px-8 h-32 flex items-center justify-between gap-8">
+      <nav className="max-w-7xl mx-auto px-8 h-36 md:h-44 flex items-center justify-between gap-8">
 
         {/* Logo */}
         <Link href="/" className="group shrink-0">
           <Image
             src="/logo-rdb.png"
             alt="La Reina de Bastos"
-            width={260}
-            height={260}
-            className="h-[6.5rem] w-auto transition-opacity duration-300 group-hover:opacity-75"
+            width={320}
+            height={320}
+            className="h-[7.5rem] md:h-[9.1rem] w-auto transition-opacity duration-300 group-hover:opacity-75"
             priority
           />
         </Link>
@@ -94,6 +96,18 @@ export default function Navbar() {
 
         {/* Acciones Desktop */}
         <div className="hidden md:flex items-center gap-5 shrink-0">
+
+          {/* Editor visual — solo admin */}
+          {session?.user?.isAdmin && (
+            <button
+              onClick={() => setEditorOpen(true)}
+              className="flex items-center justify-center w-9 h-9 text-morado hover:bg-morado/5 transition-all"
+              aria-label="Abrir editor visual"
+              title="Editor visual"
+            >
+              <Palette size={18} strokeWidth={1.8} />
+            </button>
+          )}
 
           {/* Carrito */}
           <button
@@ -315,6 +329,14 @@ export default function Navbar() {
                     </Link>
                   )}
                 </div>
+                {session.user?.isAdmin && (
+                  <button
+                    onClick={() => { setEditorOpen(true); setOpen(false); }}
+                    className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/30"
+                  >
+                    <Palette size={15} strokeWidth={1.8} /> Editor visual
+                  </button>
+                )}
                 <button
                   onClick={() => { void signOut({ callbackUrl: "/" }); setOpen(false); }}
                   className="w-full flex items-center justify-center gap-2 font-sans font-semibold text-xs text-crema/80 hover:bg-crema hover:text-verde transition-colors tracking-widest uppercase py-3 border-2 border-crema/30"
