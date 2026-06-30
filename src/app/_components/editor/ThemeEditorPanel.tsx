@@ -8,7 +8,7 @@ import {
   Upload, Loader2, Trash2, Circle, CircleDot,
 } from "lucide-react";
 import { useThemeEditor, type SectionBg } from "./ThemeEditorContext";
-import { COLOR_GROUPS, ALL_TOKENS, type ColorToken } from "./theme-tokens";
+import { COLOR_GROUPS, FONT_ROLES, FONT_OPTIONS, type ColorToken } from "./theme-tokens";
 
 const HEX_RE = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
@@ -294,12 +294,62 @@ function FondosTab() {
   );
 }
 
+// ── Pestaña de tipografías ─────────────────────────────────────────────────
+function FuentesTab() {
+  const { getColor, setColor, resetColor, overrides } = useThemeEditor();
+  return (
+    <div className="space-y-6">
+      {FONT_ROLES.map((role) => {
+        const current = getColor(role.var, role.def);
+        const overridden = role.var in overrides;
+        return (
+          <div key={role.var}>
+            <div className="flex items-baseline justify-between mb-2 border-b-2 border-morado/15 pb-1.5">
+              <h3 className="font-sans font-bold text-[0.72rem] text-morado-dark tracking-[0.2em] uppercase">{role.label}</h3>
+              <div className="flex items-center gap-2">
+                <span className="font-sans italic text-[0.66rem] text-tierra/50">{role.hint}</span>
+                {overridden && (
+                  <button type="button" onClick={() => resetColor(role.var)} title="Restablecer" className="text-rosa hover:text-rosa-light transition-colors">
+                    <RotateCcw size={12} strokeWidth={2} />
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              {FONT_OPTIONS.map((opt) => {
+                const active = current === opt.value;
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setColor(role.var, opt.value)}
+                    className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 border-2 text-left transition-colors ${
+                      active ? "border-morado-dark bg-morado/10" : "border-morado/15 hover:border-morado/40"
+                    }`}
+                  >
+                    <span className="text-xl text-tierra-dark leading-none truncate" style={{ fontFamily: opt.value }}>
+                      La Reina
+                    </span>
+                    <span className={`font-sans text-[0.62rem] tracking-widest uppercase shrink-0 ${active ? "text-morado font-bold" : "text-tierra/40"}`}>
+                      {opt.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Panel ──────────────────────────────────────────────────────────────────
 export default function ThemeEditorPanel() {
   const { data: session } = useSession();
   const { open, setOpen, resetAll, isDirty, overrides, sectionBgs, setFondosMode } = useThemeEditor();
   const [mounted, setMounted] = useState(false);
-  const [tab, setTab] = useState<"colores" | "fondos">("colores");
+  const [tab, setTab] = useState<"colores" | "fuentes" | "fondos">("colores");
   const [copied, setCopied] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -309,7 +359,7 @@ export default function ThemeEditorPanel() {
   if (!mounted || !session?.user?.isAdmin) return null;
 
   const copyColors = async () => {
-    const lines = ALL_TOKENS.filter((t) => t.var in overrides).map((t) => `  ${t.var}: ${overrides[t.var]};`);
+    const lines = Object.entries(overrides).map(([k, v]) => `  ${k}: ${v};`);
     await navigator.clipboard.writeText(`:root {\n${lines.join("\n")}\n}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
@@ -346,7 +396,7 @@ export default function ThemeEditorPanel() {
 
       {/* Tabs */}
       <div className="flex shrink-0 border-b-2 border-morado-dark">
-        {([["colores", "Colores"], ["fondos", "Fondos"]] as const).map(([key, lbl]) => (
+        {([["colores", "Colores"], ["fuentes", "Fuentes"], ["fondos", "Fondos"]] as const).map(([key, lbl]) => (
           <button
             key={key}
             type="button"
@@ -378,7 +428,17 @@ export default function ThemeEditorPanel() {
               </div>
             ))}
           </>
-        ) : (
+        ) : null}
+        {tab === "fuentes" && (
+          <>
+            <p className="font-sans text-[0.7rem] text-tierra/65 leading-relaxed tracking-wide mb-4">
+              Elegí la fuente de cada rol y mirá el cambio en vivo en toda la web. Se guarda como
+              vista previa en este navegador.
+            </p>
+            <FuentesTab />
+          </>
+        )}
+        {tab === "fondos" && (
           <>
             <p className="font-sans text-[0.7rem] text-tierra/65 leading-relaxed tracking-wide mb-4">
               Poné una imagen de fondo a cualquier sección y ajustala. Elegí la sección desde la página
@@ -391,7 +451,7 @@ export default function ThemeEditorPanel() {
 
       {/* Footer */}
       <div className="shrink-0 border-t-2 border-morado-dark bg-crema-dark/60 px-5 py-3.5 flex items-center gap-2.5">
-        {tab === "colores" ? (
+        {tab !== "fondos" ? (
           <>
             <button
               type="button"

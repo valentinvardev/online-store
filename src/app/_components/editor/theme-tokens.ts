@@ -68,4 +68,25 @@ export const COLOR_GROUPS: ColorGroup[] = [
 
 export const ALL_TOKENS: ColorToken[] = COLOR_GROUPS.flatMap((g) => g.tokens);
 
+// ── Tipografías ──
+// Roles de la marca (variables CSS que consumen las utilidades font-*).
+export type FontRole = { var: string; label: string; hint: string; def: string };
+
+export const FONT_ROLES: FontRole[] = [
+  { var: "--font-display", label: "Títulos", hint: "Hero y encabezados", def: "var(--font-lostar), serif" },
+  { var: "--font-serif",   label: "Acento",  hint: "Subtítulos y detalles", def: "var(--font-jost), ui-sans-serif, system-ui, sans-serif" },
+  { var: "--font-sans",    label: "Cuerpo",  hint: "Texto y UI", def: "var(--font-jost), ui-sans-serif, system-ui, sans-serif" },
+];
+
+// Fuentes disponibles (ya cargadas vía next/font en el layout).
+export type FontOption = { label: string; value: string };
+
+export const FONT_OPTIONS: FontOption[] = [
+  { label: "Lostar",      value: "var(--font-lostar), serif" },
+  { label: "RetroMother", value: "var(--font-tropi), serif" },
+  { label: "Chevrola",    value: "var(--font-chevrola), serif" },
+  { label: "Jost",        value: "var(--font-jost), sans-serif" },
+  { label: "Sistema",     value: "ui-sans-serif, system-ui, sans-serif" },
+];
+
 export const STORAGE_KEY = "rdb_theme_overrides";
