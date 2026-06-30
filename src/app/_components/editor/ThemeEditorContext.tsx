@@ -25,6 +25,7 @@ export type SectionBgMap = Record<string, SectionBg>;
 export type RegisteredSection = { id: string; label: string };
 
 const SECTION_KEY = "rdb_section_bgs";
+const LIB_KEY = "rdb_bg_library";
 
 type Ctx = {
   open: boolean;
@@ -45,6 +46,9 @@ type Ctx = {
   sectionBgs: SectionBgMap;
   setSectionBg: (id: string, patch: Partial<SectionBg>) => void;
   clearSectionBg: (id: string) => void;
+  bgLibrary: string[];
+  addToLibrary: (url: string) => void;
+  removeFromLibrary: (url: string) => void;
   fondosMode: boolean;
   setFondosMode: (v: boolean) => void;
   selectedSection: string | null;
@@ -70,6 +74,7 @@ export default function ThemeEditorProvider({ children }: { children: ReactNode 
   const [open, setOpen] = useState(false);
   const [overrides, setOverrides] = useState<Overrides>({});
   const [sectionBgs, setSectionBgs] = useState<SectionBgMap>({});
+  const [bgLibrary, setBgLibrary] = useState<string[]>([]);
   const [sections, setSections] = useState<RegisteredSection[]>([]);
   const [fondosMode, setFondosMode] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
@@ -89,6 +94,10 @@ export default function ThemeEditorProvider({ children }: { children: ReactNode 
     try {
       const rawBg = localStorage.getItem(SECTION_KEY);
       if (rawBg) setSectionBgs(JSON.parse(rawBg) as SectionBgMap);
+    } catch { /* ignore */ }
+    try {
+      const rawLib = localStorage.getItem(LIB_KEY);
+      if (rawLib) setBgLibrary(JSON.parse(rawLib) as string[]);
     } catch { /* ignore */ }
     setHydrated(true);
   }, []);
@@ -110,6 +119,15 @@ export default function ThemeEditorProvider({ children }: { children: ReactNode 
       else localStorage.setItem(SECTION_KEY, JSON.stringify(sectionBgs));
     } catch { /* ignore */ }
   }, [sectionBgs, hydrated]);
+
+  // Persistir galería de fondos
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      if (bgLibrary.length === 0) localStorage.removeItem(LIB_KEY);
+      else localStorage.setItem(LIB_KEY, JSON.stringify(bgLibrary));
+    } catch { /* ignore */ }
+  }, [bgLibrary, hydrated]);
 
   // ── Colores ──
   const getColor = useCallback(
@@ -158,6 +176,12 @@ export default function ThemeEditorProvider({ children }: { children: ReactNode 
       return next;
     });
   }, []);
+  const addToLibrary = useCallback((url: string) => {
+    setBgLibrary((prev) => (prev.includes(url) ? prev : [url, ...prev]));
+  }, []);
+  const removeFromLibrary = useCallback((url: string) => {
+    setBgLibrary((prev) => prev.filter((u) => u !== url));
+  }, []);
   const selectSection = useCallback((id: string | null) => {
     setSelectedSection(id);
     if (id) setFondosMode(false);
@@ -171,6 +195,7 @@ export default function ThemeEditorProvider({ children }: { children: ReactNode 
         isDirty: Object.keys(overrides).length > 0,
         sections, registerSection, unregisterSection,
         sectionBgs, setSectionBg, clearSectionBg,
+        bgLibrary, addToLibrary, removeFromLibrary,
         fondosMode, setFondosMode, selectedSection, selectSection,
       }}
     >

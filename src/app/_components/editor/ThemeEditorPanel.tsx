@@ -87,13 +87,10 @@ function Slider({ label, value, def, min, max, step = 1, unit = "", onChange }: 
 
 // ── Controles de una sección seleccionada ──────────────────────────────────
 function SectionControls({ id }: { id: string }) {
-  const { sectionBgs, setSectionBg, clearSectionBg } = useThemeEditor();
+  const { sectionBgs, setSectionBg, clearSectionBg, bgLibrary, addToLibrary, removeFromLibrary } = useThemeEditor();
   const cfg: SectionBg = sectionBgs[id] ?? {};
   const [uploading, setUploading] = useState(false);
-  const [urlText, setUrlText] = useState(cfg.imageUrl ?? "");
   const fileRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => setUrlText(cfg.imageUrl ?? ""), [cfg.imageUrl]);
 
   const upload = async (file: File) => {
     setUploading(true);
@@ -102,7 +99,7 @@ function SectionControls({ id }: { id: string }) {
       fd.append("file", file);
       const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
       const data = (await res.json()) as { url?: string };
-      if (data.url) setSectionBg(id, { imageUrl: data.url });
+      if (data.url) { setSectionBg(id, { imageUrl: data.url }); addToLibrary(data.url); }
     } catch { /* ignore */ } finally {
       setUploading(false);
     }
@@ -119,7 +116,7 @@ function SectionControls({ id }: { id: string }) {
             <img src={cfg.imageUrl} alt="" className="w-full h-full object-cover" />
             <button
               type="button"
-              onClick={() => { setSectionBg(id, { imageUrl: undefined }); setUrlText(""); }}
+              onClick={() => setSectionBg(id, { imageUrl: undefined })}
               className="absolute top-1.5 right-1.5 bg-tierra-dark/80 text-white p-1.5 hover:bg-rosa transition-colors"
               title="Quitar imagen"
             >
@@ -145,15 +142,44 @@ function SectionControls({ id }: { id: string }) {
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) void upload(f); e.target.value = ""; }} />
         </div>
 
-        <input
-          type="text"
-          value={urlText}
-          onChange={(e) => setUrlText(e.target.value)}
-          onBlur={() => setSectionBg(id, { imageUrl: urlText || undefined })}
-          placeholder="…o pegá una URL de imagen"
-          spellCheck={false}
-          className="w-full mt-2 font-mono text-[0.68rem] text-tierra-dark bg-white border border-morado/25 px-2 py-1.5 focus:outline-none focus:border-morado"
-        />
+        {/* Galería de fondos reutilizables */}
+        {bgLibrary.length > 0 && (
+          <div className="mt-3">
+            <p className="font-sans text-[0.64rem] text-tierra/55 tracking-[0.2em] uppercase mb-1.5">Galería de fondos</p>
+            <div className="grid grid-cols-4 gap-1.5">
+              {bgLibrary.map((url) => {
+                const active = cfg.imageUrl === url;
+                return (
+                  <div key={url} className="relative group aspect-square">
+                    <button
+                      type="button"
+                      onClick={() => setSectionBg(id, { imageUrl: url })}
+                      className={`block w-full h-full overflow-hidden border-2 transition-colors ${
+                        active ? "border-morado" : "border-morado/15 hover:border-morado/50"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={url} alt="" className="w-full h-full object-cover" />
+                    </button>
+                    {active && (
+                      <span className="absolute top-0.5 left-0.5 bg-morado text-crema p-0.5 pointer-events-none">
+                        <Check size={9} strokeWidth={3} />
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => removeFromLibrary(url)}
+                      title="Quitar de la galería"
+                      className="absolute top-0.5 right-0.5 bg-tierra-dark/80 text-white p-0.5 opacity-0 group-hover:opacity-100 hover:bg-rosa transition-all"
+                    >
+                      <X size={9} />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {cfg.imageUrl && (
