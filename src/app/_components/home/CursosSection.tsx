@@ -1,5 +1,6 @@
 import { Clock, BookOpen } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
+import EditableSection from "../editor/EditableSection";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
 
@@ -50,7 +51,7 @@ const cursos: Curso[] = [
 
 export default function CursosSection() {
   return (
-    <section className="bg-morado-dark py-24 px-6 relative overflow-hidden">
+    <EditableSection id="home-cursos" label="Inicio — Cursos" className="bg-morado-dark py-24 px-6 overflow-hidden">
       <Stickers blend="screen" items={[
         { id: "sticker-15", top: "5%",   left: "3%", size: 110, opacity: 0.18, rotate: -10, anim: "float-slow" },
         { id: "sticker-13", bottom: "5%", right: "3%", size: 120, opacity: 0.2, rotate: 12, anim: "float", delay: 1.2 },
@@ -135,6 +136,6 @@ export default function CursosSection() {
           </div>
         </RevealOnScroll>
       </div>
-    </section>
+    </EditableSection>
   );
 }

@@ -1,5 +1,6 @@
 import RevealOnScroll from "./RevealOnScroll";
 import Stickers from "../Stickers";
+import EditableSection from "../editor/EditableSection";
 
 type Product = {
   id: number;
@@ -47,7 +48,7 @@ const products: Product[] = [
 
 export default function TiendaSection() {
   return (
-    <section className="bg-dorado-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+    <EditableSection id="home-tienda" label="Inicio — Tienda" className="bg-dorado-light py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <Stickers blend="multiply" items={[
         { id: "sticker-05", top: "5%",  left: "3%",  size: 124, opacity: 0.42, rotate: -12, anim: "float-slow" },
         { id: "sticker-07", top: "5%",  right: "3%", size: 117, opacity: 0.4,  rotate: 10,  anim: "spin", delay: 0.6 },
@@ -95,6 +96,6 @@ export default function TiendaSection() {
           ))}
         </div>
       </div>
-    </section>
+    </EditableSection>
   );
 }

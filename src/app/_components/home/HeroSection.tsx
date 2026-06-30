@@ -1,8 +1,9 @@
 import Stickers from "../Stickers";
+import EditableSection from "../editor/EditableSection";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-crema flex flex-col overflow-hidden">
+    <EditableSection id="home-hero" label="Inicio — Hero" className="bg-crema flex flex-col overflow-hidden">
 
       {/* Decoración de fondo — stickers en las esquinas (un poco más adentro) */}
       <Stickers
@@ -77,6 +78,6 @@ export default function HeroSection() {
         <div className="w-px h-6 bg-gradient-to-b from-morado/20 to-transparent" />
       </div>
 
-    </section>
+    </EditableSection>
   );
 }

@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
+import EditableSection from "../editor/EditableSection";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
 
@@ -44,7 +45,7 @@ const testimonios: Testimonio[] = [
 
 export default function TestimoniosSection() {
   return (
-    <section className="bg-rosa py-24 px-6 relative overflow-hidden">
+    <EditableSection id="home-testimonios" label="Inicio — Testimonios" className="bg-rosa py-24 px-6 overflow-hidden">
       <StarField color="#fff0f5" />
       <Stickers blend="soft-light" items={[
         { id: "sticker-03", top: "5%",   left: "3%", size: 110, opacity: 0.42, rotate: 8,  anim: "float-slow" },
@@ -81,6 +82,6 @@ export default function TestimoniosSection() {
           ))}
         </div>
       </div>
-    </section>
+    </EditableSection>
   );
 }

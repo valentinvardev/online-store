@@ -1,4 +1,5 @@
 import Image from "next/image";
+import EditableSection from "../editor/EditableSection";
 import RevealOnScroll from "./RevealOnScroll";
 
 const pillars = [
@@ -27,7 +28,7 @@ const pillars = [
 
 export default function PropuestaSection() {
   return (
-    <section className="bg-verde-light py-24 px-6 relative overflow-hidden">
+    <EditableSection id="home-propuesta" label="Inicio — Propuesta" className="bg-verde-light py-24 px-6 overflow-hidden">
       {/* Degradado de verdes claros con shimmer */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #5fa569 0%, #6bae75 25%, #7bc888 55%, #6bae75 85%, #5fa569 100%)" }} />
@@ -84,6 +85,6 @@ export default function PropuestaSection() {
           ))}
         </div>
       </div>
-    </section>
+    </EditableSection>
   );
 }

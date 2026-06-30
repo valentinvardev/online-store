@@ -5,6 +5,7 @@ import RevealOnScroll from "./RevealOnScroll";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
 import { api } from "~/trpc/react";
+import EditableSection from "../editor/EditableSection";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="bg-morado py-24 px-6 relative overflow-hidden">
+    <EditableSection id="home-newsletter" label="Inicio — Newsletter" className="bg-morado py-24 px-6 overflow-hidden">
       <Stickers blend="screen" items={[
         { id: "sticker-22", top: "5%",   right: "3%", size: 150, opacity: 0.22, rotate: 12,  anim: "float-slow" },
         { id: "sticker-04", bottom: "5%", left: "3%", size: 110, opacity: 0.2, rotate: -8, anim: "float", delay: 1.2 },
@@ -94,6 +95,6 @@ export default function NewsletterSection() {
           )}
         </RevealOnScroll>
       </div>
-    </section>
+    </EditableSection>
   );
 }

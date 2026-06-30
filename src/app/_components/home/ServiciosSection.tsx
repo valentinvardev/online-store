@@ -1,5 +1,6 @@
 import RevealOnScroll from "./RevealOnScroll";
 import Stickers from "../Stickers";
+import EditableSection from "../editor/EditableSection";
 
 type Servicio = {
   id: number;
@@ -47,7 +48,7 @@ const servicios: Servicio[] = [
 
 export default function ServiciosSection() {
   return (
-    <section className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden relative">
+    <EditableSection id="home-servicios" label="Inicio — Servicios" className="bg-crema py-16 sm:py-20 lg:py-24 px-5 sm:px-6 overflow-hidden">
       <Stickers blend="multiply" items={[
         { id: "sticker-17", top: "5%",   right: "3%", size: 110, opacity: 0.38, rotate: 8,   anim: "float-slow" },
         { id: "sticker-09", bottom: "5%", left: "3%", size: 130, opacity: 0.4,  rotate: -12, anim: "float", delay: 1.2 },
@@ -92,6 +93,6 @@ export default function ServiciosSection() {
           ))}
         </div>
       </div>
-    </section>
+    </EditableSection>
   );
 }

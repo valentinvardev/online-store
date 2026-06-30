@@ -1,8 +1,9 @@
 import Stickers from "../Stickers";
+import EditableSection from "../editor/EditableSection";
 
 export default function SobreMiSection() {
   return (
-    <section className="bg-dorado-light py-16 sm:py-20 lg:py-28 px-5 sm:px-6 overflow-hidden relative">
+    <EditableSection id="home-sobremi" label="Inicio — Sobre mí" className="bg-dorado-light py-16 sm:py-20 lg:py-28 px-5 sm:px-6 overflow-hidden">
       <Stickers blend="multiply" items={[
         { id: "sticker-10", top: "5%",   right: "3%", size: 110, opacity: 0.4,  rotate: 8,   anim: "float-slow" },
         { id: "sticker-06", bottom: "5%", left: "3%", size: 130, opacity: 0.42, rotate: -10, anim: "float", delay: 1.2 },
@@ -60,6 +61,6 @@ export default function SobreMiSection() {
           </div>
         </div>
       </div>
-    </section>
+    </EditableSection>
   );
 }
