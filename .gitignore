@@ -48,3 +48,6 @@ yarn-error.log*
 # prisma — binarios temporales del query engine (basura de 21MB)
 generated/prisma/*.tmp*
 generated/prisma/query_engine-*.node
+
+# zips de descarga de fuentes (las fuentes ya viven extraidas en src/fonts)
+/fonts/*.zip

@@ -82,11 +82,23 @@ export const FONT_ROLES: FontRole[] = [
 export type FontOption = { label: string; value: string };
 
 export const FONT_OPTIONS: FontOption[] = [
-  { label: "Lostar",      value: "var(--font-lostar), serif" },
-  { label: "RetroMother", value: "var(--font-tropi), serif" },
-  { label: "Chevrola",    value: "var(--font-chevrola), serif" },
-  { label: "Jost",        value: "var(--font-jost), sans-serif" },
-  { label: "Sistema",     value: "ui-sans-serif, system-ui, sans-serif" },
+  { label: "Lostar",        value: "var(--font-lostar), serif" },
+  { label: "RetroMother",   value: "var(--font-tropi), serif" },
+  { label: "Chevrola",      value: "var(--font-chevrola), serif" },
+  { label: "Pretorian",     value: "var(--font-pretorian), serif" },
+  { label: "Tropi Land",    value: "var(--font-tropiland), serif" },
+  { label: "The Groovy",    value: "var(--font-thegroovy), serif" },
+  { label: "Funky Groovy",  value: "var(--font-funky), serif" },
+  { label: "Groovy Beach",  value: "var(--font-groovybeach), serif" },
+  { label: "Groovy Beach X",value: "var(--font-groovybeachx), serif" },
+  { label: "Groovy Clouds", value: "var(--font-groovyclouds), serif" },
+  { label: "Groovy Day",    value: "var(--font-groovyday), serif" },
+  { label: "Kong Groovy",   value: "var(--font-kong), serif" },
+  { label: "Masa Groovy",   value: "var(--font-masa), serif" },
+  { label: "Retro Groovy",  value: "var(--font-retrogroovy), serif" },
+  { label: "Super Groovy",  value: "var(--font-super), serif" },
+  { label: "Jost",          value: "var(--font-jost), sans-serif" },
+  { label: "Sistema",       value: "ui-sans-serif, system-ui, sans-serif" },
 ];
 
 export const STORAGE_KEY = "rdb_theme_overrides";
