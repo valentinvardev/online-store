@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "~/app/_components/home/Navbar";
 import Footer from "~/app/_components/home/Footer";
-import { type LastOrder } from "~/app/_components/cart/CartContext";
+import { useCart, type LastOrder } from "~/app/_components/cart/CartContext";
 import {
   Package,
   MessageCircle,
@@ -236,6 +236,7 @@ function ServiciosSection({ items, buyerName }: { items: LastOrder["items"]; buy
 
 // ── Página principal ──────────────────────────────────────────────────────────
 export default function GraciasPage() {
+  const { clearCart } = useCart();
   const [order, setOrder] = useState<LastOrder | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -247,7 +248,10 @@ export default function GraciasPage() {
         // No borramos el order de localStorage por si recarga la página
       }
     } catch {}
+    // El pago fue aprobado (MP redirige acá), así que vaciamos el carrito.
+    clearCart();
     setReady(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const hasCursos = order?.items.some((i) => i.itemType === "course") ?? false;

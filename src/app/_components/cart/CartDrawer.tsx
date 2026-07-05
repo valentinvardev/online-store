@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { X, Plus, Minus, ShoppingBag, Trash2, ArrowLeft, User, Mail, Phone } from "lucide-react";
 import { useCart, type BuyerInfo, type LastOrder } from "./CartContext";
-import { api } from "~/trpc/react";
 
 const inputClass = "w-full bg-white border-2 border-morado/20 px-3 py-2.5 font-sans text-sm text-tierra-dark placeholder:text-tierra/25 focus:outline-none focus:border-morado transition-colors";
 const labelClass = "block font-sans text-[0.78rem] text-tierra/70 tracking-widest uppercase mb-1";
@@ -12,15 +10,12 @@ const labelClass = "block font-sans text-[0.78rem] text-tierra/70 tracking-wides
 type Step = "cart" | "checkout";
 
 export default function CartDrawer() {
-  const router = useRouter();
-  const { items, isOpen, closeCart, removeItem, updateQty, clearCart, total, count } = useCart();
+  const { items, isOpen, closeCart, removeItem, updateQty, total, count } = useCart();
   const [step, setStep] = useState<Step>("cart");
   const [buyer, setBuyer] = useState<BuyerInfo>({ name: "", apellido: "", email: "", phone: "" });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const set = (k: keyof BuyerInfo, v: string) => setBuyer((b) => ({ ...b, [k]: v }));
-
-  const createOrder = api.orders.create.useMutation();
 
   function handleClose() {
     closeCart();
@@ -33,39 +28,48 @@ export default function CartDrawer() {
     setSubmitting(true);
     setError(null);
 
+    // Guardamos el pedido para mostrarlo al volver de Mercado Pago (/pago/gracias).
     const order: LastOrder = { buyer, items, total };
     try {
       localStorage.setItem("rdb_last_order", JSON.stringify(order));
     } catch {}
 
     try {
-      const res = await createOrder.mutateAsync({
-        buyer: {
-          name: buyer.name,
-          apellido: buyer.apellido || undefined,
-          email: buyer.email,
-          phone: buyer.phone || undefined,
-        },
-        items: items.map((it) => ({
-          id: it.id,
-          name: it.name,
-          price: it.price,
-          quantity: it.quantity,
-          itemType: it.itemType,
-        })),
+      const res = await fetch("/api/mp/create-preference", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((it) => ({
+            id: it.id,
+            name: it.name,
+            price: it.price,
+            quantity: it.quantity,
+            itemType: it.itemType.toUpperCase(),
+          })),
+          buyer: {
+            name: buyer.name,
+            apellido: buyer.apellido,
+            email: buyer.email,
+            phone: buyer.phone,
+          },
+        }),
       });
-      try {
-        localStorage.setItem("rdb_last_order_id", res.orderId);
-      } catch {}
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "No pudimos registrar tu orden");
-      setSubmitting(false);
-      return;
-    }
 
-    clearCart();
-    handleClose();
-    router.push("/pago/gracias");
+      if (!res.ok) throw new Error("No pudimos iniciar el pago");
+
+      const data = (await res.json()) as {
+        init_point?: string;
+        sandbox_init_point?: string;
+      };
+      const checkoutUrl = data.init_point ?? data.sandbox_init_point;
+      if (!checkoutUrl) throw new Error("No recibimos el link de pago");
+
+      // El carrito se limpia al volver a /pago/gracias tras un pago aprobado.
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No pudimos iniciar el pago");
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -264,7 +268,7 @@ export default function CartDrawer() {
                 disabled={submitting}
                 className="w-full bg-dorado text-tierra-dark font-sans font-bold text-[13px] py-4 border-2 border-morado-dark hover:bg-dorado-light transition-colors tracking-widest uppercase block-shadow disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {submitting ? "Procesando..." : "Confirmar compra ✦"}
+                {submitting ? "Redirigiendo a Mercado Pago…" : "Pagar con Mercado Pago ✦"}
               </button>
               <button
                 type="button"
