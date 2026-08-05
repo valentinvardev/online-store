@@ -3,6 +3,7 @@ import RevealOnScroll from "./RevealOnScroll";
 import EditableSection from "../editor/EditableSection";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
+import Sticker from "../Sticker";
 
 type Curso = {
   id: number;
@@ -87,7 +88,7 @@ export default function CursosSection() {
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 border-b border-crema/10">
                       <span className="text-crema/15 font-sans text-[0.8rem] tracking-[0.3em] uppercase">Portada del curso</span>
                       <div className="w-10 h-px bg-crema/10" />
-                      <span className="text-crema/10 text-3xl">✦</span>
+                      <Sticker name="estrella" size={44} className="opacity-30" />
                     </div>
                   )}
                   {/* Nivel */}

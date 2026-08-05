@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import Sticker from "../Sticker";
 
 /* ── SVG logos de redes sociales ── */
 const IconInstagram = () => (
@@ -117,7 +118,7 @@ export default function Footer() {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="group flex items-center gap-2 font-sans text-[13px] text-crema/95 hover:text-dorado transition-colors tracking-wide">
-                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.8rem] transition-colors">✦</span>
+                    <Sticker name="destello" size={13} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.label}
                   </Link>
                 </li>
@@ -134,7 +135,7 @@ export default function Footer() {
               {servicios.map((s) => (
                 <li key={s}>
                   <Link href="/servicios" className="group flex items-center gap-2 font-sans text-[13px] text-crema/95 hover:text-dorado transition-colors tracking-wide">
-                    <span className="text-dorado/0 group-hover:text-dorado/50 text-[0.8rem] transition-colors">✦</span>
+                    <Sticker name="destello" size={13} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                     {s}
                   </Link>
                 </li>
@@ -158,7 +159,7 @@ export default function Footer() {
                 href="/sobre-mi"
                 className="inline-flex items-center gap-2 font-sans text-[0.95rem] text-crema/95 hover:text-dorado border border-crema/45 hover:border-dorado/40 px-4 py-2.5 tracking-widest uppercase transition-colors"
               >
-                ✦ Mi historia
+                <Sticker name="destello" size={14} /> Mi historia
               </Link>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import Stickers from "../Stickers";
+import Sticker from "../Sticker";
 import EditableSection from "../editor/EditableSection";
 
 export default function SobreMiSection() {
@@ -14,15 +15,15 @@ export default function SobreMiSection() {
         {/* Imagen */}
         <div className="w-full max-w-[260px] sm:max-w-[300px] lg:max-w-sm lg:flex-shrink-0 lg:basis-2/5 relative">
           {/* Badge "Certificada" */}
-          <div className="absolute -top-3 left-2 z-10 bg-morado text-crema font-sans text-[0.75rem] sm:text-[0.8rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase">
-            ✦ Certificada en Tarot
+          <div className="absolute -top-3 left-2 z-10 bg-morado text-crema font-sans text-[0.75rem] sm:text-[0.8rem] px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-morado-dark block-shadow-sm tracking-widest uppercase flex items-center gap-1.5">
+            <Sticker name="destello" size={14} /> Certificada en Tarot
           </div>
 
           {/* Card de imagen */}
           <div className="aspect-[3/4] bg-gradient-to-br from-morado-pale via-rosa-pale to-dorado-pale relative overflow-hidden border-2 border-morado-dark block-shadow">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-white/60 flex items-center justify-center border border-morado/20">
-                <span className="text-morado text-3xl sm:text-4xl">✦</span>
+                <Sticker name="estrella" size={40} />
               </div>
               <p className="font-sans text-tierra/65 text-[13px] tracking-wide">Tu foto acá</p>
             </div>

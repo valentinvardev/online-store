@@ -1,24 +1,25 @@
 import Image from "next/image";
+import Sticker from "../Sticker";
 import EditableSection from "../editor/EditableSection";
 import RevealOnScroll from "./RevealOnScroll";
 
 const pillars = [
   {
-    icon: "/cart.png",
+    icon: "/iconos/carta.png",
     title: "Tienda",
     desc: "Objetos cargados de intención. Cada pieza lleva el cuidado de una práctica real para llevar lo sagrado a tu cotidiano.",
     href: "/tienda",
     linkText: "Ver productos",
   },
   {
-    icon: "/book.png",
+    icon: "/iconos/libro.png",
     title: "Cursos",
     desc: "Aprende a leer el lenguaje sagrado de tu existencia. Tarot, astrología, rituales lunares y mucho más, a tu propio ritmo.",
     href: "/cursos",
     linkText: "Ver cursos",
   },
   {
-    icon: "/crown.png",
+    icon: "/iconos/corona.png",
     title: "Servicios",
     desc: "Una lectura, un ritual diseñado solo para vos. Porque la espiritualidad más poderosa es la que te encuentra donde estás.",
     href: "/servicios",
@@ -37,12 +38,12 @@ export default function PropuestaSection() {
         <div className="absolute inset-x-0 h-[45%] animate-shimmer-fall-slow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(143,212,160,0.28) 50%, transparent 100%)" }} />
 
         {/* Estrellitas dispersas */}
-        <span className="absolute top-[12%] right-[14%] font-display text-crema text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.7)]">✦</span>
+        <Sticker name="destello" size={22} className="absolute top-[12%] right-[14%] drop-shadow-[0_0_8px_rgba(251,245,230,0.5)]" />
         <span className="absolute top-[24%] left-[15%] font-display text-crema/90 text-[13px] select-none drop-shadow-[0_0_6px_rgba(251,245,230,0.6)]">⋆</span>
-        <span className="absolute top-[38%] right-[20%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
-        <span className="absolute top-[55%] left-[38%] font-display text-crema/85 text-base select-none drop-shadow-[0_0_8px_rgba(251,245,230,0.6)]">✦</span>
+        <Sticker name="estrella-2" size={18} className="absolute top-[38%] right-[20%] drop-shadow-[0_0_7px_rgba(251,245,230,0.4)]" />
+        <Sticker name="destello" size={24} className="absolute top-[55%] left-[38%] drop-shadow-[0_0_8px_rgba(251,245,230,0.4)]" />
         <span className="absolute top-[70%] right-[10%] font-display text-crema/90 text-[0.8rem] select-none">⋆</span>
-        <span className="absolute top-[82%] left-[55%] font-display text-crema text-sm select-none drop-shadow-[0_0_7px_rgba(251,245,230,0.7)]">✧</span>
+        <Sticker name="estrella" size={18} className="absolute top-[82%] left-[55%] drop-shadow-[0_0_7px_rgba(251,245,230,0.4)]" />
         <span className="absolute top-[18%] left-[48%] font-display text-crema/75 text-[0.75rem] select-none">·</span>
         <span className="absolute top-[48%] right-[48%] font-display text-crema/70 text-[0.8rem] select-none">·</span>
         <span className="absolute top-[88%] right-[35%] font-display text-crema/80 text-[13px] select-none">⋆</span>

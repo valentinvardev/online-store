@@ -11,6 +11,7 @@ import {
 import { useCart } from "../cart/CartContext";
 import { useSession, signOut } from "next-auth/react";
 import { useThemeEditor } from "../editor/ThemeEditorContext";
+import Sticker from "../Sticker";
 
 const links = [
   { label: "Tienda",        href: "/tienda" },
@@ -216,9 +217,9 @@ export default function Navbar() {
           {/* CTA Reservar */}
           <Link
             href="/reservas"
-            className="bg-morado text-crema font-sans font-semibold text-[0.75rem] px-6 py-2.5 border-2 border-morado hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
+            className="inline-flex items-center gap-2 bg-morado text-crema font-sans font-semibold text-[0.75rem] px-6 py-2.5 border-2 border-morado hover:bg-morado-light transition-colors tracking-widest uppercase block-shadow-sm whitespace-nowrap"
           >
-            ✦ Reservar
+            <Sticker name="destello" size={14} /> Reservar
           </Link>
         </div>
 
@@ -356,9 +357,9 @@ export default function Navbar() {
             <Link
               href="/reservas"
               onClick={() => setOpen(false)}
-              className="w-full block text-center bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors block-shadow-sm"
+              className="w-full flex items-center justify-center gap-2 bg-dorado text-tierra-dark font-sans font-bold text-xs py-4 tracking-widest uppercase border-2 border-dorado hover:bg-dorado-light transition-colors block-shadow-sm"
             >
-              ✦ Reservar consulta
+              <Sticker name="destello" size={14} /> Reservar consulta
             </Link>
           </div>
         </aside>

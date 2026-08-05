@@ -4,6 +4,7 @@ import { useState } from "react";
 import RevealOnScroll from "./RevealOnScroll";
 import StarField from "./StarField";
 import Stickers from "../Stickers";
+import Sticker from "../Sticker";
 import { api } from "~/trpc/react";
 import EditableSection from "../editor/EditableSection";
 
@@ -56,8 +57,8 @@ export default function NewsletterSection() {
         <RevealOnScroll direction="up" delay={200}>
           {sent ? (
             <div className="bg-white/10 border-2 border-crema/30 p-8 ">
-              <p className="font-display uppercase text-2xl text-dorado mb-3 tracking-wide">
-                ✦ ¡Bienvenida! ✦
+              <p className="font-display uppercase text-2xl text-dorado mb-3 tracking-wide flex items-center justify-center gap-2.5">
+                <Sticker name="destello" size={20} /> ¡Bienvenida! <Sticker name="destello" size={20} />
               </p>
               <p className="font-sans italic text-crema/70 text-lg">
                 Tu primera carta llega pronto. Mientras tanto, respirá.

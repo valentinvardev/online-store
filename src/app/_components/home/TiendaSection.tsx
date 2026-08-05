@@ -1,5 +1,6 @@
 import RevealOnScroll from "./RevealOnScroll";
 import Stickers from "../Stickers";
+import Sticker from "../Sticker";
 import EditableSection from "../editor/EditableSection";
 
 type Product = {
@@ -73,7 +74,7 @@ export default function TiendaSection() {
               <article className="bg-white border-2 border-morado-dark overflow-hidden block-shadow cursor-pointer h-full group flex flex-col">
                 <div className={`h-52 bg-gradient-to-br ${product.gradient} relative flex items-center justify-center shrink-0`}>
                   <div className="w-14 h-14 bg-white/20 border-2 border-white/60 flex items-center justify-center">
-                    <span className="text-white text-xl">✦</span>
+                    <Sticker name="estrella" size={30} />
                   </div>
                 </div>
                 <div className="p-5 flex flex-col flex-1">

@@ -1,4 +1,5 @@
 import Stickers from "../Stickers";
+import Sticker from "../Sticker";
 import EditableSection from "../editor/EditableSection";
 
 export default function HeroSection() {
@@ -22,10 +23,10 @@ export default function HeroSection() {
       <div className="absolute inset-4 border border-morado/12 pointer-events-none z-10" />
 
       {/* Ornamentos de esquina */}
-      <span className="absolute top-8 left-8 font-display text-dorado/40 text-lg z-10 select-none">✦</span>
-      <span className="absolute top-8 right-8 font-display text-dorado/40 text-lg z-10 select-none">✦</span>
-      <span className="absolute bottom-8 left-8 font-display text-dorado/40 text-lg z-10 select-none">✦</span>
-      <span className="absolute bottom-8 right-8 font-display text-dorado/40 text-lg z-10 select-none">✦</span>
+      <Sticker name="destello" size={26} className="absolute top-7 left-7 z-10 opacity-90" />
+      <Sticker name="estrella" size={26} className="absolute top-7 right-7 z-10 opacity-90" />
+      <Sticker name="estrella" size={26} className="absolute bottom-7 left-7 z-10 opacity-90" />
+      <Sticker name="destello" size={26} className="absolute bottom-7 right-7 z-10 opacity-90" />
 
       {/* Contenido */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 sm:px-6 lg:px-8 py-12 sm:py-16 text-center relative z-20">
@@ -43,7 +44,7 @@ export default function HeroSection() {
         {/* Separador */}
         <div className="flex items-center gap-5 mb-8 w-full max-w-sm">
           <div className="flex-1 h-px bg-morado/30" />
-          <span className="font-display text-morado/40 text-[13px]">✦</span>
+          <Sticker name="destello" size={18} />
           <div className="flex-1 h-px bg-morado/30" />
         </div>
 
