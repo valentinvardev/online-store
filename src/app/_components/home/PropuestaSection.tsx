@@ -5,21 +5,21 @@ import RevealOnScroll from "./RevealOnScroll";
 
 const pillars = [
   {
-    icon: "/iconos/carta.png",
+    icon: "/cart.png",
     title: "Tienda",
     desc: "Objetos cargados de intención. Cada pieza lleva el cuidado de una práctica real para llevar lo sagrado a tu cotidiano.",
     href: "/tienda",
     linkText: "Ver productos",
   },
   {
-    icon: "/iconos/libro.png",
+    icon: "/book.png",
     title: "Cursos",
     desc: "Aprende a leer el lenguaje sagrado de tu existencia. Tarot, astrología, rituales lunares y mucho más, a tu propio ritmo.",
     href: "/cursos",
     linkText: "Ver cursos",
   },
   {
-    icon: "/iconos/corona.png",
+    icon: "/crown.png",
     title: "Servicios",
     desc: "Una lectura, un ritual diseñado solo para vos. Porque la espiritualidad más poderosa es la que te encuentra donde estás.",
     href: "/servicios",

@@ -73,6 +73,23 @@ const presets: Record<string, Sticker[]> = {
   ],
 };
 
+/* Mapa: stickers viejos (/stickers/sticker-XX.png) → nueva librería ilustrada
+ * (surcodia, /iconos/*.png). Las secciones siguen usando los ids "sticker-XX";
+ * acá se resuelven al icono nuevo correspondiente. */
+const ICONO_NUEVO: Record<string, string> = {
+  "sticker-01": "luna",            "sticker-02": "sol",
+  "sticker-03": "estrella",        "sticker-04": "cometa",
+  "sticker-05": "destello",        "sticker-06": "eclipse",
+  "sticker-07": "planeta",         "sticker-08": "constelacion",
+  "sticker-09": "constelacion-2",  "sticker-10": "estrella-2",
+  "sticker-11": "bola-de-cristal", "sticker-12": "cristal",
+  "sticker-13": "ojo-mistico",     "sticker-14": "mano",
+  "sticker-15": "pocion",          "sticker-16": "vela",
+  "sticker-17": "llave",           "sticker-18": "varita",
+  "sticker-19": "mariposa-lunar",  "sticker-20": "reloj-de-arena",
+  "sticker-21": "copa",            "sticker-22": "espada",
+};
+
 interface Props {
   preset?: keyof typeof presets;
   items?: Sticker[];
@@ -90,7 +107,7 @@ export default function Stickers({ preset = "suave", items, blend = "soft-light"
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={i}
-          src={`/stickers/${s.id}.png`}
+          src={`/iconos/${ICONO_NUEVO[s.id] ?? "estrella"}.png`}
           alt=""
           className={`absolute ${s.anim && s.anim !== "none" ? animClass[s.anim] : ""} ${s.hideOnMobile ? "hidden sm:block" : ""}`}
           style={{
